@@ -388,15 +388,15 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     void load() {
         Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        int coveredR = pref.getInt("JaCoCoverage.CoveredR", DEF_COVERED_R);
-        int coveredG = pref.getInt("JaCoCoverage.CoveredG", DEF_COVERED_G);
-        int coveredB = pref.getInt("JaCoCoverage.CoveredB", DEF_COVERED_B);
-        int parCoveredR = pref.getInt("JaCoCoverage.PartiallyCoveredR", DEF_PARTIAL_COVERED_R);
-        int parCoveredG = pref.getInt("JaCoCoverage.PartiallyCoveredG", DEF_PARTIAL_COVERED_G);
-        int parCoveredB = pref.getInt("JaCoCoverage.PartiallyCoveredB", DEF_PARTIAL_COVERED_B);
-        int notCoveredR = pref.getInt("JaCoCoverage.NotCoveredR", DEF_NOT_COVERED_R);
-        int notCoveredG = pref.getInt("JaCoCoverage.NotCoveredG", DEF_NOT_COVERED_G);
-        int notCoveredB = pref.getInt("JaCoCoverage.NotCoveredB", DEF_NOT_COVERED_B);
+        int coveredR = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, DEF_COVERED_R);
+        int coveredG = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, DEF_COVERED_G);
+        int coveredB = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, DEF_COVERED_B);
+        int parCoveredR = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, DEF_PARTIAL_COVERED_R);
+        int parCoveredG = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, DEF_PARTIAL_COVERED_G);
+        int parCoveredB = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, DEF_PARTIAL_COVERED_B);
+        int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, DEF_NOT_COVERED_R);
+        int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, DEF_NOT_COVERED_G);
+        int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, DEF_NOT_COVERED_B);
         jSpinnerCoveredR.setValue(coveredR);
         jSpinnerCoveredG.setValue(coveredG);
         jSpinnerCoveredB.setValue(coveredB);
@@ -413,15 +413,15 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     void store() {
         Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        pref.putInt("JaCoCoverage.CoveredR", (Integer) jSpinnerCoveredR.getValue());
-        pref.putInt("JaCoCoverage.CoveredG", (Integer) jSpinnerCoveredG.getValue());
-        pref.putInt("JaCoCoverage.CoveredB", (Integer) jSpinnerCoveredB.getValue());
-        pref.putInt("JaCoCoverage.PartiallyCoveredR", (Integer) jSpinnerPartiallyCoveredR.getValue());
-        pref.putInt("JaCoCoverage.PartiallyCoveredG", (Integer) jSpinnerPartiallyCoveredG.getValue());
-        pref.putInt("JaCoCoverage.PartiallyCoveredB", (Integer) jSpinnerPartiallyCoveredB.getValue());
-        pref.putInt("JaCoCoverage.NotCoveredR", (Integer) jSpinnerNotCoveredR.getValue());
-        pref.putInt("JaCoCoverage.NotCoveredG", (Integer) jSpinnerNotCoveredG.getValue());
-        pref.putInt("JaCoCoverage.NotCoveredB", (Integer) jSpinnerNotCoveredB.getValue());
+        pref.putInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerCoveredR.getValue());
+        pref.putInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, (Integer) jSpinnerCoveredG.getValue());
+        pref.putInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerCoveredB.getValue());
+        pref.putInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerPartiallyCoveredR.getValue());
+        pref.putInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, (Integer) jSpinnerPartiallyCoveredG.getValue());
+        pref.putInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerPartiallyCoveredB.getValue());
+        pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerNotCoveredR.getValue());
+        pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, (Integer) jSpinnerNotCoveredG.getValue());
+        pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerNotCoveredB.getValue());
     }
 
     boolean valid() {
