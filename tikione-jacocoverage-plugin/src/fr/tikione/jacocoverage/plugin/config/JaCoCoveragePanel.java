@@ -306,80 +306,54 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredR.setValue(DEF_NOT_COVERED_R);
         jSpinnerNotCoveredG.setValue(DEF_NOT_COVERED_G);
         jSpinnerNotCoveredB.setValue(DEF_NOT_COVERED_B);
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jSpinnerCoveredRStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCoveredRStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerCoveredRStateChanged
 
     private void jSpinnerCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCoveredGStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerCoveredGStateChanged
 
     private void jSpinnerCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCoveredBStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerCoveredBStateChanged
 
     private void jSpinnerPartiallyCoveredRStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredRStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerPartiallyCoveredRStateChanged
 
     private void jSpinnerPartiallyCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredGStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerPartiallyCoveredGStateChanged
 
     private void jSpinnerPartiallyCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredBStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerPartiallyCoveredBStateChanged
 
     private void jSpinnerNotCoveredRStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredRStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerNotCoveredRStateChanged
 
     private void jSpinnerNotCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredGStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerNotCoveredGStateChanged
 
     private void jSpinnerNotCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredBStateChanged
-        updateCoveredPreview();
-        updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();
+        updatePreviews();
     }//GEN-LAST:event_jSpinnerNotCoveredBStateChanged
 
-    private void updateCoveredPreview() {
+    private void updatePreviews() {
         jPanelCoveredPreview.setBackground(new Color(
                 (Integer) jSpinnerCoveredR.getValue(),
                 (Integer) jSpinnerCoveredG.getValue(),
                 (Integer) jSpinnerCoveredB.getValue()));
-    }
-
-    private void updatePartiallyCoveredPreview() {
         jPanelPartiallyCoveredPreview.setBackground(new Color(
                 (Integer) jSpinnerPartiallyCoveredR.getValue(),
                 (Integer) jSpinnerPartiallyCoveredG.getValue(),
                 (Integer) jSpinnerPartiallyCoveredB.getValue()));
-    }
-
-    private void updateNotCoveredPreview() {
         jPanelNotCoveredPreview.setBackground(new Color(
                 (Integer) jSpinnerNotCoveredR.getValue(),
                 (Integer) jSpinnerNotCoveredG.getValue(),

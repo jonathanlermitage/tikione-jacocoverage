@@ -1,3 +1,4 @@
 /build/
 /tikione-jacocoverage-plugin/build/
 /tikione-jacoco-lib/build/
+/tikione-jacoco-lib/nbproject/private/
