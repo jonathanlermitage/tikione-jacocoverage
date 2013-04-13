@@ -19,10 +19,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanelHighlightingCoveredCode" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonResoreDefaults" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -33,21 +33,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanelHighlightingCoveredCode" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="20" max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonResoreDefaults" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jPanelHighlightingCoveredCode">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Highlighting of covered code:">
-              <ResourceString PropertyName="titleX" bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jPanel1.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -60,43 +60,43 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelPartiallyCoveredCodeBG" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelNotCoveredCodeBG" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jLabel1" min="-2" pref="224" max="-2" attributes="0"/>
+                      <Component id="jLabelCoveredCodeBG" min="-2" pref="224" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCoveredR" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCoveredG" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPartiallyCoveredR" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPartiallyCoveredG" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPartiallyCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPartiallyCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jTextField7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNotCoveredR" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField8" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNotCoveredG" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNotCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNotCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelInfoColorsAreRGB" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -106,30 +106,30 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelInfoColorsAreRGB" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel4" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelCoveredCodeBG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel3" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPartiallyCoveredCodeBG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPartiallyCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPartiallyCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPartiallyCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPartiallyCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField7" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField8" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField9" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel2" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNotCoveredCodeBG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNotCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNotCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNotCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNotCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
               </Group>
@@ -137,91 +137,91 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabelCoveredCodeBG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelCoveredCodeBG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabelPartiallyCoveredCodeBG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelPartiallyCoveredCodeBG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLabelNotCoveredCodeBG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel3.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelNotCoveredCodeBG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jTextFieldCoveredR">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldCoveredR.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="jTextFieldCoveredG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldCoveredG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="jTextFieldCoveredB">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField3.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldCoveredB.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="jTextFieldPartiallyCoveredR">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField4.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldPartiallyCoveredR.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="jTextFieldPartiallyCoveredG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField5.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldPartiallyCoveredG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="jTextFieldPartiallyCoveredB">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField6.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldPartiallyCoveredB.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="jTextFieldNotCoveredR">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField7.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldNotCoveredR.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField8">
+        <Component class="javax.swing.JTextField" name="jTextFieldNotCoveredG">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField8.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldNotCoveredG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField9">
+        <Component class="javax.swing.JTextField" name="jTextFieldNotCoveredB">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextField9.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jTextFieldNotCoveredB.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jTextFieldNotCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="c2" green="c9" red="fc" type="rgb"/>
@@ -248,7 +248,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="jTextFieldPartiallyCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9d" green="e7" red="ff" type="rgb"/>
@@ -275,7 +275,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel4">
+        <Container class="javax.swing.JPanel" name="jTextFieldCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="af" green="eb" red="cd" type="rgb"/>
@@ -302,22 +302,22 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="jLabelInfoColorsAreRGB">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="2"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel4.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelInfoColorsAreRGB.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonResoreDefaults">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jButton1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jButtonResoreDefaults.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>

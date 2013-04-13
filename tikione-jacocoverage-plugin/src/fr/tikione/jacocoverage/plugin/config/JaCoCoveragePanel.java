@@ -31,173 +31,173 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new JPanel();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        jTextField1 = new JTextField();
-        jTextField2 = new JTextField();
-        jTextField3 = new JTextField();
-        jTextField4 = new JTextField();
-        jTextField5 = new JTextField();
-        jTextField6 = new JTextField();
-        jTextField7 = new JTextField();
-        jTextField8 = new JTextField();
-        jTextField9 = new JTextField();
-        jPanel2 = new JPanel();
-        jPanel3 = new JPanel();
-        jPanel4 = new JPanel();
-        jLabel4 = new JLabel();
-        jButton1 = new JButton();
+        jPanelHighlightingCoveredCode = new JPanel();
+        jLabelCoveredCodeBG = new JLabel();
+        jLabelPartiallyCoveredCodeBG = new JLabel();
+        jLabelNotCoveredCodeBG = new JLabel();
+        jTextFieldCoveredR = new JTextField();
+        jTextFieldCoveredG = new JTextField();
+        jTextFieldCoveredB = new JTextField();
+        jTextFieldPartiallyCoveredR = new JTextField();
+        jTextFieldPartiallyCoveredG = new JTextField();
+        jTextFieldPartiallyCoveredB = new JTextField();
+        jTextFieldNotCoveredR = new JTextField();
+        jTextFieldNotCoveredG = new JTextField();
+        jTextFieldNotCoveredB = new JTextField();
+        jTextFieldNotCoveredPreview = new JPanel();
+        jTextFieldPartiallyCoveredPreview = new JPanel();
+        jTextFieldCoveredPreview = new JPanel();
+        jLabelInfoColorsAreRGB = new JLabel();
+        jButtonResoreDefaults = new JButton();
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanel1.border.title"))); // NOI18N
+        jPanelHighlightingCoveredCode.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title"))); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabelCoveredCodeBG, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelCoveredCodeBG.text")); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabelPartiallyCoveredCodeBG, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelPartiallyCoveredCodeBG.text")); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabel3, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel3.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabelNotCoveredCodeBG, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelNotCoveredCodeBG.text")); // NOI18N
 
-        jTextField1.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField1.text")); // NOI18N
+        jTextFieldCoveredR.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldCoveredR.text")); // NOI18N
 
-        jTextField2.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField2.text")); // NOI18N
+        jTextFieldCoveredG.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldCoveredG.text")); // NOI18N
 
-        jTextField3.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField3.text")); // NOI18N
+        jTextFieldCoveredB.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldCoveredB.text")); // NOI18N
 
-        jTextField4.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField4.text")); // NOI18N
+        jTextFieldPartiallyCoveredR.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldPartiallyCoveredR.text")); // NOI18N
 
-        jTextField5.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField5.text")); // NOI18N
+        jTextFieldPartiallyCoveredG.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldPartiallyCoveredG.text")); // NOI18N
 
-        jTextField6.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField6.text")); // NOI18N
+        jTextFieldPartiallyCoveredB.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldPartiallyCoveredB.text")); // NOI18N
 
-        jTextField7.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField7.text")); // NOI18N
+        jTextFieldNotCoveredR.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldNotCoveredR.text")); // NOI18N
 
-        jTextField8.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField8.text")); // NOI18N
+        jTextFieldNotCoveredG.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldNotCoveredG.text")); // NOI18N
 
-        jTextField9.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextField9.text")); // NOI18N
+        jTextFieldNotCoveredB.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldNotCoveredB.text")); // NOI18N
 
-        jPanel2.setBackground(new Color(252, 201, 194));
-        jPanel2.setMaximumSize(new Dimension(16, 16));
-        jPanel2.setMinimumSize(new Dimension(16, 16));
-        jPanel2.setName(""); // NOI18N
+        jTextFieldNotCoveredPreview.setBackground(new Color(252, 201, 194));
+        jTextFieldNotCoveredPreview.setMaximumSize(new Dimension(16, 16));
+        jTextFieldNotCoveredPreview.setMinimumSize(new Dimension(16, 16));
+        jTextFieldNotCoveredPreview.setName(""); // NOI18N
 
-        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        GroupLayout jTextFieldNotCoveredPreviewLayout = new GroupLayout(jTextFieldNotCoveredPreview);
+        jTextFieldNotCoveredPreview.setLayout(jTextFieldNotCoveredPreviewLayout);
+        jTextFieldNotCoveredPreviewLayout.setHorizontalGroup(
+            jTextFieldNotCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new Color(255, 231, 157));
-        jPanel3.setMaximumSize(new Dimension(16, 16));
-        jPanel3.setMinimumSize(new Dimension(16, 16));
-        jPanel3.setName(""); // NOI18N
-
-        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 16, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jTextFieldNotCoveredPreviewLayout.setVerticalGroup(
+            jTextFieldNotCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
 
-        jPanel4.setBackground(new Color(205, 235, 175));
-        jPanel4.setMaximumSize(new Dimension(16, 16));
-        jPanel4.setMinimumSize(new Dimension(16, 16));
-        jPanel4.setName(""); // NOI18N
+        jTextFieldPartiallyCoveredPreview.setBackground(new Color(255, 231, 157));
+        jTextFieldPartiallyCoveredPreview.setMaximumSize(new Dimension(16, 16));
+        jTextFieldPartiallyCoveredPreview.setMinimumSize(new Dimension(16, 16));
+        jTextFieldPartiallyCoveredPreview.setName(""); // NOI18N
 
-        GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        GroupLayout jTextFieldPartiallyCoveredPreviewLayout = new GroupLayout(jTextFieldPartiallyCoveredPreview);
+        jTextFieldPartiallyCoveredPreview.setLayout(jTextFieldPartiallyCoveredPreviewLayout);
+        jTextFieldPartiallyCoveredPreviewLayout.setHorizontalGroup(
+            jTextFieldPartiallyCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jTextFieldPartiallyCoveredPreviewLayout.setVerticalGroup(
+            jTextFieldPartiallyCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
 
-        jLabel4.setFont(new Font("Tahoma", 2, 11)); // NOI18N
-        Mnemonics.setLocalizedText(jLabel4, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel4.text")); // NOI18N
+        jTextFieldCoveredPreview.setBackground(new Color(205, 235, 175));
+        jTextFieldCoveredPreview.setMaximumSize(new Dimension(16, 16));
+        jTextFieldCoveredPreview.setMinimumSize(new Dimension(16, 16));
+        jTextFieldCoveredPreview.setName(""); // NOI18N
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        GroupLayout jTextFieldCoveredPreviewLayout = new GroupLayout(jTextFieldCoveredPreview);
+        jTextFieldCoveredPreview.setLayout(jTextFieldCoveredPreviewLayout);
+        jTextFieldCoveredPreviewLayout.setHorizontalGroup(
+            jTextFieldCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        jTextFieldCoveredPreviewLayout.setVerticalGroup(
+            jTextFieldCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        jLabelInfoColorsAreRGB.setFont(new Font("Tahoma", 2, 11)); // NOI18N
+        Mnemonics.setLocalizedText(jLabelInfoColorsAreRGB, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelInfoColorsAreRGB.text")); // NOI18N
+
+        GroupLayout jPanelHighlightingCoveredCodeLayout = new GroupLayout(jPanelHighlightingCoveredCode);
+        jPanelHighlightingCoveredCode.setLayout(jPanelHighlightingCoveredCodeLayout);
+        jPanelHighlightingCoveredCodeLayout.setHorizontalGroup(
+            jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelPartiallyCoveredCodeBG)
+                        .addComponent(jLabelNotCoveredCodeBG))
+                    .addComponent(jLabelCoveredCodeBG, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                        .addComponent(jTextFieldCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                        .addComponent(jTextFieldPartiallyCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPartiallyCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPartiallyCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                        .addComponent(jTextFieldNotCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNotCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNotCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldNotCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabelInfoColorsAreRGB)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4)
+        jPanelHighlightingCoveredCodeLayout.setVerticalGroup(
+            jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                .addComponent(jLabelInfoColorsAreRGB)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelPartiallyCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPartiallyCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPartiallyCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPartiallyCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelNotCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNotCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNotCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNotCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNotCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        Mnemonics.setLocalizedText(jButton1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButton1.text")); // NOI18N
+        Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
 
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
@@ -206,19 +206,19 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonResoreDefaults)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonResoreDefaults)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -248,23 +248,23 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JPanel jPanel1;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
-    private JPanel jPanel4;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
-    private JTextField jTextField4;
-    private JTextField jTextField5;
-    private JTextField jTextField6;
-    private JTextField jTextField7;
-    private JTextField jTextField8;
-    private JTextField jTextField9;
+    private JButton jButtonResoreDefaults;
+    private JLabel jLabelCoveredCodeBG;
+    private JLabel jLabelInfoColorsAreRGB;
+    private JLabel jLabelNotCoveredCodeBG;
+    private JLabel jLabelPartiallyCoveredCodeBG;
+    private JPanel jPanelHighlightingCoveredCode;
+    private JTextField jTextFieldCoveredB;
+    private JTextField jTextFieldCoveredG;
+    private JPanel jTextFieldCoveredPreview;
+    private JTextField jTextFieldCoveredR;
+    private JTextField jTextFieldNotCoveredB;
+    private JTextField jTextFieldNotCoveredG;
+    private JPanel jTextFieldNotCoveredPreview;
+    private JTextField jTextFieldNotCoveredR;
+    private JTextField jTextFieldPartiallyCoveredB;
+    private JTextField jTextFieldPartiallyCoveredG;
+    private JPanel jTextFieldPartiallyCoveredPreview;
+    private JTextField jTextFieldPartiallyCoveredR;
     // End of variables declaration//GEN-END:variables
 }
