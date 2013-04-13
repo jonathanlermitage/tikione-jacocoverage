@@ -20,7 +20,6 @@ import org.openide.awt.Mnemonics;
 import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
-// TODO add input verifiers (int, 0-255) on text-fields
 final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -43,12 +42,11 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final int DEF_NOT_COVERED_B = 194;
 
-    private final JaCoCoverageOptionsPanelController controller;
+    private final JaCoCoverageOptionsPanelController controller; // TODO remove if useless
 
     JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
         this.controller = controller;
         initComponents();
-        // TODO listen to changes in form fields and call controller.changed()
     }
 
     /** 
@@ -322,42 +320,50 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private void jSpinnerCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCoveredGStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerCoveredGStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerCoveredGStateChanged
 
     private void jSpinnerCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerCoveredBStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerCoveredBStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerCoveredBStateChanged
 
     private void jSpinnerPartiallyCoveredRStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredRStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerPartiallyCoveredRStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerPartiallyCoveredRStateChanged
 
     private void jSpinnerPartiallyCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredGStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerPartiallyCoveredGStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerPartiallyCoveredGStateChanged
 
     private void jSpinnerPartiallyCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerPartiallyCoveredBStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerPartiallyCoveredBStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerPartiallyCoveredBStateChanged
 
     private void jSpinnerNotCoveredRStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredRStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerNotCoveredRStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerNotCoveredRStateChanged
 
     private void jSpinnerNotCoveredGStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredGStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerNotCoveredGStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerNotCoveredGStateChanged
 
     private void jSpinnerNotCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredBStateChanged
         updateCoveredPreview();
         updatePartiallyCoveredPreview();
-        updateNotCoveredPreview();    }//GEN-LAST:event_jSpinnerNotCoveredBStateChanged
+        updateNotCoveredPreview();
+    }//GEN-LAST:event_jSpinnerNotCoveredBStateChanged
 
     private void updateCoveredPreview() {
         jPanelCoveredPreview.setBackground(new Color(
