@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: fr.tikione.jacocoverage.plugin/1
+OpenIDE-Module-Implementation-Version: 1
+OpenIDE-Module-Localizing-Bundle: fr/tikione/jacocoverage/plugin/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
