@@ -16,27 +16,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanelHighlightingCoveredCode" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButtonResoreDefaults" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jButtonResoreDefaults" min="-2" max="-2" attributes="0"/>
           </Group>
+          <Component id="jPanelHighlightingCoveredCode" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelHighlightingCoveredCode" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Component id="jButtonResoreDefaults" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,7 +38,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Highlighting of covered code:">
+            <TitledBorder title="Highlighting of code:">
               <ResourceString PropertyName="titleX" bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
@@ -74,7 +66,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldCoveredPreview" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jTextFieldPartiallyCoveredR" min="-2" max="-2" attributes="0"/>
@@ -83,7 +75,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldPartiallyCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldPartiallyCoveredPreview" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelPartiallyCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jTextFieldNotCoveredR" min="-2" max="-2" attributes="0"/>
@@ -92,7 +84,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldNotCoveredB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldNotCoveredPreview" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelNotCoveredPreview" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
@@ -113,7 +105,7 @@
                       <Component id="jTextFieldCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanelCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
@@ -121,7 +113,7 @@
                       <Component id="jTextFieldPartiallyCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPartiallyCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPartiallyCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldPartiallyCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanelPartiallyCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
@@ -129,7 +121,7 @@
                       <Component id="jTextFieldNotCoveredR" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldNotCoveredG" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldNotCoveredB" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldNotCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanelNotCoveredPreview" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
               </Group>
@@ -221,10 +213,10 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jTextFieldNotCoveredPreview">
+        <Container class="javax.swing.JPanel" name="jPanelNotCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c2" green="c9" red="fc" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[16, 16]"/>
@@ -248,10 +240,10 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jTextFieldPartiallyCoveredPreview">
+        <Container class="javax.swing.JPanel" name="jPanelPartiallyCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="9d" green="e7" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[16, 16]"/>
@@ -275,10 +267,10 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="jTextFieldCoveredPreview">
+        <Container class="javax.swing.JPanel" name="jPanelCoveredPreview">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="af" green="eb" red="cd" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[16, 16]"/>
@@ -320,6 +312,9 @@
           <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jButtonResoreDefaults.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonResoreDefaultsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -6,13 +6,14 @@ import javax.swing.JComponent;
 import org.netbeans.spi.options.OptionsPanelController;
 import org.openide.util.HelpCtx;
 import org.openide.util.Lookup;
+import org.openide.util.NbBundle;
 
 @OptionsPanelController.SubRegistration(
         location = "Java",
         displayName = "#AdvancedOption_DisplayName_JaCoCoverage",
         keywords = "#AdvancedOption_Keywords_JaCoCoverage",
         keywordsCategory = "Java/JaCoCoverage")
-@org.openide.util.NbBundle.Messages({"AdvancedOption_DisplayName_JaCoCoverage=JaCoCo", "AdvancedOption_Keywords_JaCoCoverage=jacoco"})
+@NbBundle.Messages({"AdvancedOption_DisplayName_JaCoCoverage=JaCoCoverage", "AdvancedOption_Keywords_JaCoCoverage=jacoco"})
 public final class JaCoCoverageOptionsPanelController extends OptionsPanelController {
 
     private JaCoCoveragePanel panel;
