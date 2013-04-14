@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -48,6 +49,10 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private static final int DEF_NOT_COVERED_G = 201;
 
     private static final int DEF_NOT_COVERED_B = 194;
+
+    private static String DEF_TEST_ANT_TASK = "test";
+
+    private static String DEF_TEST_ANT_TASK_PARAMS = "-javaagent:{pathOfJacocoagentJar}=destfile=includes={appPackages}";
 
     private final JaCoCoverageOptionsPanelController controller; // TODO remove if useless
 
@@ -83,6 +88,12 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jButtonResoreDefaults = new JButton();
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
+        jPanel1 = new JPanel();
+        jLabelAntTask = new JLabel();
+        jTextFieldAntTask = new JTextField();
+        jLabelAntTaskParams = new JLabel();
+        jTextFieldAntTaskParams = new JTextField();
+        jLabelAntTaskParamsTips = new JLabel();
 
         jPanelHighlightingCoveredCode.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title"))); // NOI18N
 
@@ -297,6 +308,55 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanel1.border.title"))); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabelAntTask, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTask.text")); // NOI18N
+
+        jTextFieldAntTask.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldAntTask.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabelAntTaskParams, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParams.text")); // NOI18N
+
+        jTextFieldAntTaskParams.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldAntTaskParams.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jLabelAntTaskParamsTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParamsTips.text")); // NOI18N
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelAntTask)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelAntTaskParams)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAntTaskParams))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAntTask)
+                    .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAntTaskParams)
+                    .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,15 +367,16 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonResoreDefaults))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonResoreDefaults)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -334,6 +395,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredR.setValue(DEF_NOT_COVERED_R);
         jSpinnerNotCoveredG.setValue(DEF_NOT_COVERED_G);
         jSpinnerNotCoveredB.setValue(DEF_NOT_COVERED_B);
+        jTextFieldAntTask.setText(DEF_TEST_ANT_TASK);
+        jTextFieldAntTaskParams.setText(DEF_TEST_ANT_TASK_PARAMS);
         updatePreviews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
@@ -409,6 +472,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, DEF_NOT_COVERED_R);
         int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, DEF_NOT_COVERED_G);
         int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, DEF_NOT_COVERED_B);
+        String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, DEF_TEST_ANT_TASK);
+        String antTaskParams = pref.get(Globals.PROP_TEST_ANT_TASK_PARAMS, DEF_TEST_ANT_TASK_PARAMS);
         jSpinnerCoveredR.setValue(coveredR);
         jSpinnerCoveredG.setValue(coveredG);
         jSpinnerCoveredB.setValue(coveredB);
@@ -421,6 +486,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jPanelCoveredPreview.setBackground(new Color(coveredR, coveredG, coveredB));
         jPanelPartiallyCoveredPreview.setBackground(new Color(parCoveredR, parCoveredG, parCoveredB));
         jPanelNotCoveredPreview.setBackground(new Color(notCoveredR, notCoveredG, notCoveredB));
+        jTextFieldAntTask.setText(antTask);
+        jTextFieldAntTaskParams.setText(antTaskParams);
     }
 
     void store() {
@@ -434,6 +501,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerNotCoveredR.getValue());
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, (Integer) jSpinnerNotCoveredG.getValue());
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerNotCoveredB.getValue());
+        pref.put(Globals.PROP_TEST_ANT_TASK, jTextFieldAntTask.getText());
+        pref.put(Globals.PROP_TEST_ANT_TASK_PARAMS, jTextFieldAntTaskParams.getText());
     }
 
     boolean valid() {
@@ -443,10 +512,14 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JButton jButtonResoreDefaults;
     private JLabel jLabel1;
     private JLabel jLabel2;
+    private JLabel jLabelAntTask;
+    private JLabel jLabelAntTaskParams;
+    private JLabel jLabelAntTaskParamsTips;
     private JLabel jLabelCoveredCodeBG;
     private JLabel jLabelInfoColorsAreRGB;
     private JLabel jLabelNotCoveredCodeBG;
     private JLabel jLabelPartiallyCoveredCodeBG;
+    private JPanel jPanel1;
     private JPanel jPanelCoveredPreview;
     private JPanel jPanelHighlightingCoveredCode;
     private JPanel jPanelNotCoveredPreview;
@@ -460,5 +533,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JSpinner jSpinnerPartiallyCoveredB;
     private JSpinner jSpinnerPartiallyCoveredG;
     private JSpinner jSpinnerPartiallyCoveredR;
+    private JTextField jTextFieldAntTask;
+    private JTextField jTextFieldAntTaskParams;
     // End of variables declaration//GEN-END:variables
 }

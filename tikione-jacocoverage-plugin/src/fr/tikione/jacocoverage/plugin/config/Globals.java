@@ -20,6 +20,10 @@ public class Globals {
 
     public static String PROP_NOCOVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.NotCoveredB";
 
+    public static String PROP_TEST_ANT_TASK = "JaCoCoverage.JavaAgent.AntTask";
+
+    public static String PROP_TEST_ANT_TASK_PARAMS = "JaCoCoverage.JavaAgent.AntTaskParams";
+
     private Globals() {
     }
 }

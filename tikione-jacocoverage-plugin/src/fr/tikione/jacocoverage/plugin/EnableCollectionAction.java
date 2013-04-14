@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import org.netbeans.api.project.Project;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -11,8 +13,6 @@ import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Lookup;
-import org.openide.windows.IOProvider;
-import org.openide.windows.InputOutput;
 
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.EnableCollectionAction")
@@ -58,9 +58,10 @@ public final class EnableCollectionAction extends AbstractAction implements Cont
         public @Override
         void actionPerformed(ActionEvent e) {
             String msg = "Project location: " + FileUtil.getFileDisplayName(project.getProjectDirectory());
-            InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage", true);
-            //io.getOut().println(msg);
-            io.getOut().close();
+//            InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage", true);
+//            io.getOut().println(msg);
+//            io.getOut().close();
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(msg));
         }
     }
 }
