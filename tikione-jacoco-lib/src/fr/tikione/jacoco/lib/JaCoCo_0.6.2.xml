@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE library PUBLIC "-//NetBeans//DTD Library Declaration 1.0//EN" "http://www.netbeans.org/dtds/library-declaration-1_0.dtd">
+<library version="1.0">
+  <name>JaCoCo_0.6.2</name>
+  <type>j2se</type>
+  <localizing-bundle>fr.tikione.jacoco.lib.Bundle</localizing-bundle>
+  <volume>
+    <type>classpath</type>
+    <resource>jar:nbinst://fr.tikione.jacoco.lib/libs/jacocoagent-0.6.2.jar!/</resource>
+    <resource>jar:nbinst://fr.tikione.jacoco.lib/libs/jacocoant-0.6.2.jar!/</resource>
+  </volume>
+  <volume>
+    <type>src</type>
+  </volume>
+  <volume>
+    <type>javadoc</type>
+    <resource>jar:nbinst://fr.tikione.jacoco.lib/docs/jacoco-0.6.2_api.zip!/</resource>
+  </volume>
+</library>

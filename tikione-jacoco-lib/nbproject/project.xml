@@ -6,14 +6,56 @@
             <code-name-base>fr.tikione.jacoco.lib</code-name-base>
             <suite-component/>
             <module-dependencies/>
-            <public-packages/>
+            <public-packages>
+                <package>com.vladium.emma.rt</package>
+                <package>org.jacoco.agent</package>
+                <package>org.jacoco.agent.rt</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.asm</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.asm.commons</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.asm.tree</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.data</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.instr</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.internal</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.internal.data</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.internal.flow</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.internal.instr</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.core.runtime</package>
+                <package>org.jacoco.agent.rt.internal_5d10cad.output</package>
+                <package>org.jacoco.ant</package>
+                <package>org.jacoco.asm</package>
+                <package>org.jacoco.asm.commons</package>
+                <package>org.jacoco.asm.tree</package>
+                <package>org.jacoco.core</package>
+                <package>org.jacoco.core.analysis</package>
+                <package>org.jacoco.core.data</package>
+                <package>org.jacoco.core.instr</package>
+                <package>org.jacoco.core.internal</package>
+                <package>org.jacoco.core.internal.analysis</package>
+                <package>org.jacoco.core.internal.data</package>
+                <package>org.jacoco.core.internal.flow</package>
+                <package>org.jacoco.core.internal.instr</package>
+                <package>org.jacoco.core.runtime</package>
+                <package>org.jacoco.report</package>
+                <package>org.jacoco.report.csv</package>
+                <package>org.jacoco.report.html</package>
+                <package>org.jacoco.report.internal</package>
+                <package>org.jacoco.report.internal.html</package>
+                <package>org.jacoco.report.internal.html.index</package>
+                <package>org.jacoco.report.internal.html.page</package>
+                <package>org.jacoco.report.internal.html.resources</package>
+                <package>org.jacoco.report.internal.html.table</package>
+                <package>org.jacoco.report.internal.xml</package>
+                <package>org.jacoco.report.xml</package>
+            </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/jacocoant.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jacocoant.jar</binary-origin>
+                <runtime-relative-path>ext/jacocoant-0.6.2.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jacocoant-0.6.2.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/jacocoagent.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jacocoagent.jar</binary-origin>
+                <runtime-relative-path>ext/jacocoagent-0.6.2.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jacocoagent-0.6.2.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
