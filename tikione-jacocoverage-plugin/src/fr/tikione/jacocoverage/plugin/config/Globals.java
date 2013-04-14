@@ -24,6 +24,30 @@ public class Globals {
 
     public static String PROP_TEST_ANT_TASK_PARAMS = "JaCoCoverage.JavaAgent.AntTaskParams";
 
-    private Globals() {
+    public static final long serialVersionUID = 1L;
+
+    public static final int DEF_COVERED_R = 205;
+
+    public static final int DEF_COVERED_G = 235;
+
+    public static final int DEF_COVERED_B = 175;
+
+    public static final int DEF_PARTIAL_COVERED_R = 255;
+
+    public static final int DEF_PARTIAL_COVERED_G = 231;
+
+    public static final int DEF_PARTIAL_COVERED_B = 157;
+
+    public static final int DEF_NOT_COVERED_R = 252;
+
+    public static final int DEF_NOT_COVERED_G = 201;
+
+    public static final int DEF_NOT_COVERED_B = 194;
+
+    public static String DEF_TEST_ANT_TASK = "test";
+
+    public static String DEF_TEST_ANT_TASK_PARAMS = "-javaagent:{pathOfJacocoagentJar}=destfile=includes={appPackages}";
+
+    public Globals() {
     }
 }

@@ -25,34 +25,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.openide.awt.Mnemonics;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
 final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-
-    private static final int DEF_COVERED_R = 205;
-
-    private static final int DEF_COVERED_G = 235;
-
-    private static final int DEF_COVERED_B = 175;
-
-    private static final int DEF_PARTIAL_COVERED_R = 255;
-
-    private static final int DEF_PARTIAL_COVERED_G = 231;
-
-    private static final int DEF_PARTIAL_COVERED_B = 157;
-
-    private static final int DEF_NOT_COVERED_R = 252;
-
-    private static final int DEF_NOT_COVERED_G = 201;
-
-    private static final int DEF_NOT_COVERED_B = 194;
-
-    private static String DEF_TEST_ANT_TASK = "test";
-
-    private static String DEF_TEST_ANT_TASK_PARAMS = "-javaagent:{pathOfJacocoagentJar}=destfile=includes={appPackages}";
 
     private final JaCoCoverageOptionsPanelController controller; // TODO remove if useless
 
@@ -387,17 +366,17 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonResoreDefaultsActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonResoreDefaultsActionPerformed
-        jSpinnerCoveredR.setValue(DEF_COVERED_R);
-        jSpinnerCoveredG.setValue(DEF_COVERED_G);
-        jSpinnerCoveredB.setValue(DEF_COVERED_B);
-        jSpinnerPartiallyCoveredR.setValue(DEF_PARTIAL_COVERED_R);
-        jSpinnerPartiallyCoveredG.setValue(DEF_PARTIAL_COVERED_G);
-        jSpinnerPartiallyCoveredB.setValue(DEF_PARTIAL_COVERED_B);
-        jSpinnerNotCoveredR.setValue(DEF_NOT_COVERED_R);
-        jSpinnerNotCoveredG.setValue(DEF_NOT_COVERED_G);
-        jSpinnerNotCoveredB.setValue(DEF_NOT_COVERED_B);
-        jTextFieldAntTask.setText(DEF_TEST_ANT_TASK);
-        jTextFieldAntTaskParams.setText(DEF_TEST_ANT_TASK_PARAMS);
+        jSpinnerCoveredR.setValue(Globals.DEF_COVERED_R);
+        jSpinnerCoveredG.setValue(Globals.DEF_COVERED_G);
+        jSpinnerCoveredB.setValue(Globals.DEF_COVERED_B);
+        jSpinnerPartiallyCoveredR.setValue(Globals.DEF_PARTIAL_COVERED_R);
+        jSpinnerPartiallyCoveredG.setValue(Globals.DEF_PARTIAL_COVERED_G);
+        jSpinnerPartiallyCoveredB.setValue(Globals.DEF_PARTIAL_COVERED_B);
+        jSpinnerNotCoveredR.setValue(Globals.DEF_NOT_COVERED_R);
+        jSpinnerNotCoveredG.setValue(Globals.DEF_NOT_COVERED_G);
+        jSpinnerNotCoveredB.setValue(Globals.DEF_NOT_COVERED_B);
+        jTextFieldAntTask.setText(Globals.DEF_TEST_ANT_TASK);
+        jTextFieldAntTaskParams.setText(Globals.DEF_TEST_ANT_TASK_PARAMS);
         updatePreviews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
@@ -442,7 +421,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             try {
                 Desktop.getDesktop().browse(new URI("http://netbeanscolors.org"));
             } catch (URISyntaxException ex) {
+                Exceptions.printStackTrace(ex);
             } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
             }
         }
     }//GEN-LAST:event_jLabelAuthorWebsiteMouseClicked
@@ -464,17 +445,17 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     void load() {
         Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        int coveredR = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, DEF_COVERED_R);
-        int coveredG = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, DEF_COVERED_G);
-        int coveredB = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, DEF_COVERED_B);
-        int parCoveredR = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, DEF_PARTIAL_COVERED_R);
-        int parCoveredG = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, DEF_PARTIAL_COVERED_G);
-        int parCoveredB = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, DEF_PARTIAL_COVERED_B);
-        int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, DEF_NOT_COVERED_R);
-        int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, DEF_NOT_COVERED_G);
-        int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, DEF_NOT_COVERED_B);
-        String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, DEF_TEST_ANT_TASK);
-        String antTaskParams = pref.get(Globals.PROP_TEST_ANT_TASK_PARAMS, DEF_TEST_ANT_TASK_PARAMS);
+        int coveredR = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, Globals.DEF_COVERED_R);
+        int coveredG = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, Globals.DEF_COVERED_G);
+        int coveredB = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, Globals.DEF_COVERED_B);
+        int parCoveredR = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_PARTIAL_COVERED_R);
+        int parCoveredG = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_PARTIAL_COVERED_G);
+        int parCoveredB = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_PARTIAL_COVERED_B);
+        int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_NOT_COVERED_R);
+        int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_NOT_COVERED_G);
+        int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_NOT_COVERED_B);
+        String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
+        String antTaskParams = pref.get(Globals.PROP_TEST_ANT_TASK_PARAMS, Globals.DEF_TEST_ANT_TASK_PARAMS);
         jSpinnerCoveredR.setValue(coveredR);
         jSpinnerCoveredG.setValue(coveredG);
         jSpinnerCoveredB.setValue(coveredB);
