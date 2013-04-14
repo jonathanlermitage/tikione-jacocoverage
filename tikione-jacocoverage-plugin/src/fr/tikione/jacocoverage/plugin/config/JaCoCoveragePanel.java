@@ -86,9 +86,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredG = new JSpinner();
         jSpinnerNotCoveredB = new JSpinner();
         jButtonResoreDefaults = new JButton();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jPanel1 = new JPanel();
+        jLabelAuthor = new JLabel();
+        jLabelAuthorWebsite = new JLabel();
+        jPanelJaCoCoRuntimeParams = new JPanel();
         jLabelAntTask = new JLabel();
         jTextFieldAntTask = new JTextField();
         jLabelAntTaskParams = new JLabel();
@@ -296,19 +296,19 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
-        Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabelAuthor, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAuthor.text")); // NOI18N
 
-        jLabel2.setForeground(new Color(0, 51, 204));
-        Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
-        jLabel2.setToolTipText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.toolTipText")); // NOI18N
-        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new MouseAdapter() {
+        jLabelAuthorWebsite.setForeground(new Color(0, 51, 204));
+        Mnemonics.setLocalizedText(jLabelAuthorWebsite, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAuthorWebsite.text")); // NOI18N
+        jLabelAuthorWebsite.setToolTipText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAuthorWebsite.toolTipText")); // NOI18N
+        jLabelAuthorWebsite.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabelAuthorWebsite.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelAuthorWebsiteMouseClicked(evt);
             }
         });
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanel1.border.title"))); // NOI18N
+        jPanelJaCoCoRuntimeParams.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelJaCoCoRuntimeParams.border.title"))); // NOI18N
 
         Mnemonics.setLocalizedText(jLabelAntTask, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTask.text")); // NOI18N
 
@@ -320,37 +320,37 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelAntTaskParamsTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParamsTips.text")); // NOI18N
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        GroupLayout jPanelJaCoCoRuntimeParamsLayout = new GroupLayout(jPanelJaCoCoRuntimeParams);
+        jPanelJaCoCoRuntimeParams.setLayout(jPanelJaCoCoRuntimeParamsLayout);
+        jPanelJaCoCoRuntimeParamsLayout.setHorizontalGroup(
+            jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                         .addComponent(jLabelAntTask)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                         .addComponent(jLabelAntTaskParams)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldAntTaskParams)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(132, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelJaCoCoRuntimeParamsLayout.setVerticalGroup(
+            jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTask)
                     .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTaskParams)
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -363,26 +363,26 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(jLabelAuthor)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabelAuthorWebsite)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonResoreDefaults))
             .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelJaCoCoRuntimeParams, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelJaCoCoRuntimeParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonResoreDefaults)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2))))
+                        .addComponent(jLabelAuthor)
+                        .addComponent(jLabelAuthorWebsite))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -437,7 +437,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         updatePreviews();
     }//GEN-LAST:event_jSpinnerNotCoveredBStateChanged
 
-    private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabelAuthorWebsiteMouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabelAuthorWebsiteMouseClicked
         if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(new URI("http://netbeanscolors.org"));
@@ -445,7 +445,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             } catch (IOException ex) {
             }
         }
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabelAuthorWebsiteMouseClicked
 
     private void updatePreviews() {
         jPanelCoveredPreview.setBackground(new Color(
@@ -511,18 +511,18 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonResoreDefaults;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
     private JLabel jLabelAntTask;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
+    private JLabel jLabelAuthor;
+    private JLabel jLabelAuthorWebsite;
     private JLabel jLabelCoveredCodeBG;
     private JLabel jLabelInfoColorsAreRGB;
     private JLabel jLabelNotCoveredCodeBG;
     private JLabel jLabelPartiallyCoveredCodeBG;
-    private JPanel jPanel1;
     private JPanel jPanelCoveredPreview;
     private JPanel jPanelHighlightingCoveredCode;
+    private JPanel jPanelJaCoCoRuntimeParams;
     private JPanel jPanelNotCoveredPreview;
     private JPanel jPanelPartiallyCoveredPreview;
     private JSpinner jSpinnerCoveredB;
