@@ -73,6 +73,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jLabelAntTaskParams = new JLabel();
         jTextFieldAntTaskParams = new JTextField();
         jLabelAntTaskParamsTips = new JLabel();
+        jLabelAntTaskTips = new JLabel();
 
         jPanelHighlightingCoveredCode.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title"))); // NOI18N
 
@@ -299,6 +300,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelAntTaskParamsTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParamsTips.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(jLabelAntTaskTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskTips.text")); // NOI18N
+
         GroupLayout jPanelJaCoCoRuntimeParamsLayout = new GroupLayout(jPanelJaCoCoRuntimeParams);
         jPanelJaCoCoRuntimeParams.setLayout(jPanelJaCoCoRuntimeParamsLayout);
         jPanelJaCoCoRuntimeParamsLayout.setHorizontalGroup(
@@ -309,7 +312,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                         .addComponent(jLabelAntTask)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelAntTaskTips)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                         .addComponent(jLabelAntTaskParams)
@@ -319,7 +324,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelJaCoCoRuntimeParamsLayout.setVerticalGroup(
             jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -327,7 +332,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTask)
-                    .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAntTaskTips))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTaskParams)
@@ -495,6 +501,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JLabel jLabelAntTask;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
+    private JLabel jLabelAntTaskTips;
     private JLabel jLabelAuthor;
     private JLabel jLabelAuthorWebsite;
     private JLabel jLabelCoveredCodeBG;

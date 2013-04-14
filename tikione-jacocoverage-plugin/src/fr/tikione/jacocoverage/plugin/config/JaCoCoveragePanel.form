@@ -405,7 +405,9 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabelAntTask" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldAntTask" min="-2" pref="155" max="-2" attributes="0"/>
+                          <Component id="jTextFieldAntTask" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabelAntTaskTips" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -419,7 +421,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jLabelAntTaskParamsTips" min="-2" pref="405" max="-2" attributes="0"/>
-                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -430,6 +432,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelAntTask" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldAntTask" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAntTaskTips" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -476,6 +479,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelAntTaskParamsTips.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelAntTaskTips">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelAntTaskTips.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
