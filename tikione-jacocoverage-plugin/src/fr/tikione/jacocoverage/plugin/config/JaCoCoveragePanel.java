@@ -1,10 +1,17 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.prefs.Preferences;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -74,6 +81,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredG = new JSpinner();
         jSpinnerNotCoveredB = new JSpinner();
         jButtonResoreDefaults = new JButton();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
 
         jPanelHighlightingCoveredCode.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title"))); // NOI18N
 
@@ -255,19 +264,17 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelPartiallyCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addComponent(jSpinnerPartiallyCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerPartiallyCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerPartiallyCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanelPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSpinnerPartiallyCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerPartiallyCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerPartiallyCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelNotCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addComponent(jSpinnerNotCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerNotCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSpinnerNotCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanelNotCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSpinnerNotCoveredR, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerNotCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerNotCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelNotCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -278,21 +285,42 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
+        Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
+
+        jLabel2.setForeground(new Color(0, 51, 204));
+        Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
+        jLabel2.setToolTipText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.toolTipText")); // NOI18N
+        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonResoreDefaults))
-            .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jButtonResoreDefaults))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonResoreDefaults)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -344,6 +372,16 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private void jSpinnerNotCoveredBStateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNotCoveredBStateChanged
         updatePreviews();
     }//GEN-LAST:event_jSpinnerNotCoveredBStateChanged
+
+    private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI("http://netbeanscolors.org"));
+            } catch (URISyntaxException ex) {
+            } catch (IOException ex) {
+            }
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     private void updatePreviews() {
         jPanelCoveredPreview.setBackground(new Color(
@@ -403,6 +441,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonResoreDefaults;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
     private JLabel jLabelCoveredCodeBG;
     private JLabel jLabelInfoColorsAreRGB;
     private JLabel jLabelNotCoveredCodeBG;
