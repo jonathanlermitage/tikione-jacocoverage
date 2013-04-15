@@ -18,13 +18,18 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileObject;
-import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
 
+/**
+ * The "Test with JaCoCoverage" contextual action registration.
+ * Start an Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
+ *
+ * @author Jonathan Lermitage
+ */
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.RunWithJaCoCoAction")
 @ActionRegistration(displayName = "Test with JaCoCoverage",
@@ -46,12 +51,21 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
         return new ContextAction(context);
     }
 
+    /**
+     * The "Test with JaCoCoverage" contextual action.
+     */
     private static final class ContextAction extends AbstractAction {
 
         private static final long serialVersionUID = 1L;
 
+        /** The project the contextual action is called from. */
         private final Project project;
 
+        /**
+         * Enable the context action on supported projects only.
+         *
+         * @param context the context the action is called from.
+         */
         public ContextAction(Lookup context) {
             project = context.lookup(Project.class);
             setEnabled(Utils.isProjectSupported(project));
@@ -62,35 +76,40 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
         public @Override
         void actionPerformed(ActionEvent ae) {
             try {
+                // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
                 Preferences pref = NbPreferences.forModule(RunWithJaCoCoAction.class);
                 String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
-                String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
-                String projectDir = FileUtil.getFileDisplayName(project.getProjectDirectory());
+
                 FileObject projectPropertiesFile = project.getProjectDirectory().getFileObject("nbproject/project.properties");
-                String jacocoExecPath = projectDir + File.separator + "jacoco.exec";
-                File jacocoExecFile = new File(jacocoExecPath);
+                File jacocoExecFile = Utils.getJacocoexec(project);
                 if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
                     String msg = "Cannot delete the previous JaCoCo report file.\n"
-                            + "Please delete it manually: \"" + jacocoExecPath + "\".";
+                            + "Please delete it manually: \"" + jacocoExecFile.getAbsolutePath() + "\".";
                     NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
                     DialogDisplayer.getDefault().notify(nd);
                 } else {
-                    Properties projectProperties = new Properties();
-                    projectProperties.load(projectPropertiesFile.getInputStream());
-                    String projectJvmArgs = projectProperties.getProperty("run.jvmargs", "");
-                    File jacocoJarfile = Utils.getJacocoAgentJar();
-                    String appPackages = "*";
-                    antTaskJavaagentParam = antTaskJavaagentParam
-                            .replace("{pathOfJacocoagentJar}", jacocoJarfile.getAbsolutePath())
-                            .replace("{appPackages}", appPackages);
+                    // Apply JaCoCo JavaAgent customization.
+                    String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
+                            .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
+                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, ":"));
+
                     FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                     DataObject dataObj = DataObject.find(scriptToExecute);
                     AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
+
                     AntTargetExecutor.Env env = new AntTargetExecutor.Env();
                     AntTargetExecutor executor = AntTargetExecutor.createTargetExecutor(env);
-                    Properties targetProps = env.getProperties();
+
+                    // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
+                    // appended to the existing list of JVM arguments that is given to the Ant task.
+                    Properties projectProperties = new Properties(); // Project properties.
+                    Properties targetProps = env.getProperties();    // Properties that will be given to the Ant task.
+                    projectProperties.load(projectPropertiesFile.getInputStream());
+                    String projectJvmArgs = projectProperties.getProperty("run.jvmargs", "");
                     targetProps.put("run.jvmargs", projectJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                     env.setProperties(targetProps);
+
+                    // Launch the Ant task.
                     executor.execute(antCookie, new String[]{antTask});
                 }
             } catch (IOException ex) {
