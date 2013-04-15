@@ -97,7 +97,7 @@ public class Utils {
      */
     public static List<String> getProjectJavaPackages(Project project, Properties projectProperties) {
         List<String> packages = new ArrayList<String>(8);
-        String srcFolderName = projectProperties.getProperty("src.dir", "");
+        String srcFolderName = projectProperties.getProperty("src.dir", "src");
         List<File> packagesAsFolders = listFolders(new File(getProjectDir(project) + File.separator + srcFolderName + File.separator));
         int rootDirnameLen = getProjectDir(project).length() + 1;
         for (File srcPackage : packagesAsFolders) {
