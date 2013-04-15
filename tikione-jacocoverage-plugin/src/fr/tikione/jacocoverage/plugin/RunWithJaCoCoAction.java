@@ -80,7 +80,11 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                 Preferences pref = NbPreferences.forModule(RunWithJaCoCoAction.class);
                 String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
 
+                // Retrieve proejct properties.
                 FileObject projectPropertiesFile = project.getProjectDirectory().getFileObject("nbproject/project.properties");
+                Properties projectProperties = new Properties();
+                projectProperties.load(projectPropertiesFile.getInputStream());
+
                 File jacocoExecFile = Utils.getJacocoexec(project);
                 if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
                     String msg = "Cannot delete the previous JaCoCo report file.\n"
@@ -91,7 +95,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     // Apply JaCoCo JavaAgent customization.
                     String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
                             .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, ":"));
+                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, projectProperties, ":"));
 
                     FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                     DataObject dataObj = DataObject.find(scriptToExecute);
@@ -102,9 +106,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
 
                     // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
                     // appended to the existing list of JVM arguments that is given to the Ant task.
-                    Properties projectProperties = new Properties(); // Project properties.
                     Properties targetProps = env.getProperties();    // Properties that will be given to the Ant task.
-                    projectProperties.load(projectPropertiesFile.getInputStream());
                     String projectJvmArgs = projectProperties.getProperty("run.jvmargs", "");
                     targetProps.put("run.jvmargs", projectJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                     env.setProperties(targetProps);

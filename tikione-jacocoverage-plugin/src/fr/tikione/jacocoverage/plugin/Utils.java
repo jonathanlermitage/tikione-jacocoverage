@@ -1,8 +1,11 @@
 package fr.tikione.jacocoverage.plugin;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import org.netbeans.api.project.Project;
 import org.openide.filesystems.FileUtil;
 import org.openide.modules.InstalledFileLocator;
@@ -64,31 +67,50 @@ public class Utils {
         return supported;
     }
 
+    public static List<File> listFolders(File root) {
+        List<File> folders = new ArrayList<File>(16);
+        File[] subfolders = root.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isDirectory();
+            }
+        });
+        folders.addAll(Arrays.asList(subfolders));
+        for (File subfolder : subfolders) {
+            folders.addAll(listFolders(subfolder));
+        }
+        return folders;
+    }
+
     /**
      * Retrieve the list of Java packages of a given project.
-     * Each element is a fully qualified package name, e.g. <code>foo.bar</code> and <code>foo.bar.too</code>.
+     * Each element is a fully qualified package name, e.g. <code>foo</code>, <code>foo.bar</code> and <code>foo.bar.too</code>.
      *
      * @param project the project to list Java packages.
      * @return a list of Java package names.
      */
-    public static List<String> getProjectJavaPackages(Project project) {
+    public static List<String> getProjectJavaPackages(Project project, Properties projectProperties) {
         List<String> packages = new ArrayList<String>(8);
-        // TODO get project's packages
-        
+        String srcFolderName = projectProperties.getProperty("src.dir", "");
+        List<File> packagesAsFolders = listFolders(new File(getProjectDir(project) + File.separator + srcFolderName + File.separator));
+        int rootDirnameLen = getProjectDir(project).length() + 1;
+        for (File srcPackage : packagesAsFolders) {
+            packages.add(srcPackage.getAbsolutePath().substring(rootDirnameLen).replace(File.separator, "."));
+        }
         return packages;
     }
 
     /**
      * Retrieve the list of Java packages of a given project.
-     * Each element is a fully qualified package name, e.g. <code>foo.bar</code> and <code>foo.bar.too</code>. 
+     * Each element is a fully qualified package name, e.g.  <code>foo</code>, <code>foo.bar</code> and <code>foo.bar.too</code>.
      * Elements are separated with a given separator string.
      *
      * @param project the project to list Java packages.
      * @param separator the separator string.
      * @return a list of Java package names.
      */
-    public static String getProjectJavaPackagesAsStr(Project project, String separator) {
-        List<String> packagesList = getProjectJavaPackages(project);
+    public static String getProjectJavaPackagesAsStr(Project project, Properties projectProperties, String separator) {
+        List<String> packagesList = getProjectJavaPackages(project, projectProperties);
         StringBuilder packages = new StringBuilder(128);
         if (packagesList.isEmpty()) {
             packages.append("*");
