@@ -67,6 +67,12 @@ public class Utils {
         return supported;
     }
 
+    /**
+     * Get a list of every subfolder contained in a given folder.
+     *
+     * @param root the root folder.
+     * @return a list of subfolders.
+     */
     public static List<File> listFolders(File root) {
         List<File> folders = new ArrayList<File>(16);
         File[] subfolders = root.listFiles(new FileFilter() {
