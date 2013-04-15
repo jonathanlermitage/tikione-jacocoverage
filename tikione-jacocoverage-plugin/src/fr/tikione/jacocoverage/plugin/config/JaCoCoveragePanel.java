@@ -33,10 +33,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private final JaCoCoverageOptionsPanelController controller; // TODO remove if useless
-
     JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
-        this.controller = controller;
         initComponents();
     }
 
