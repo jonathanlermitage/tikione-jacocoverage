@@ -22,7 +22,7 @@ public class Globals {
 
     public static String PROP_TEST_ANT_TASK = "JaCoCoverage.JavaAgent.AntTask";
 
-    public static String PROP_TEST_ANT_TASK_PARAMS = "JaCoCoverage.JavaAgent.AntTaskParams";
+    public static String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
 
     public static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class Globals {
 
     public static String DEF_TEST_ANT_TASK = "test";
 
-    public static String DEF_TEST_ANT_TASK_PARAMS = "-javaagent:{pathOfJacocoagentJar}=destfile=includes={appPackages}";
+    public static String DEF_TEST_ANT_TASK_JAVAAGENT = "{pathOfJacocoagentJar}=includes={appPackages}";
 
     public Globals() {
     }
