@@ -25,8 +25,8 @@ public class Utils {
      *
      * @return the JaCoCo-Agent JAR.
      */
-    public static File getJacocoAgentJar() { // TODO synchronize with JaCoCo Library plugin
-        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoagent-0.6.2.jar", "fr.tikione.jacoco.lib", false);
+    public static File getJacocoAgentJar() {
+        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoagent.jar", "fr.tikione.jacoco.lib", false);
     }
 
     /**
@@ -34,8 +34,8 @@ public class Utils {
      *
      * @return the JaCoCo-Ant JAR.
      */
-    public static File getJacocoAntJar() { // TODO synchronize with JaCoCo Library plugin
-        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoant-0.6.2.jar", "fr.tikione.jacoco.lib", false);
+    public static File getJacocoAntJar() {
+        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoant.jar", "fr.tikione.jacoco.lib", false);
     }
 
     /**
