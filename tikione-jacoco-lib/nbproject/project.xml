@@ -50,12 +50,12 @@
                 <package>org.jacoco.report.xml</package>
             </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/jacocoant-0.6.2.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jacocoant-0.6.2.jar</binary-origin>
+                <runtime-relative-path>ext/jacocoant.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jacocoant.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/jacocoagent-0.6.2.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jacocoagent-0.6.2.jar</binary-origin>
+                <runtime-relative-path>ext/jacocoagent.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jacocoagent.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
