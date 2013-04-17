@@ -25,9 +25,22 @@ public class JaCoCoReportAnalyzer {
     private JaCoCoReportAnalyzer() {
     }
 
+    /**
+     * Load a JaCoCo binary report and convert it to XML.
+     *
+     * @param jacocoexec the JaCoCo binary report.
+     * @param xmlreport the XML file to generate.
+     * @param prjClassesDir the directory containing project's compiled classes.
+     * @param prjSourcesDir the directory containing project's Java source files.
+     * @throws FileNotFoundException if the JaCoCo binary report, compiled classes or Java sources files directory can't be found.
+     * @throws IOException if an I/O error occurs.
+     */
     public static void createXmlReport(File jacocoexec, File xmlreport, File prjClassesDir, File prjSourcesDir)
             throws FileNotFoundException,
                    IOException {
+        xmlreport.delete();
+
+        // Load the JaCoCo binary report.
         FileInputStream fis = new FileInputStream(jacocoexec);
         ExecutionDataReader executionDataReader = new ExecutionDataReader(fis);
         ExecutionDataStore executionDataStore = new ExecutionDataStore();
@@ -40,6 +53,8 @@ public class JaCoCoReportAnalyzer {
         } finally {
             fis.close();
         }
+
+        // Convert the binary report to XML.
         CoverageBuilder coverageBuilder = new CoverageBuilder();
         Analyzer analyzer = new Analyzer(executionDataStore, coverageBuilder);
         analyzer.analyzeAll(prjClassesDir);
