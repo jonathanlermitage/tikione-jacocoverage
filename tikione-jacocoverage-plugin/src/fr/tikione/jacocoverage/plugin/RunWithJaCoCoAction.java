@@ -95,7 +95,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     // Apply JaCoCo JavaAgent customization.
                     String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
                             .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, projectProperties, ":"));
+                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, projectProperties, ":", ".*"));
 
                     FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                     DataObject dataObj = DataObject.find(scriptToExecute);

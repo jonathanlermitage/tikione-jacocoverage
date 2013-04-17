@@ -113,9 +113,10 @@ public class Utils {
      *
      * @param project the project to list Java packages.
      * @param separator the separator string.
+     * @param prefix a prefix to append to the end of each package name (can be empty).
      * @return a list of Java package names.
      */
-    public static String getProjectJavaPackagesAsStr(Project project, Properties projectProperties, String separator) {
+    public static String getProjectJavaPackagesAsStr(Project project, Properties projectProperties, String separator, String prefix) {
         List<String> packagesList = getProjectJavaPackages(project, projectProperties);
         StringBuilder packages = new StringBuilder(128);
         if (packagesList.isEmpty()) {
@@ -124,7 +125,7 @@ public class Utils {
             boolean first = true;
             for (String pack : packagesList) {
                 if (!first) {
-                    packages.append(separator);
+                    packages.append(separator).append(prefix);
                 }
                 packages.append(pack);
                 first = false;
