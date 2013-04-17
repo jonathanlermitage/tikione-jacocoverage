@@ -42,12 +42,12 @@ public class JaCoCoReportAnalyzer {
 
         // Load the JaCoCo binary report.
         FileInputStream fis = new FileInputStream(jacocoexec);
-        ExecutionDataReader executionDataReader = new ExecutionDataReader(fis);
         ExecutionDataStore executionDataStore = new ExecutionDataStore();
         SessionInfoStore sessionInfoStore = new SessionInfoStore();
-        executionDataReader.setExecutionDataVisitor(executionDataStore);
-        executionDataReader.setSessionInfoVisitor(sessionInfoStore);
         try {
+            ExecutionDataReader executionDataReader = new ExecutionDataReader(fis);
+            executionDataReader.setExecutionDataVisitor(executionDataStore);
+            executionDataReader.setSessionInfoVisitor(sessionInfoStore);
             while (executionDataReader.read()) {
             }
         } finally {
