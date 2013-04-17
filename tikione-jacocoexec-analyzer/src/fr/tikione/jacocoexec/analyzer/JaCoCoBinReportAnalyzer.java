@@ -16,13 +16,13 @@ import org.jacoco.report.IReportVisitor;
 import org.jacoco.report.xml.XMLFormatter;
 
 /**
- * JaCoCo reports related utilities.
+ * JaCoCo binary reports related utilities.
  *
  * @author Jonathan Lermitage
  */
-public class JaCoCoReportAnalyzer {
+public class JaCoCoBinReportAnalyzer {
 
-    private JaCoCoReportAnalyzer() {
+    private JaCoCoBinReportAnalyzer() {
     }
 
     /**
@@ -35,7 +35,7 @@ public class JaCoCoReportAnalyzer {
      * @throws FileNotFoundException if the JaCoCo binary report, compiled classes or Java sources files directory can't be found.
      * @throws IOException if an I/O error occurs.
      */
-    public static void createXmlReport(File jacocoexec, File xmlreport, File prjClassesDir, File prjSourcesDir)
+    public static void toXmlReport(File jacocoexec, File xmlreport, File prjClassesDir, File prjSourcesDir)
             throws FileNotFoundException,
                    IOException {
         xmlreport.delete();
