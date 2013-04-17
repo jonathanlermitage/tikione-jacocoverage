@@ -99,7 +99,7 @@ public class Utils {
         List<String> packages = new ArrayList<String>(8);
         String srcFolderName = projectProperties.getProperty("src.dir", "src");
         List<File> packagesAsFolders = listFolders(new File(getProjectDir(project) + File.separator + srcFolderName + File.separator));
-        int rootDirnameLen = getProjectDir(project).length() + 1;
+        int rootDirnameLen = getProjectDir(project).length() + srcFolderName.length() + 2;
         for (File srcPackage : packagesAsFolders) {
             packages.add(srcPackage.getAbsolutePath().substring(rootDirnameLen).replace(File.separator, "."));
         }
@@ -125,9 +125,9 @@ public class Utils {
             boolean first = true;
             for (String pack : packagesList) {
                 if (!first) {
-                    packages.append(separator).append(prefix);
+                    packages.append(separator);
                 }
-                packages.append(pack);
+                packages.append(pack).append(prefix);
                 first = false;
             }
         }
