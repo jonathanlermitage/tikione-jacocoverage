@@ -13,8 +13,8 @@ TikiOne JaCoCoverage plugin is built with NetBeans 7.3 (http://netbeans.org/) an
 * NetBeans integration: DONE
 * Configurable: DONE
 * JaCoCo report generation (binary form): DONE
-* JaCoCo report analysis: UNDER DEVELOPMENT (reports are already converted to XML. Now, I have to parse them to extract coverage data)
-* Java source files highlighting: TODO
+* JaCoCo report analysis: DONE
+* Java source files highlighting: UNDER DEVELOPMENT
 * HTML report: TODO (maybe optional?)
 
 I hope a first release next week.
