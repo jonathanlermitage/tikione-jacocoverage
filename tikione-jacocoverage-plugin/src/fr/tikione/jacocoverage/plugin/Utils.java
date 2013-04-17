@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
 import org.netbeans.api.project.Project;
 import org.openide.filesystems.FileUtil;
 import org.openide.modules.InstalledFileLocator;
@@ -101,7 +102,9 @@ public class Utils {
         List<File> packagesAsFolders = listFolders(new File(getProjectDir(project) + File.separator + srcFolderName + File.separator));
         int rootDirnameLen = getProjectDir(project).length() + srcFolderName.length() + 2;
         for (File srcPackage : packagesAsFolders) {
-            packages.add(srcPackage.getAbsolutePath().substring(rootDirnameLen).replace(File.separator, "."));
+            packages.add(srcPackage.getAbsolutePath()
+                    .substring(rootDirnameLen)
+                    .replaceAll(Matcher.quoteReplacement(File.separator), "."));
         }
         return packages;
     }

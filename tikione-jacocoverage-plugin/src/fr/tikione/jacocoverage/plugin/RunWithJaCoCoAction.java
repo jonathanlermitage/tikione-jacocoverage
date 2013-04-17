@@ -1,13 +1,19 @@
 package fr.tikione.jacocoverage.plugin;
 
+import fr.tikione.jacocoexec.analyzer.JaCoCoBinReportAnalyzer;
+import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
+import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.xml.parsers.ParserConfigurationException;
 import org.apache.tools.ant.module.api.AntProjectCookie;
 import org.apache.tools.ant.module.api.AntTargetExecutor;
 import org.netbeans.api.project.Project;
@@ -17,12 +23,14 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.awt.DynamicMenuContent;
+import org.openide.execution.ExecutorTask;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
+import org.xml.sax.SAXException;
 
 /**
  * The "Test with JaCoCoverage" contextual action registration.
@@ -82,10 +90,10 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
 
                 // Retrieve proejct properties.
                 FileObject projectPropertiesFile = project.getProjectDirectory().getFileObject("nbproject/project.properties");
-                Properties projectProperties = new Properties();
+                final Properties projectProperties = new Properties();
                 projectProperties.load(projectPropertiesFile.getInputStream());
 
-                File jacocoExecFile = Utils.getJacocoexec(project);
+                final File jacocoExecFile = Utils.getJacocoexec(project);
                 if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
                     String msg = "Cannot delete the previous JaCoCo report file.\n"
                             + "Please delete it manually: \"" + jacocoExecFile.getAbsolutePath() + "\".";
@@ -111,8 +119,37 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     targetProps.put("run.jvmargs", projectJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                     env.setProperties(targetProps);
 
-                    // Launch the Ant task.
-                    executor.execute(antCookie, new String[]{antTask});
+                    // Launch the Ant task with the JaCoCo JavaAgent.
+                    final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            execute.result();
+
+                            // Load the generated JaCoCo coverage report.
+                            String projectDir = Utils.getProjectDir(project) + File.separator;
+                            File xmlreport = new File(projectDir + "jacocoverage.report.xml");
+                            File prjClassesDir = new File(projectDir + projectProperties.getProperty("build.classes.dir")
+                                    .replace("${build.dir}", projectProperties.getProperty("build.dir")) + File.separator);
+                            File prjSourcesDir = new File(projectDir + projectProperties.getProperty("src.dir") + File.separator);
+                            try {
+                                JaCoCoBinReportAnalyzer.toXmlReport(jacocoExecFile, xmlreport, prjClassesDir, prjSourcesDir);
+                                List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+
+                                // TODO apply highlighting
+                                
+                            } catch (FileNotFoundException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (IOException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (ParserConfigurationException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (SAXException ex) {
+                                Exceptions.printStackTrace(ex);
+                            }
+                        }
+                    }).start();
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
