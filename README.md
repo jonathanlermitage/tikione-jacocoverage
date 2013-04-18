@@ -9,13 +9,15 @@ Coverage collections are based on JaCoCo in order to support Java 7 bytecode.
 
 TikiOne JaCoCoverage plugin is built with NetBeans 7.3 (http://netbeans.org/) and the latest version of Oracle JDK6.
 
+![Screenshot](http://netbeanscolors.org/files/jacococoverage_2.png)
+
 ## Development progression
-* NetBeans integration: DONE
-* Configurable: DONE
-* JaCoCo report generation (binary form): DONE
-* JaCoCo report analysis: DONE
-* Java source files highlighting: UNDER DEVELOPMENT
-* HTML report: TODO (maybe optional?)
+* NetBeans integration: done
+* Configurable: done
+* JaCoCo report generation (binary form): done
+* JaCoCo report analysis: done
+* Java source files highlighting: under development
+* HTML report: todo
 
 I hope a first release next week.
 
