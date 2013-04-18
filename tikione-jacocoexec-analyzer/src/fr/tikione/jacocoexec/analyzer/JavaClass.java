@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class JavaClass {
 
-    /** The package name. */
+    /** The package name (with "/" instead of "."). */
     private String packageName;
 
     /** The class name (with ".java" extension). */

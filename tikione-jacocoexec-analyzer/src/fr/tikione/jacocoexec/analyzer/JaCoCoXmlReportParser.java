@@ -75,7 +75,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("PACKAGE")) {
             for (int idx = 0; idx < attributes.getLength(); idx++) {
                 if (attributes.getQName(idx).equalsIgnoreCase("NAME")) {
-                    currentPackage = attributes.getValue(idx);
+                    currentPackage = "/" + attributes.getValue(idx) + "/";
                     break;
                 }
             }
@@ -94,7 +94,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
             int coveredBranches = 0;
             for (int idx = 0; idx < attributes.getLength(); idx++) {
                 if (attributes.getQName(idx).equalsIgnoreCase("NR")) {
-                    lineNumber = Integer.parseInt(attributes.getValue(idx));
+                    lineNumber = Integer.parseInt(attributes.getValue(idx)) - 1;
                 } else if (attributes.getQName(idx).equalsIgnoreCase("MI")) {
                     missedInstructions = Integer.parseInt(attributes.getValue(idx));
                 } else if (attributes.getQName(idx).equalsIgnoreCase("CI")) {

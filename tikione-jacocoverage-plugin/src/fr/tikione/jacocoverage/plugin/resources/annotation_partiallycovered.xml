@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE type PUBLIC "-//NetBeans//DTD annotation type 1.1//EN" "http://www.netbeans.org/dtds/annotation-type-1_1.dtd">
+<type name="annotation_partiallycovered"
+      description_key="LBL_annotation_partiallycovered"
+      localizing_bundle="org.netbeans.modules.coverage.resources.Bundle"
+      visible="true"
+      highlight="#FFE79D"
+      custom_sidebar_color="#FFE79D"
+      type="line"
+      browseable="false"
+      severity="ok"
+      priority="500"
+/>

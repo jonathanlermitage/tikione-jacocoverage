@@ -114,7 +114,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
 
                     // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
                     // appended to the existing list of JVM arguments that is given to the Ant task.
-                    Properties targetProps = env.getProperties();    // Properties that will be given to the Ant task.
+                    Properties targetProps = env.getProperties();
                     String projectJvmArgs = projectProperties.getProperty("run.jvmargs", "");
                     targetProps.put("run.jvmargs", projectJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                     env.setProperties(targetProps);
@@ -125,6 +125,9 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
+                            // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
+                            // object provided by the NetBeans platform is not correctly wrapped.
                             execute.result();
 
                             // Load the generated JaCoCo coverage report.
@@ -135,10 +138,17 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                             File prjSourcesDir = new File(projectDir + projectProperties.getProperty("src.dir") + File.separator);
                             try {
                                 JaCoCoBinReportAnalyzer.toXmlReport(jacocoExecFile, xmlreport, prjClassesDir, prjSourcesDir);
-                                List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+                                final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                                // TODO apply highlighting
-                                
+                                // Apply highlighting on each Java source file.
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        for (final JavaClass jclass : coverageData) {
+                                            Utils.colorDoc(project, jclass, true);
+                                        }
+                                    }
+                                }).start();
                             } catch (FileNotFoundException ex) {
                                 Exceptions.printStackTrace(ex);
                             } catch (IOException ex) {
