@@ -141,14 +141,9 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                                 final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
                                 // Apply highlighting on each Java source file.
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        for (final JavaClass jclass : coverageData) {
-                                            Utils.colorDoc(project, jclass, true);
-                                        }
-                                    }
-                                }).start();
+                                for (final JavaClass jclass : coverageData) {
+                                    Utils.colorDoc(project, jclass, true);
+                                }
                             } catch (FileNotFoundException ex) {
                                 Exceptions.printStackTrace(ex);
                             } catch (IOException ex) {

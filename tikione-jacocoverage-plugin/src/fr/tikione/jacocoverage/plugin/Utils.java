@@ -163,17 +163,18 @@ public class Utils {
     public static void colorDoc(Project project, JavaClass jclass, boolean openedFilesOnly) {
         InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage progress", true);
         String classResource = jclass.getPackageName() + jclass.getClassName();
+        FIND_JAVA_FO:
         for (FileObject curRoot : GlobalPathRegistry.getDefault().getSourceRoots()) {
             io.getOut().println("[" + classResource + "]");
             FileObject fileObject = curRoot.getFileObject(classResource); // TODO See http://wiki.netbeans.org/DevFaqOpenFileAtLine
-            if (fileObject != null) {
+            if (fileObject != null && fileObject.getExt().equalsIgnoreCase("JAVA")) {
                 try {
                     io.getOut().println(" >> Object found");
                     DataObject dataObject = DataObject.find(fileObject);
                     Node node = dataObject.getNodeDelegate();
                     EditorCookie editorCookie = node.getLookup().lookup(EditorCookie.class);
-                    if (!openedFilesOnly || (openedFilesOnly && editorCookie != null && editorCookie.getOpenedPanes() != null)) {
-                        io.getOut().println(" >> Opened in editor");
+                    if (editorCookie != null) {
+                        io.getOut().println(" >> Object here");
                         StyledDocument doc = editorCookie.getDocument();
                         if (doc != null) {
                             io.getOut().println(" >> Document retrieved");
@@ -184,32 +185,33 @@ public class Utils {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     CoveredAnnotation annotation = new CoveredAnnotation();
-                                    annotation.attach(line);
-                                    io.getOut().println(" >> Covered: " + covIdx);
+//                                    annotation.attach(line);
                                 }
                             }
                             for (int covIdx : jclass.getPartiallyCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     PartiallyCoveredAnnotation annotation = new PartiallyCoveredAnnotation();
-                                    annotation.attach(line);
-                                    io.getOut().println(" >> Partially covered: " + covIdx);
+//                                    annotation.attach(line);
                                 }
                             }
                             for (int covIdx : jclass.getNotCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     NotCoveredAnnotation annotation = new NotCoveredAnnotation();
-                                    annotation.attach(line);
-                                    io.getOut().println(" >> Not covered: " + covIdx);
+//                                    annotation.attach(line);
                                 }
                             }
+                        } else {
+                            io.getOut().println(" !! Document is null");
                         }
+                        break FIND_JAVA_FO;
+                    } else {
+                        io.getOut().println(" !! editorCookie is null");
                     }
                 } catch (DataObjectNotFoundException ex) {
                     Exceptions.printStackTrace(ex);
                 }
-                break;
             }
         }
         io.getOut().close();
