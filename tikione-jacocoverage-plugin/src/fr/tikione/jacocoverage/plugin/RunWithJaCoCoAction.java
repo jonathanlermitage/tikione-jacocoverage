@@ -142,7 +142,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
 
                                 // Apply highlighting on each Java source file.
                                 for (final JavaClass jclass : coverageData) {
-                                    Utils.colorDoc(project, jclass, true);
+                                    Utils.colorDoc(project, jclass);
                                 }
                             } catch (FileNotFoundException ex) {
                                 Exceptions.printStackTrace(ex);

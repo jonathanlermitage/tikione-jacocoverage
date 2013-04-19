@@ -3,6 +3,7 @@ package fr.tikione.jacocoverage.plugin;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +22,6 @@ import org.openide.nodes.Node;
 import org.openide.text.Line;
 import org.openide.text.NbDocument;
 import org.openide.util.Exceptions;
-import org.openide.windows.IOProvider;
-import org.openide.windows.InputOutput;
 
 /**
  * Some NetBeans related utilities.
@@ -160,24 +159,19 @@ public class Utils {
         return FileUtil.getFileDisplayName(project.getProjectDirectory());
     }
 
-    public static void colorDoc(Project project, JavaClass jclass, boolean openedFilesOnly) {
-        InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage progress", true);
+    public static void colorDoc(Project project, JavaClass jclass) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
         FIND_JAVA_FO:
         for (FileObject curRoot : GlobalPathRegistry.getDefault().getSourceRoots()) {
-            io.getOut().println("[" + classResource + "]");
-            FileObject fileObject = curRoot.getFileObject(classResource); // TODO See http://wiki.netbeans.org/DevFaqOpenFileAtLine
+            FileObject fileObject = curRoot.getFileObject(classResource);
             if (fileObject != null && fileObject.getExt().equalsIgnoreCase("JAVA")) {
                 try {
-                    io.getOut().println(" >> Object found");
                     DataObject dataObject = DataObject.find(fileObject);
                     Node node = dataObject.getNodeDelegate();
                     EditorCookie editorCookie = node.getLookup().lookup(EditorCookie.class);
                     if (editorCookie != null) {
-                        io.getOut().println(" >> Object here");
-                        StyledDocument doc = editorCookie.getDocument();
+                        StyledDocument doc = editorCookie.openDocument(); //.getDocument();
                         if (doc != null) {
-                            io.getOut().println(" >> Document retrieved");
                             int startLine = 0;
                             int endLine = NbDocument.findLineNumber(doc, doc.getLength());
                             Line.Set lineset = editorCookie.getLineSet();
@@ -185,35 +179,32 @@ public class Utils {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     CoveredAnnotation annotation = new CoveredAnnotation();
-//                                    annotation.attach(line);
+                                    annotation.attach(line);
                                 }
                             }
                             for (int covIdx : jclass.getPartiallyCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     PartiallyCoveredAnnotation annotation = new PartiallyCoveredAnnotation();
-//                                    annotation.attach(line);
+                                    annotation.attach(line);
                                 }
                             }
                             for (int covIdx : jclass.getNotCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     NotCoveredAnnotation annotation = new NotCoveredAnnotation();
-//                                    annotation.attach(line);
+                                    annotation.attach(line);
                                 }
                             }
-                        } else {
-                            io.getOut().println(" !! Document is null");
                         }
                         break FIND_JAVA_FO;
-                    } else {
-                        io.getOut().println(" !! editorCookie is null");
                     }
                 } catch (DataObjectNotFoundException ex) {
+                    Exceptions.printStackTrace(ex);
+                } catch (IOException ex) {
                     Exceptions.printStackTrace(ex);
                 }
             }
         }
-        io.getOut().close();
     }
 }
