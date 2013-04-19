@@ -21,6 +21,8 @@ TikiOne JaCoCoverage plugin is built with NetBeans 7.3 (http://netbeans.org/) an
 
 I hope a first release next week (between Sunday 21 April and Friday 26).
 
+You can get the latest development build (for testing purpose only!) at: <https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/>
+
 ## Author
 * Jonathan Lermitage (<jonathan.lermitage@entreprise38.org>)
 
