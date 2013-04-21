@@ -159,6 +159,12 @@ public class Utils {
         return FileUtil.getFileDisplayName(project.getProjectDirectory());
     }
 
+    /**
+     * Color (in editor) all the document representing the Java class.
+     *
+     * @param project the project containing the Java class.
+     * @param jclass the Java class informations and coverage data.
+     */
     public static void colorDoc(Project project, JavaClass jclass) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
         FIND_JAVA_FO:
@@ -170,7 +176,7 @@ public class Utils {
                     Node node = dataObject.getNodeDelegate();
                     EditorCookie editorCookie = node.getLookup().lookup(EditorCookie.class);
                     if (editorCookie != null) {
-                        StyledDocument doc = editorCookie.openDocument(); //.getDocument();
+                        StyledDocument doc = editorCookie.openDocument();
                         if (doc != null) {
                             int startLine = 0;
                             int endLine = NbDocument.findLineNumber(doc, doc.getLength());
