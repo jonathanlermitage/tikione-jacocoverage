@@ -89,9 +89,9 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                 String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
 
                 // Retrieve proejct properties.
-                FileObject projectPropertiesFile = project.getProjectDirectory().getFileObject("nbproject/project.properties");
-                final Properties projectProperties = new Properties();
-                projectProperties.load(projectPropertiesFile.getInputStream());
+                FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
+                final Properties prjProps = new Properties();
+                prjProps.load(prjPropsFo.getInputStream());
 
                 final File jacocoExecFile = Utils.getJacocoexec(project);
                 if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
@@ -103,7 +103,7 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     // Apply JaCoCo JavaAgent customization.
                     String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
                             .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, projectProperties, ":", ".*"));
+                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
 
                     FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                     DataObject dataObj = DataObject.find(scriptToExecute);
@@ -115,8 +115,8 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                     // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
                     // appended to the existing list of JVM arguments that is given to the Ant task.
                     Properties targetProps = env.getProperties();
-                    String projectJvmArgs = projectProperties.getProperty("run.jvmargs", "");
-                    targetProps.put("run.jvmargs", projectJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
+                    String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
+                    targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                     env.setProperties(targetProps);
 
                     // Launch the Ant task with the JaCoCo JavaAgent.
@@ -133,9 +133,8 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                             // Load the generated JaCoCo coverage report.
                             String projectDir = Utils.getProjectDir(project) + File.separator;
                             File xmlreport = new File(projectDir + "jacocoverage.report.xml");
-                            File prjClassesDir = new File(projectDir + projectProperties.getProperty("build.classes.dir")
-                                    .replace("${build.dir}", projectProperties.getProperty("build.dir")) + File.separator);
-                            File prjSourcesDir = new File(projectDir + projectProperties.getProperty("src.dir") + File.separator);
+                            File prjClassesDir = new File(projectDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                            File prjSourcesDir = new File(projectDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                             try {
                                 JaCoCoBinReportAnalyzer.toXmlReport(jacocoExecFile, xmlreport, prjClassesDir, prjSourcesDir);
                                 final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);

@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.text.StyledDocument;
 import org.netbeans.api.java.classpath.GlobalPathRegistry;
 import org.netbeans.api.project.Project;
@@ -30,7 +31,43 @@ import org.openide.util.Exceptions;
  */
 public class Utils {
 
+    /** Regex to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    private static final String PA_NBPROPKEY_SHORTCUT = "\\$\\{([^\\}]+)\\}";
+
+    /** Compiled regex to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
+
     private Utils() {
+    }
+
+    /**
+     * Check a regular expression.
+     *
+     * @param src the text to examine.
+     * @param pattern the compiled regular expression, targeted area are enclosed with parenthesis.
+     * @return <code>true</code> if the regular expression is checked, otherwise <code>false</code>.
+     */
+    public static boolean checkRegex(String src, Pattern pattern) {
+        return pattern.matcher(src).find();
+    }
+
+    /**
+     * Return the capturing groups from the regular expression in the string.
+     *
+     * @param src the string to search in.
+     * @param pattern the compiled pattern.
+     * @param expectedNbMatchs the expected tokens matched, for performance purpose.
+     * @return all the strings matched (in an ArrayList).
+     */
+    public static List<String> getGroupsFromRegex(String src, Pattern pattern, int expectedNbMatchs) {
+        List<String> res = new ArrayList<String>(expectedNbMatchs);
+        Matcher matcher = pattern.matcher(src);
+        while (matcher.find()) {
+            for (int group = 1; group <= matcher.groupCount(); group++) {
+                res.add(matcher.group(group));
+            }
+        }
+        return res;
     }
 
     /**
@@ -106,11 +143,12 @@ public class Utils {
      * Each element is a fully qualified package name, e.g. <code>foo</code>, <code>foo.bar</code> and <code>foo.bar.too</code>.
      *
      * @param project the project to list Java packages.
+     * @param prjProps the project properties.
      * @return a list of Java package names.
      */
-    public static List<String> getProjectJavaPackages(Project project, Properties projectProperties) {
+    public static List<String> getProjectJavaPackages(Project project, Properties prjProps) {
         List<String> packages = new ArrayList<String>(8);
-        String srcFolderName = projectProperties.getProperty("src.dir", "src");
+        String srcFolderName = getProperty(prjProps, "src.dir");
         List<File> packagesAsFolders = listFolders(new File(getProjectDir(project) + File.separator + srcFolderName + File.separator));
         int rootDirnameLen = getProjectDir(project).length() + srcFolderName.length() + 2;
         for (File srcPackage : packagesAsFolders) {
@@ -127,12 +165,13 @@ public class Utils {
      * Elements are separated with a given separator string.
      *
      * @param project the project to list Java packages.
+     * @param prjProps the project properties.
      * @param separator the separator string.
      * @param prefix a prefix to append to the end of each package name (can be empty).
      * @return a list of Java package names.
      */
-    public static String getProjectJavaPackagesAsStr(Project project, Properties projectProperties, String separator, String prefix) {
-        List<String> packagesList = getProjectJavaPackages(project, projectProperties);
+    public static String getProjectJavaPackagesAsStr(Project project, Properties prjProps, String separator, String prefix) {
+        List<String> packagesList = getProjectJavaPackages(project, prjProps);
         StringBuilder packages = new StringBuilder(128);
         if (packagesList.isEmpty()) {
             packages.append("*");
@@ -147,6 +186,25 @@ public class Utils {
             }
         }
         return packages.toString();
+    }
+
+    /**
+     * Get a key value from a Properties object, with support of NetBeans key references (aka "${key}").
+     *
+     * @param props the Properties object to load key value from.
+     * @param key the key value to get value.
+     * @return the key value.
+     */
+    public static String getProperty(Properties props, String key) {
+        String value = props.getProperty(key, "");
+        int security = 0;
+        while (security++ < 80 && checkRegex(value, CPA_NBPROPKEY_SHORTCUT)) {
+            List<String> refs = getGroupsFromRegex(value, CPA_NBPROPKEY_SHORTCUT, 3);
+            for (String ref : refs) {
+                value =  value.replaceFirst(PA_NBPROPKEY_SHORTCUT, props.getProperty(ref, ""));
+            }
+        }
+        return value;
     }
 
     /**
