@@ -28,13 +28,13 @@ public abstract class CoverageAnnotation extends Annotation implements PropertyC
      * Creates new annotation and adds it to the global annotations list so it can be managed later
      *
      * @param projectName the project this annotation belongs to.
-     * @param className the class this annotation belongs to.
+     * @param classFullName the class (package + name) this annotation belongs to.
      * @param lineNum the number of the line to be annotated.
      */
     @SuppressWarnings("LeakingThisInConstructor")
-    public CoverageAnnotation(String projectName, String className, Integer lineNum) {
+    public CoverageAnnotation(String projectName, String classFullName, Integer lineNum) {
         synchronized (annotations) {
-            String key = combineKey(projectName, className);
+            String key = combineKey(projectName, classFullName);
             HashMap<Integer, Annotation> anns = annotations.get(key);
             if (anns == null) {
                 anns = new HashMap<Integer, Annotation>();
@@ -86,10 +86,10 @@ public abstract class CoverageAnnotation extends Annotation implements PropertyC
      * Removes annotations from specific class in the specific project.
      *
      * @param projectName the project to remove annotations for.
-     * @param className the class to remove annotations for.
+     * @param classFullName the class (package + name) to remove annotations for.
      */
-    public static void removeFromClass(String projectName, String className) {
-        String id = combineKey(projectName, className);
+    public static void removeFromClass(String projectName, String classFullName) {
+        String id = combineKey(projectName, classFullName);
         synchronized (annotations) {
             HashMap<Integer, Annotation> anns = annotations.get(id);
             if (anns != null) {
@@ -124,9 +124,10 @@ public abstract class CoverageAnnotation extends Annotation implements PropertyC
      * This method is used to create a unique key for every new class annotation.
      *
      * @param projectName the project this annotation belongs to.
-     * @param className the class this annotation belongs to.
+     * @param classFullName the class (package + name) this annotation belongs to.
      */
-    private static String combineKey(String projectName, String className) {
-        return projectName + KEY_JOIN_CHAR + className;
+    private static String combineKey(String projectName, String classFullName) {
+        // FIXED replaced the class name by the package plus the class name, because class names are not unique.
+        return projectName + KEY_JOIN_CHAR + classFullName;
     }
 }
