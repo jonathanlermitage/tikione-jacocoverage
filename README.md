@@ -6,12 +6,12 @@
 * The plugin works as a transparent additional service that colors all java files according to the unit tests coverage information. With code coverage enabled user continues to work with his/her project in the usual way but can easily view the test coverage of the project classes.<br>The code coverage plugin will update the code coverage data and refresh editors markup every time a unit test (or any selected Ant target) is executed for the project. Currently the Java Application, Java Library and Java Project with Existing Sources are supported. Maven and Gradle support may be added later.
 * Coverage collections are based on JaCoCo in order to support Java 7 bytecode. Take it as a modern alternative to the EMMA and Cobertura based plugins.
 
-TikiOne JaCoCoverage plugin is built with NetBeans (<http://netbeans.org>) and the latest version of Oracle JDK6. The latest version of NetBeans will always be used: don't expect support for olders NetBeans versions (too much work and nobody uses them).
+TikiOne JaCoCoverage plugin is built with NetBeans (<http://netbeans.org>) and the latest version of Oracle JDK6. The latest version of NetBeans will always be used: don't expect support for older NetBeans versions (too much work and nobody uses them).
 
 ## Download
 
-* You can get the latest development build (for testing purpose only!) at: <https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/>
-* After the first stable release, builds will probably be hosted on a Jenkins server provided by CloudBee (<http://www.cloudbees.com>). Also, NBM stable files will be hosted on the NetBeans Plugin Portal website (<http://plugins.netbeans.org/PluginPortal/>), validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see "Tools" -> "Plugins")
+* You can get the latest development build (for testing purpose only!) at: <https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/>.
+* After the first stable release, builds will probably be hosted on a Jenkins server provided by CloudBees (<http://www.cloudbees.com>). Also, NBM stable files will be hosted on the NetBeans Plugin Portal website (<http://plugins.netbeans.org/PluginPortal/>), validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see "Tools" -> "Plugins").
 
 ## Development progression
 
