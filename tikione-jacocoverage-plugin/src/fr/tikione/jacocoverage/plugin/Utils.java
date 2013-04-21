@@ -1,5 +1,8 @@
 package fr.tikione.jacocoverage.plugin;
 
+import fr.tikione.jacocoverage.plugin.anno.NotCoveredAnnotation;
+import fr.tikione.jacocoverage.plugin.anno.PartiallyCoveredAnnotation;
+import fr.tikione.jacocoverage.plugin.anno.CoveredAnnotation;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import java.io.File;
 import java.io.FileFilter;

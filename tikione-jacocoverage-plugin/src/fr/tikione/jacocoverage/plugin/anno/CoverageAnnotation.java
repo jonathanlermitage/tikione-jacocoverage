@@ -1,4 +1,4 @@
-package fr.tikione.jacocoverage.plugin;
+package fr.tikione.jacocoverage.plugin.anno;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

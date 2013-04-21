@@ -95,8 +95,8 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
 
                 final File jacocoExecFile = Utils.getJacocoexec(project);
                 if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
-                    String msg = "Cannot delete the previous JaCoCo report file.\n"
-                            + "Please delete it manually: \"" + jacocoExecFile.getAbsolutePath() + "\".";
+                    String msg = "Cannot delete the previous JaCoCo report file, please delete it manually: "
+                            + jacocoExecFile.getAbsolutePath();
                     NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
                     DialogDisplayer.getDefault().notify(nd);
                 } else {
