@@ -92,14 +92,25 @@ public class Utils {
     }
 
     /**
-     * Get the JaCoCo report file (default is called jacoco.exec) of the given project.
+     * Get the JaCoCo bnary report file of the given project.
      *
      * @param project the project to get JaCoCo report file.
      * @return the JaCoCo report file.
      */
-    public static File getJacocoexec(Project project) {
+    public static File getJacocoBinReportFile(Project project) {
         String jacocoExecPath = getProjectDir(project) + File.separator + "jacoco.exec";
         return new File(jacocoExecPath);
+    }
+
+    /**
+     * Get the JaCoCo XML report file of the given project.
+     *
+     * @param project the project to get JaCoCo report file.
+     * @return the JaCoCo report file.
+     */
+    public static File getJacocoXmlReportfile(Project project) {
+        String jacocoXmlReportPath = getProjectDir(project) + File.separator + "jacocoverage.report.xml";
+        return new File(jacocoXmlReportPath);
     }
 
     /**

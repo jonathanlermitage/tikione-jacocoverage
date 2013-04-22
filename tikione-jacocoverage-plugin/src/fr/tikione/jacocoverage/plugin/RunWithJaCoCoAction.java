@@ -1,6 +1,6 @@
 package fr.tikione.jacocoverage.plugin;
 
-import fr.tikione.jacocoexec.analyzer.JaCoCoBinReportAnalyzer;
+import fr.tikione.jacocoexec.analyzer.JaCoCoReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import static fr.tikione.jacocoverage.plugin.Utils.getProjectId;
@@ -95,10 +95,13 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                 final Properties prjProps = new Properties();
                 prjProps.load(prjPropsFo.getInputStream());
 
-                final File jacocoExecFile = Utils.getJacocoexec(project);
-                if (jacocoExecFile.exists() && !jacocoExecFile.delete()) {
-                    String msg = "Cannot delete the previous JaCoCo report file, please delete it manually: "
-                            + jacocoExecFile.getAbsolutePath();
+                final File xmlreport = Utils.getJacocoXmlReportfile(project);
+                final File binreport = Utils.getJacocoBinReportFile(project);
+                if (binreport.exists() && !binreport.delete() ||
+                        xmlreport.exists() && !xmlreport.delete()) {
+                    String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
+                            + binreport.getAbsolutePath() + " and/or\n"
+                            + xmlreport.getAbsolutePath();
                     NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
                     DialogDisplayer.getDefault().notify(nd);
                 } else {
@@ -130,32 +133,38 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                             // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
                             // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
                             // object provided by the NetBeans platform is not correctly wrapped.
-                            execute.result();
+                            if (0 == execute.result()) {
+                                // Load the generated JaCoCo coverage report.
+                                String prjDir = Utils.getProjectDir(project) + File.separator;
+                                File prjClassesDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                                File prjSourcesDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
+                                try {
+                                    JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, prjClassesDir, prjSourcesDir);
+                                    final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                            // Load the generated JaCoCo coverage report.
-                            String projectDir = Utils.getProjectDir(project) + File.separator;
-                            File xmlreport = new File(projectDir + "jacocoverage.report.xml");
-                            File prjClassesDir = new File(projectDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
-                            File prjSourcesDir = new File(projectDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-                            try {
-                                JaCoCoBinReportAnalyzer.toXmlReport(jacocoExecFile, xmlreport, prjClassesDir, prjSourcesDir);
-                                final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+                                    // Remove existing highlighting (from a previous coverage task).
+                                    AbstractCoverageAnnotation.removeAll(getProjectId(project));
 
-                                // Remove existing highlighting (from a previous coverage task).
-                                AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                                    // Show a report in the NetBeans console.
+                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData);
 
-                                // Apply highlighting on each Java source file.
-                                for (final JavaClass jclass : coverageData) {
-                                    Utils.colorDoc(project, jclass);
+                                    // Apply highlighting on each Java source file.
+                                    for (final JavaClass jclass : coverageData) {
+                                        Utils.colorDoc(project, jclass);
+                                    }
+
+                                    // Delete working files.
+                                    xmlreport.delete();
+                                    binreport.delete();
+                                } catch (FileNotFoundException ex) {
+                                    Exceptions.printStackTrace(ex);
+                                } catch (IOException ex) {
+                                    Exceptions.printStackTrace(ex);
+                                } catch (ParserConfigurationException ex) {
+                                    Exceptions.printStackTrace(ex);
+                                } catch (SAXException ex) {
+                                    Exceptions.printStackTrace(ex);
                                 }
-                            } catch (FileNotFoundException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (IOException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (ParserConfigurationException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (SAXException ex) {
-                                Exceptions.printStackTrace(ex);
                             }
                         }
                     }).start();

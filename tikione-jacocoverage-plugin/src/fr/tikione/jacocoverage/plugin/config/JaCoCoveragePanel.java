@@ -132,6 +132,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         Mnemonics.setLocalizedText(jLabelInfoColorsAreRGB, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelInfoColorsAreRGB.text")); // NOI18N
 
         jSpinnerCoveredR.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerCoveredR.setEnabled(false);
         jSpinnerCoveredR.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerCoveredRStateChanged(evt);
@@ -139,6 +140,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerCoveredG.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerCoveredG.setEnabled(false);
         jSpinnerCoveredG.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerCoveredGStateChanged(evt);
@@ -146,6 +148,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerCoveredB.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerCoveredB.setEnabled(false);
         jSpinnerCoveredB.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerCoveredBStateChanged(evt);
@@ -153,6 +156,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerPartiallyCoveredR.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerPartiallyCoveredR.setEnabled(false);
         jSpinnerPartiallyCoveredR.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerPartiallyCoveredRStateChanged(evt);
@@ -160,6 +164,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerPartiallyCoveredG.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerPartiallyCoveredG.setEnabled(false);
         jSpinnerPartiallyCoveredG.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerPartiallyCoveredGStateChanged(evt);
@@ -167,6 +172,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerPartiallyCoveredB.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerPartiallyCoveredB.setEnabled(false);
         jSpinnerPartiallyCoveredB.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerPartiallyCoveredBStateChanged(evt);
@@ -174,6 +180,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerNotCoveredR.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerNotCoveredR.setEnabled(false);
         jSpinnerNotCoveredR.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerNotCoveredRStateChanged(evt);
@@ -181,6 +188,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerNotCoveredG.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerNotCoveredG.setEnabled(false);
         jSpinnerNotCoveredG.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerNotCoveredGStateChanged(evt);
@@ -188,6 +196,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jSpinnerNotCoveredB.setModel(new SpinnerNumberModel(0, 0, 255, 1));
+        jSpinnerNotCoveredB.setEnabled(false);
         jSpinnerNotCoveredB.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSpinnerNotCoveredBStateChanged(evt);
@@ -360,7 +369,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelJaCoCoRuntimeParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonResoreDefaults)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
