@@ -191,6 +191,12 @@ public class Utils {
         return packages.toString();
     }
 
+    /**
+     * Generate a string representing the project. Two different projects should have different representation.
+     *
+     * @param project the project.
+     * @return a representation of the proejct.
+     */
     public static String getProjectId(Project project) {
         return getProjectDir(project) + '_' + project.toString();
     }
