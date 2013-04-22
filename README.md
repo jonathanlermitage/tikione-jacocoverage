@@ -15,7 +15,7 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ## Development progression
 
-####Ccurrent version (1.0.0):
+####Current version (1.0.0):
 
 * ``NetBeans integration (context menu action)``: done.
 * ``Configurable``: done.
