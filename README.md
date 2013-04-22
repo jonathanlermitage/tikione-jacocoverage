@@ -15,22 +15,20 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ## Development progression
 
-####1.0.0:
+####Ccurrent version (1.0.0):
 
 * ``NetBeans integration (context menu action)``: done.
 * ``Configurable``: done.
 * ``JaCoCo report generation (binary form and XML transformation)``: done.
 * ``JaCoCo report analysis``: done.
-* ``Java source files highlighting``: **under development** (implemented but needs stabilization and configuration).
+* ``Java source files highlighting``: done.
+* ``Minimal textual report (displayed in the console)``: done.
 
-I hope a first stable release between Sunday, April 21 and Friday 26.
+####Next version:
 
-####1.1.0:
-
+* ``Unlock configuration of highlighting``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
-
-It doesn't need a lot of work. Probably a few days.
 
 ## Media
 
