@@ -46,7 +46,7 @@ public class Globals {
 
     public static String DEF_TEST_ANT_TASK = "test";
 
-    public static String DEF_TEST_ANT_TASK_JAVAAGENT = "{pathOfJacocoagentJar}=includes={appPackages},destfile=jacoco.exec";
+    public static String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
 
     public Globals() {
     }
