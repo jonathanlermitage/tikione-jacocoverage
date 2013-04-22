@@ -3,6 +3,8 @@ package fr.tikione.jacocoverage.plugin;
 import fr.tikione.jacocoexec.analyzer.JaCoCoBinReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
+import static fr.tikione.jacocoverage.plugin.Utils.getProjectId;
+import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -138,6 +140,9 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
                             try {
                                 JaCoCoBinReportAnalyzer.toXmlReport(jacocoExecFile, xmlreport, prjClassesDir, prjSourcesDir);
                                 final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+
+                                // Remove existing highlighting (from a previous coverage task).
+                                AbstractCoverageAnnotation.removeAll(getProjectId(project));
 
                                 // Apply highlighting on each Java source file.
                                 for (final JavaClass jclass : coverageData) {

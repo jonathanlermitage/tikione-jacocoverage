@@ -1,9 +1,9 @@
 package fr.tikione.jacocoverage.plugin;
 
-import fr.tikione.jacocoverage.plugin.anno.NotCoveredAnnotation;
-import fr.tikione.jacocoverage.plugin.anno.PartiallyCoveredAnnotation;
-import fr.tikione.jacocoverage.plugin.anno.CoveredAnnotation;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
+import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
+import fr.tikione.jacocoverage.plugin.anno.CoverageAnnotation;
+import fr.tikione.jacocoverage.plugin.anno.CoverageStateEnum;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -191,6 +191,10 @@ public class Utils {
         return packages.toString();
     }
 
+    public static String getProjectId(Project project) {
+        return getProjectDir(project) + '_' + project.toString();
+    }
+
     /**
      * Get a key value from a Properties object, with support of NetBeans key references (aka "${key}").
      *
@@ -228,6 +232,7 @@ public class Utils {
      */
     public static void colorDoc(Project project, JavaClass jclass) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
+        String prjId = getProjectId(project);
         FIND_JAVA_FO:
         for (FileObject curRoot : GlobalPathRegistry.getDefault().getSourceRoots()) {
             FileObject fileObject = curRoot.getFileObject(classResource);
@@ -245,22 +250,37 @@ public class Utils {
                             for (int covIdx : jclass.getCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
-                                    CoveredAnnotation annotation = new CoveredAnnotation();
+                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
+                                            CoverageStateEnum.COVERED, 
+                                            prjId,
+                                            jclass.getPackageName() + jclass.getClassName(),
+                                            covIdx);
                                     annotation.attach(line);
+                                    line.addPropertyChangeListener(annotation);
                                 }
                             }
                             for (int covIdx : jclass.getPartiallyCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
-                                    PartiallyCoveredAnnotation annotation = new PartiallyCoveredAnnotation();
+                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
+                                            CoverageStateEnum.PARTIALLY_COVERED, 
+                                            prjId,
+                                            jclass.getPackageName() + jclass.getClassName(),
+                                            covIdx);
                                     annotation.attach(line);
+                                    line.addPropertyChangeListener(annotation);
                                 }
                             }
                             for (int covIdx : jclass.getNotCoveredLines()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
-                                    NotCoveredAnnotation annotation = new NotCoveredAnnotation();
+                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
+                                            CoverageStateEnum.NOT_COVERED, 
+                                            prjId,
+                                            jclass.getPackageName() + jclass.getClassName(),
+                                            covIdx);
                                     annotation.attach(line);
+                                    line.addPropertyChangeListener(annotation);
                                 }
                             }
                         }
