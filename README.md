@@ -1,4 +1,4 @@
-# TikiOne JaCoCoverage - a NetBeans module for JaCoCo code coverage
+# TikiOne JaCoCoverage - Java7 Code Coverage for NetBeans
 
 * The JaCoCoverage Plugin is a Netbeans 7.3 plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
 * The plugin works as a transparent additional service that colors all java files according to the unit tests coverage information. With code coverage enabled user continues to work with his/her project in the usual way but can easily view the test coverage of the project classes.<br>The code coverage plugin will update the code coverage data and refresh editors markup every time a unit test (or any selected Ant target) is executed for the project. Currently the Java Application, Java Library and Java Project with Existing Sources are supported. Maven and Gradle support may be added later.
@@ -13,17 +13,18 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ## Development progression
 
-####Current version (1.0.0):
+####Current version (available at Plugin Portal and validated):
 
-* ``NetBeans integration (context menu action)``: done.
-* ``Configurable``: done.
-* ``JaCoCo report generation (binary form and XML transformation)``: done.
-* ``JaCoCo report analysis``: done.
-* ``Java source files highlighting``: done.
-* ``Minimal textual report (displayed in the console)``: done.
+* ``NetBeans integration (context menu action)``: since 1.0.0.
+* ``Configurable``: since 1.0.0.
+* ``JaCoCo report generation (binary form and XML transformation)``: since 1.0.0.
+* ``JaCoCo report analysis``: since 1.0.0.
+* ``Java source files highlighting``: since 1.0.0.
+* ``Minimal textual report (displayed in the console)``: since 1.0.0.
 
-####Next versions:
+####Future updates:
 
+* ``Unlock configuration of highlighting``: **done** and scheduled for 1.0.1.
 * ``Unlock configuration of highlighting``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
