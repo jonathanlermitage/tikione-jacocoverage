@@ -10,9 +10,11 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 ## Download
 
 * Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage), validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see ``Tools``, ``Plugins``, ``Available Plugins`` and look for ``TikiOne`` plugins).
-* You can get the latest development build (for testing purpose only!) at [Sourceforge](https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/). Future updates marked as "done" are integrated into the latest development builds.
+* You can get the latest development build (for testing purpose only!) at [Sourceforge.net](https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/). Future updates marked as "done" are integrated into the latest development builds.
 
 ## Development progression
+
+Current stable version is 1.0.0, available at NetBeans Plugin Portal and Update Centers. Next version will be 1.1.0.
 
 ####Current version (available at Plugin Portal and validated):
 
@@ -29,8 +31,8 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 * ``Unlock configuration of highlighting colors``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
-* ``Multi-line statements coloring`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
-* ``Add glyphs in the left margin`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
+* ``Multi-line statements coloring`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): **investigating**.
+* ``Add glyphs in the left margin`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): **under development**.
 * ``Enable test on single file`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
 
 ## Media
