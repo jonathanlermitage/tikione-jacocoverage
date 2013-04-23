@@ -123,7 +123,8 @@ public class Utils {
     public static boolean isProjectSupported(Project project) {
         boolean supported;
         String projectClass = project.getClass().getName();
-        if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")) {
+        if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")
+                || projectClass.equals("org.netbeans.modules.apisupport.project.NbModuleProject")) {
             supported = true;
         } else {
             supported = false;
@@ -225,7 +226,7 @@ public class Utils {
         while (security++ < 80 && checkRegex(value, CPA_NBPROPKEY_SHORTCUT)) {
             List<String> refs = getGroupsFromRegex(value, CPA_NBPROPKEY_SHORTCUT, 3);
             for (String ref : refs) {
-                value =  value.replaceFirst(PA_NBPROPKEY_SHORTCUT, props.getProperty(ref, ""));
+                value = value.replaceFirst(PA_NBPROPKEY_SHORTCUT, props.getProperty(ref, ""));
             }
         }
         return value;
@@ -268,7 +269,7 @@ public class Utils {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.COVERED, 
+                                            CoverageStateEnum.COVERED,
                                             prjId,
                                             jclass.getPackageName() + jclass.getClassName(),
                                             covIdx);
@@ -280,7 +281,7 @@ public class Utils {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.PARTIALLY_COVERED, 
+                                            CoverageStateEnum.PARTIALLY_COVERED,
                                             prjId,
                                             jclass.getPackageName() + jclass.getClassName(),
                                             covIdx);
@@ -292,7 +293,7 @@ public class Utils {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
                                     AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.NOT_COVERED, 
+                                            CoverageStateEnum.NOT_COVERED,
                                             prjId,
                                             jclass.getPackageName() + jclass.getClassName(),
                                             covIdx);
