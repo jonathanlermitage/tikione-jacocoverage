@@ -25,11 +25,12 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 ####Future updates:
 
 * ``Enable/disable highlighting and report``: **done** and scheduled for 1.0.1.
-* ``Unlock configuration of highlighting``: todo.
+* ``Unlock configuration of highlighting colors``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
 * ``Multi-line statements coloring`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
 * ``Add glyphs in the left margin`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
+* ``Enable test on single file`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
 
 ## Media
 
