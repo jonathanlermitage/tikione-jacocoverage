@@ -10,8 +10,8 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ## Download
 
-* You can get the **latest development build** (for testing purpose only!) at [Sourceforge](https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/).
-* After the first stable release, builds will probably be hosted on a Jenkins server provided by [CloudBees](http://www.cloudbees.com). Also, NBM stable files will be hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/PluginPortal/), validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see ``Tools``, ``Plugins``, ``Available Plugins``).
+* Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage), validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see ``Tools``, ``Plugins``, ``Available Plugins`` and look for ``TikiOne`` plugins).
+* You can get the latest development build (for testing purpose only!) at [Sourceforge](https://sourceforge.net/projects/nbjacoco/files/latest_dev_build/).
 
 ## Development progression
 
@@ -24,11 +24,13 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 * ``Java source files highlighting``: done.
 * ``Minimal textual report (displayed in the console)``: done.
 
-####Next version:
+####Next versions:
 
 * ``Unlock configuration of highlighting``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
+* ``Multi-line statements coloring`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
+* ``Add glyphs in the left margin`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): todo.
 
 ## Media
 
