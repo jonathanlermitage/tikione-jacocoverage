@@ -98,9 +98,6 @@ public class JaCoCoReportAnalyzer {
                 io.getOut().println("    " + jclass.getPackageName() + jclass.getClassName());
             }
             IOColorPrint.print(io, "\nEnd of report\n\n", Color.GRAY);
-            IOColorPrint.print(io, "TikiOne JaCoCoverage " + Version.VERSION
-                    + ", TikiOne JaCoCo Reporting Library " + fr.tikione.jacocoexec.analyzer.Version.VERSION
-                    + ", EclEmma JaCoCo Library " + fr.tikione.jacoco.lib.Version.VERSION + "\n", Color.GRAY);
             IOColorPrint.print(io, "You can ask questions and report bugs by visiting: "
                     + "https://github.com/jonathanlermitage/tikione-jacocoverage", Color.GRAY);
         } finally {
