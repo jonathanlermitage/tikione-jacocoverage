@@ -49,8 +49,6 @@ public class JaCoCoReportAnalyzer {
     public static void toXmlReport(File jacocoexec, File xmlreport, File prjClassesDir, File prjSourcesDir)
             throws FileNotFoundException,
                    IOException {
-        xmlreport.delete();
-
         // Load the JaCoCo binary report.
         FileInputStream fis = new FileInputStream(jacocoexec);
         ExecutionDataStore executionDataStore = new ExecutionDataStore();
@@ -88,7 +86,7 @@ public class JaCoCoReportAnalyzer {
             throws IOException {
         InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage Report", false);
         try {
-            io.getOut().reset(); //
+            io.getOut().reset();
             IOColorPrint.print(io, "=== JaCoCoverage report (powered by JaCoCo from EclEmma) ===\n", Color.GRAY);
             IOColorPrint.print(io, "Covered | Partially covered | Not covered | Java Class\n\n", Color.GRAY);
             for (JavaClass jclass : coverageData) {
@@ -97,9 +95,10 @@ public class JaCoCoReportAnalyzer {
                 IOColorPrint.print(io, " " + String.format("%5s", jclass.getNotCoveredLines().size()), CONSOLE_NOT_COVERED);
                 io.getOut().println("    " + jclass.getPackageName() + jclass.getClassName());
             }
-            IOColorPrint.print(io, "\nEnd of report\n\n", Color.GRAY);
-            IOColorPrint.print(io, "You can ask questions and report bugs by visiting: "
-                    + "https://github.com/jonathanlermitage/tikione-jacocoverage", Color.GRAY);
+            IOColorPrint.print(io, "\nEnd of report\n", Color.GRAY);
+            IOColorPrint.print(io, "You can ask questions and report bugs by visiting: ", Color.GRAY);
+            IOColorPrint.print(io, "https://github.com/jonathanlermitage/tikione-jacocoverage", Color.BLUE);
+            io.getOut().println();
         } finally {
             io.getOut().close();
         }
