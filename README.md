@@ -1,7 +1,5 @@
 # TikiOne JaCoCoverage - a NetBeans module for JaCoCo code coverage
 
-#### Warning: plugin under development
-
 * The JaCoCoverage Plugin is a Netbeans 7.3 plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
 * The plugin works as a transparent additional service that colors all java files according to the unit tests coverage information. With code coverage enabled user continues to work with his/her project in the usual way but can easily view the test coverage of the project classes.<br>The code coverage plugin will update the code coverage data and refresh editors markup every time a unit test (or any selected Ant target) is executed for the project. Currently the Java Application, Java Library and Java Project with Existing Sources are supported. Maven and Gradle support may be added later.
 * Coverage collections are based on JaCoCo in order to **support Java 7 bytecode**. Take it as a modern alternative to the EMMA and Cobertura based plugins.
