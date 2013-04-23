@@ -24,7 +24,7 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ####Future updates:
 
-* ``Enable/disable highlighting and report``: **done** and scheduled for 1.0.1.
+* ``Enable/disable highlighting and report``: **done** and scheduled for 1.1.0.
 * ``Unlock configuration of highlighting colors``: todo.
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.

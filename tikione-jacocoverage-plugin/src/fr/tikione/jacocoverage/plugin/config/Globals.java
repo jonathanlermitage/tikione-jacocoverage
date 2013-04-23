@@ -24,6 +24,10 @@ public class Globals {
 
     public static String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
 
+    public static String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
+
+    public static String PROP_ENABLE_CONSOLE_REPORT = "JaCoCoverage.NbConsole.EnableReport";
+
     public static final long serialVersionUID = 1L;
 
     public static final int DEF_COVERED_R = 205;
@@ -47,6 +51,10 @@ public class Globals {
     public static String DEF_TEST_ANT_TASK = "test";
 
     public static String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
+
+    public static boolean DEF_ENABLE_HIGHLIGHT = true;
+
+    public static boolean DEF_ENABLE_CONSOLE_REPORT = true;
 
     public Globals() {
     }

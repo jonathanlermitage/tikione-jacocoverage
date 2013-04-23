@@ -88,86 +88,98 @@ public final class RunWithJaCoCoAction extends AbstractAction implements Context
             try {
                 // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
                 Preferences pref = NbPreferences.forModule(RunWithJaCoCoAction.class);
-                String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
+                final boolean enblHighlight = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
+                final boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
 
-                // Retrieve proejct properties.
-                FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
-                final Properties prjProps = new Properties();
-                prjProps.load(prjPropsFo.getInputStream());
+                if (enblHighlight || enblConsoleReport) {
+                    String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
 
-                final File xmlreport = Utils.getJacocoXmlReportfile(project);
-                final File binreport = Utils.getJacocoBinReportFile(project);
-                if (binreport.exists() && !binreport.delete() ||
-                        xmlreport.exists() && !xmlreport.delete()) {
-                    String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
-                            + binreport.getAbsolutePath() + " and/or\n"
-                            + xmlreport.getAbsolutePath();
-                    NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
-                    DialogDisplayer.getDefault().notify(nd);
-                } else {
-                    // Apply JaCoCo JavaAgent customization.
-                    String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
-                            .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
+                    // Retrieve project properties.
+                    FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
+                    final Properties prjProps = new Properties();
+                    prjProps.load(prjPropsFo.getInputStream());
 
-                    FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
-                    DataObject dataObj = DataObject.find(scriptToExecute);
-                    AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
+                    final File xmlreport = Utils.getJacocoXmlReportfile(project);
+                    final File binreport = Utils.getJacocoBinReportFile(project);
+                    if (binreport.exists() && !binreport.delete()
+                            || xmlreport.exists() && !xmlreport.delete()) {
+                        String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
+                                + binreport.getAbsolutePath() + " and/or\n"
+                                + xmlreport.getAbsolutePath();
+                        NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
+                        DialogDisplayer.getDefault().notify(nd);
+                    } else {
+                        // Apply JaCoCo JavaAgent customization.
+                        String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
+                                .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
+                                .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
 
-                    AntTargetExecutor.Env env = new AntTargetExecutor.Env();
-                    AntTargetExecutor executor = AntTargetExecutor.createTargetExecutor(env);
+                        FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
+                        DataObject dataObj = DataObject.find(scriptToExecute);
+                        AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
 
-                    // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
-                    // appended to the existing list of JVM arguments that is given to the Ant task.
-                    Properties targetProps = env.getProperties();
-                    String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
-                    targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
-                    env.setProperties(targetProps);
+                        AntTargetExecutor.Env env = new AntTargetExecutor.Env();
+                        AntTargetExecutor executor = AntTargetExecutor.createTargetExecutor(env);
 
-                    // Launch the Ant task with the JaCoCo JavaAgent.
-                    final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
+                        // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
+                        // appended to the existing list of JVM arguments that is given to the Ant task.
+                        Properties targetProps = env.getProperties();
+                        String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
+                        targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
+                        env.setProperties(targetProps);
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
-                            // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
-                            // object provided by the NetBeans platform is not correctly wrapped.
-                            if (0 == execute.result()) {
-                                // Load the generated JaCoCo coverage report.
-                                String prjDir = Utils.getProjectDir(project) + File.separator;
-                                File prjClassesDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
-                                File prjSourcesDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-                                try {
-                                    JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, prjClassesDir, prjSourcesDir);
-                                    final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+                        // Launch the Ant task with the JaCoCo JavaAgent.
+                        final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
 
-                                    // Remove existing highlighting (from a previous coverage task).
-                                    AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
+                                // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
+                                // object provided by the NetBeans platform is not correctly wrapped.
+                                if (0 == execute.result()) {
+                                    // Load the generated JaCoCo coverage report.
+                                    String prjDir = Utils.getProjectDir(project) + File.separator;
+                                    File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                                    File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
+                                    try {
+                                        JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
+                                        final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                                    // Show a report in the NetBeans console.
-                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData);
+                                        // Remove existing highlighting (from a previous coverage task).
+                                        AbstractCoverageAnnotation.removeAll(getProjectId(project));
 
-                                    // Apply highlighting on each Java source file.
-                                    for (final JavaClass jclass : coverageData) {
-                                        Utils.colorDoc(project, jclass);
+                                        if (enblConsoleReport) {
+                                            // Show a report in the NetBeans console.
+                                            JaCoCoReportAnalyzer.toConsoleReport(coverageData);
+                                        }
+                                        if (enblHighlight) {
+                                            // Apply highlighting on each Java source file.
+                                            for (final JavaClass jclass : coverageData) {
+                                                Utils.colorDoc(project, jclass);
+                                            }
+                                        }
+
+                                        // Delete working files.
+                                        xmlreport.delete();
+                                        binreport.delete();
+                                    } catch (FileNotFoundException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (IOException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (ParserConfigurationException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (SAXException ex) {
+                                        Exceptions.printStackTrace(ex);
                                     }
-
-                                    // Delete working files.
-                                    xmlreport.delete();
-                                    binreport.delete();
-                                } catch (FileNotFoundException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (IOException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (ParserConfigurationException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (SAXException ex) {
-                                    Exceptions.printStackTrace(ex);
                                 }
                             }
-                        }
-                    }).start();
+                        }).start();
+                    }
+                } else {
+                    String msg = "Please enable at least one JaCoCoverage feature first (highlighting or reporting).";
+                    NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
+                    DialogDisplayer.getDefault().notify(nd);
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);

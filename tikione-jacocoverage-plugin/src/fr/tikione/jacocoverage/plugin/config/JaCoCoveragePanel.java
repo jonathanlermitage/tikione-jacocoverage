@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,6 +15,7 @@ import java.util.prefs.Preferences;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -51,7 +51,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jPanelNotCoveredPreview = new JPanel();
         jPanelPartiallyCoveredPreview = new JPanel();
         jPanelCoveredPreview = new JPanel();
-        jLabelInfoColorsAreRGB = new JLabel();
         jSpinnerCoveredR = new JSpinner();
         jSpinnerCoveredG = new JSpinner();
         jSpinnerCoveredB = new JSpinner();
@@ -61,6 +60,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredR = new JSpinner();
         jSpinnerNotCoveredG = new JSpinner();
         jSpinnerNotCoveredB = new JSpinner();
+        jCheckBoxEnableHighlighting = new JCheckBox();
         jButtonResoreDefaults = new JButton();
         jLabelAuthor = new JLabel();
         jLabelAuthorWebsite = new JLabel();
@@ -71,6 +71,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jTextFieldAntTaskParams = new JTextField();
         jLabelAntTaskParamsTips = new JLabel();
         jLabelAntTaskTips = new JLabel();
+        jPanel1 = new JPanel();
+        jCheckBoxEnableConsoleReport = new JCheckBox();
 
         jPanelHighlightingCoveredCode.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelHighlightingCoveredCode.border.title"))); // NOI18N
 
@@ -127,9 +129,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             jPanelCoveredPreviewLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 16, Short.MAX_VALUE)
         );
-
-        jLabelInfoColorsAreRGB.setFont(new Font("Tahoma", 2, 11)); // NOI18N
-        Mnemonics.setLocalizedText(jLabelInfoColorsAreRGB, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelInfoColorsAreRGB.text")); // NOI18N
 
         jSpinnerCoveredR.setModel(new SpinnerNumberModel(0, 0, 255, 1));
         jSpinnerCoveredR.setEnabled(false);
@@ -203,19 +202,22 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
+        Mnemonics.setLocalizedText(jCheckBoxEnableHighlighting, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxEnableHighlighting.text")); // NOI18N
+
         GroupLayout jPanelHighlightingCoveredCodeLayout = new GroupLayout(jPanelHighlightingCoveredCode);
         jPanelHighlightingCoveredCode.setLayout(jPanelHighlightingCoveredCodeLayout);
         jPanelHighlightingCoveredCodeLayout.setHorizontalGroup(
             jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabelPartiallyCoveredCodeBG)
-                        .addComponent(jLabelNotCoveredCodeBG))
-                    .addComponent(jLabelCoveredCodeBG, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxEnableHighlighting)
                     .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                        .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabelPartiallyCoveredCodeBG)
+                                .addComponent(jLabelNotCoveredCodeBG, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelCoveredCodeBG, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
@@ -241,16 +243,14 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerPartiallyCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanelPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabelInfoColorsAreRGB, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanelPartiallyCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelHighlightingCoveredCodeLayout.setVerticalGroup(
             jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
-                .addComponent(jLabelInfoColorsAreRGB)
+            .addGroup(GroupLayout.Alignment.TRAILING, jPanelHighlightingCoveredCodeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxEnableHighlighting)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelHighlightingCoveredCodeLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelCoveredCodeBG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -272,7 +272,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jSpinnerNotCoveredG, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinnerNotCoveredB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelNotCoveredPreview, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -350,6 +350,28 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanel1.border.title"))); // NOI18N
+        jPanel1.setPreferredSize(new Dimension(435, 123));
+
+        Mnemonics.setLocalizedText(jCheckBoxEnableConsoleReport, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxEnableConsoleReport.text")); // NOI18N
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxEnableConsoleReport)
+                .addContainerGap(166, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxEnableConsoleReport)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -360,8 +382,12 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jLabelAuthorWebsite)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonResoreDefaults))
-            .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanelJaCoCoRuntimeParams, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -369,6 +395,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jPanelHighlightingCoveredCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelJaCoCoRuntimeParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonResoreDefaults)
@@ -390,6 +418,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredB.setValue(Globals.DEF_NOT_COVERED_B);
         jTextFieldAntTask.setText(Globals.DEF_TEST_ANT_TASK);
         jTextFieldAntTaskParams.setText(Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+        jCheckBoxEnableHighlighting.setSelected(Globals.DEF_ENABLE_HIGHLIGHT);
+        jCheckBoxEnableConsoleReport.setSelected(Globals.DEF_ENABLE_CONSOLE_REPORT);
         updatePreviews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
@@ -469,6 +499,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_NOT_COVERED_B);
         String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
         String antTaskJavaagent = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+        boolean enblHighlighting = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
+        boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
         jSpinnerCoveredR.setValue(coveredR);
         jSpinnerCoveredG.setValue(coveredG);
         jSpinnerCoveredB.setValue(coveredB);
@@ -483,6 +515,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jPanelNotCoveredPreview.setBackground(new Color(notCoveredR, notCoveredG, notCoveredB));
         jTextFieldAntTask.setText(antTask);
         jTextFieldAntTaskParams.setText(antTaskJavaagent);
+        jCheckBoxEnableHighlighting.setSelected(enblHighlighting);
+        jCheckBoxEnableConsoleReport.setSelected(enblConsoleReport);
     }
 
     void store() {
@@ -498,6 +532,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerNotCoveredB.getValue());
         pref.put(Globals.PROP_TEST_ANT_TASK, jTextFieldAntTask.getText());
         pref.put(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, jTextFieldAntTaskParams.getText());
+        pref.putBoolean(Globals.PROP_ENABLE_HIGHLIGHT, jCheckBoxEnableHighlighting.isSelected());
+        pref.putBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, jCheckBoxEnableConsoleReport.isSelected());
     }
 
     boolean valid() {
@@ -505,6 +541,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonResoreDefaults;
+    private JCheckBox jCheckBoxEnableConsoleReport;
+    private JCheckBox jCheckBoxEnableHighlighting;
     private JLabel jLabelAntTask;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
@@ -512,9 +550,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JLabel jLabelAuthor;
     private JLabel jLabelAuthorWebsite;
     private JLabel jLabelCoveredCodeBG;
-    private JLabel jLabelInfoColorsAreRGB;
     private JLabel jLabelNotCoveredCodeBG;
     private JLabel jLabelPartiallyCoveredCodeBG;
+    private JPanel jPanel1;
     private JPanel jPanelCoveredPreview;
     private JPanel jPanelHighlightingCoveredCode;
     private JPanel jPanelJaCoCoRuntimeParams;
