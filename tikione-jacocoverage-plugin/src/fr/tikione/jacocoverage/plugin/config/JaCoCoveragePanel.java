@@ -65,12 +65,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jLabelAuthor = new JLabel();
         jLabelAuthorWebsite = new JLabel();
         jPanelJaCoCoRuntimeParams = new JPanel();
-        jLabelAntTask = new JLabel();
-        jTextFieldAntTask = new JTextField();
         jLabelAntTaskParams = new JLabel();
         jTextFieldAntTaskParams = new JTextField();
         jLabelAntTaskParamsTips = new JLabel();
-        jLabelAntTaskTips = new JLabel();
         jPanel1 = new JPanel();
         jCheckBoxEnableConsoleReport = new JCheckBox();
 
@@ -296,40 +293,25 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         jPanelJaCoCoRuntimeParams.setBorder(BorderFactory.createTitledBorder(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jPanelJaCoCoRuntimeParams.border.title"))); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabelAntTask, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTask.text")); // NOI18N
-
-        jTextFieldAntTask.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldAntTask.text")); // NOI18N
-
         Mnemonics.setLocalizedText(jLabelAntTaskParams, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParams.text")); // NOI18N
 
         jTextFieldAntTaskParams.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldAntTaskParams.text")); // NOI18N
 
         Mnemonics.setLocalizedText(jLabelAntTaskParamsTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskParamsTips.text")); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabelAntTaskTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelAntTaskTips.text")); // NOI18N
-
         GroupLayout jPanelJaCoCoRuntimeParamsLayout = new GroupLayout(jPanelJaCoCoRuntimeParams);
         jPanelJaCoCoRuntimeParams.setLayout(jPanelJaCoCoRuntimeParamsLayout);
         jPanelJaCoCoRuntimeParamsLayout.setHorizontalGroup(
             jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
-                                .addComponent(jLabelAntTask)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelAntTaskTips)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
-                                .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAntTaskParams, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))))
+                        .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAntTaskParams, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
                     .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -337,11 +319,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAntTask)
-                    .addComponent(jTextFieldAntTask, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelAntTaskTips))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -416,7 +393,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jSpinnerNotCoveredR.setValue(Globals.DEF_NOT_COVERED_R);
         jSpinnerNotCoveredG.setValue(Globals.DEF_NOT_COVERED_G);
         jSpinnerNotCoveredB.setValue(Globals.DEF_NOT_COVERED_B);
-        jTextFieldAntTask.setText(Globals.DEF_TEST_ANT_TASK);
         jTextFieldAntTaskParams.setText(Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
         jCheckBoxEnableHighlighting.setSelected(Globals.DEF_ENABLE_HIGHLIGHT);
         jCheckBoxEnableConsoleReport.setSelected(Globals.DEF_ENABLE_CONSOLE_REPORT);
@@ -497,7 +473,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_NOT_COVERED_R);
         int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_NOT_COVERED_G);
         int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_NOT_COVERED_B);
-        String antTask = pref.get(Globals.PROP_TEST_ANT_TASK, Globals.DEF_TEST_ANT_TASK);
         String antTaskJavaagent = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
         boolean enblHighlighting = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
         boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
@@ -513,7 +488,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jPanelCoveredPreview.setBackground(new Color(coveredR, coveredG, coveredB));
         jPanelPartiallyCoveredPreview.setBackground(new Color(parCoveredR, parCoveredG, parCoveredB));
         jPanelNotCoveredPreview.setBackground(new Color(notCoveredR, notCoveredG, notCoveredB));
-        jTextFieldAntTask.setText(antTask);
         jTextFieldAntTaskParams.setText(antTaskJavaagent);
         jCheckBoxEnableHighlighting.setSelected(enblHighlighting);
         jCheckBoxEnableConsoleReport.setSelected(enblConsoleReport);
@@ -530,7 +504,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerNotCoveredR.getValue());
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, (Integer) jSpinnerNotCoveredG.getValue());
         pref.putInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, (Integer) jSpinnerNotCoveredB.getValue());
-        pref.put(Globals.PROP_TEST_ANT_TASK, jTextFieldAntTask.getText());
         pref.put(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, jTextFieldAntTaskParams.getText());
         pref.putBoolean(Globals.PROP_ENABLE_HIGHLIGHT, jCheckBoxEnableHighlighting.isSelected());
         pref.putBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, jCheckBoxEnableConsoleReport.isSelected());
@@ -543,10 +516,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JButton jButtonResoreDefaults;
     private JCheckBox jCheckBoxEnableConsoleReport;
     private JCheckBox jCheckBoxEnableHighlighting;
-    private JLabel jLabelAntTask;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
-    private JLabel jLabelAntTaskTips;
     private JLabel jLabelAuthor;
     private JLabel jLabelAuthorWebsite;
     private JLabel jLabelCoveredCodeBG;
@@ -567,7 +538,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JSpinner jSpinnerPartiallyCoveredB;
     private JSpinner jSpinnerPartiallyCoveredG;
     private JSpinner jSpinnerPartiallyCoveredR;
-    private JTextField jTextFieldAntTask;
     private JTextField jTextFieldAntTaskParams;
     // End of variables declaration//GEN-END:variables
 }
