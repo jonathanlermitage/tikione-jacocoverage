@@ -22,7 +22,7 @@ import org.openide.util.NbBundle.Messages;
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.RunSingleWithJaCoCoAction")
+          id = "fr.tikione.jacocoverage.plugin.TestSingleWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestSingleWithJaCoCoAction",
                     lazy = false)
 @ActionReferences({

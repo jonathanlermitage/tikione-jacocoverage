@@ -19,7 +19,7 @@ import org.openide.util.NbBundle;
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.RunWithJaCoCoAction")
+          id = "fr.tikione.jacocoverage.plugin.TestProjectWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestProjectWithJaCoCoAction",
                     lazy = false)
 @ActionReference(path = "Projects/Actions",
