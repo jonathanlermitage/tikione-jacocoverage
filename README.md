@@ -14,7 +14,7 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 
 ## Development progression
 
-Current stable version is 1.0.0, available at NetBeans Plugin Portal and Update Centers. Next version is be 1.1.0 and will provide minor bugfixes plus some important new features.
+Current stable version is 1.0.0, available at NetBeans Plugin Portal and Update Centers. Next version is 1.1.0 and will provide minor bugfixes plus some important new features.
 
 ####Current version (available at Plugin Portal and validated):
 
@@ -32,7 +32,7 @@ Current stable version is 1.0.0, available at NetBeans Plugin Portal and Update 
 * ``Multi-line statements coloring`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): **investigating**.
 * ``Add glyphs in the left margin`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): **under development**.
 * ``Enable test on single file`` [GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1): **under development**.
-* ``Unlock configuration of highlighting colors``: todo.
+* ``Unlock configuration of highlighting colors``: todo (help needed!).
 * ``Detailed HTML report``: todo.
 * ``Documentation (JavaHelp integrated into NetBeans)``: todo.
 
