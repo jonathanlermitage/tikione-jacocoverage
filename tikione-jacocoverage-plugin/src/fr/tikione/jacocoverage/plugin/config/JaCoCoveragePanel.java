@@ -29,6 +29,11 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
+/**
+ * JaCoCoverage configuration panel.
+ *
+ * @author Jonathan Lermitage
+ */
 final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -320,8 +325,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             .addGroup(jPanelJaCoCoRuntimeParamsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelJaCoCoRuntimeParamsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -384,15 +389,15 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonResoreDefaultsActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonResoreDefaultsActionPerformed
-        jSpinnerCoveredR.setValue(Globals.DEF_COVERED_R);
-        jSpinnerCoveredG.setValue(Globals.DEF_COVERED_G);
-        jSpinnerCoveredB.setValue(Globals.DEF_COVERED_B);
-        jSpinnerPartiallyCoveredR.setValue(Globals.DEF_PARTIAL_COVERED_R);
-        jSpinnerPartiallyCoveredG.setValue(Globals.DEF_PARTIAL_COVERED_G);
-        jSpinnerPartiallyCoveredB.setValue(Globals.DEF_PARTIAL_COVERED_B);
-        jSpinnerNotCoveredR.setValue(Globals.DEF_NOT_COVERED_R);
-        jSpinnerNotCoveredG.setValue(Globals.DEF_NOT_COVERED_G);
-        jSpinnerNotCoveredB.setValue(Globals.DEF_NOT_COVERED_B);
+        jSpinnerCoveredR.setValue(Globals.DEF_COVERED_RGB[0]);
+        jSpinnerCoveredG.setValue(Globals.DEF_COVERED_RGB[1]);
+        jSpinnerCoveredB.setValue(Globals.DEF_COVERED_RGB[2]);
+        jSpinnerPartiallyCoveredR.setValue(Globals.DEF_PARTIAL_COVERED_RGB[0]);
+        jSpinnerPartiallyCoveredG.setValue(Globals.DEF_PARTIAL_COVERED_RGB[1]);
+        jSpinnerPartiallyCoveredB.setValue(Globals.DEF_PARTIAL_COVERED_RGB[2]);
+        jSpinnerNotCoveredR.setValue(Globals.DEF_NOT_COVERED_RGB[0]);
+        jSpinnerNotCoveredG.setValue(Globals.DEF_NOT_COVERED_RGB[1]);
+        jSpinnerNotCoveredB.setValue(Globals.DEF_NOT_COVERED_RGB[2]);
         jTextFieldAntTaskParams.setText(Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
         jCheckBoxEnableHighlighting.setSelected(Globals.DEF_ENABLE_HIGHLIGHT);
         jCheckBoxEnableConsoleReport.setSelected(Globals.DEF_ENABLE_CONSOLE_REPORT);
@@ -447,6 +452,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLabelAuthorWebsiteMouseClicked
 
+    /** Update RGB previews. */
     private void updatePreviews() {
         jPanelCoveredPreview.setBackground(new Color(
                 (Integer) jSpinnerCoveredR.getValue(),
@@ -462,17 +468,18 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 (Integer) jSpinnerNotCoveredB.getValue()));
     }
 
+    /** Load user preferences and configure UI. */
     void load() {
         Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        int coveredR = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, Globals.DEF_COVERED_R);
-        int coveredG = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, Globals.DEF_COVERED_G);
-        int coveredB = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, Globals.DEF_COVERED_B);
-        int parCoveredR = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_PARTIAL_COVERED_R);
-        int parCoveredG = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_PARTIAL_COVERED_G);
-        int parCoveredB = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_PARTIAL_COVERED_B);
-        int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_NOT_COVERED_R);
-        int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_NOT_COVERED_G);
-        int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_NOT_COVERED_B);
+        int coveredR = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, Globals.DEF_COVERED_RGB[0]);
+        int coveredG = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_G, Globals.DEF_COVERED_RGB[1]);
+        int coveredB = pref.getInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_B, Globals.DEF_COVERED_RGB[2]);
+        int parCoveredR = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_PARTIAL_COVERED_RGB[0]);
+        int parCoveredG = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_PARTIAL_COVERED_RGB[1]);
+        int parCoveredB = pref.getInt(Globals.PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_PARTIAL_COVERED_RGB[2]);
+        int notCoveredR = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_R, Globals.DEF_NOT_COVERED_RGB[0]);
+        int notCoveredG = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_G, Globals.DEF_NOT_COVERED_RGB[1]);
+        int notCoveredB = pref.getInt(Globals.PROP_NOCOVERAGE_HILIGHT_COLOR_B, Globals.DEF_NOT_COVERED_RGB[2]);
         String antTaskJavaagent = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
         boolean enblHighlighting = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
         boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
@@ -493,6 +500,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxEnableConsoleReport.setSelected(enblConsoleReport);
     }
 
+    /** Store configuration to user preferences. */
     void store() {
         Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
         pref.putInt(Globals.PROP_COVERAGE_HILIGHT_COLOR_R, (Integer) jSpinnerCoveredR.getValue());

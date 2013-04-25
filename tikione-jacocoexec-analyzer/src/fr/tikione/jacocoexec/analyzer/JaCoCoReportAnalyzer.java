@@ -77,14 +77,15 @@ public class JaCoCoReportAnalyzer {
     }
 
     /**
-     * Load JaCoCo coverage data and show it to the NetBeans console.
+     * Load JaCoCo coverage data and show it to the NetBeans console tab.
      *
      * @param xmlreport the XML report file to load.
+     * @param tabName the name of the NetBeans console tab to open.
      * @return the textual report.
      */
-    public static void toConsoleReport(List<JavaClass> coverageData)
+    public static void toConsoleReport(List<JavaClass> coverageData, String tabName)
             throws IOException {
-        InputOutput io = IOProvider.getDefault().getIO("JaCoCoverage Report", false);
+        InputOutput io = IOProvider.getDefault().getIO(tabName, false);
         try {
             io.getOut().reset();
             IOColorPrint.print(io, "=== JaCoCoverage report (powered by JaCoCo from EclEmma) ===\n", Color.GRAY);

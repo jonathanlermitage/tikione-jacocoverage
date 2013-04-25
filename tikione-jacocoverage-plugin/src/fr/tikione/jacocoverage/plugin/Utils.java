@@ -26,6 +26,7 @@ import org.openide.nodes.Node;
 import org.openide.text.Line;
 import org.openide.text.NbDocument;
 import org.openide.util.Exceptions;
+import org.openide.windows.IOProvider;
 
 /**
  * Some NetBeans related utilities.
@@ -41,6 +42,16 @@ public class Utils {
     private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
 
     private Utils() {
+    }
+
+    /**
+     * Close a NetBeans console tab.
+     *
+     * @param tabName the name on the tab.
+     */
+    public static void closeJaCoCoConsoleReport(String tabName)
+            throws IOException {
+        IOProvider.getDefault().getIO(tabName, false).closeInputOutput();
     }
 
     /**
