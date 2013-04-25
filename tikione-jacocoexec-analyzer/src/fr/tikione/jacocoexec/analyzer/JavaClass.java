@@ -16,9 +16,6 @@ public class JavaClass {
     /** The class name (with ".java" extension). */
     private String className;
 
-    /** The coverage status of the entire Java class. */
-    private CoverageStatus coverageStatus;
-
     /** Indicate which lines or source code are fully covered. */
     private final List<Integer> coveredLines = new ArrayList<Integer>(16);
 
@@ -51,10 +48,6 @@ public class JavaClass {
         notCoveredLines.add(lineNumber);
     }
 
-    public void setCoverageStatus(CoverageStatus coverageStatus) {
-        this.coverageStatus = coverageStatus;
-    }
-
     public String getPackageName() {
         return packageName;
     }
@@ -73,9 +66,5 @@ public class JavaClass {
 
     public List<Integer> getNotCoveredLines() {
         return notCoveredLines;
-    }
-
-    public CoverageStatus getCoverageStatus() {
-        return coverageStatus;
     }
 }
