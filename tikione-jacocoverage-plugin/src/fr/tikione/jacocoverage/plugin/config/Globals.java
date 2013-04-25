@@ -1,57 +1,69 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+/**
+ * Global data.
+ *
+ * @author Jonathan Lermitage
+ */
 public class Globals {
 
-    public static final long serialVersionUID = 1L;
+    /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
+    public static final String TXTREPORT_TABNAME = "JaCoCoverage Report";
 
-    public static String PROP_COVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.CoveredR";
+    /** User preference: highlighting color of covered code (Red part of RGB). */
+    public static final String PROP_COVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.CoveredR";
 
-    public static String PROP_COVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.CoveredG";
+    /** User preference: highlighting color of covered code (Green part of RGB). */
+    public static final String PROP_COVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.CoveredG";
 
-    public static String PROP_COVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.CoveredB";
+    /** User preference: highlighting color of covered code (Blue part of RGB). */
+    public static final String PROP_COVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.CoveredB";
 
-    public static String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.PartiallyCoveredR";
+    /** User preference: highlighting color of partially covered code (Red part of RGB). */
+    public static final String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.PartiallyCoveredR";
 
-    public static String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.PartiallyCoveredG";
+    /** User preference: highlighting color of partially covered code (Green part of RGB). */
+    public static final String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.PartiallyCoveredG";
 
-    public static String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.PartiallyCoveredB";
+    /** User preference: highlighting color of partially covered code (Blue part of RGB). */
+    public static final String PROP_PARTIALCOVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.PartiallyCoveredB";
 
-    public static String PROP_NOCOVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.NotCoveredR";
+    /** User preference: highlighting color of not covered code (Red part of RGB). */
+    public static final String PROP_NOCOVERAGE_HILIGHT_COLOR_R = "JaCoCoverage.NotCoveredR";
 
-    public static String PROP_NOCOVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.NotCoveredG";
+    /** User preference: highlighting color of not covered code (Green part of RGB). */
+    public static final String PROP_NOCOVERAGE_HILIGHT_COLOR_G = "JaCoCoverage.NotCoveredG";
 
-    public static String PROP_NOCOVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.NotCoveredB";
+    /** User preference: highlighting color of not covered code (Blue part of RGB). */
+    public static final String PROP_NOCOVERAGE_HILIGHT_COLOR_B = "JaCoCoverage.NotCoveredB";
 
-    public static String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
+    /** User preference: customization of the JavaAgent passed to the Ant task. */
+    public static final String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
 
-    public static String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
+    /** User preference: enable code highlighting. */
+    public static final String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
 
-    public static String PROP_ENABLE_CONSOLE_REPORT = "JaCoCoverage.NbConsole.EnableReport";
+    /** User preference: show a minimal textual JaCoCo report in a NetBeans console tab. */
+    public static final String PROP_ENABLE_CONSOLE_REPORT = "JaCoCoverage.NbConsole.EnableReport";
 
-    public static final int DEF_COVERED_R = 205;
+    /** Default highlighting color (RGB) of covered code. */
+    public static final int[] DEF_COVERED_RGB = new int []{205, 235, 175};
 
-    public static final int DEF_COVERED_G = 235;
+    /** Default highlighting color (RGB) of partially covered code. */
+    public static final int[] DEF_PARTIAL_COVERED_RGB = new int []{255, 231, 157};
 
-    public static final int DEF_COVERED_B = 175;
+    /** Default highlighting color (RGB) of not covered code. */
+    public static final int[] DEF_NOT_COVERED_RGB = new int []{252, 201, 194};
 
-    public static final int DEF_PARTIAL_COVERED_R = 255;
+    /** Default configuration value: the JavaAgent passed to the Ant task. */
+    public static final String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
 
-    public static final int DEF_PARTIAL_COVERED_G = 231;
+    /** Default configuration value: enable code highlighting. */
+    public static final boolean DEF_ENABLE_HIGHLIGHT = true;
 
-    public static final int DEF_PARTIAL_COVERED_B = 157;
+    /** Default configuration value: show a minimal textual JaCoCo report in a NetBeans console tab. */
+    public static final boolean DEF_ENABLE_CONSOLE_REPORT = true;
 
-    public static final int DEF_NOT_COVERED_R = 252;
-
-    public static final int DEF_NOT_COVERED_G = 201;
-
-    public static final int DEF_NOT_COVERED_B = 194;
-
-    public static String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
-
-    public static boolean DEF_ENABLE_HIGHLIGHT = true;
-
-    public static boolean DEF_ENABLE_CONSOLE_REPORT = true;
-
-    public Globals() {
+    private Globals() {
     }
 }
