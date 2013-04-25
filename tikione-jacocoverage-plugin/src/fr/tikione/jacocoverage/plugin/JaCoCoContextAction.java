@@ -29,6 +29,11 @@ import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
 import org.xml.sax.SAXException;
 
+/**
+ * A toolkit that launches Ant tasks with the JaCoCo JavaAgent, colorizes Java source files and shows a coverage report.
+ *
+ * @author Jonathan Lermitage
+ */
 public abstract class JaCoCoContextAction extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
@@ -60,12 +65,11 @@ public abstract class JaCoCoContextAction extends AbstractAction {
     void actionPerformed(ActionEvent ae) {
         try {
             // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
-            Preferences pref = NbPreferences.forModule(TestProjectWithJaCoCoAction.class);
+            Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
             final boolean enblHighlight = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
             final boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
 
             if (enblHighlight || enblConsoleReport) {
-
                 // Retrieve project properties.
                 FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
                 final Properties prjProps = new Properties();
@@ -73,8 +77,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
 
                 final File xmlreport = Utils.getJacocoXmlReportfile(project);
                 final File binreport = Utils.getJacocoBinReportFile(project);
-                if (binreport.exists() && !binreport.delete()
-                        || xmlreport.exists() && !xmlreport.delete()) {
+                if (binreport.exists() && !binreport.delete() || xmlreport.exists() && !xmlreport.delete()) {
                     String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
                             + binreport.getAbsolutePath() + " and/or\n"
                             + xmlreport.getAbsolutePath();
@@ -107,44 +110,43 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
-                            // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
-                            // object provided by the NetBeans platform is not correctly wrapped.
-                            if (0 == execute.result()) {
-                                // Load the generated JaCoCo coverage report.
-                                String prjDir = Utils.getProjectDir(project) + File.separator;
-                                File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
-                                File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-                                try {
+                            try {
+                                // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
+                                // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
+                                // object provided by the NetBeans platform is not correctly wrapped.
+                                if (0 == execute.result() && binreport.exists()) {
+                                    // Load the generated JaCoCo coverage report.
+                                    String prjDir = Utils.getProjectDir(project) + File.separator;
+                                    File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                                    File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                                     JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                     final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                                    // Remove existing highlighting (from a previous coverage task).
+                                    // Remove existing highlighting (from a previous coverage task), show a report in the NetBeans
+                                    // console and apply highlighting on each Java source file.
                                     AbstractCoverageAnnotation.removeAll(getProjectId(project));
-
                                     if (enblConsoleReport) {
-                                        // Show a report in the NetBeans console.
-                                        JaCoCoReportAnalyzer.toConsoleReport(coverageData);
+                                        JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
                                     }
                                     if (enblHighlight) {
-                                        // Apply highlighting on each Java source file.
                                         for (final JavaClass jclass : coverageData) {
                                             Utils.colorDoc(project, jclass);
                                         }
                                     }
-
-                                    // Delete working files.
                                     xmlreport.delete();
                                     binreport.delete();
-                                } catch (FileNotFoundException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (IOException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (ParserConfigurationException ex) {
-                                    Exceptions.printStackTrace(ex);
-                                } catch (SAXException ex) {
-                                    Exceptions.printStackTrace(ex);
+                                } else {
+                                    AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                                    Utils.closeJaCoCoConsoleReport(Globals.TXTREPORT_TABNAME);
                                 }
+                            } catch (FileNotFoundException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (IOException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (ParserConfigurationException ex) {
+                                Exceptions.printStackTrace(ex);
+                            } catch (SAXException ex) {
+                                Exceptions.printStackTrace(ex);
                             }
                         }
                     }).start();

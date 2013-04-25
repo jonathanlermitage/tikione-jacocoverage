@@ -1,6 +1,7 @@
 package fr.tikione.jacocoverage.plugin;
 
 import java.awt.event.ActionEvent;
+import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
@@ -11,22 +12,23 @@ import org.openide.awt.ActionRegistration;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
+import org.openide.util.NbPreferences;
 
 /**
- * The "Test with JaCoCoverage" contextual action registration.
+ * The "Run with JaCoCoverage" contextual action registration.
  * Start an Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.TestProjectWithJaCoCoAction")
-@ActionRegistration(displayName = "#CTL_TestProjectWithJaCoCoAction",
+          id = "fr.tikione.jacocoverage.plugin.RunProjectWithJaCoCoAction")
+@ActionRegistration(displayName = "#CTL_RunProjectWithJaCoCoAction",
                     lazy = false)
 @ActionReference(path = "Projects/Actions",
-                 position = 1985,
-                 separatorAfter = 1986)
-@NbBundle.Messages("CTL_TestProjectWithJaCoCoAction=Test with JaCoCoverage")
-public final class TestProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
+                 position = 1984,
+                 separatorBefore = 1983)
+@NbBundle.Messages("CTL_RunProjectWithJaCoCoAction=Run with JaCoCoverage")
+public final class RunProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,8 +54,12 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
          * @param context the context the action is called from.
          */
         public ContextAction(Lookup context) {
-            super(context, context.lookup(Project.class), "test");
-            putValue(NAME, "Test with JaCoCoverage");
+            super(context, context.lookup(Project.class), "run");
+            putValue(NAME, "Run with JaCoCoverage");
+            Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
+            if (pref.get("main.class", "").isEmpty()) {
+                //setEnabled(false);
+            }
         }
     }
 }
