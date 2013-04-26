@@ -4,27 +4,29 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
+import static javax.swing.Action.SMALL_ICON;
+import org.netbeans.api.annotations.common.StaticResource;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.awt.DynamicMenuContent;
 import org.openide.loaders.DataObject;
 import org.openide.util.ContextAwareAction;
+import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
 
 /**
  * The "Test File with JaCoCoverage" contextual action registration.
- * Start an Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source file and show a coverage report.
+ * Start the "test-single" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source file and show a coverage report.
  *
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.TestSingleWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestSingleWithJaCoCoAction",
-                    lazy = false)
+                    lazy = true)
 @ActionReferences({
     @ActionReference(path = "Loaders/text/x-java/Actions",
                      position = 1268),
@@ -33,6 +35,9 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_TestSingleWithJaCoCoAction=Test File with JaCoCoverage")
 public final class TestSingleWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
+
+    @StaticResource
+    private static final String ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
 
     private static final long serialVersionUID = 1L;
 
@@ -59,8 +64,8 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
          */
         public ContextAction(Lookup context) {
             super(context, FileOwnerQuery.getOwner(context.lookup(DataObject.class).getPrimaryFile()), "test-single");
-            putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
-            putValue(NAME, "Test File with JaCoCoverage");
+            putValue(NAME, Bundle.CTL_TestSingleWithJaCoCoAction());
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(ICON, false));
         }
 
         public @Override

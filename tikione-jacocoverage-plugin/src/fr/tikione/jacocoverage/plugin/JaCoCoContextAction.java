@@ -58,7 +58,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
         this.project = project;
         this.antTask = antTask;
         setEnabled(Utils.isProjectSupported(project));
-        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, false);
     }
 
     public @Override

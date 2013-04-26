@@ -4,29 +4,35 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
+import static javax.swing.Action.SMALL_ICON;
+import org.netbeans.api.annotations.common.StaticResource;
 import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.ContextAwareAction;
+import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 
 /**
  * The "Test with JaCoCoverage" contextual action registration.
- * Start an Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
+ * Start the "test" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.TestProjectWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestProjectWithJaCoCoAction",
-                    lazy = false)
+                    lazy = true)
 @ActionReference(path = "Projects/Actions",
                  position = 1985,
                  separatorAfter = 1986)
 @NbBundle.Messages("CTL_TestProjectWithJaCoCoAction=Test with JaCoCoverage")
 public final class TestProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
+
+    @StaticResource
+    private static final String ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +59,8 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
          */
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "test");
-            putValue(NAME, "Test with JaCoCoverage");
+            putValue(NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(ICON, false));
         }
     }
 }
