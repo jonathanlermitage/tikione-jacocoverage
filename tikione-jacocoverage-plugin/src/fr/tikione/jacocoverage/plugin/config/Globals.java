@@ -1,11 +1,17 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+import org.netbeans.api.annotations.common.StaticResource;
+
 /**
  * Global data.
  *
  * @author Jonathan Lermitage
  */
 public class Globals {
+
+    /** Icon attached to JaCoCoverage actions (run, test, test-single). */
+    @StaticResource
+    public static final String JACOCOACTION_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
 
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
     public static final String TXTREPORT_TABNAME = "JaCoCoverage Report";

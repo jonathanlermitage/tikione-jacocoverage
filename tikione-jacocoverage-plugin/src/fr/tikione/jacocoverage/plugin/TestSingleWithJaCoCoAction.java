@@ -1,12 +1,12 @@
 package fr.tikione.jacocoverage.plugin;
 
+import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
 import static javax.swing.Action.SMALL_ICON;
 import javax.swing.JMenuItem;
-import org.netbeans.api.annotations.common.StaticResource;
 import org.netbeans.api.project.FileOwnerQuery;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -28,7 +28,7 @@ import org.openide.util.actions.Presenter;
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.TestSingleWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestSingleWithJaCoCoAction",
-                    lazy = true)
+                    lazy = false)
 @ActionReferences({
     @ActionReference(path = "Loaders/text/x-java/Actions",
                      position = 1268),
@@ -36,10 +36,7 @@ import org.openide.util.actions.Presenter;
                      position = 1785)
 })
 @Messages("CTL_TestSingleWithJaCoCoAction=Test File with JaCoCoverage")
-public final class TestSingleWithJaCoCoAction extends AbstractAction implements ContextAwareAction, Presenter.Popup  {
-
-    @StaticResource
-    private static final String ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
+public final class TestSingleWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,15 +49,10 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
         return new ContextAction(context);
     }
 
-    @Override
-    public JMenuItem getPopupPresenter() {
-        return new JMenuItem(this);
-    }
-
     /**
      * The "Test File with JaCoCoverage" contextual action.
      */
-    private static final class ContextAction extends JaCoCoContextAction {
+    private static final class ContextAction extends JaCoCoContextAction implements Presenter.Popup {
 
         private static final long serialVersionUID = 1L;
 
@@ -72,7 +64,7 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
         public ContextAction(Lookup context) {
             super(context, FileOwnerQuery.getOwner(context.lookup(DataObject.class).getPrimaryFile()), "test-single");
             putValue(NAME, Bundle.CTL_TestSingleWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(ICON, false));
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.JACOCOACTION_ICON, false));
         }
 
         public @Override
@@ -82,6 +74,11 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
 //            getAddAntTargetProps().put("javac.includes", "demo.coverage.app.Utility1Test");
 //            getAddAntTargetProps().put("test.includes", "demo.coverage.app.Utility1Test");
             super.actionPerformed(ae);
+        }
+
+        @Override
+        public JMenuItem getPopupPresenter() {
+            return new JMenuItem(this);
         }
     }
 }

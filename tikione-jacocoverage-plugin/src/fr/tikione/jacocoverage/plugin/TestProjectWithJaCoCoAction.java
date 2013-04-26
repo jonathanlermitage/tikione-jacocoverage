@@ -1,12 +1,12 @@
 package fr.tikione.jacocoverage.plugin;
 
+import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
 import static javax.swing.Action.SMALL_ICON;
 import javax.swing.JMenuItem;
-import org.netbeans.api.annotations.common.StaticResource;
 import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -26,15 +26,12 @@ import org.openide.util.actions.Presenter;
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.TestProjectWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestProjectWithJaCoCoAction",
-                    lazy = true)
+                    lazy = false)
 @ActionReference(path = "Projects/Actions",
                  position = 1985,
                  separatorAfter = 1986)
 @NbBundle.Messages("CTL_TestProjectWithJaCoCoAction=Test with JaCoCoverage")
-public final class TestProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction, Presenter.Popup  {
-
-    @StaticResource
-    private static final String ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
+public final class TestProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,15 +44,10 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
         return new ContextAction(context);
     }
 
-    @Override
-    public JMenuItem getPopupPresenter() {
-        return new JMenuItem(this);
-    }
-
     /**
      * The "Test with JaCoCoverage" contextual action.
      */
-    private static final class ContextAction extends JaCoCoContextAction {
+    private static final class ContextAction extends JaCoCoContextAction implements Presenter.Popup {
 
         private static final long serialVersionUID = 1L;
 
@@ -67,7 +59,12 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "test");
             putValue(NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(ICON, false));
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.JACOCOACTION_ICON, false));
+        }
+
+        @Override
+        public JMenuItem getPopupPresenter() {
+            return new JMenuItem(this);
         }
     }
 }
