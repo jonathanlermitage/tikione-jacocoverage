@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
-  <folder name="Actions">
-        <folder name="Project">
-            <file name="fr-tikione-jacocoverage-plugin-RunSingleWithJaCoCoAction.instance_hidden"/>
-            <file name="fr-tikione-jacocoverage-plugin-RunWithJaCoCoAction.instance_hidden"/>
-            <file name="fr-tikione-jacocoverage-plugin-TestProjectWithJaCoCoAction.instance">
-                <attr name="instanceCreate" newvalue="fr.tikione.jacocoverage.plugin.RunWithJaCoCoAction"/>
-            </file>
-            <file name="fr-tikione-jacocoverage-plugin-TestSingleWithJaCoCoAction.instance"/>
-        </folder>
-    </folder>
     <folder name="Editors">
     <folder name="AnnotationTypes">
       <file name="annotation_covered.xml" url="resources/annotation_covered.xml"/>
