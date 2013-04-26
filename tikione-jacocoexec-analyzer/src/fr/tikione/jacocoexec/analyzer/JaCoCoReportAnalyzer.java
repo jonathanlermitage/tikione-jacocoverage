@@ -94,7 +94,25 @@ public class JaCoCoReportAnalyzer {
                 IOColorPrint.print(io, String.format("%5s", jclass.getCoveredLines().size()), CONSOLE_COVERED);
                 IOColorPrint.print(io, " " + String.format("%5s", jclass.getPartiallyCoveredLines().size()), CONSOLE_PARTIALLY_COVERED);
                 IOColorPrint.print(io, " " + String.format("%5s", jclass.getNotCoveredLines().size()), CONSOLE_NOT_COVERED);
-                io.getOut().println("    " + jclass.getPackageName() + jclass.getClassName());
+                Color classCovColor;
+                io.getOut().print("    " + jclass.getPackageName());
+                boolean existCL = !jclass.getCoveredLines().isEmpty();
+                boolean existPCL = !jclass.getPartiallyCoveredLines().isEmpty();
+                boolean existNCL = !jclass.getNotCoveredLines().isEmpty();
+                if (existCL) {
+                    if (existNCL || existPCL) {
+                        classCovColor = CONSOLE_PARTIALLY_COVERED;
+                    } else {
+                        classCovColor = CONSOLE_COVERED;
+                    }
+                } else {
+                    if (existPCL) {
+                        classCovColor = CONSOLE_PARTIALLY_COVERED;
+                    } else {
+                        classCovColor = CONSOLE_NOT_COVERED;
+                    }
+                }
+                IOColorPrint.print(io, jclass.getClassName() + '\n', classCovColor);
             }
             IOColorPrint.print(io, "\nEnd of report\n", Color.GRAY);
             IOColorPrint.print(io, "You can ask questions and report bugs by visiting: ", Color.GRAY);
