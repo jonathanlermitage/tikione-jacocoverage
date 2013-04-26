@@ -63,7 +63,7 @@ public final class RunProjectWithJaCoCoAction extends AbstractAction implements 
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "run");
             putValue(NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.JACOCOACTION_ICON, false));
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
             FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
             try {

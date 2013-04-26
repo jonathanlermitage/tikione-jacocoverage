@@ -64,7 +64,7 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
         public ContextAction(Lookup context) {
             super(context, FileOwnerQuery.getOwner(context.lookup(DataObject.class).getPrimaryFile()), "test-single");
             putValue(NAME, Bundle.CTL_TestSingleWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.JACOCOACTION_ICON, false));
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
         }
 
         public @Override

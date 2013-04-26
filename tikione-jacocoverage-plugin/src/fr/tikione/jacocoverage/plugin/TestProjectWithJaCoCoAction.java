@@ -59,7 +59,7 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "test");
             putValue(NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.JACOCOACTION_ICON, false));
+            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
         }
 
         @Override

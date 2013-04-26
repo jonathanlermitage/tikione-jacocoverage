@@ -11,7 +11,11 @@ public class Globals {
 
     /** Icon attached to JaCoCoverage actions (run, test, test-single). */
     @StaticResource
-    public static final String JACOCOACTION_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/eclemma_report.gif";
+    public static final String TEST_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_test.png";
+
+    /** Icon attached to JaCoCoverage actions (run, test, test-single). */
+    @StaticResource
+    public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
     public static final String TXTREPORT_TABNAME = "JaCoCoverage Report";
