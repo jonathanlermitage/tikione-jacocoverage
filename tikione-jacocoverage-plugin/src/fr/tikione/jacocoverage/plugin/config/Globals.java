@@ -9,11 +9,11 @@ import org.netbeans.api.annotations.common.StaticResource;
  */
 public class Globals {
 
-    /** Icon attached to JaCoCoverage actions (run, test, test-single). */
+    /** Icon attached to JaCoCoverage actions (test, test-single). */
     @StaticResource
     public static final String TEST_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_test.png";
 
-    /** Icon attached to JaCoCoverage actions (run, test, test-single). */
+    /** Icon attached to JaCoCoverage actions (run). */
     @StaticResource
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 

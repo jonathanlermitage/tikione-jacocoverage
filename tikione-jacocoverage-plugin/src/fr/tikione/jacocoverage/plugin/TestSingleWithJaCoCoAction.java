@@ -12,6 +12,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.awt.DynamicMenuContent;
 import org.openide.loaders.DataObject;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.ImageUtilities;
@@ -65,6 +66,10 @@ public final class TestSingleWithJaCoCoAction extends AbstractAction implements 
             super(context, FileOwnerQuery.getOwner(context.lookup(DataObject.class).getPrimaryFile()), "test-single");
             putValue(NAME, Bundle.CTL_TestSingleWithJaCoCoAction());
             putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
+
+            // TODO temporarily disabled, will be enabled in 1.2.0 or later.
+            putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+            setEnabled(false);
         }
 
         public @Override

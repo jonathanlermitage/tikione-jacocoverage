@@ -19,11 +19,14 @@ import org.openide.text.Line;
  */
 public abstract class AbstractCoverageAnnotation extends Annotation implements PropertyChangeListener {
 
+    /** A short description of the annotation. */
     private String descrmessage = null;
 
+    /** A list of all registered living annotation. Used to know and clear annotations associated to a project. */
     private final static HashMap<String, HashMap<Integer, Annotation>> annotations = new HashMap<String, HashMap<Integer, Annotation>>();
 
-    private final static String KEY_JOIN_CHAR = " ";
+    /** Utility character. Projects are identified by the concatenation of their path, this utility character and the project's name. */
+    private final static char KEY_JOIN_CHAR = ' ';
 
     /**
      * Creates new annotation and adds it to the global annotations list so it can be managed later

@@ -14,6 +14,11 @@ public enum CoverageStateEnum {
     /** Not covered. */
     NOT_COVERED;
 
+    /**
+     * Get the coverage status short description.
+     *
+     * @return a short description.
+     */
     public String getDescription() {
         switch (this) {
             case COVERED:
@@ -27,6 +32,11 @@ public enum CoverageStateEnum {
         }
     }
 
+    /**
+     * Get the coverage type (id) registered in the "layer.xml" NetBeans module file.
+     *
+     * @return coverage type.
+     */
     public String getType() {
         switch (this) {
             case COVERED:

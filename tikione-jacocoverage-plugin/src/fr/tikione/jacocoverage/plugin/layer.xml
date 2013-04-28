@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
-    <folder name="Editors">
+  <folder name="Editors">
     <folder name="AnnotationTypes">
       <file name="annotation_covered.xml" url="resources/annotation_covered.xml"/>
       <file name="annotation_partiallycovered.xml" url="resources/annotation_partiallycovered.xml"/>
