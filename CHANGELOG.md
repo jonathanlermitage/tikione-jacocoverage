@@ -1,10 +1,13 @@
 # TikiOne JaCoCoverage - Changelog
 
-## 1.1.0 2013-0x-xx (under development)
+## 1.1.0 2013-04-28
 
+* added support of NetBeans Modules projects.
 * added a "Run Project with JaCoCoverage" action menu and removed the configuration of the Ant task.
 * added configuration of code highlighting and reporting (enable/disable).
-* fixed errors when the Ant task and JavaAgent don't generate JaCoCo report file (jacoco.exec).
+* added icons on action menus.
+* minor enhancement of the minimal coverage report.
+* fixed errors when the JaCoCo JavaAgent doesn't generate JaCoCo report file (jacoco.exec).
 
 ## 1.0.0 2013-04-22
 
