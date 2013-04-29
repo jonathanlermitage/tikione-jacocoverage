@@ -41,6 +41,9 @@ and scheduled for 1.2.0**.
 ## Author
 * Jonathan Lermitage (<jonathan.lermitage@entreprise38.org>)
 
+You are an IT or industrial company which has an office in France? I'm open to hiring: I will integrate an engineering school (Computer
+Science and Mathematics) in September, and I look for a three-year contract (part-time at school, part-time work).
+
 ## License
 
 LGPL License
