@@ -3,6 +3,7 @@ package fr.tikione.jacocoverage.plugin;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -66,13 +67,24 @@ public final class RunProjectWithJaCoCoAction extends AbstractAction implements 
             putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
             FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
+            InputStream ins = null;
             try {
-                prjProps.load(prjPropsFo.getInputStream());
+                if (prjPropsFo != null) {
+                    prjProps.load(ins = prjPropsFo.getInputStream());
+                }
                 if (prjProps.getProperty("main.class", "").isEmpty()) {
                     setEnabled(false);
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
+            } finally {
+                try {
+                    if (ins != null) {
+                        ins.close();
+                    }
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
             }
         }
 
