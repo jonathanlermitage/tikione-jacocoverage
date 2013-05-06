@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
@@ -120,7 +120,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                     File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
                                     File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                                     JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
-                                    final List<JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+                                    final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
                                     // Remove existing highlighting (from a previous coverage task), show a report in the NetBeans
                                     // console and apply highlighting on each Java source file.
@@ -129,7 +129,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
                                     }
                                     if (enblHighlight) {
-                                        for (final JavaClass jclass : coverageData) {
+                                        for (final JavaClass jclass : coverageData.values()) {
                                             Utils.colorDoc(project, jclass);
                                         }
                                     }
