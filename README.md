@@ -18,7 +18,7 @@ don't expect support for older NetBeans versions (too much work and nobody uses 
 
 ## Download
 
-Current stable version is 1.1.0.
+Current stable version is 1.1.1.
 
 * Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage),
 validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see ``Tools``, ``Plugins``,
