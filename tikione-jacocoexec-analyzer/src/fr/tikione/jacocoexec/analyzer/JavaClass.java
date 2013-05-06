@@ -1,14 +1,16 @@
 package fr.tikione.jacocoexec.analyzer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Representation of a Java class code coverage.
  *
  * @author Jonathan Lermitage
  */
-public class JavaClass {
+public class JavaClass implements Comparable<JavaClass> {
 
     /** The package name (with "/" instead of "."). */
     private String packageName;
@@ -17,13 +19,16 @@ public class JavaClass {
     private String className;
 
     /** Indicate which lines or source code are fully covered. */
-    private final List<Integer> coveredLines = new ArrayList<Integer>(16);
+    private final List<Integer> coveredLines = new ArrayList<Integer>(64);
 
     /** Indicate which lines or source code are partially covered. */
-    private final List<Integer> partiallyCoveredLines = new ArrayList<Integer>(16);
+    private final List<Integer> partiallyCoveredLines = new ArrayList<Integer>(32);
 
     /** Indicate which lines or source code are not covered. */
-    private final List<Integer> notCoveredLines = new ArrayList<Integer>(16);
+    private final List<Integer> notCoveredLines = new ArrayList<Integer>(32);
+
+    /** Indicate the coverage state of classe's methods declarations. */
+    private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(24);
 
     /**
      * Describe a Java class. Coverage data will be added later.
@@ -48,6 +53,14 @@ public class JavaClass {
         notCoveredLines.add(lineNumber);
     }
 
+    public void addMethodCoverage(int lineNumber, CoverageStateEnum coverageState) {
+        methodCoverage.put(lineNumber, coverageState);
+    }
+
+    public Map<Integer, CoverageStateEnum> getMethodCoverage() {
+        return methodCoverage;
+    }
+    
     public String getPackageName() {
         return packageName;
     }
@@ -66,5 +79,10 @@ public class JavaClass {
 
     public List<Integer> getNotCoveredLines() {
         return notCoveredLines;
+    }
+
+    @Override
+    public int compareTo(JavaClass o) {
+        return (this.getPackageName() + this.getClassName()).compareTo(o.getPackageName() + o.getClassName());
     }
 }

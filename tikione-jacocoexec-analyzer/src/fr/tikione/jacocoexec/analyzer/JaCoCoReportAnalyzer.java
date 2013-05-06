@@ -6,7 +6,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IBundleCoverage;
@@ -27,11 +30,13 @@ import org.openide.windows.InputOutput;
  */
 public class JaCoCoReportAnalyzer {
 
-    private static Color CONSOLE_COVERED = new Color(44, 126, 0);
+    private static final String DEF_ENCODING = "UTF-8";
 
-    private static Color CONSOLE_PARTIALLY_COVERED = new Color(186, 93, 0);
+    private static final Color CONSOLE_COVERED = new Color(44, 126, 0);
 
-    private static Color CONSOLE_NOT_COVERED = new Color(199, 0, 1);
+    private static final Color CONSOLE_PARTIALLY_COVERED = new Color(186, 93, 0);
+
+    private static final Color CONSOLE_NOT_COVERED = new Color(199, 0, 1);
 
     private JaCoCoReportAnalyzer() {
     }
@@ -67,12 +72,12 @@ public class JaCoCoReportAnalyzer {
         CoverageBuilder coverageBuilder = new CoverageBuilder();
         Analyzer analyzer = new Analyzer(executionDataStore, coverageBuilder);
         analyzer.analyzeAll(prjClassesDir);
-        IBundleCoverage bundleCoverage = coverageBuilder.getBundle("JaCoCoverage analysis, powered by JaCoCo");
+        IBundleCoverage bundleCoverage = coverageBuilder.getBundle("JaCoCoverage analysis (powered by JaCoCo from EclEmma)");
         XMLFormatter xmlformatter = new XMLFormatter();
-        xmlformatter.setOutputEncoding("UTF-8");
+        xmlformatter.setOutputEncoding(DEF_ENCODING);
         IReportVisitor visitor = xmlformatter.createVisitor(new FileOutputStream(xmlreport));
         visitor.visitInfo(sessionInfoStore.getInfos(), executionDataStore.getContents());
-        visitor.visitBundle(bundleCoverage, new DirectorySourceFileLocator(prjSourcesDir, "UTF-8", 4));
+        visitor.visitBundle(bundleCoverage, new DirectorySourceFileLocator(prjSourcesDir, DEF_ENCODING, 4));
         visitor.visitEnd();
     }
 
@@ -83,14 +88,16 @@ public class JaCoCoReportAnalyzer {
      * @param tabName the name of the NetBeans console tab to open.
      * @return the textual report.
      */
-    public static void toConsoleReport(List<JavaClass> coverageData, String tabName)
+    public static void toConsoleReport(Map<String, JavaClass> coverageData, String tabName)
             throws IOException {
         InputOutput io = IOProvider.getDefault().getIO(tabName, false);
         try {
             io.getOut().reset();
             IOColorPrint.print(io, "=== JaCoCoverage report (powered by JaCoCo from EclEmma) ===\n", Color.GRAY);
             IOColorPrint.print(io, "Covered | Partially covered | Not covered | Java Class\n\n", Color.GRAY);
-            for (JavaClass jclass : coverageData) {
+            List<JavaClass> sortedClasses = new ArrayList<JavaClass>(coverageData.values());
+            Collections.sort(sortedClasses);
+            for (JavaClass jclass : sortedClasses) {
                 IOColorPrint.print(io, String.format("%5s", jclass.getCoveredLines().size()), CONSOLE_COVERED);
                 IOColorPrint.print(io, " " + String.format("%5s", jclass.getPartiallyCoveredLines().size()), CONSOLE_PARTIALLY_COVERED);
                 IOColorPrint.print(io, " " + String.format("%5s", jclass.getNotCoveredLines().size()), CONSOLE_NOT_COVERED);
