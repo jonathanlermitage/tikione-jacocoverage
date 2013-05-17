@@ -4,9 +4,12 @@ import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageStateEnum;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.regex.Pattern;
 import javax.swing.text.StyledDocument;
 import org.netbeans.api.java.classpath.GlobalPathRegistry;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectUtils;
 import org.openide.cookies.EditorCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -42,6 +46,23 @@ public class Utils {
     private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
 
     private Utils() {
+    }
+
+    /**
+     * Launche the default browser to display an URI.
+     *
+     * @param uri the URI to display.
+     */
+    public static void extBrowser(String uri) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI(uri));
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            } catch (URISyntaxException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
     }
 
     /**
@@ -251,6 +272,16 @@ public class Utils {
      */
     public static String getProjectDir(Project project) {
         return FileUtil.getFileDisplayName(project.getProjectDirectory());
+    }
+
+    /**
+     * Get the name of a project.
+     *
+     * @param project the project.
+     * @return the project's name.
+     */
+    public static String getProjectName(Project project) {
+        return ProjectUtils.getInformation(project).getName();
     }
 
     /**

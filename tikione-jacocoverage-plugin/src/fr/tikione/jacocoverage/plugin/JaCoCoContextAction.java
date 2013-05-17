@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.prefs.Preferences;
@@ -21,12 +22,14 @@ import org.netbeans.api.project.Project;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.DynamicMenuContent;
+import org.openide.awt.HtmlBrowser;
 import org.openide.execution.ExecutorTask;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
+import org.openide.util.Utilities;
 import org.xml.sax.SAXException;
 
 /**
@@ -68,8 +71,10 @@ public abstract class JaCoCoContextAction extends AbstractAction {
             Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
             final boolean enblHighlight = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
             final boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
+            final boolean enblHtmlReport = pref.getBoolean(Globals.PROP_ENABLE_HTML_REPORT, Globals.DEF_ENABLE_HTML_REPORT);
+            final boolean openHtmlReport = pref.getBoolean(Globals.PROP_AUTOOPEN_HTML_REPORT, Globals.DEF_AUTOOPEN_HTML_REPORT);
 
-            if (enblHighlight || enblConsoleReport) {
+            if (enblHighlight || enblConsoleReport || enblHtmlReport) {
                 // Retrieve project properties.
                 FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
                 final Properties prjProps = new Properties();
@@ -122,11 +127,27 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                     JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                     final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                                    // Remove existing highlighting (from a previous coverage task), show a report in the NetBeans
-                                    // console and apply highlighting on each Java source file.
+                                    // Remove existing highlighting (from a previous coverage task), show reports and apply
+                                    // highlighting on each Java source file.
                                     AbstractCoverageAnnotation.removeAll(getProjectId(project));
                                     if (enblConsoleReport) {
                                         JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
+                                    }
+                                    File reportdir = new File(prjDir + Globals.DEF_HTML_REPORT_DIR);
+                                    if (reportdir.exists()) {
+                                        org.apache.commons.io.FileUtils.deleteDirectory(reportdir);
+                                    }
+                                    if (enblHtmlReport) {
+                                        reportdir.mkdirs();
+                                        String prjname = Utils.getProjectName(project);
+                                        String report = JaCoCoReportAnalyzer.toHtmlReport(binreport, reportdir, classDir, srcDir, prjname);
+                                        if (openHtmlReport) {
+                                            try {
+                                                HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
+                                            } catch (MalformedURLException ex) {
+                                                Exceptions.printStackTrace(ex);
+                                            }
+                                        }
                                     }
                                     if (enblHighlight) {
                                         for (final JavaClass jclass : coverageData.values()) {
