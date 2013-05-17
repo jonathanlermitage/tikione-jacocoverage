@@ -17,7 +17,9 @@ import org.jacoco.core.data.ExecutionDataReader;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.jacoco.core.data.SessionInfoStore;
 import org.jacoco.report.DirectorySourceFileLocator;
+import org.jacoco.report.FileMultiReportOutput;
 import org.jacoco.report.IReportVisitor;
+import org.jacoco.report.html.HTMLFormatter;
 import org.jacoco.report.xml.XMLFormatter;
 import org.openide.windows.IOColorPrint;
 import org.openide.windows.IOProvider;
@@ -25,24 +27,89 @@ import org.openide.windows.InputOutput;
 
 /**
  * JaCoCo reports related utilities.
+ * <br/>See <a href="http://www.eclemma.org/jacoco/trunk/doc/index.html">JaCoCo online documentation</a>.
  *
  * @author Jonathan Lermitage
  */
 public class JaCoCoReportAnalyzer {
 
+    /** Encoding used by JaCoCo. */
     private static final String DEF_ENCODING = "UTF-8";
 
+    /** NetBeans console: color associated to covered instructions. */
     private static final Color CONSOLE_COVERED = new Color(44, 126, 0);
 
+    /** NetBeans console: color associated to partially covered instructions. */
     private static final Color CONSOLE_PARTIALLY_COVERED = new Color(186, 93, 0);
 
+    /** NetBeans console: color associated to not covered instructions. */
     private static final Color CONSOLE_NOT_COVERED = new Color(199, 0, 1);
 
     private JaCoCoReportAnalyzer() {
     }
 
     /**
+     * Connect to a remote JaCoCo Java Agent and collect coverage data. The remote agent has to run in output mode {@code tcpserver}
+     * and request execution data.
+     * <br/>See <a href="http://www.eclemma.org/jacoco/trunk/doc/agent.html">JaCoCo agent configuration</a>.
+     * <br/>See <a href="http://www.eclemma.org/jacoco/trunk/doc/examples/java/ExecutionDataClient.java">TCP client example code</a>.
+     *
+     * @param address coverage agent's TCP address (JaCoCo agent default address is loopback interface, aka localhost).
+     * @param port coverage agent's TCP port (JaCoCo agent default port is 6300).
+     * @param jacocoexec the binary report to dump collected coverage data to.
+     * @param prjClassesDir directory containing project's compiled classes.
+     * @param prjSourcesDir the directory containing project's Java source files.
+     */
+    public static void tcpToBinary(String address, int port, File jacocoexec, File prjClassesDir, File prjSourcesDir) {
+        // TODO dump coverage data from remote agent (scheduled for 1.2.0 or later)
+    }
+
+    /**
+     * Load a JaCoCo binary report and convert it to HTML.
+     * <br/>See <a href="http://www.eclemma.org/jacoco/trunk/doc/examples/java/ReportGenerator.java">report generator example code</a>.
+     *
+     * @param jacocoexec the JaCoCo binary report.
+     * @param reportdir the folder to store HTML report.
+     * @param prjClassesDir the directory containing project's compiled classes.
+     * @param prjSourcesDir the directory containing project's Java source files.
+     * @return the absolute path of HTML report's {@code index.html} file.
+     * @throws FileNotFoundException if the JaCoCo binary report, compiled classes or Java sources files directory can't be found.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static String toHtmlReport(File jacocoexec, File reportdir, File prjClassesDir, File prjSourcesDir, String projectName)
+            throws FileNotFoundException,
+                   IOException {
+        // Load the JaCoCo binary report.
+        FileInputStream fis = new FileInputStream(jacocoexec);
+        ExecutionDataStore executionDataStore = new ExecutionDataStore();
+        SessionInfoStore sessionInfoStore = new SessionInfoStore();
+        try {
+            ExecutionDataReader executionDataReader = new ExecutionDataReader(fis);
+            executionDataReader.setExecutionDataVisitor(executionDataStore);
+            executionDataReader.setSessionInfoVisitor(sessionInfoStore);
+            while (executionDataReader.read()) {
+            }
+        } finally {
+            fis.close();
+        }
+
+        // Convert the binary report to HTML.
+        CoverageBuilder coverageBuilder = new CoverageBuilder();
+        Analyzer analyzer = new Analyzer(executionDataStore, coverageBuilder);
+        analyzer.analyzeAll(prjClassesDir);
+        IBundleCoverage bundleCoverage = coverageBuilder.getBundle("JaCoCoverage analysis of project \"" + projectName
+                + "\" (powered by JaCoCo from EclEmma)");
+        HTMLFormatter htmlformatter = new HTMLFormatter();
+        IReportVisitor visitor = htmlformatter.createVisitor(new FileMultiReportOutput(reportdir));
+        visitor.visitInfo(sessionInfoStore.getInfos(), executionDataStore.getContents());
+        visitor.visitBundle(bundleCoverage, new DirectorySourceFileLocator(prjSourcesDir, DEF_ENCODING, 4));
+        visitor.visitEnd();
+        return new File(reportdir, "index.html").getAbsolutePath();
+    }
+
+    /**
      * Load a JaCoCo binary report and convert it to XML.
+     * <br/>See <a href="http://www.eclemma.org/jacoco/trunk/doc/examples/java/ReportGenerator.java">report generator example code</a>.
      *
      * @param jacocoexec the JaCoCo binary report.
      * @param xmlreport the XML file to generate.
@@ -82,11 +149,10 @@ public class JaCoCoReportAnalyzer {
     }
 
     /**
-     * Load JaCoCo coverage data and show it to the NetBeans console tab.
+     * Load JaCoCo coverage data and show it to a NetBeans console tab.
      *
-     * @param xmlreport the XML report file to load.
+     * @param coverageData the JaCoCo coverage data to show.
      * @param tabName the name of the NetBeans console tab to open.
-     * @return the textual report.
      */
     public static void toConsoleReport(Map<String, JavaClass> coverageData, String tabName)
             throws IOException {
