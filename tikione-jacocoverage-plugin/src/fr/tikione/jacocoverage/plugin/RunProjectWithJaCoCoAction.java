@@ -27,6 +27,7 @@ import org.openide.util.actions.Presenter;
  * Start the "run" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
  * @author Jonathan Lermitage
+ * @author Jan Lahoda (patch https://github.com/jonathanlermitage/tikione-jacocoverage/pull/3)
  */
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.RunProjectWithJaCoCoAction")
