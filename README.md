@@ -18,7 +18,7 @@ don't expect support for older NetBeans versions (too much work and nobody uses 
 * Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage),
 validated by the NetBeans Plugin Review staff and available in the NetBeans integrated Plugins Manager (see ``Tools``, ``Plugins``,
 ``Available Plugins`` and look for the ``TikiOne JaCoCoverage Plugin`` plugin).
-* You can get the latest latest stable development builds by registering the following update center into NetBeans: ``http://jacocoverage.tikione.fr/nbuc/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
+* You can get the latest stable development builds by registering the following update center into NetBeans: ``http://jacocoverage.tikione.fr/nbuc/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
 
 ### Development progression
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Multi-line statements coloring: investigating.
