@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 OpenIDE-Module: fr.tikione.jacocoexec.analyzer/1
 OpenIDE-Module-Localizing-Bundle: fr/tikione/jacocoexec/analyzer/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0.2
+OpenIDE-Module-Specification-Version: 1.1.0.20130516
 
