@@ -180,6 +180,10 @@
                 <package>fr.tikione.jacocoverage.plugin.anno</package>
                 <package>fr.tikione.jacocoverage.plugin.config</package>
             </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/commons-io-2.4.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/commons-io-2.4.jar</binary-origin>
+            </class-path-extension>
         </data>
     </configuration>
 </project>
