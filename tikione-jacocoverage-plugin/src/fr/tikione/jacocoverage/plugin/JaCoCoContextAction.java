@@ -29,11 +29,13 @@ import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
+import org.openide.util.RequestProcessor;
 import org.openide.util.Utilities;
 import org.xml.sax.SAXException;
 
 /**
  * A toolkit that launches Ant tasks with the JaCoCo JavaAgent, colorizes Java source files and shows a coverage report.
+ * <br/>See <a href="http://wiki.netbeans.org/DevFaqRequestProcessor">DevFaqRequestProcessor</a> for NetBeans threading tweaks.
  *
  * @author Jonathan Lermitage
  */
@@ -112,7 +114,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                     // Launch the Ant task with the JaCoCo JavaAgent.
                     final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
 
-                    new Thread(new Runnable() {
+                    new RequestProcessor("JaCoCoverage Coverage Collection Task", 3, true).post(new Runnable() {
                         @Override
                         public void run() {
                             try {
@@ -170,7 +172,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                 Exceptions.printStackTrace(ex);
                             }
                         }
-                    }).start();
+                    });
                 }
             } else {
                 String msg = "Please enable at least one JaCoCoverage feature first (highlighting or reporting).";
