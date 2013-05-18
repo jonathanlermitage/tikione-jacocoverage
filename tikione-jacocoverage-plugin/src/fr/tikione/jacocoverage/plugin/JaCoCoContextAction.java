@@ -68,122 +68,140 @@ public abstract class JaCoCoContextAction extends AbstractAction {
 
     public @Override
     void actionPerformed(ActionEvent ae) {
-        try {
-            // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
-            Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
-            final boolean enblHighlight = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
-            final boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
-            final boolean enblHtmlReport = pref.getBoolean(Globals.PROP_ENABLE_HTML_REPORT, Globals.DEF_ENABLE_HTML_REPORT);
-            final boolean openHtmlReport = pref.getBoolean(Globals.PROP_AUTOOPEN_HTML_REPORT, Globals.DEF_AUTOOPEN_HTML_REPORT);
+        new RequestProcessor("JaCoCoverage Main Task", 3, true).post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
+                    Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
+                    final boolean enblHighlight = pref.getBoolean(
+                            Globals.PROP_ENABLE_HIGHLIGHT,
+                            Globals.DEF_ENABLE_HIGHLIGHT);
+                    final boolean enblConsoleReport = pref.getBoolean(
+                            Globals.PROP_ENABLE_CONSOLE_REPORT,
+                            Globals.DEF_ENABLE_CONSOLE_REPORT);
+                    final boolean enblHtmlReport = pref.getBoolean(
+                            Globals.PROP_ENABLE_HTML_REPORT,
+                            Globals.DEF_ENABLE_HTML_REPORT);
+                    final boolean openHtmlReport = pref.getBoolean(
+                            Globals.PROP_AUTOOPEN_HTML_REPORT,
+                            Globals.DEF_AUTOOPEN_HTML_REPORT);
 
-            if (enblHighlight || enblConsoleReport || enblHtmlReport) {
-                // Retrieve project properties.
-                FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
-                final Properties prjProps = new Properties();
-                prjProps.load(prjPropsFo.getInputStream());
+                    if (enblHighlight || enblConsoleReport || enblHtmlReport) {
+                        // Retrieve project properties.
+                        FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
+                        final Properties prjProps = new Properties();
+                        prjProps.load(prjPropsFo.getInputStream());
 
-                final File xmlreport = Utils.getJacocoXmlReportfile(project);
-                final File binreport = Utils.getJacocoBinReportFile(project);
-                if (binreport.exists() && !binreport.delete() || xmlreport.exists() && !xmlreport.delete()) {
-                    String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
-                            + binreport.getAbsolutePath() + " and/or\n"
-                            + xmlreport.getAbsolutePath();
-                    NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
-                    DialogDisplayer.getDefault().notify(nd);
-                } else {
-                    // Apply JaCoCo JavaAgent customization.
-                    String antTaskJavaagentParam = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
-                            .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                            .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
+                        final File xmlreport = Utils.getJacocoXmlReportfile(project);
+                        final File binreport = Utils.getJacocoBinReportFile(project);
+                        if (binreport.exists() && !binreport.delete() || xmlreport.exists() && !xmlreport.delete()) {
+                            String msg = "Cannot delete the previous JaCoCo report files, please delete them manually:\n"
+                                    + binreport.getAbsolutePath() + " and/or\n"
+                                    + xmlreport.getAbsolutePath();
+                            NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
+                            DialogDisplayer.getDefault().notify(nd);
+                        } else {
+                            // Apply JaCoCo JavaAgent customization.
+                            String antTaskJavaagentParam = pref.get(
+                                    Globals.PROP_TEST_ANT_TASK_JAVAAGENT,
+                                    Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
+                                    .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
+                                    .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
 
-                    FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
-                    DataObject dataObj = DataObject.find(scriptToExecute);
-                    AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
+                            FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
+                            DataObject dataObj = DataObject.find(scriptToExecute);
+                            AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
 
-                    AntTargetExecutor.Env env = new AntTargetExecutor.Env();
-                    AntTargetExecutor executor = AntTargetExecutor.createTargetExecutor(env);
+                            AntTargetExecutor.Env env = new AntTargetExecutor.Env();
+                            AntTargetExecutor executor = AntTargetExecutor.createTargetExecutor(env);
 
-                    // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
-                    // appended to the existing list of JVM arguments that is given to the Ant task.
-                    Properties targetProps = env.getProperties();
-                    targetProps.putAll(addAntTargetProps);
-                    String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
-                    targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
-                    env.setProperties(targetProps);
+                            // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
+                            // appended to the existing list of JVM arguments that is given to the Ant task.
+                            Properties targetProps = env.getProperties();
+                            targetProps.putAll(addAntTargetProps);
+                            String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
+                            targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
+                            env.setProperties(targetProps);
 
-                    // Launch the Ant task with the JaCoCo JavaAgent.
-                    final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
+                            // Launch the Ant task with the JaCoCo JavaAgent.
+                            final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
 
-                    new RequestProcessor("JaCoCoverage Coverage Collection Task", 3, true).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
-                                // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
-                                // object provided by the NetBeans platform is not correctly wrapped.
-                                if (0 == execute.result() && binreport.exists()) {
-                                    // Load the generated JaCoCo coverage report.
-                                    String prjDir = Utils.getProjectDir(project) + File.separator;
-                                    File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
-                                    File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-                                    JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
-                                    final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
+                            new RequestProcessor("JaCoCoverage Coverage Collection Task", 3, true).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
+                                        // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
+                                        // object provided by the NetBeans platform is not correctly wrapped.
+                                        if (0 == execute.result() && binreport.exists()) {
+                                            // Load the generated JaCoCo coverage report.
+                                            String prjDir = Utils.getProjectDir(project) + File.separator;
+                                            File classDir = new File(
+                                                    prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                                            File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
+                                            JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
+                                            final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 
-                                    // Remove existing highlighting (from a previous coverage task), show reports and apply
-                                    // highlighting on each Java source file.
-                                    AbstractCoverageAnnotation.removeAll(getProjectId(project));
-                                    if (enblConsoleReport) {
-                                        JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
-                                    }
-                                    File reportdir = new File(prjDir + Globals.DEF_HTML_REPORT_DIR);
-                                    if (reportdir.exists()) {
-                                        org.apache.commons.io.FileUtils.deleteDirectory(reportdir);
-                                    }
-                                    if (enblHtmlReport) {
-                                        reportdir.mkdirs();
-                                        String prjname = Utils.getProjectName(project);
-                                        String report = JaCoCoReportAnalyzer.toHtmlReport(binreport, reportdir, classDir, srcDir, prjname);
-                                        if (openHtmlReport) {
-                                            try {
-                                                HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
-                                            } catch (MalformedURLException ex) {
-                                                Exceptions.printStackTrace(ex);
+                                            // Remove existing highlighting (from a previous coverage task), show reports and apply
+                                            // highlighting on each Java source file.
+                                            AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                                            if (enblConsoleReport) {
+                                                JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
                                             }
+                                            File reportdir = new File(prjDir + Globals.DEF_HTML_REPORT_DIR);
+                                            if (reportdir.exists()) {
+                                                org.apache.commons.io.FileUtils.deleteDirectory(reportdir);
+                                            }
+                                            if (enblHtmlReport) {
+                                                reportdir.mkdirs();
+                                                String prjname = Utils.getProjectName(project);
+                                                String report = JaCoCoReportAnalyzer.toHtmlReport(
+                                                        binreport, reportdir, classDir, srcDir, prjname);
+                                                if (openHtmlReport) {
+                                                    try {
+                                                        HtmlBrowser.URLDisplayer.getDefault().showURL(
+                                                                Utilities.toURI(new File(report)).toURL());
+                                                    } catch (MalformedURLException ex) {
+                                                        Exceptions.printStackTrace(ex);
+                                                    }
+                                                }
+                                            }
+                                            if (enblHighlight) {
+                                                for (final JavaClass jclass : coverageData.values()) {
+                                                    Utils.colorDoc(project, jclass);
+                                                }
+                                            }
+                                            xmlreport.delete();
+                                            binreport.delete();
+                                        } else {
+                                            AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                                            Utils.closeJaCoCoConsoleReport(Globals.TXTREPORT_TABNAME);
                                         }
+                                    } catch (FileNotFoundException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (IOException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (ParserConfigurationException ex) {
+                                        Exceptions.printStackTrace(ex);
+                                    } catch (SAXException ex) {
+                                        Exceptions.printStackTrace(ex);
                                     }
-                                    if (enblHighlight) {
-                                        for (final JavaClass jclass : coverageData.values()) {
-                                            Utils.colorDoc(project, jclass);
-                                        }
-                                    }
-                                    xmlreport.delete();
-                                    binreport.delete();
-                                } else {
-                                    AbstractCoverageAnnotation.removeAll(getProjectId(project));
-                                    Utils.closeJaCoCoConsoleReport(Globals.TXTREPORT_TABNAME);
                                 }
-                            } catch (FileNotFoundException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (IOException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (ParserConfigurationException ex) {
-                                Exceptions.printStackTrace(ex);
-                            } catch (SAXException ex) {
-                                Exceptions.printStackTrace(ex);
-                            }
+                            });
                         }
-                    });
+                    } else {
+                        String msg = "Please enable at least one JaCoCoverage feature first (highlighting or reporting).";
+                        NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
+                        DialogDisplayer.getDefault().notify(nd);
+                    }
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                } catch (IllegalArgumentException ex) {
+                    Exceptions.printStackTrace(ex);
                 }
-            } else {
-                String msg = "Please enable at least one JaCoCoverage feature first (highlighting or reporting).";
-                NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.ERROR_MESSAGE);
-                DialogDisplayer.getDefault().notify(nd);
             }
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        } catch (IllegalArgumentException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        });
     }
 
     public Project getProject() {
