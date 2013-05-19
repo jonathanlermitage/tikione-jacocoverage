@@ -3,7 +3,6 @@ package fr.tikione.jacocoverage.plugin;
 import fr.tikione.jacocoexec.analyzer.JaCoCoReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
-import static fr.tikione.jacocoverage.plugin.Utils.getProjectId;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
@@ -106,8 +105,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                             String antTaskJavaagentParam = pref.get(
                                     Globals.PROP_TEST_ANT_TASK_JAVAAGENT,
                                     Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
-                                    .replace("{pathOfJacocoagentJar}", Utils.getJacocoAgentJar().getAbsolutePath())
-                                    .replace("{appPackages}", Utils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
+                                    .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
+                                    .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
 
                             FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                             DataObject dataObj = DataObject.find(scriptToExecute);
@@ -136,7 +135,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         // object provided by the NetBeans platform is not correctly wrapped.
                                         if (0 == execute.result() && binreport.exists()) {
                                             // Load the generated JaCoCo coverage report.
-                                            String prjDir = Utils.getProjectDir(project) + File.separator;
+                                            String prjDir = NBUtils.getProjectDir(project) + File.separator;
                                             File classDir = new File(
                                                     prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
                                             File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
@@ -145,8 +144,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
 
                                             // Remove existing highlighting (from a previous coverage task), show reports and apply
                                             // highlighting on each Java source file.
-                                            AbstractCoverageAnnotation.removeAll(getProjectId(project));
-                                            String prjname = Utils.getProjectName(project);
+                                            AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
+                                            String prjname = NBUtils.getProjectName(project);
                                             if (enblConsoleReport) {
                                                 JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME);
                                             }
@@ -169,14 +168,14 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             }
                                             if (enblHighlight) {
                                                 for (final JavaClass jclass : coverageData.values()) {
-                                                    Utils.colorDoc(project, jclass);
+                                                    NBUtils.colorDoc(project, jclass);
                                                 }
                                             }
                                             xmlreport.delete();
                                             binreport.delete();
                                         } else {
-                                            AbstractCoverageAnnotation.removeAll(getProjectId(project));
-                                            Utils.closeJaCoCoConsoleReport(Globals.TXTREPORT_TABNAME);
+                                            AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
+                                            NBUtils.closeConsoleTab(Globals.TXTREPORT_TABNAME);
                                         }
                                     } catch (FileNotFoundException ex) {
                                         Exceptions.printStackTrace(ex);

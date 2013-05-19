@@ -1,11 +1,10 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.prefs.Preferences;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -14,9 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import org.openide.awt.HtmlBrowser.URLDisplayer;
 import org.openide.awt.Mnemonics;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
@@ -214,7 +211,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonResoreDefaults)
@@ -238,43 +235,23 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jButtonSocialTwitterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialTwitterActionPerformed
-        try {
-            URLDisplayer.getDefault().showURL(new URL("https://twitter.com/JLermitage"));
-        } catch (MalformedURLException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        NBUtils.extBrowser("https://twitter.com/JLermitage");
     }//GEN-LAST:event_jButtonSocialTwitterActionPerformed
 
     private void jButtonSocialFacebookActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialFacebookActionPerformed
-        try {
-            URLDisplayer.getDefault().showURL(new URL("https://www.facebook.com/jonathan.lermitage"));
-        } catch (MalformedURLException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        NBUtils.extBrowser("https://www.facebook.com/jonathan.lermitage");
     }//GEN-LAST:event_jButtonSocialFacebookActionPerformed
 
     private void jButtonSocialGithubActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialGithubActionPerformed
-        try {
-            URLDisplayer.getDefault().showURL(new URL("https://github.com/jonathanlermitage"));
-        } catch (MalformedURLException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        NBUtils.extBrowser("https://github.com/jonathanlermitage");
     }//GEN-LAST:event_jButtonSocialGithubActionPerformed
 
     private void jButtonOnlineHelpActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonOnlineHelpActionPerformed
-        try {
-            URLDisplayer.getDefault().showURL(new URL("http://jacocoverage.tikione.fr/redirect/help/"));
-        } catch (MalformedURLException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        NBUtils.extBrowser("http://jacocoverage.tikione.fr/redirect/help/");
     }//GEN-LAST:event_jButtonOnlineHelpActionPerformed
 
     private void jButtonSocialJojohomeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialJojohomeActionPerformed
-        try {
-            URLDisplayer.getDefault().showURL(new URL("http://netbeanscolors.org"));
-        } catch (MalformedURLException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        NBUtils.extBrowser("http://netbeanscolors.org");
     }//GEN-LAST:event_jButtonSocialJojohomeActionPerformed
 
     private void jCheckBoxEnableHtmlReportActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEnableHtmlReportActionPerformed
