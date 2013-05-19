@@ -146,8 +146,9 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             // Remove existing highlighting (from a previous coverage task), show reports and apply
                                             // highlighting on each Java source file.
                                             AbstractCoverageAnnotation.removeAll(getProjectId(project));
+                                            String prjname = Utils.getProjectName(project);
                                             if (enblConsoleReport) {
-                                                JaCoCoReportAnalyzer.toConsoleReport(coverageData, Globals.TXTREPORT_TABNAME);
+                                                JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME);
                                             }
                                             File reportdir = new File(prjDir + Globals.DEF_HTML_REPORT_DIR);
                                             if (reportdir.exists()) {
@@ -155,7 +156,6 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             }
                                             if (enblHtmlReport) {
                                                 reportdir.mkdirs();
-                                                String prjname = Utils.getProjectName(project);
                                                 String report = JaCoCoReportAnalyzer.toHtmlReport(
                                                         binreport, reportdir, classDir, srcDir, prjname);
                                                 if (openHtmlReport) {

@@ -19,7 +19,7 @@ public class Globals {
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
-    public static final String TXTREPORT_TABNAME = "JaCoCoverage Report";
+    public static final String TXTREPORT_TABNAME = " (jacocoverage report)";
 
     /** User preference: customization of the JavaAgent passed to the Ant task. */
     public static final String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";

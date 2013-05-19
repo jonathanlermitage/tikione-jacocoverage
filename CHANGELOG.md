@@ -1,11 +1,12 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Version 1.2.0.20130518 (2013-05-18)
+### Latest Development Version 1.2.0.20130519 (2013-05-19)
 * stabilization and optimization: JaCoCoverage task now runs with a RequestProcessor limited to 3 maximum threads.
 * added support of detailed JaCoCo HTML reports.
 * updated coverage colors (they are now based on JaCoCo HTML reports).
 * configuration panel: removed unused options.
 * configuration panel: added social icons and a link to the online help.
+* some minor UI improvements.
 
 ### Version 1.1.1 (2013-05-06)
 * integrated Jan Lahoda's [patch](https://github.com/jonathanlermitage/tikione-jacocoverage/pull/3) (preventing NPE when right-clicking on a project that does not have nbproject/project.properties).
