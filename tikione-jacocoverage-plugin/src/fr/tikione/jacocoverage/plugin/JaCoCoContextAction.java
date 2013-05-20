@@ -4,6 +4,7 @@ import fr.tikione.jacocoexec.analyzer.JaCoCoReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
+import fr.tikione.jacocoverage.plugin.config.Config;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -12,7 +13,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Properties;
-import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.tools.ant.module.api.AntProjectCookie;
@@ -27,7 +27,6 @@ import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
-import org.openide.util.NbPreferences;
 import org.openide.util.RequestProcessor;
 import org.openide.util.Utilities;
 import org.xml.sax.SAXException;
@@ -71,20 +70,11 @@ public abstract class JaCoCoContextAction extends AbstractAction {
             @Override
             public void run() {
                 try {
-                    // Retrieve JaCoCoverage preferences. They contains coloration and JaCoCo JavaAgent customizations.
-                    Preferences pref = NbPreferences.forModule(JaCoCoContextAction.class);
-                    final boolean enblHighlight = pref.getBoolean(
-                            Globals.PROP_ENABLE_HIGHLIGHT,
-                            Globals.DEF_ENABLE_HIGHLIGHT);
-                    final boolean enblConsoleReport = pref.getBoolean(
-                            Globals.PROP_ENABLE_CONSOLE_REPORT,
-                            Globals.DEF_ENABLE_CONSOLE_REPORT);
-                    final boolean enblHtmlReport = pref.getBoolean(
-                            Globals.PROP_ENABLE_HTML_REPORT,
-                            Globals.DEF_ENABLE_HTML_REPORT);
-                    final boolean openHtmlReport = pref.getBoolean(
-                            Globals.PROP_AUTOOPEN_HTML_REPORT,
-                            Globals.DEF_AUTOOPEN_HTML_REPORT);
+                    // Retrieve JaCoCoverage preferences.
+                    final boolean enblHighlight = Config.isEnblHighlighting();
+                    final boolean enblConsoleReport = Config.isEnblConsoleReport();
+                    final boolean enblHtmlReport = Config.isEnblHtmlReport();
+                    final boolean openHtmlReport = Config.isOpenHtmlReport();
 
                     if (enblHighlight || enblConsoleReport || enblHtmlReport) {
                         // Retrieve project properties.
@@ -102,9 +92,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                             DialogDisplayer.getDefault().notify(nd);
                         } else {
                             // Apply JaCoCo JavaAgent customization.
-                            String antTaskJavaagentParam = pref.get(
-                                    Globals.PROP_TEST_ANT_TASK_JAVAAGENT,
-                                    Globals.DEF_TEST_ANT_TASK_JAVAAGENT)
+                            String antTaskJavaagentParam = Config.getAntTaskJavaagentArg()
                                     .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
                                     .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
 
