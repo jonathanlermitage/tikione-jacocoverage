@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.prefs.Preferences;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import org.openide.awt.Mnemonics;
 import org.openide.util.NbBundle;
-import org.openide.util.NbPreferences;
 
 /**
  * JaCoCoverage configuration panel.
@@ -211,7 +209,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonResoreDefaults)
@@ -260,28 +258,24 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     /** Load user preferences and configure UI. */
     void load() {
-        Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        String antTaskJavaagent = pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
-        boolean enblHighlighting = pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHT, Globals.DEF_ENABLE_HIGHLIGHT);
-        boolean enblConsoleReport = pref.getBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, Globals.DEF_ENABLE_CONSOLE_REPORT);
-        boolean enblHtmlReport = pref.getBoolean(Globals.PROP_ENABLE_HTML_REPORT, Globals.DEF_ENABLE_HTML_REPORT);
-        boolean openHtmlReport = pref.getBoolean(Globals.PROP_AUTOOPEN_HTML_REPORT, Globals.DEF_AUTOOPEN_HTML_REPORT);
-        jTextFieldAntTaskParams.setText(antTaskJavaagent);
-        jCheckBoxEnableHighlighting.setSelected(enblHighlighting);
-        jCheckBoxEnableConsoleReport.setSelected(enblConsoleReport);
-        jCheckBoxEnableHtmlReport.setSelected(enblHtmlReport);
-        jCheckBoxOpenHtmlReport.setSelected(openHtmlReport);
+        Config.sync();
+        jTextFieldAntTaskParams.setText(Config.getAntTaskJavaagentArg());
+        jCheckBoxEnableHighlighting.setSelected(Config.isEnblHighlighting());
+        jCheckBoxEnableConsoleReport.setSelected(Config.isEnblConsoleReport());
+        jCheckBoxEnableHtmlReport.setSelected(Config.isEnblHtmlReport());
+        jCheckBoxOpenHtmlReport.setSelected(Config.isOpenHtmlReport());
         jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
+
     }
 
     /** Store configuration to user preferences. */
     void store() {
-        Preferences pref = NbPreferences.forModule(JaCoCoveragePanel.class);
-        pref.put(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, jTextFieldAntTaskParams.getText());
-        pref.putBoolean(Globals.PROP_ENABLE_HIGHLIGHT, jCheckBoxEnableHighlighting.isSelected());
-        pref.putBoolean(Globals.PROP_ENABLE_CONSOLE_REPORT, jCheckBoxEnableConsoleReport.isSelected());
-        pref.putBoolean(Globals.PROP_ENABLE_HTML_REPORT, jCheckBoxEnableHtmlReport.isSelected());
-        pref.putBoolean(Globals.PROP_AUTOOPEN_HTML_REPORT, jCheckBoxOpenHtmlReport.isSelected());
+        Config.setAntTaskJavaagentArg(jTextFieldAntTaskParams.getText());
+        Config.setEnblConsoleReport(jCheckBoxEnableConsoleReport.isSelected());
+        Config.setEnblHighlighting(jCheckBoxEnableHighlighting.isSelected());
+        Config.setEnblHtmlReport(jCheckBoxEnableHtmlReport.isSelected());
+        Config.setOpenHtmlReport(jCheckBoxOpenHtmlReport.isSelected());
+        Config.flush();
     }
 
     boolean valid() {
