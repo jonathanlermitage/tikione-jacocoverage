@@ -36,7 +36,7 @@ public class Globals {
     /** User preference: automatically open generated complete HTML JaCoCo report. */
     public static final String PROP_AUTOOPEN_HTML_REPORT = "JaCoCoverage.Html.AutoOpenReport";
 
-    /** Default configuration value: the JavaAgent passed to the Ant task. */
+    /** Default configuration value: the JavaAgent arguments passed to the Ant task. */
     public static final String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
 
     /** Default configuration value: enable code highlighting. */
