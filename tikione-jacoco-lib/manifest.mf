@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 OpenIDE-Module: fr.tikione.jacoco.lib/1
 OpenIDE-Module-Layer: fr/tikione/jacoco/lib/layer.xml
 OpenIDE-Module-Localizing-Bundle: fr/tikione/jacoco/lib/Bundle.properties
-OpenIDE-Module-Specification-Version: 0.6.2.20130520.440
+OpenIDE-Module-Specification-Version: 0.6.2.20130523.320
 
