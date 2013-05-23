@@ -164,14 +164,14 @@ public class JaCoCoReportAnalyzer {
             List<JavaClass> sortedClasses = new ArrayList<JavaClass>(coverageData.values());
             Collections.sort(sortedClasses);
             for (JavaClass jclass : sortedClasses) {
-                IOColorPrint.print(io, String.format("%5s", jclass.getCoveredLines().size()), CONSOLE_COVERED);
-                IOColorPrint.print(io, " " + String.format("%5s", jclass.getPartiallyCoveredLines().size()), CONSOLE_PARTIALLY_COVERED);
-                IOColorPrint.print(io, " " + String.format("%5s", jclass.getNotCoveredLines().size()), CONSOLE_NOT_COVERED);
+                IOColorPrint.print(io, String.format("%5s", jclass.getNbCoveredLines()), CONSOLE_COVERED);
+                IOColorPrint.print(io, " " + String.format("%5s", jclass.getNbPartiallyCoveredLines()), CONSOLE_PARTIALLY_COVERED);
+                IOColorPrint.print(io, " " + String.format("%5s", jclass.getNbNotCoveredLines()), CONSOLE_NOT_COVERED);
                 Color classCovColor;
                 io.getOut().print("    " + jclass.getPackageName());
-                boolean existCL = !jclass.getCoveredLines().isEmpty();
-                boolean existPCL = !jclass.getPartiallyCoveredLines().isEmpty();
-                boolean existNCL = !jclass.getNotCoveredLines().isEmpty();
+                boolean existCL = jclass.getNbCoveredLines() > 0;
+                boolean existPCL = jclass.getNbPartiallyCoveredLines() > 0;
+                boolean existNCL = jclass.getNbNotCoveredLines() > 0;
                 if (existCL) {
                     if (existNCL || existPCL) {
                         classCovColor = CONSOLE_PARTIALLY_COVERED;
