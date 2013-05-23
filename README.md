@@ -20,6 +20,9 @@ validated by the NetBeans Plugin Review staff and available in the NetBeans inte
 ``Available Plugins`` and look for the ``TikiOne JaCoCoverage Plugin`` plugin).
 * You can get the latest stable development builds by registering the following **Update Center** into NetBeans: ``http://jacocoverage.tikione.fr/nbuc/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
 
+### Known issues
+* In NetBeans Java project's properties, if the ``Run`` / ``Working Directory`` field is used, JaCoCoverage can't configure JaCoCo Agent correctly and coverage collection fails. It may be fixed in a future JaCoCoverage release (but I can't confirm yet).
+
 ### Development progression
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Multi-line statements coloring: investigating.
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Add glyphs in the left margin: under development.
