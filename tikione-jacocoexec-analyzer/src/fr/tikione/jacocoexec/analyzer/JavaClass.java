@@ -1,8 +1,6 @@
 package fr.tikione.jacocoexec.analyzer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,17 +16,20 @@ public class JavaClass implements Comparable<JavaClass> {
     /** The class name (with ".java" extension). */
     private String className;
 
-    /** Indicate which lines or source code are fully covered. */
-    private final List<Integer> coveredLines = new ArrayList<Integer>(64);
-
-    /** Indicate which lines or source code are partially covered. */
-    private final List<Integer> partiallyCoveredLines = new ArrayList<Integer>(32);
-
-    /** Indicate which lines or source code are not covered. */
-    private final List<Integer> notCoveredLines = new ArrayList<Integer>(32);
+    /** Indicate the coverage state of classe's instructions. */
+    private final Map<Integer, CoverageStateEnum> coverage = new HashMap<Integer, CoverageStateEnum>(256);
 
     /** Indicate the coverage state of classe's methods declarations. */
     private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(24);
+
+    /** Number of covered lines. */
+    private int nbCoveredLines = 0;
+
+    /** Number of partially covered lines. */
+    private int nbPartiallyCoveredLines = 0;
+
+    /** Number of not covered lines. */
+    private int nbNotCoveredLines = 0;
 
     /**
      * Describe a Java class. Coverage data will be added later.
@@ -42,15 +43,18 @@ public class JavaClass implements Comparable<JavaClass> {
     }
 
     public void addCoveredLine(int lineNumber) {
-        coveredLines.add(lineNumber);
+        coverage.put(lineNumber, CoverageStateEnum.COVERED);
+        nbCoveredLines++;
     }
 
     public void addPartiallyCoveredLine(int lineNumber) {
-        partiallyCoveredLines.add(lineNumber);
+        coverage.put(lineNumber, CoverageStateEnum.PARTIALLY_COVERED);
+        nbPartiallyCoveredLines++;
     }
 
     public void addNotCoveredLine(int lineNumber) {
-        notCoveredLines.add(lineNumber);
+        coverage.put(lineNumber, CoverageStateEnum.NOT_COVERED);
+        nbNotCoveredLines++;
     }
 
     public void addMethodCoverage(int lineNumber, CoverageStateEnum coverageState) {
@@ -69,18 +73,22 @@ public class JavaClass implements Comparable<JavaClass> {
         return className;
     }
 
-    public List<Integer> getCoveredLines() {
-        return coveredLines;
+    public Map<Integer, CoverageStateEnum> getCoverage() {
+        return coverage;
     }
 
-    public List<Integer> getPartiallyCoveredLines() {
-        return partiallyCoveredLines;
+    public int getNbCoveredLines() {
+        return nbCoveredLines;
     }
 
-    public List<Integer> getNotCoveredLines() {
-        return notCoveredLines;
+    public int getNbPartiallyCoveredLines() {
+        return nbPartiallyCoveredLines;
     }
 
+    public int getNbNotCoveredLines() {
+        return nbNotCoveredLines;
+    }
+    
     @Override
     public int compareTo(JavaClass o) {
         return (this.getPackageName() + this.getClassName()).compareTo(o.getPackageName() + o.getClassName());
