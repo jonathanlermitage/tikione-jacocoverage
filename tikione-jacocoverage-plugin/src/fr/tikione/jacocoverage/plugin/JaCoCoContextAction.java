@@ -121,7 +121,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
                                         // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
                                         // object provided by the NetBeans platform is not correctly wrapped.
-                                        if (0 == execute.result() && binreport.exists()) {
+                                        int executeRes = execute.result();
+                                        if (0 == executeRes && binreport.exists()) {
                                             // Load the generated JaCoCo coverage report.
                                             String prjDir = NBUtils.getProjectDir(project) + File.separator;
                                             File classDir = new File(
@@ -164,6 +165,10 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         } else {
                                             AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
                                             NBUtils.closeConsoleTab(Globals.TXTREPORT_TABNAME);
+                                            String msg = "Ant Task or JaCoCo Agent failed, JaCoCoverage can't process data.\n"
+                                                    + "(executeRes=" + executeRes + ", binreport.exists=" + binreport.exists() + ")";
+                                            NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.WARNING_MESSAGE);
+                                            DialogDisplayer.getDefault().notify(nd);
                                         }
                                     } catch (FileNotFoundException ex) {
                                         Exceptions.printStackTrace(ex);
