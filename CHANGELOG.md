@@ -1,9 +1,11 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Version 1.2.0.20130519 (2013-05-19)
+### Latest Development Version 1.2.0.20130523 (2013-05-23)
 * stabilization and optimization: JaCoCoverage task now runs with a RequestProcessor limited to 3 maximum threads.
 * added support of detailed JaCoCo HTML reports.
+* added a warning message when Ant Task or JaCoCo Agent fails.
 * updated coverage colors (they are now based on JaCoCo HTML reports).
+* removed duplicated JAR files in JaCoCo Library module.
 * configuration panel: removed unused options.
 * configuration panel: added social icons and a link to the online help.
 * some minor UI improvements.
