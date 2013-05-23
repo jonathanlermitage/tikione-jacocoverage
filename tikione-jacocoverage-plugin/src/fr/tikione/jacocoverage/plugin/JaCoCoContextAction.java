@@ -78,6 +78,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
 
                     if (enblHighlight || enblConsoleReport || enblHtmlReport) {
                         // Retrieve project properties.
+                        final String prjDir = NBUtils.getProjectDir(project) + File.separator;
                         FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
                         final Properties prjProps = new Properties();
                         prjProps.load(prjPropsFo.getInputStream());
@@ -94,7 +95,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                             // Apply JaCoCo JavaAgent customization.
                             String antTaskJavaagentParam = Config.getAntTaskJavaagentArg()
                                     .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
-                                    .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"));
+                                    .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"))
+                                    .replace("destfile=jacoco.exec", "destfile=\"" + prjDir + "jacoco.exec\"");
 
                             FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                             DataObject dataObj = DataObject.find(scriptToExecute);
@@ -124,7 +126,6 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         int executeRes = execute.result();
                                         if (0 == executeRes && binreport.exists()) {
                                             // Load the generated JaCoCo coverage report.
-                                            String prjDir = NBUtils.getProjectDir(project) + File.separator;
                                             File classDir = new File(
                                                     prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
                                             File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);

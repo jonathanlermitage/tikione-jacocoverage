@@ -2,6 +2,7 @@
 
 ### Latest Development Version 1.2.0.20130523 (2013-05-23)
 * stabilization and optimization: JaCoCoverage task now runs with a RequestProcessor limited to 3 maximum threads.
+* fixed a bug: jacoco.exec file was generated into the default dist folder, not the project's root.
 * added support of detailed JaCoCo HTML reports.
 * added a warning message when Ant Task or JaCoCo Agent fails.
 * updated coverage colors (they are now based on JaCoCo HTML reports).
