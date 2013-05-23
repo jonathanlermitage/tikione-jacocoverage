@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import javax.swing.text.StyledDocument;
@@ -72,35 +73,26 @@ public class NBUtils {
                             int startLine = 0;
                             int endLine = NbDocument.findLineNumber(doc, doc.getLength());
                             Line.Set lineset = editorCookie.getLineSet();
-                            for (int covIdx : jclass.getCoveredLines()) {
+                            Map<Integer, fr.tikione.jacocoexec.analyzer.CoverageStateEnum> coverage = jclass.getCoverage();
+                            for (int covIdx : coverage.keySet()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
+                                    CoverageStateEnum coverageState;
+                                    switch (coverage.get(covIdx)) {
+                                        case COVERED:
+                                            coverageState = CoverageStateEnum.COVERED;
+                                            break;
+                                        case NOT_COVERED:
+                                            coverageState = CoverageStateEnum.NOT_COVERED;
+                                            break;
+                                        case PARTIALLY_COVERED:
+                                            coverageState = CoverageStateEnum.PARTIALLY_COVERED;
+                                            break;
+                                        default:
+                                            coverageState = CoverageStateEnum.COVERED;
+                                    }
                                     AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.COVERED,
-                                            prjId,
-                                            jclass.getPackageName() + jclass.getClassName(),
-                                            covIdx);
-                                    annotation.attach(line);
-                                    line.addPropertyChangeListener(annotation);
-                                }
-                            }
-                            for (int covIdx : jclass.getPartiallyCoveredLines()) {
-                                if (covIdx >= startLine && covIdx <= endLine) {
-                                    Line line = lineset.getOriginal(covIdx);
-                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.PARTIALLY_COVERED,
-                                            prjId,
-                                            jclass.getPackageName() + jclass.getClassName(),
-                                            covIdx);
-                                    annotation.attach(line);
-                                    line.addPropertyChangeListener(annotation);
-                                }
-                            }
-                            for (int covIdx : jclass.getNotCoveredLines()) {
-                                if (covIdx >= startLine && covIdx <= endLine) {
-                                    Line line = lineset.getOriginal(covIdx);
-                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            CoverageStateEnum.NOT_COVERED,
+                                            coverageState,
                                             prjId,
                                             jclass.getPackageName() + jclass.getClassName(),
                                             covIdx);
@@ -160,7 +152,7 @@ public class NBUtils {
     public static String getProjectDir(Project project) {
         return FileUtil.getFileDisplayName(project.getProjectDirectory());
     }
-    
+
     /**
      * Generate a string representing the project. Two different projects should have different representation.
      *
