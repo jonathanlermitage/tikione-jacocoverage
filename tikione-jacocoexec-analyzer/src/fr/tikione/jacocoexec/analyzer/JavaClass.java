@@ -8,39 +8,38 @@ import java.util.Map;
  *
  * @author Jonathan Lermitage
  */
+@lombok.RequiredArgsConstructor(staticName = "build")
 public class JavaClass implements Comparable<JavaClass> {
 
     /** The package name (with "/" instead of "."). */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.NonNull()
     private String packageName;
 
     /** The class name (with ".java" extension). */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.NonNull()
     private String className;
 
     /** Indicate the coverage state of classe's instructions. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private final Map<Integer, CoverageStateEnum> coverage = new HashMap<Integer, CoverageStateEnum>(256);
 
     /** Indicate the coverage state of classe's methods declarations. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(24);
 
     /** Number of covered lines. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private int nbCoveredLines = 0;
 
     /** Number of partially covered lines. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private int nbPartiallyCoveredLines = 0;
 
     /** Number of not covered lines. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private int nbNotCoveredLines = 0;
-
-    /**
-     * Describe a Java class. Coverage data will be added later.
-     *
-     * @param packageName the package name.
-     * @param className the class name.
-     */
-    public JavaClass(String packageName, String className) {
-        this.packageName = packageName;
-        this.className = className;
-    }
 
     public void addCoveredLine(int lineNumber) {
         coverage.put(lineNumber, CoverageStateEnum.COVERED);
@@ -59,34 +58,6 @@ public class JavaClass implements Comparable<JavaClass> {
 
     public void addMethodCoverage(int lineNumber, CoverageStateEnum coverageState) {
         methodCoverage.put(lineNumber, coverageState);
-    }
-
-    public Map<Integer, CoverageStateEnum> getMethodCoverage() {
-        return methodCoverage;
-    }
-    
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public Map<Integer, CoverageStateEnum> getCoverage() {
-        return coverage;
-    }
-
-    public int getNbCoveredLines() {
-        return nbCoveredLines;
-    }
-
-    public int getNbPartiallyCoveredLines() {
-        return nbPartiallyCoveredLines;
-    }
-
-    public int getNbNotCoveredLines() {
-        return nbNotCoveredLines;
     }
     
     @Override

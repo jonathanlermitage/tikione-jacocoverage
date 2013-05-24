@@ -5,68 +5,30 @@ package fr.tikione.jacocoexec.analyzer;
  *
  * @author Jonathan Lermitage
  */
+@lombok.NoArgsConstructor
 public class JavaMethod {
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private CoverageStateEnum coverageState;
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private int instructionsCovered = 0;
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private int instructionsMissed = 0;
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private int linesCovered = 0;
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private int linesMissed = 0;
 
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private String coderageDesc;
-
-    public JavaMethod() {
-    }
-
-    public CoverageStateEnum getCoverageState() {
-        return coverageState;
-    }
-
-    public void setCoverageState(CoverageStateEnum coverageState) {
-        this.coverageState = coverageState;
-    }
-
-    public int getInstructionsCovered() {
-        return instructionsCovered;
-    }
-
-    public void setInstructionsCovered(int instructionsCovered) {
-        this.instructionsCovered = instructionsCovered;
-    }
-
-    public int getInstructionsMissed() {
-        return instructionsMissed;
-    }
-
-    public void setInstructionsMissed(int instructionsMissed) {
-        this.instructionsMissed = instructionsMissed;
-    }
-
-    public int getLinesCovered() {
-        return linesCovered;
-    }
-
-    public void setLinesCovered(int linesCovered) {
-        this.linesCovered = linesCovered;
-    }
-
-    public int getLinesMissed() {
-        return linesMissed;
-    }
-
-    public void setLinesMissed(int linesMissed) {
-        this.linesMissed = linesMissed;
-    }
-
-    public String getCoderageDesc() {
-        return coderageDesc;
-    }
-
-    public void setCoderageDesc(String coderageDesc) {
-        this.coderageDesc = coderageDesc;
-    }
 }
