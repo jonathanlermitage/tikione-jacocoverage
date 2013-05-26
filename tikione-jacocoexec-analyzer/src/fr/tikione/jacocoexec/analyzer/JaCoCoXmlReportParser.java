@@ -23,7 +23,13 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
 
     private String currentPackage = null;
 
+    private JavaMethod currentJavaMethod = null;
+
+    private boolean inMethod = false;
+
     private JavaClass currentJavaClass = null;
+
+    private static String METHOD_COVERAGE_DESC = "Coverage: inst.(%d/%d) lines.(%d/%d)";
 
     /**
      * Extract coverage data from a JaCoCo XML report file.
@@ -111,9 +117,37 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
                 }
             }
         } else if (qName.equalsIgnoreCase("METHOD")) {
-            //
-        } else if (qName.equalsIgnoreCase("COUNTER")) {
-            //
+            inMethod = true;
+            currentJavaMethod = new JavaMethod();
+            for (int idx = 0; idx < attributes.getLength(); idx++) {
+                if (attributes.getQName(idx).equalsIgnoreCase("LINE")) {
+                    currentJavaMethod.setLineNumber(Integer.parseInt(attributes.getValue(idx)) - 1);
+                } else if (attributes.getQName(idx).equalsIgnoreCase("NAME")) {
+                    currentJavaMethod.setName(attributes.getValue(idx));
+                }
+            }
+        } else if (qName.equalsIgnoreCase("COUNTER") && inMethod) {
+            String type = null;
+            int missed = 0;
+            int covered = 0;
+            for (int idx = 0; idx < attributes.getLength(); idx++) {
+                if (attributes.getQName(idx).equalsIgnoreCase("TYPE")) {
+                    type = attributes.getValue(idx);
+                } else if (attributes.getQName(idx).equalsIgnoreCase("MISSED")) {
+                    missed = Integer.parseInt(attributes.getValue(idx));
+                } else if (attributes.getQName(idx).equalsIgnoreCase("COVERED")) {
+                    covered = Integer.parseInt(attributes.getValue(idx));
+                }
+            }
+            if (type != null) {
+                if (type.equalsIgnoreCase("INSTRUCTION")) {
+                    currentJavaMethod.setInstructionsCovered(covered);
+                    currentJavaMethod.setInstructionsMissed(missed);
+                } else if (type.equalsIgnoreCase("LINE")) {
+                    currentJavaMethod.setLinesCovered(covered);
+                    currentJavaMethod.setLinesMissed(missed);
+                }
+            }
         } else if (qName.equalsIgnoreCase("LINE")) {
             int lineNumber = 0;
             int missedInstructions = 0;
@@ -142,12 +176,45 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
             } else {
                 currentJavaClass.addNotCoveredLine(lineNumber);
             }
+            if (missedBranches > 0) {
+                if (coveredBranches > 0) {
+                    currentJavaClass.getCoverageDesc().put(lineNumber, missedBranches + " of " + (missedBranches + coveredBranches)
+                            + " branches missed.");
+                } else {
+                    currentJavaClass.getCoverageDesc().put(lineNumber, "All " + missedBranches + " branches missed.");
+                }
+            } else if (coveredBranches > 0) {
+                currentJavaClass.getCoverageDesc().put(lineNumber, "All " + coveredBranches + " branches covered.");
+            }
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
+        if (qName.equalsIgnoreCase("COUNTER")) {
+            if (!currentJavaMethod.getName().equals("<init>")) {
+                currentJavaMethod.setCoverageDesc(String.format(METHOD_COVERAGE_DESC,
+                        currentJavaMethod.getInstructionsCovered(),
+                        currentJavaMethod.getInstructionsCovered() + currentJavaMethod.getInstructionsMissed(),
+                        currentJavaMethod.getLinesCovered(),
+                        currentJavaMethod.getLinesCovered() + currentJavaMethod.getLinesMissed()));
+                int totalMissed = currentJavaMethod.getInstructionsMissed() + currentJavaMethod.getLinesMissed();
+                int totalCovered = currentJavaMethod.getInstructionsCovered() + currentJavaMethod.getLinesCovered();
+                if (totalMissed > 0) {
+                    if (totalCovered > 0) {
+                        currentJavaMethod.setCoverageState(CoverageStateEnum.PARTIALLY_COVERED);
+                    } else {
+                        currentJavaMethod.setCoverageState(CoverageStateEnum.NOT_COVERED);
+                    }
+                } else {
+                    currentJavaMethod.setCoverageState(CoverageStateEnum.COVERED);
+                }
+                currentJavaClass.addMethodCoverage(currentJavaMethod.getLineNumber(), currentJavaMethod.getCoverageState());
+            }
+        } else if (qName.equalsIgnoreCase("METHOD")) {
+            inMethod = false;
+        }
     }
 
     @Override

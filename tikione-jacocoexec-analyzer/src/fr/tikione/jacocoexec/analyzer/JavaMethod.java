@@ -10,6 +10,10 @@ public class JavaMethod {
 
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
     @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    private String name;
+
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
     private CoverageStateEnum coverageState;
 
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
@@ -30,5 +34,9 @@ public class JavaMethod {
 
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
     @lombok.Setter(lombok.AccessLevel.PUBLIC)
-    private String coderageDesc;
+    private String coverageDesc;
+
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    private int lineNumber;
 }

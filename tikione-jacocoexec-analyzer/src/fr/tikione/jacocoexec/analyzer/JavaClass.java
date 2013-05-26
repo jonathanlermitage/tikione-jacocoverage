@@ -25,6 +25,10 @@ public class JavaClass implements Comparable<JavaClass> {
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private final Map<Integer, CoverageStateEnum> coverage = new HashMap<Integer, CoverageStateEnum>(256);
 
+    /** Indicate the coverage description of classe's instructions. */
+    @lombok.Getter(lombok.AccessLevel.PUBLIC)
+    private final Map<Integer, String> coverageDesc = new HashMap<Integer, String>(256);
+
     /** Indicate the coverage state of classe's methods declarations. */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(24);

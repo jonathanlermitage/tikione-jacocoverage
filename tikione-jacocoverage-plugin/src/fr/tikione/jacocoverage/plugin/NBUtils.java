@@ -3,6 +3,7 @@ package fr.tikione.jacocoverage.plugin;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageAnnotation;
+import fr.tikione.jacocoverage.plugin.anno.CoverageGlyphedAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageStateEnum;
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +75,7 @@ public class NBUtils {
                             int endLine = NbDocument.findLineNumber(doc, doc.getLength());
                             Line.Set lineset = editorCookie.getLineSet();
                             Map<Integer, fr.tikione.jacocoexec.analyzer.CoverageStateEnum> coverage = jclass.getCoverage();
+                            Map<Integer, String> coverageDesc = jclass.getCoverageDesc();
                             for (int covIdx : coverage.keySet()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
@@ -91,11 +93,21 @@ public class NBUtils {
                                         default:
                                             coverageState = CoverageStateEnum.COVERED;
                                     }
-                                    AbstractCoverageAnnotation annotation = new CoverageAnnotation(
-                                            coverageState,
-                                            prjId,
-                                            jclass.getPackageName() + jclass.getClassName(),
-                                            covIdx);
+                                    AbstractCoverageAnnotation annotation;
+                                    if (coverageDesc.containsKey(covIdx)) {
+                                        annotation = new CoverageGlyphedAnnotation(
+                                                coverageState,
+                                                prjId,
+                                                jclass.getPackageName() + jclass.getClassName(),
+                                                covIdx,
+                                                coverageDesc.get(covIdx));
+                                    } else {
+                                        annotation = new CoverageAnnotation(
+                                                coverageState,
+                                                prjId,
+                                                jclass.getPackageName() + jclass.getClassName(),
+                                                covIdx);
+                                    }
                                     annotation.attach(line);
                                     line.addPropertyChangeListener(annotation);
                                 }
