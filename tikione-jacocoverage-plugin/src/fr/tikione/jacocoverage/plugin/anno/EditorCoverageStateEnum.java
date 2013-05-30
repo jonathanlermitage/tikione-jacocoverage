@@ -1,11 +1,11 @@
 package fr.tikione.jacocoverage.plugin.anno;
 
 /**
- * Coverage status.
+ * Coverage status. For integration in NetBeans code editor.
  *
  * @author Jonathan Lermitage
  */
-public enum CoverageStateEnum {
+public enum EditorCoverageStateEnum {
 
     /** Covered. */
     COVERED,

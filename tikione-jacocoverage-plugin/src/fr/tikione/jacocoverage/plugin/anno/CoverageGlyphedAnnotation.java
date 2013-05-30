@@ -9,7 +9,7 @@ public class CoverageGlyphedAnnotation extends CoverageAnnotation {
 
     private final String desc;
 
-    public CoverageGlyphedAnnotation(CoverageStateEnum state, String projectName, String classFullName, Integer lineNum, String desc) {
+    public CoverageGlyphedAnnotation(EditorCoverageStateEnum state, String projectName, String classFullName, Integer lineNum, String desc) {
         super(state, projectName, classFullName, lineNum);
         this.desc = desc;
     }

@@ -7,9 +7,9 @@ package fr.tikione.jacocoverage.plugin.anno;
  */
 public class CoverageAnnotation extends AbstractCoverageAnnotation {
 
-    private final CoverageStateEnum state;
+    private final EditorCoverageStateEnum state;
 
-    public CoverageAnnotation(CoverageStateEnum state, String projectName, String classFullName, Integer lineNum) {
+    public CoverageAnnotation(EditorCoverageStateEnum state, String projectName, String classFullName, Integer lineNum) {
         super(projectName, classFullName, lineNum);
         this.state = state;
     }

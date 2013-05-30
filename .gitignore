@@ -3,3 +3,5 @@
 /tikione-jacoco-lib/build/
 /tikione-jacoco-lib/nbproject/private/
 /tikione-jacocoexec-analyzer/build/
+/tikione-jacocoverage-ext/build/
+/tikione-jacocoverage-ext/nbproject/private/

@@ -1,6 +1,6 @@
 ## JaCoCoverage Java7 Code Coverage for NetBeans
 
-* The JaCoCoverage Plugin is a Netbeans 7.3 plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
+* The JaCoCoverage Plugin is a NetBeans 7.3 plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
 * The plugin works as a transparent additional service that colors all java files according to the unit tests coverage information. With
 code coverage enabled user continues to work with his/her project in the usual way but can easily view the test coverage of the project
 classes.<br>The code coverage plugin will update the code coverage data and refresh editors markup every time a unit test (or any selected
@@ -26,18 +26,16 @@ validated by the NetBeans Plugin Review staff and available in the NetBeans inte
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Enable test on single file: under development.
 * Improve code highlighting by coloring methods declarations: under development.
 * Detailed HTML report: **done**.
-* Get coverage data from a remote coverage agent and support various project types (Ant based Java EE, Maven, etc.): under development.
+* Get coverage data from a living (local or remote) JaCoCo Java Agent: under development.
+* Load an existing JaCoCo binary or XML report file: under development.
 
 For details, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
-### Documentation
-*Work in progress.*
-
-### Media
-![Screenshot](http://netbeanscolors.org/files/jacococoverage.png)
+### Documentation and Media
+[Click Here!](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/DOCUMENTATION.md) (work in progress)
 
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
 ### License
-LGPL License. In other words: you can do what you want!
+LGPL License.
