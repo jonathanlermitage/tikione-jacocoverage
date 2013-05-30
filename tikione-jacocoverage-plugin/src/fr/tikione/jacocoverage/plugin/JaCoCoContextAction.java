@@ -13,10 +13,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.tools.ant.module.api.AntProjectCookie;
 import org.apache.tools.ant.module.api.AntTargetExecutor;
+import org.netbeans.api.progress.ProgressHandle;
+import org.netbeans.api.progress.ProgressHandleFactory;
 import org.netbeans.api.project.Project;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -40,6 +44,8 @@ import org.xml.sax.SAXException;
 public abstract class JaCoCoContextAction extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = Logger.getLogger(JaCoCoContextAction.class.getName());
 
     /** The project the contextual action is called from. */
     private final Project project;
@@ -66,7 +72,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
 
     public @Override
     void actionPerformed(ActionEvent ae) {
-        new RequestProcessor("JaCoCoverage Main Task", 3, true).post(new Runnable() {
+        new RequestProcessor("JaCoCoverage Action Task", 3, true).post(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -116,15 +122,21 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                             // Launch the Ant task with the JaCoCo JavaAgent.
                             final ExecutorTask execute = executor.execute(antCookie, new String[]{antTask});
 
-                            new RequestProcessor("JaCoCoverage Coverage Collection Task", 3, true).post(new Runnable() {
+                            new RequestProcessor("JaCoCoverage Collection Task", 3, true).post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    ProgressHandle progr = ProgressHandleFactory.createHandle("JaCoCoverage Collection Task");
                                     try {
+                                        progr.setInitialDelay(400);
+                                        progr.start();
+                                        progr.switchToIndeterminate();
+                                        
                                         // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
                                         // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
                                         // object provided by the NetBeans platform is not correctly wrapped.
                                         int executeRes = execute.result();
                                         if (0 == executeRes && binreport.exists()) {
+                                            long st = System.currentTimeMillis();
                                             // Load the generated JaCoCo coverage report.
                                             File classDir = new File(
                                                     prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
@@ -163,6 +175,9 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             }
                                             xmlreport.delete();
                                             binreport.delete();
+
+                                            long et = System.currentTimeMillis();
+                                            LOGGER.log(Level.INFO, "Coverage Collection Task took: {0} ms", et - st);
                                         } else {
                                             AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
                                             NBUtils.closeConsoleTab(Globals.TXTREPORT_TABNAME);
@@ -179,6 +194,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                         Exceptions.printStackTrace(ex);
                                     } catch (SAXException ex) {
                                         Exceptions.printStackTrace(ex);
+                                    } finally {
+                                        progr.finish();
                                     }
                                 }
                             });
