@@ -5,38 +5,33 @@ package fr.tikione.jacocoexec.analyzer;
  *
  * @author Jonathan Lermitage
  */
-@lombok.NoArgsConstructor
+@lombok.Data
 public class JavaMethod {
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Method's name. */
     private String name;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Method's coverage state. */
     private CoverageStateEnum coverageState;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Number of covered instructions. */
     private int instructionsCovered = 0;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Number of not covered instructions. */
     private int instructionsMissed = 0;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Number of covered lines. */
     private int linesCovered = 0;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Number of not covered lines. */
     private int linesMissed = 0;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** Description of method's coverage state. */
     private String coverageDesc;
 
-    @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.Setter(lombok.AccessLevel.PUBLIC)
+    /** 
+     * Line number of method's declaration in NetBeans source code editor.
+     * Warning: in NetBeans editor starting index is 0, not 1. */
     private int lineNumber;
+
 }

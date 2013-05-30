@@ -13,25 +13,23 @@ public class JavaClass implements Comparable<JavaClass> {
 
     /** The package name (with "/" instead of "."). */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.NonNull()
-    private String packageName;
+    private final String packageName;
 
     /** The class name (with ".java" extension). */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    @lombok.NonNull()
-    private String className;
+    private final String className;
 
-    /** Indicate the coverage state of classe's instructions. */
+    /** Indicate the coverage state of class instructions. */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
     private final Map<Integer, CoverageStateEnum> coverage = new HashMap<Integer, CoverageStateEnum>(256);
 
-    /** Indicate the coverage description of classe's instructions. */
+    /** Indicate the coverage description of class instructions. */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    private final Map<Integer, String> coverageDesc = new HashMap<Integer, String>(256);
+    private final Map<Integer, String> coverageDesc = new HashMap<Integer, String>(128);
 
-    /** Indicate the coverage state of classe's methods declarations. */
+    /** Indicate the coverage state of class methods declarations. */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)
-    private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(24);
+    private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(32);
 
     /** Number of covered lines. */
     @lombok.Getter(lombok.AccessLevel.PUBLIC)

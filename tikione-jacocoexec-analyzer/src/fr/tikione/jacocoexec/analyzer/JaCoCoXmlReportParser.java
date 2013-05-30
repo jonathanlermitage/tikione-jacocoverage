@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * JaCoCo XML reports related utilities.
+ * JaCoCo XML reports parser and related utilities.
  *
  * @author Jonathan Lermitage
  */
@@ -21,24 +21,26 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
     /** The coverage data of each Java class. */
     private final Map<String, JavaClass> classes = new LinkedHashMap<String, JavaClass>(32);
 
+    /** Used to remember current Java package while XML parsing. */
     private String currentPackage = null;
 
+    /** Used to remember current Java method while XML parsing. */
     private JavaMethod currentJavaMethod = null;
 
+    /** Used to remember if we are in a Java method description while XML parsing. */
     private boolean inMethod = false;
 
+    /** Used to remember current Java class while XML parsing. */
     private JavaClass currentJavaClass = null;
-
-    private static String METHOD_COVERAGE_DESC = "Coverage: inst.(%d/%d) lines.(%d/%d)";
 
     /**
      * Extract coverage data from a JaCoCo XML report file.
      *
      * @param xml the JaCoCo XML report file.
      * @return the coverage data of each Java class registered in the JaCoCo XML report.
-     * @throws ParserConfigurationException if an errors occurs during the parsing of the JaCoCo XML report.
-     * @throws SAXException if an errors occurs during the parsing of the JaCoCo XML report.
-     * @throws IOException if an errors occurs during the parsing of the JaCoCo XML report.
+     * @throws ParserConfigurationException if an error occurs during the parsing of the JaCoCo XML report.
+     * @throws SAXException if an error occurs during the parsing of the JaCoCo XML report.
+     * @throws IOException if an error occurs during the parsing of the JaCoCo XML report.
      */
     public static Map<String, JavaClass> getCoverageData(File xml)
             throws ParserConfigurationException,
@@ -149,6 +151,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
                 }
             }
         } else if (qName.equalsIgnoreCase("LINE")) {
+            // Get line's coverage data.
             int lineNumber = 0;
             int missedInstructions = 0;
             int coveredInstructions = 0;
@@ -167,15 +170,19 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
                     coveredBranches = Integer.parseInt(attributes.getValue(idx));
                 }
             }
-            boolean noCoverage = missedInstructions > 0 || missedBranches > 0;
-            boolean someCoverage = coveredInstructions > 0 || coveredBranches > 0;
-            if (!noCoverage) {
-                currentJavaClass.addCoveredLine(lineNumber);
-            } else if (noCoverage && someCoverage) {
-                currentJavaClass.addPartiallyCoveredLine(lineNumber);
+            boolean someMissed = missedInstructions > 0 || missedBranches > 0;
+            boolean someCovered = coveredInstructions > 0 || coveredBranches > 0;
+            // Set coverage state. Will indicate the color of code highlighting.
+            if (someCovered) {
+                if (someMissed) {
+                    currentJavaClass.addPartiallyCoveredLine(lineNumber);
+                } else {
+                    currentJavaClass.addCoveredLine(lineNumber);
+                }
             } else {
                 currentJavaClass.addNotCoveredLine(lineNumber);
             }
+            // Set coverage description when possible (currently: branches coverage). Will enable glyphed annotations.
             if (missedBranches > 0) {
                 if (coveredBranches > 0) {
                     currentJavaClass.getCoverageDesc().put(lineNumber, missedBranches + " of " + (missedBranches + coveredBranches)
@@ -194,11 +201,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
             throws SAXException {
         if (qName.equalsIgnoreCase("COUNTER")) {
             if (!currentJavaMethod.getName().equals("<init>")) {
-                currentJavaMethod.setCoverageDesc(String.format(METHOD_COVERAGE_DESC,
-                        currentJavaMethod.getInstructionsCovered(),
-                        currentJavaMethod.getInstructionsCovered() + currentJavaMethod.getInstructionsMissed(),
-                        currentJavaMethod.getLinesCovered(),
-                        currentJavaMethod.getLinesCovered() + currentJavaMethod.getLinesMissed()));
+                currentJavaMethod.setCoverageDesc(""); // TODO anno desc if needed
                 int totalMissed = currentJavaMethod.getInstructionsMissed() + currentJavaMethod.getLinesMissed();
                 int totalCovered = currentJavaMethod.getInstructionsCovered() + currentJavaMethod.getLinesCovered();
                 if (totalMissed > 0) {
