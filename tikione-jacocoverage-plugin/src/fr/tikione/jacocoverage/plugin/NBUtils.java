@@ -4,7 +4,7 @@ import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageGlyphedAnnotation;
-import fr.tikione.jacocoverage.plugin.anno.CoverageStateEnum;
+import fr.tikione.jacocoverage.plugin.anno.EditorCoverageStateEnum;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -79,19 +79,19 @@ public class NBUtils {
                             for (int covIdx : coverage.keySet()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
-                                    CoverageStateEnum coverageState;
+                                    EditorCoverageStateEnum coverageState;
                                     switch (coverage.get(covIdx)) {
                                         case COVERED:
-                                            coverageState = CoverageStateEnum.COVERED;
+                                            coverageState = EditorCoverageStateEnum.COVERED;
                                             break;
                                         case NOT_COVERED:
-                                            coverageState = CoverageStateEnum.NOT_COVERED;
+                                            coverageState = EditorCoverageStateEnum.NOT_COVERED;
                                             break;
                                         case PARTIALLY_COVERED:
-                                            coverageState = CoverageStateEnum.PARTIALLY_COVERED;
+                                            coverageState = EditorCoverageStateEnum.PARTIALLY_COVERED;
                                             break;
                                         default:
-                                            coverageState = CoverageStateEnum.COVERED;
+                                            coverageState = EditorCoverageStateEnum.COVERED;
                                     }
                                     AbstractCoverageAnnotation annotation;
                                     if (coverageDesc.containsKey(covIdx)) {
@@ -169,7 +169,7 @@ public class NBUtils {
      * Generate a string representing the project. Two different projects should have different representation.
      *
      * @param project the project.
-     * @return a representation of the proejct.
+     * @return a representation of the project.
      */
     public static String getProjectId(Project project) {
         return getProjectDir(project) + '_' + project.toString();
