@@ -11,18 +11,23 @@ JaCoCo and JaCoCoverage support Java 7 and are also tested with Java 6. It may w
 
 ### Media
 NetBeans Java editor showing highlighted code. You can see covered, partially covered and not covered code, and annotations in the left margin:
+
 ![Screenshot](http://netbeanscolors.org/files/jacococoverage_editor.png)
 
 A context menu is enabled for supported projects. It allows you to run and test your programs with JaCoCoverage:
+
 ![Screenshot](http://netbeanscolors.org/files/jacococoverage_menu.png)
 
 JaCoCoverage is configurable:
+
 ![Screenshot](http://netbeanscolors.org/files/jacococoverage_options.png)
 
 A short textual coverage report:
+
 ![Screenshot](http://netbeanscolors.org/files/jacococoverage_consolereport.png)
 
 A complete HTML coverage report:
+
 ![Screenshot](http://netbeanscolors.org/files/jacococoverage_htmlreport.png)
 
 ### Author
