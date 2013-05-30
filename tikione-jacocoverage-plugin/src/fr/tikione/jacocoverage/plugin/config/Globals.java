@@ -33,6 +33,9 @@ public class Globals {
     /** User preference: enable code highlighting. */
     public static final String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
 
+    /** User preference: JaCoCoverage theme. */
+    public static final String PROP_THEME = "JaCoCoverage.Editor.Theme";
+
     /** User preference: show a minimal textual JaCoCo report in a NetBeans console tab. */
     public static final String PROP_ENABLE_CONSOLE_REPORT = "JaCoCoverage.NbConsole.EnableReport";
 
@@ -50,6 +53,9 @@ public class Globals {
 
     /** Default configuration value: enable code highlighting. */
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;
+
+    /** Default configuration value: JaCoCoverage theme. */
+    public static final int DEF_THEME = 0;
 
     /** Default configuration value: show a minimal textual JaCoCo report in a NetBeans console tab. */
     public static final boolean DEF_ENABLE_CONSOLE_REPORT = true;

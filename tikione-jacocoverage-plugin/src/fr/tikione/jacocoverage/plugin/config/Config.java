@@ -99,6 +99,15 @@ public class Config {
     }
 
     /**
+     * Get configuration value: JaCoCoverage theme.
+     *
+     * @return configuration value.
+     */
+    public static int getTheme() {
+        return pref.getInt(Globals.PROP_THEME, Globals.DEF_THEME);
+    }
+
+    /**
      * Set configuration value: show latest news in configuration panel.
      *
      * @param agentArg configuration value.
@@ -150,5 +159,14 @@ public class Config {
      */
     public static void setOpenHtmlReport(boolean enbl) {
         pref.putBoolean(Globals.PROP_AUTOOPEN_HTML_REPORT, enbl);
+    }
+
+    /**
+     * Set configuration value: JaCoCoverage theme.
+     *
+     * @param theme configuration value.
+     */
+    public static void setTheme(int theme) {
+        pref.putInt(Globals.PROP_THEME, theme);
     }
 }
