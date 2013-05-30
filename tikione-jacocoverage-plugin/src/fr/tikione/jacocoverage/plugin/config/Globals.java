@@ -18,11 +18,17 @@ public class Globals {
     @StaticResource
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 
+    /** The URL of remote file describing JaCoCoverage latest news. */
+    public static final String LATEST_NEWS_URL = "http://jacocoverage.tikione.fr/jacocoverage_latest_news.txt";
+
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
     public static final String TXTREPORT_TABNAME = " (jacocoverage report)";
 
     /** User preference: customization of the JavaAgent passed to the Ant task. */
     public static final String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
+
+    /** User preference: show latest news in configuration panel. */
+    public static final String PROP_SHOW_LATEST_NEWS = "JaCoCoverage.ConfigPanel.ShowLatestNews";
 
     /** User preference: enable code highlighting. */
     public static final String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
@@ -38,6 +44,9 @@ public class Globals {
 
     /** Default configuration value: the JavaAgent arguments passed to the Ant task. */
     public static final String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
+
+    /** Default configuration value: show latest news in configuration panel. */
+    public static final boolean DEF_SHOW_LATEST_NEWS = true;
 
     /** Default configuration value: enable code highlighting. */
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;

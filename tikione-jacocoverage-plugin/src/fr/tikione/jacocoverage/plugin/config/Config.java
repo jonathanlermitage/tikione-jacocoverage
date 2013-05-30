@@ -45,6 +45,15 @@ public class Config {
     }
 
     /**
+     * Get configuration value: show latest news in configuration panel.
+     *
+     * @return configuration value.
+     */
+    public static boolean isShowLatestNews() {
+        return pref.getBoolean(Globals.PROP_SHOW_LATEST_NEWS, Globals.DEF_SHOW_LATEST_NEWS);
+    }
+
+    /**
      * Get configuration value: show a minimal textual JaCoCo report in a NetBeans console tab.
      *
      * @return configuration value.
@@ -87,6 +96,15 @@ public class Config {
      */
     public static String getAntTaskJavaagentArg() {
         return pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+    }
+
+    /**
+     * Set configuration value: show latest news in configuration panel.
+     *
+     * @param agentArg configuration value.
+     */
+    public static void setShowLatestNews(boolean show) {
+        pref.putBoolean(Globals.PROP_SHOW_LATEST_NEWS, show);
     }
 
     /**
