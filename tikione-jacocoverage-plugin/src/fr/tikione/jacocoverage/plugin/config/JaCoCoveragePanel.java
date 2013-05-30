@@ -3,17 +3,26 @@ package fr.tikione.jacocoverage.plugin.config;
 import fr.tikione.jacocoverage.plugin.NBUtils;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import org.apache.commons.io.IOUtils;
 import org.openide.awt.Mnemonics;
 import org.openide.util.NbBundle;
+import org.openide.util.RequestProcessor;
 
 /**
  * JaCoCoverage configuration panel.
@@ -26,25 +35,48 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
         initComponents();
-        jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)"
-                + "<br><font color=\"blue\">"
-                + "https://twitter.com/JLermitage"
-                + "</font></body></html>");
-        jButtonSocialFacebook.setToolTipText("<html><body>Jonathan Lermitage on <b>Facebook</b> (author of JaCoCoverage)"
-                + "<br><font color=\"blue\">"
-                + "https://www.facebook.com/jonathan.lermitage"
-                + "</font></body></html>");
-        jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)"
-                + "<br><font color=\"blue\">"
-                + "https://github.com/jonathanlermitage"
-                + "</font></body></html>");
-        jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)"
-                + "<br><font color=\"blue\">"
-                + "http://netbeanscolors.org"
-                + "</font></body></html>");
-        jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br><font color=\"blue\">"
-                + "http://jacocoverage.tikione.fr/redirect/help/"
-                + "</font></body></html>");
+        // Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
+        jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
+                + "https://twitter.com/JLermitage" + "</body></html>");
+        jButtonSocialFacebook.setToolTipText("<html><body>Jonathan Lermitage on <b>Facebook</b> (author of JaCoCoverage)<br>"
+                + "https://www.facebook.com/jonathan.lermitage" + "</body></html>");
+        jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
+                + "https://github.com/jonathanlermitage" + "</body></html>");
+        jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
+                + "http://netbeanscolors.org" + "</body></html>");
+        jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
+                + "http://jacocoverage.tikione.fr/redirect/help/" + "</body></html>");
+    }
+
+    private void showLatestNews() {
+        new RequestProcessor("JaCoCoverage Control Panel showLatestNews() Task", 1, true).post(new Runnable() {
+            @Override
+            public void run() {
+                boolean enable = jCheckBoxShowLatestNews.isSelected();
+                if (enable) {
+                    jTextAreaLatestNews.setText("Loading...");
+                    try {
+                        InputStream in = new URL(Globals.LATEST_NEWS_URL).openStream();
+                        try {
+                            String latestnews = IOUtils.toString(in);
+                            jTextAreaLatestNews.setText(latestnews);
+                        } finally {
+                            IOUtils.closeQuietly(in);
+                        }
+                    } catch (MalformedURLException ex) {
+                        jTextAreaLatestNews.setText("Internal configuration error, can't contact " + Globals.LATEST_NEWS_URL
+                                + "\n\n (MalformedURLException: " + ex + ")");
+                    } catch (IOException ex) {
+                        jTextAreaLatestNews.setText("Communication error, can't contact " + Globals.LATEST_NEWS_URL
+                                + "\n\n (IOException: " + ex + ")");
+                    }
+                    jTextAreaLatestNews.setCaretPosition(0);
+                } else {
+                    jTextAreaLatestNews.setText("");
+                }
+                jTextAreaLatestNews.setEnabled(enable);
+            }
+        });
     }
 
     /** 
@@ -67,6 +99,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jButtonSocialJojohome = new JButton();
         jCheckBoxEnableHtmlReport = new JCheckBox();
         jCheckBoxOpenHtmlReport = new JCheckBox();
+        jScrollPane1 = new JScrollPane();
+        jTextAreaLatestNews = new JTextArea();
+        jCheckBoxShowLatestNews = new JCheckBox();
 
         jButtonResoreDefaults.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_defaults.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -159,6 +194,21 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jCheckBoxOpenHtmlReport, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxOpenHtmlReport.text")); // NOI18N
 
+        jTextAreaLatestNews.setEditable(false);
+        jTextAreaLatestNews.setColumns(20);
+        jTextAreaLatestNews.setFont(new Font("Arial", 0, 12)); // NOI18N
+        jTextAreaLatestNews.setLineWrap(true);
+        jTextAreaLatestNews.setRows(5);
+        jTextAreaLatestNews.setAutoscrolls(false);
+        jScrollPane1.setViewportView(jTextAreaLatestNews);
+
+        Mnemonics.setLocalizedText(jCheckBoxShowLatestNews, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxShowLatestNews.text")); // NOI18N
+        jCheckBoxShowLatestNews.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxShowLatestNewsActionPerformed(evt);
+            }
+        });
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,17 +231,22 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jTextFieldAntTaskParams)
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxEnableHighlighting)
                     .addComponent(jCheckBoxEnableConsoleReport)
                     .addComponent(jCheckBoxEnableHtmlReport)
+                    .addComponent(jCheckBoxShowLatestNews)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jCheckBoxOpenHtmlReport)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -209,7 +264,11 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jCheckBoxShowLatestNews)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonResoreDefaults)
@@ -230,6 +289,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxEnableHtmlReport.setSelected(Globals.DEF_ENABLE_HTML_REPORT);
         jCheckBoxOpenHtmlReport.setSelected(Globals.DEF_AUTOOPEN_HTML_REPORT);
         jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
+        jCheckBoxShowLatestNews.setSelected(Globals.DEF_SHOW_LATEST_NEWS);
+        showLatestNews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jButtonSocialTwitterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialTwitterActionPerformed
@@ -256,6 +317,10 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
     }//GEN-LAST:event_jCheckBoxEnableHtmlReportActionPerformed
 
+    private void jCheckBoxShowLatestNewsActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxShowLatestNewsActionPerformed
+        showLatestNews();
+    }//GEN-LAST:event_jCheckBoxShowLatestNewsActionPerformed
+
     /** Load user preferences and configure UI. */
     void load() {
         Config.sync();
@@ -265,7 +330,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxEnableHtmlReport.setSelected(Config.isEnblHtmlReport());
         jCheckBoxOpenHtmlReport.setSelected(Config.isOpenHtmlReport());
         jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
-
+        jCheckBoxShowLatestNews.setSelected(Config.isShowLatestNews());
+        showLatestNews();
     }
 
     /** Store configuration to user preferences. */
@@ -275,6 +341,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         Config.setEnblHighlighting(jCheckBoxEnableHighlighting.isSelected());
         Config.setEnblHtmlReport(jCheckBoxEnableHtmlReport.isSelected());
         Config.setOpenHtmlReport(jCheckBoxOpenHtmlReport.isSelected());
+        Config.setShowLatestNews(jCheckBoxShowLatestNews.isSelected());
         Config.flush();
     }
 
@@ -292,8 +359,11 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxEnableHighlighting;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
+    private JCheckBox jCheckBoxShowLatestNews;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
+    private JScrollPane jScrollPane1;
+    private JTextArea jTextAreaLatestNews;
     private JTextField jTextFieldAntTaskParams;
     // End of variables declaration//GEN-END:variables
 }
