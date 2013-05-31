@@ -2,7 +2,7 @@
 <!DOCTYPE type PUBLIC "-//NetBeans//DTD annotation type 1.1//EN" "http://www.netbeans.org/dtds/annotation-type-1_1.dtd">
 <type name="annotation_partiallycovered_glyph"
       description_key="LBL_annotation_partiallycovered_glyph"
-      localizing_bundle="org.netbeans.modules.coverage.resources.Bundle"
+      localizing_bundle="fr.tikione.jacocoverage.plugin.resources.Bundle"
       visible="true"
       highlight="#FFFFB1"
       custom_sidebar_color="#FFFFB1"
