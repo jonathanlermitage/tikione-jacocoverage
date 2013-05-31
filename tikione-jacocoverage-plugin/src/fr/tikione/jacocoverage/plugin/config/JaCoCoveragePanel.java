@@ -1,6 +1,8 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import fr.tikione.jacocoverage.plugin.NBUtils;
+import fr.tikione.jacocoverage.plugin.Utils;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,19 +12,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.ListCellRenderer;
+import static javax.swing.SwingConstants.CENTER;
+import static javax.swing.SwingConstants.LEFT;
 import org.apache.commons.io.IOUtils;
 import org.openide.awt.Mnemonics;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.util.RequestProcessor;
 
@@ -37,6 +43,18 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
         initComponents();
+        try {
+            // Add "NetBeans (default)" and "Norway Today (dark)" themes with colors preview.
+            jComboBoxColorTheme.setRenderer(new ComboBoxRenderer());
+            ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_default.png"));
+            ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_norwaytoday.png"));
+            thNetBeansImg.setDescription("NetBeans (default)");
+            thNorwaytoday.setDescription("Norway Today (dark)");
+            jComboBoxColorTheme.addItem(thNetBeansImg);
+            jComboBoxColorTheme.addItem(thNorwaytoday);
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
         // Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
         jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
                 + "https://twitter.com/JLermitage" + "</body></html>");
@@ -220,8 +238,6 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelColorTheme, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelColorTheme.text")); // NOI18N
 
-        jComboBoxColorTheme.setModel(new DefaultComboBoxModel(new String[] { "NetBeans (default)", "Norway Today (dark)" }));
-
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,14 +274,14 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                             .addComponent(jCheckBoxShowLatestNews)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jCheckBoxOpenHtmlReport))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBoxEnableHighlighting)
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabelColorTheme)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 18, Short.MAX_VALUE)))
+                                .addComponent(jCheckBoxOpenHtmlReport)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxEnableHighlighting)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabelColorTheme)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -290,7 +306,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(jCheckBoxShowLatestNews)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -379,6 +395,32 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
     boolean valid() {
         return true;
+    }
+
+    private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+
+        private static final long serialVersionUID = 1L;
+
+        ComboBoxRenderer() {
+            setOpaque(true);
+            setHorizontalAlignment(LEFT);
+            setVerticalAlignment(CENTER);
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (isSelected) {
+                setBackground(list.getSelectionBackground());
+                setForeground(list.getSelectionForeground());
+            } else {
+                setBackground(list.getBackground());
+                setForeground(list.getForeground());
+            }
+            ImageIcon icon = (ImageIcon) value;
+            setText(icon.getDescription());
+            setIcon(icon);
+            return this;
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonOnlineHelp;

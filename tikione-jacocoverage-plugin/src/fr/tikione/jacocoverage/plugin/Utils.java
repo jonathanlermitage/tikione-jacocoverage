@@ -2,12 +2,15 @@ package fr.tikione.jacocoverage.plugin;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.io.IOUtils;
 import org.netbeans.api.project.Project;
 
 /**
@@ -135,5 +138,26 @@ public class Utils {
             folders.addAll(listFolders(subfolder));
         }
         return folders;
+    }
+
+    /**
+     * Load an internal resource.
+     *
+     * @param internalResource the path of internal resource.
+     * @return the loaded resource.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static byte[] toBytes(String internalResource)
+            throws IOException {
+        byte[] content = null;
+        InputStream is = Utils.class.getResourceAsStream(internalResource);
+        try {
+            content = IOUtils.toByteArray(is);
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+        return content;
     }
 }
