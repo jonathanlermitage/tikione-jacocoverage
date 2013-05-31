@@ -1,6 +1,8 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import org.netbeans.api.annotations.common.StaticResource;
 
 /**
@@ -18,6 +20,8 @@ public class Globals {
     @StaticResource
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 
+    public static final List<String> THEME_PREFIX = Arrays.asList("", "norwaytoday__");
+
     /** The URL of remote file describing JaCoCoverage latest news. */
     public static final String LATEST_NEWS_URL = "http://jacocoverage.tikione.fr/jacocoverage_latest_news.txt";
 
@@ -33,7 +37,7 @@ public class Globals {
     /** User preference: enable code highlighting. */
     public static final String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
 
-    /** User preference: JaCoCoverage theme. */
+    /** User preference: JaCoCoverage themePrefix. */
     public static final String PROP_THEME = "JaCoCoverage.Editor.Theme";
 
     /** User preference: show a minimal textual JaCoCo report in a NetBeans console tab. */
@@ -54,7 +58,7 @@ public class Globals {
     /** Default configuration value: enable code highlighting. */
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;
 
-    /** Default configuration value: JaCoCoverage theme. */
+    /** Default configuration value: JaCoCoverage themePrefix. */
     public static final int DEF_THEME = 0;
 
     /** Default configuration value: show a minimal textual JaCoCo report in a NetBeans console tab. */

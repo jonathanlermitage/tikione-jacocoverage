@@ -9,6 +9,12 @@
       <file name="annotation_covered_glyph.xml" url="resources/annotation_covered_glyph.xml"/>
       <file name="annotation_partiallycovered_glyph.xml" url="resources/annotation_partiallycovered_glyph.xml"/>
       <file name="annotation_notcovered_glyph.xml" url="resources/annotation_notcovered_glyph.xml"/>
+      <file name="norwaytoday__annotation_covered.xml" url="resources/norwaytoday__annotation_covered.xml"/>
+      <file name="norwaytoday__annotation_partiallycovered.xml" url="resources/norwaytoday__annotation_partiallycovered.xml"/>
+      <file name="norwaytoday__annotation_notcovered.xml" url="resources/norwaytoday__annotation_notcovered.xml"/>
+      <file name="norwaytoday__annotation_covered_glyph.xml" url="resources/norwaytoday__annotation_covered_glyph.xml"/>
+      <file name="norwaytoday__annotation_partiallycovered_glyph.xml" url="resources/norwaytoday__annotation_partiallycovered_glyph.xml"/>
+      <file name="norwaytoday__annotation_notcovered_glyph.xml" url="resources/norwaytoday__annotation_notcovered_glyph.xml"/>
     </folder>
   </folder>
 </filesystem>

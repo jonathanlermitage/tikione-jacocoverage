@@ -99,7 +99,7 @@ public class Config {
     }
 
     /**
-     * Get configuration value: JaCoCoverage theme.
+     * Get configuration value: JaCoCoverage themePrefix.
      *
      * @return configuration value.
      */
@@ -162,9 +162,9 @@ public class Config {
     }
 
     /**
-     * Set configuration value: JaCoCoverage theme.
+     * Set configuration value: JaCoCoverage themePrefix.
      *
-     * @param theme configuration value.
+     * @param themePrefix configuration value.
      */
     public static void setTheme(int theme) {
         pref.putInt(Globals.PROP_THEME, theme);

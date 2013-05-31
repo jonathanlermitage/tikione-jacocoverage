@@ -5,6 +5,7 @@ import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.CoverageGlyphedAnnotation;
 import fr.tikione.jacocoverage.plugin.anno.EditorCoverageStateEnum;
+import fr.tikione.jacocoverage.plugin.config.Config;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -60,6 +61,7 @@ public class NBUtils {
     public static void colorDoc(Project project, JavaClass jclass) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
         String prjId = getProjectId(project);
+        int theme = Config.getTheme();
         FIND_JAVA_FO:
         for (FileObject curRoot : GlobalPathRegistry.getDefault().getSourceRoots()) {
             FileObject fileObject = curRoot.getFileObject(classResource);
@@ -100,13 +102,15 @@ public class NBUtils {
                                                 prjId,
                                                 jclass.getPackageName() + jclass.getClassName(),
                                                 covIdx,
-                                                coverageDesc.get(covIdx));
+                                                coverageDesc.get(covIdx),
+                                                theme);
                                     } else {
                                         annotation = new CoverageAnnotation(
                                                 coverageState,
                                                 prjId,
                                                 jclass.getPackageName() + jclass.getClassName(),
-                                                covIdx);
+                                                covIdx,
+                                                theme);
                                     }
                                     annotation.attach(line);
                                     line.addPropertyChangeListener(annotation);

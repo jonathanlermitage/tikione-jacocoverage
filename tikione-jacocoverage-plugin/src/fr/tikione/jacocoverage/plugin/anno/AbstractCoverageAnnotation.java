@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.anno;
 
+import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
@@ -19,8 +20,7 @@ import org.openide.text.Line;
  */
 public abstract class AbstractCoverageAnnotation extends Annotation implements PropertyChangeListener {
 
-    /** A short description of the annotation. */
-    private String descrmessage = null;
+    private int theme;
 
     /** A list of all registered living annotation. Used to know and clear annotations associated to a project. */
     private final static HashMap<String, HashMap<Integer, Annotation>> annotations = new HashMap<String, HashMap<Integer, Annotation>>();
@@ -34,9 +34,11 @@ public abstract class AbstractCoverageAnnotation extends Annotation implements P
      * @param projectName the project this annotation belongs to.
      * @param classFullName the class (package + name) this annotation belongs to.
      * @param lineNum the number of the line to be annotated.
+     * @param theme JaCoCoverage's colors theme.
      */
     @SuppressWarnings("LeakingThisInConstructor")
-    public AbstractCoverageAnnotation(String projectName, String classFullName, Integer lineNum) {
+    public AbstractCoverageAnnotation(String projectName, String classFullName, Integer lineNum, int theme) {
+        this.theme = theme;
         synchronized (annotations) {
             String key = combineKey(projectName, classFullName);
             HashMap<Integer, Annotation> anns = annotations.get(key);
@@ -106,24 +108,11 @@ public abstract class AbstractCoverageAnnotation extends Annotation implements P
         }
     }
 
-    /**
-     * Sets the current description message.
-     *
-     * @param message the description message.
-     */
-    public void setMessage(String message) {
-        descrmessage = message;
+    @Override
+    public String getAnnotationType() {
+        return Globals.THEME_PREFIX.get(theme);
     }
-
-    /**
-     * Getter for annotations description message.
-     *
-     * @return the description message.
-     */
-    public String getMessage() {
-        return descrmessage;
-    }
-
+    
     /**
      * This method is used to create a unique key for every new class annotation.
      *

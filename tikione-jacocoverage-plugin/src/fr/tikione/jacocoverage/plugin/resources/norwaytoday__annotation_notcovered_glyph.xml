@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE type PUBLIC "-//NetBeans//DTD annotation type 1.1//EN" "http://www.netbeans.org/dtds/annotation-type-1_1.dtd">
+<type name="norwaytoday__annotation_notcovered_glyph"
+      description_key="LBL_annotation_notcovered_glyph"
+      localizing_bundle="org.netbeans.modules.coverage.resources.Bundle"
+      visible="true"
+      highlight="#900000"
+      custom_sidebar_color="#900000"
+      glyph="nbresloc:/fr/tikione/jacocoverage/plugin/resources/icon/eclemma_branchnc.gif"
+      type="line"
+      browseable="false"
+      severity="ok"
+      priority="500"
+/>
