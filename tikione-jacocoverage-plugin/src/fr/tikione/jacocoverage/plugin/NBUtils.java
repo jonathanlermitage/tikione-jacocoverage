@@ -65,7 +65,7 @@ public class NBUtils {
         FIND_JAVA_FO:
         for (FileObject curRoot : GlobalPathRegistry.getDefault().getSourceRoots()) {
             FileObject fileObject = curRoot.getFileObject(classResource);
-            if (fileObject != null && fileObject.getExt().equalsIgnoreCase("JAVA")) {
+            if (fileObject != null && "java".equalsIgnoreCase(fileObject.getExt())) {
                 try {
                     DataObject dataObject = DataObject.find(fileObject);
                     Node node = dataObject.getNodeDelegate();
@@ -129,7 +129,7 @@ public class NBUtils {
     }
 
     /**
-     * Launche the default browser to display an URL.
+     * launch the default browser to display an URL.
      *
      * @param uri the URL to display.
      */
@@ -214,7 +214,7 @@ public class NBUtils {
      */
     public static String getProjectJavaPackagesAsStr(Project project, Properties prjProps, String separator, String prefix) {
         List<String> packagesList = getProjectJavaPackages(project, prjProps);
-        StringBuilder packages = new StringBuilder(128);
+        StringBuilder packages = new StringBuilder(256);
         if (packagesList.isEmpty()) {
             packages.append("*");
         } else {
