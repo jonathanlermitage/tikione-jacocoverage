@@ -70,8 +70,14 @@ public class Globals {
     /** Default configuration value: automatically open generated complete HTML JaCoCo report. */
     public static final boolean DEF_AUTOOPEN_HTML_REPORT = true;
 
+    /** Default configuration value: the folder where JaCoCoverage generated files are stored. */
+    public static final String DEF_JACOCOVERAGE_DATA_DIR = ".jacocoverage" + File.separator;
+
     /** Default configuration value: the folder where JaCoCo HTML reports are generated. */
-    public static final String DEF_HTML_REPORT_DIR = ".jacocoverage" + File.separator + "report.html" + File.separator;
+    public static final String DEF_HTML_REPORT_DIR = DEF_JACOCOVERAGE_DATA_DIR + "report.html" + File.separator;
+
+    /** Default configuration value: the file where JaCoCo XML reports are stored. */
+    public static final String DEF_XML_BACKUP_REPORT_DIR = DEF_JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
 
     private Globals() {
     }

@@ -143,7 +143,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                                             JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                             final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
-
+                                            new File(prjDir + Globals.DEF_JACOCOVERAGE_DATA_DIR).mkdirs();
+                                            
                                             // Remove existing highlighting (from a previous coverage task), show reports and apply
                                             // highlighting on each Java source file.
                                             AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
@@ -173,7 +174,10 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                                     NBUtils.colorDoc(project, jclass);
                                                 }
                                             }
-                                            xmlreport.delete();
+                                            // Leave a copy of the JaCoCo XML report in project's result dir and clear tmp data.
+                                            File xmlreportCpy = new File(prjDir + Globals.DEF_XML_BACKUP_REPORT_DIR);
+                                            xmlreportCpy.delete();
+                                            org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);
                                             binreport.delete();
 
                                             long et = System.currentTimeMillis();
