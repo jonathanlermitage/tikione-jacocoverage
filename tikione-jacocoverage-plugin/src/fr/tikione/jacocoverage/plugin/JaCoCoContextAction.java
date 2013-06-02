@@ -186,7 +186,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
                                             NBUtils.closeConsoleTab(Globals.TXTREPORT_TABNAME);
                                             String msg = "Ant Task or JaCoCo Agent failed, JaCoCoverage can't process data.\n"
-                                                    + "(executeRes=" + executeRes + ", binreport.exists=" + binreport.exists() + ")";
+                                                    + "(AntExitCode=" + executeRes + ", JacocoBinReportFound=" + binreport.exists() + ")";
                                             NotifyDescriptor nd = new NotifyDescriptor.Message(msg, NotifyDescriptor.WARNING_MESSAGE);
                                             DialogDisplayer.getDefault().notify(nd);
                                         }

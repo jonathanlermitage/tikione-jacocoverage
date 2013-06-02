@@ -1,6 +1,6 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Version (2013-06-01)
+### Version 1.2.0.20130602.325 (2013-06-02)
 * improved code highlighting with glyphs in left margin and additional information in lines tooltips.
 * stabilization and optimization: JaCoCoverage task now runs with a RequestProcessor limited to 3 maximum threads.
 * fixed a bug: jacoco.exec file was generated into the project's working directory, not the project's root.

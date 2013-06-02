@@ -22,12 +22,10 @@ validated by the NetBeans Plugin Review staff and available in the NetBeans inte
 
 ### Development progression
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Multi-line statements coloring: investigating.
-* ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Add glyphs in the left margin: **done**.
 * ([GitHub#1](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/1)) Enable test on single file: under development.
-* Improve code highlighting by coloring methods declarations: under development.
-* Detailed HTML report: **done**.
 * Get coverage data from a living (local or remote) JaCoCo Java Agent: under development.
 * Load an existing JaCoCo binary or XML report file: under development.
+* support for NetBeans Modules Suite projects: investigating.
 
 For details, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
