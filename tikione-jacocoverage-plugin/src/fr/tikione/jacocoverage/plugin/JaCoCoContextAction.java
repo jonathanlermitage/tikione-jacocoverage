@@ -143,7 +143,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                                             JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                             final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
-                                            new File(prjDir + Globals.DEF_JACOCOVERAGE_DATA_DIR).mkdirs();
+                                            new File(prjDir + Globals.JACOCOVERAGE_DATA_DIR).mkdirs();
                                             
                                             // Remove existing highlighting (from a previous coverage task), show reports and apply
                                             // highlighting on each Java source file.
@@ -152,7 +152,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                             if (enblConsoleReport) {
                                                 JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME);
                                             }
-                                            File reportdir = new File(prjDir + Globals.DEF_HTML_REPORT_DIR);
+                                            File reportdir = new File(prjDir + Globals.HTML_REPORT_DIR);
                                             if (reportdir.exists()) {
                                                 org.apache.commons.io.FileUtils.deleteDirectory(reportdir);
                                             }
@@ -175,7 +175,7 @@ public abstract class JaCoCoContextAction extends AbstractAction {
                                                 }
                                             }
                                             // Leave a copy of the JaCoCo XML report in project's result dir and clear tmp data.
-                                            File xmlreportCpy = new File(prjDir + Globals.DEF_XML_BACKUP_REPORT_DIR);
+                                            File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT_DIR);
                                             xmlreportCpy.delete();
                                             org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);
                                             binreport.delete();
