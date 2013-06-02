@@ -94,7 +94,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
                     if (classes.containsKey(currentPackage + classname)) {
                         currentJavaClass = classes.get(currentPackage + classname);
                     } else {
-                        currentJavaClass = JavaClass.build(currentPackage, classname);
+                        currentJavaClass = new JavaClass(currentPackage, classname);
                         classes.put(currentPackage + classname, currentJavaClass);
                     }
                     break;
@@ -112,7 +112,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
                     if (classes.containsKey(currentPackage + classname)) {
                         currentJavaClass = classes.get(currentPackage + classname);
                     } else {
-                        currentJavaClass = JavaClass.build(currentPackage, classname);
+                        currentJavaClass = new JavaClass(currentPackage, classname);
                         classes.put(currentPackage + classname, currentJavaClass);
                     }
                     break;

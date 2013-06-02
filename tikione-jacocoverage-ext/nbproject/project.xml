@@ -7,42 +7,6 @@
             <suite-component/>
             <module-dependencies/>
             <public-packages>
-                <package>com.sun.jna</package>
-                <package>com.sun.jna.ptr</package>
-                <package>com.sun.jna.win32</package>
-                <package>lombok</package>
-                <package>lombok.bytecode</package>
-                <package>lombok.core</package>
-                <package>lombok.core.debug</package>
-                <package>lombok.core.handlers</package>
-                <package>lombok.core.runtimeDependencies</package>
-                <package>lombok.delombok</package>
-                <package>lombok.delombok.ant</package>
-                <package>lombok.eclipse</package>
-                <package>lombok.eclipse.agent</package>
-                <package>lombok.eclipse.handlers</package>
-                <package>lombok.experimental</package>
-                <package>lombok.extern.apachecommons</package>
-                <package>lombok.extern.java</package>
-                <package>lombok.extern.log4j</package>
-                <package>lombok.extern.slf4j</package>
-                <package>lombok.installer</package>
-                <package>lombok.installer.eclipse</package>
-                <package>lombok.javac</package>
-                <package>lombok.javac.apt</package>
-                <package>lombok.javac.handlers</package>
-                <package>lombok.javac.java6</package>
-                <package>lombok.javac.java7</package>
-                <package>lombok.libs.com.zwitserloot.cmdreader</package>
-                <package>lombok.libs.org.objectweb.asm</package>
-                <package>lombok.libs.org.objectweb.asm.commons</package>
-                <package>lombok.libs.org.objectweb.asm.signature</package>
-                <package>lombok.libs.org.objectweb.asm.tree</package>
-                <package>lombok.libs.org.objectweb.asm.util</package>
-                <package>lombok.patcher</package>
-                <package>lombok.patcher.equinox</package>
-                <package>lombok.patcher.inject</package>
-                <package>lombok.patcher.scripts</package>
                 <package>org.apache.commons.io</package>
                 <package>org.apache.commons.io.comparator</package>
                 <package>org.apache.commons.io.filefilter</package>
@@ -53,10 +17,6 @@
             <class-path-extension>
                 <runtime-relative-path>ext/commons-io-2.4.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/commons-io-2.4.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/lombok-0.11.8.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/lombok-0.11.8.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
