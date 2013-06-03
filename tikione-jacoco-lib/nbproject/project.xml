@@ -8,7 +8,6 @@
             <module-dependencies/>
             <public-packages>
                 <package>com.vladium.emma.rt</package>
-                <package>fr.tikione.jacoco.lib</package>
                 <package>org.jacoco.agent</package>
                 <package>org.jacoco.agent.rt</package>
                 <package>org.jacoco.agent.rt.internal_5d10cad</package>
