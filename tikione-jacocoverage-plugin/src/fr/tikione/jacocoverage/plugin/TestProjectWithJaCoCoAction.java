@@ -26,7 +26,9 @@ import org.openide.util.actions.Presenter;
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.TestProjectWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_TestProjectWithJaCoCoAction",
-                    lazy = false)
+                    lazy = false,
+                    asynchronous = true,
+                    surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
                  position = 1985,
                  separatorAfter = 1986)

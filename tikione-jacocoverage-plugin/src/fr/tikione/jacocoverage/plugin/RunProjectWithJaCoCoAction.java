@@ -32,7 +32,9 @@ import org.openide.util.actions.Presenter;
 @ActionID(category = "Project",
           id = "fr.tikione.jacocoverage.plugin.RunProjectWithJaCoCoAction")
 @ActionRegistration(displayName = "#CTL_RunProjectWithJaCoCoAction",
-                    lazy = false)
+                    lazy = false,
+                    asynchronous = true,
+                    surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
                  position = 1984,
                  separatorBefore = 1983)
