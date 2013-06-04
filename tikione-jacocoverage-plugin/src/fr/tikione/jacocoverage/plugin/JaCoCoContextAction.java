@@ -38,6 +38,7 @@ import org.xml.sax.SAXException;
 /**
  * A toolkit that launches Ant tasks with the JaCoCo JavaAgent, colorizes Java source files and shows a coverage report.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqRequestProcessor">DevFaqRequestProcessor</a> for NetBeans threading tweaks.
+ * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionContextSensitive">DevFaqActionContextSensitive</a> for context action tweaks.
  *
  * @author Jonathan Lermitage
  */
@@ -66,8 +67,8 @@ public abstract class JaCoCoContextAction extends AbstractAction {
     public JaCoCoContextAction(Lookup context, Project project, String antTask) {
         this.project = project;
         this.antTask = antTask;
+        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         setEnabled(Utils.isProjectSupported(project));
-        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, false);
     }
 
     public @Override

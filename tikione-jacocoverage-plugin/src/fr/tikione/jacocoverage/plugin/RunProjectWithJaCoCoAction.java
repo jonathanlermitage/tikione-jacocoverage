@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 import org.netbeans.api.project.Project;
@@ -17,7 +16,10 @@ import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
+import org.openide.util.Utilities;
 import org.openide.util.actions.Presenter;
 
 /**
@@ -35,61 +37,59 @@ import org.openide.util.actions.Presenter;
                  position = 1984,
                  separatorBefore = 1983)
 @NbBundle.Messages("CTL_RunProjectWithJaCoCoAction=Run with JaCoCoverage")
-public final class RunProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
+public class RunProjectWithJaCoCoAction
+        extends JaCoCoContextAction
+        implements ContextAwareAction, LookupListener, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
-    public @Override
-    void actionPerformed(ActionEvent e) {
+    public RunProjectWithJaCoCoAction() {
+        this(Utilities.actionsGlobalContext());
     }
 
-    public @Override
-    Action createContextAwareInstance(Lookup context) {
-        return new ContextAction(context);
-    }
-
-    /**
-     * The "Test with JaCoCoverage" contextual action.
-     */
-    private static final class ContextAction extends JaCoCoContextAction implements Presenter.Popup {
-
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Enable the context action on supported projects only.
-         *
-         * @param context the context the action is called from.
-         */
-        public ContextAction(Lookup context) {
-            super(context, context.lookup(Project.class), "run");
-            putValue(Action.NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
-            putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
-            FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
-            final Properties prjProps = new Properties();
-            InputStream ins = null;
+    public RunProjectWithJaCoCoAction(Lookup context) {
+        super(context, context.lookup(Project.class), "run");
+        putValue(Action.NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
+        putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
+        FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
+        final Properties prjProps = new Properties();
+        InputStream ins = null;
+        try {
+            if (prjPropsFo != null) {
+                prjProps.load(ins = prjPropsFo.getInputStream());
+            }
+            if (prjProps.getProperty("main.class", "").isEmpty()) {
+                setEnabled(false);
+            }
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        } finally {
             try {
-                if (prjPropsFo != null) {
-                    prjProps.load(ins = prjPropsFo.getInputStream());
-                }
-                if (prjProps.getProperty("main.class", "").isEmpty()) {
-                    setEnabled(false);
+                if (ins != null) {
+                    ins.close();
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
-            } finally {
-                try {
-                    if (ins != null) {
-                        ins.close();
-                    }
-                } catch (IOException ex) {
-                    Exceptions.printStackTrace(ex);
-                }
             }
         }
+    }
 
-        @Override
-        public JMenuItem getPopupPresenter() {
-            return new JMenuItem(this);
-        }
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        super.actionPerformed(ev);
+    }
+
+    @Override
+    public Action createContextAwareInstance(Lookup context) {
+        return new RunProjectWithJaCoCoAction();
+    }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+    }
+
+    @Override
+    public JMenuItem getPopupPresenter() {
+        return new JMenuItem(this);
     }
 }

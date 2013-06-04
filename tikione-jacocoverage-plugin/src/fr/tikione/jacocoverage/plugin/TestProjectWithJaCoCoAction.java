@@ -2,7 +2,6 @@ package fr.tikione.jacocoverage.plugin;
 
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 import org.netbeans.api.project.Project;
@@ -12,7 +11,10 @@ import org.openide.awt.ActionRegistration;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
+import org.openide.util.Utilities;
 import org.openide.util.actions.Presenter;
 
 /**
@@ -29,40 +31,38 @@ import org.openide.util.actions.Presenter;
                  position = 1985,
                  separatorAfter = 1986)
 @NbBundle.Messages("CTL_TestProjectWithJaCoCoAction=Test with JaCoCoverage")
-public final class TestProjectWithJaCoCoAction extends AbstractAction implements ContextAwareAction {
+public final class TestProjectWithJaCoCoAction
+        extends JaCoCoContextAction
+        implements ContextAwareAction, LookupListener, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
-    public @Override
-    void actionPerformed(ActionEvent e) {
+    public TestProjectWithJaCoCoAction() {
+        this(Utilities.actionsGlobalContext());
     }
 
-    public @Override
-    Action createContextAwareInstance(Lookup context) {
-        return new ContextAction(context);
+    public TestProjectWithJaCoCoAction(Lookup context) {
+        super(context, context.lookup(Project.class), "test");
+        putValue(Action.NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
+        putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
     }
 
-    /**
-     * The "Test with JaCoCoverage" contextual action.
-     */
-    private static final class ContextAction extends JaCoCoContextAction implements Presenter.Popup {
+    @Override
+    public void actionPerformed(ActionEvent ev) {
+        super.actionPerformed(ev);
+    }
 
-        private static final long serialVersionUID = 1L;
+    @Override
+    public Action createContextAwareInstance(Lookup context) {
+        return new TestProjectWithJaCoCoAction(context);
+    }
 
-        /**
-         * Enable the context action on supported projects only.
-         *
-         * @param context the context the action is called from.
-         */
-        public ContextAction(Lookup context) {
-            super(context, context.lookup(Project.class), "test");
-            putValue(Action.NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
-            putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
-        }
+    @Override
+    public void resultChanged(LookupEvent ev) {
+    }
 
-        @Override
-        public JMenuItem getPopupPresenter() {
-            return new JMenuItem(this);
-        }
+    @Override
+    public JMenuItem getPopupPresenter() {
+        return new JMenuItem(this);
     }
 }
