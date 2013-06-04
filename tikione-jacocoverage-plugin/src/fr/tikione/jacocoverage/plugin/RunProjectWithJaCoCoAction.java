@@ -41,7 +41,7 @@ import org.openide.util.actions.Presenter;
                      position = 1984,
                      separatorBefore = 1983),
     @ActionReference(path = "Shortcuts",
-                     name = "D-F12") // Ctrl+F12
+                     name = "F12")
 })
 @NbBundle.Messages("CTL_RunProjectWithJaCoCoAction=Run with JaCoCoverage")
 public class RunProjectWithJaCoCoAction

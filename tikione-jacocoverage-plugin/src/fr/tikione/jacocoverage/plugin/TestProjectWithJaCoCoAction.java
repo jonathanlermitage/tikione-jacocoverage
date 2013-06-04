@@ -35,7 +35,7 @@ import org.openide.util.actions.Presenter;
                      position = 1985,
                      separatorAfter = 1986),
     @ActionReference(path = "Shortcuts",
-                     name = "S-F12") // Shift+F12
+                     name = "O-F12") // Shift+F12
 })
 @NbBundle.Messages("CTL_TestProjectWithJaCoCoAction=Test with JaCoCoverage")
 public final class TestProjectWithJaCoCoAction
