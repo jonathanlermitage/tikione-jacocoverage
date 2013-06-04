@@ -51,25 +51,27 @@ public class RunProjectWithJaCoCoAction
         super(context, context.lookup(Project.class), "run");
         putValue(Action.NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
         putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
-        FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
-        final Properties prjProps = new Properties();
-        InputStream ins = null;
-        try {
-            if (prjPropsFo != null) {
-                prjProps.load(ins = prjPropsFo.getInputStream());
-            }
-            if (prjProps.getProperty("main.class", "").isEmpty()) {
-                setEnabled(false);
-            }
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        } finally {
+        if (isEnabled()) { // Don't try to enable if project's type is not supported.
+            FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
+            final Properties prjProps = new Properties();
+            InputStream ins = null;
             try {
-                if (ins != null) {
-                    ins.close();
+                if (prjPropsFo != null) {
+                    prjProps.load(ins = prjPropsFo.getInputStream());
+                }
+                if (prjProps.getProperty("main.class", "").isEmpty()) {
+                    setEnabled(false);
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
+            } finally {
+                try {
+                    if (ins != null) {
+                        ins.close();
+                    }
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
             }
         }
     }
