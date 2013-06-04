@@ -109,12 +109,16 @@ public class Utils {
      */
     public static boolean isProjectSupported(Project project) {
         boolean supported;
-        String projectClass = project.getClass().getName();
-        if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")
-                || projectClass.equals("org.netbeans.modules.apisupport.project.NbModuleProject")) {
-            supported = true;
-        } else {
+        if (null == project) {
             supported = false;
+        } else {
+            String projectClass = project.getClass().getName();
+            if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")
+                    || projectClass.equals("org.netbeans.modules.apisupport.project.NbModuleProject")) {
+                supported = true;
+            } else {
+                supported = false;
+            }
         }
         return supported;
     }
