@@ -4,8 +4,6 @@ import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import static javax.swing.Action.NAME;
-import static javax.swing.Action.SMALL_ICON;
 import javax.swing.JMenuItem;
 import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
@@ -58,8 +56,8 @@ public final class TestProjectWithJaCoCoAction extends AbstractAction implements
          */
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "test");
-            putValue(NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
+            putValue(Action.NAME, Bundle.CTL_TestProjectWithJaCoCoAction());
+            putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
         }
 
         @Override

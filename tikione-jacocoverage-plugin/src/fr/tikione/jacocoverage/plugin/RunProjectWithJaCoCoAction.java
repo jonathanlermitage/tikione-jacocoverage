@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.util.Properties;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import static javax.swing.Action.NAME;
-import static javax.swing.Action.SMALL_ICON;
 import javax.swing.JMenuItem;
 import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
@@ -64,8 +62,8 @@ public final class RunProjectWithJaCoCoAction extends AbstractAction implements 
          */
         public ContextAction(Lookup context) {
             super(context, context.lookup(Project.class), "run");
-            putValue(NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
-            putValue(SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
+            putValue(Action.NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
+            putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
             FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
             InputStream ins = null;
