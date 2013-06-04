@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.filesystems.FileObject;
 import org.openide.util.ContextAwareAction;
@@ -35,9 +36,13 @@ import org.openide.util.actions.Presenter;
                     lazy = false,
                     asynchronous = true,
                     surviveFocusChange = true)
-@ActionReference(path = "Projects/Actions",
-                 position = 1984,
-                 separatorBefore = 1983)
+@ActionReferences({
+    @ActionReference(path = "Projects/Actions",
+                     position = 1984,
+                     separatorBefore = 1983),
+    @ActionReference(path = "Shortcuts",
+                     name = "D-F12") // Ctrl+F12
+})
 @NbBundle.Messages("CTL_RunProjectWithJaCoCoAction=Run with JaCoCoverage")
 public class RunProjectWithJaCoCoAction
         extends JaCoCoContextAction
