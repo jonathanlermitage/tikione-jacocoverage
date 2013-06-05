@@ -1,8 +1,10 @@
-package fr.tikione.jacocoverage.plugin;
+package fr.tikione.jacocoverage.plugin.action;
 
 import fr.tikione.jacocoexec.analyzer.JaCoCoReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
+import fr.tikione.jacocoverage.plugin.NBUtils;
+import fr.tikione.jacocoverage.plugin.Utils;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.config.Config;
 import fr.tikione.jacocoverage.plugin.config.Globals;
@@ -24,7 +26,6 @@ import org.netbeans.api.progress.ProgressHandleFactory;
 import org.netbeans.api.project.Project;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
-import org.openide.awt.DynamicMenuContent;
 import org.openide.awt.HtmlBrowser;
 import org.openide.execution.ExecutorTask;
 import org.openide.filesystems.FileObject;
@@ -42,11 +43,11 @@ import org.xml.sax.SAXException;
  *
  * @author Jonathan Lermitage
  */
-public abstract class JaCoCoContextAction extends AbstractAction {
+public abstract class JaCoCoActionOnAnt extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(JaCoCoContextAction.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(JaCoCoActionOnAnt.class.getName());
 
     /** The project the contextual action is called from. */
     private final Project project;
@@ -64,11 +65,9 @@ public abstract class JaCoCoContextAction extends AbstractAction {
      * @param project the project the contextual action is called from.
      * @param antTask additional properties passed to the Ant task.
      */
-    public JaCoCoContextAction(Lookup context, Project project, String antTask) {
+    public JaCoCoActionOnAnt(Lookup context, Project project, String antTask) {
         this.project = project;
         this.antTask = antTask;
-        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
-        setEnabled(Utils.isProjectSupported(project));
     }
 
     public @Override

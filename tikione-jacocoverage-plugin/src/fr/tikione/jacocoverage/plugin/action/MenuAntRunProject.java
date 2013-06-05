@@ -1,5 +1,6 @@
-package fr.tikione.jacocoverage.plugin;
+package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.Utils;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileObject;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
@@ -31,8 +33,8 @@ import org.openide.util.actions.Presenter;
  * @author Jan Lahoda (patch https://github.com/jonathanlermitage/tikione-jacocoverage/pull/3)
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.RunProjectWithJaCoCoAction")
-@ActionRegistration(displayName = "#CTL_RunProjectWithJaCoCoAction",
+          id = "fr.tikione.jacocoverage.plugin.action.MenuAntRunProject")
+@ActionRegistration(displayName = "#CTL_MenuAntRunProject",
                     lazy = false,
                     asynchronous = true,
                     surviveFocusChange = true)
@@ -43,20 +45,22 @@ import org.openide.util.actions.Presenter;
     @ActionReference(path = "Shortcuts",
                      name = "F12")
 })
-@NbBundle.Messages("CTL_RunProjectWithJaCoCoAction=Run with JaCoCoverage")
-public class RunProjectWithJaCoCoAction
-        extends JaCoCoContextAction
+@NbBundle.Messages("CTL_MenuAntRunProject=Run with JaCoCoverage")
+public class MenuAntRunProject
+        extends JaCoCoActionOnAnt
         implements ContextAwareAction, LookupListener, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
-    public RunProjectWithJaCoCoAction() {
+    public MenuAntRunProject() {
         this(Utilities.actionsGlobalContext());
     }
 
-    public RunProjectWithJaCoCoAction(Lookup context) {
+    public MenuAntRunProject(Lookup context) {
         super(context, context.lookup(Project.class), "run");
-        putValue(Action.NAME, Bundle.CTL_RunProjectWithJaCoCoAction());
+        setEnabled(Utils.isProjectSupported(getProject()));
+        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+        putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());
         putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
         if (isEnabled()) { // Don't try to enable if project's type is not supported.
             FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
@@ -85,12 +89,14 @@ public class RunProjectWithJaCoCoAction
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        super.actionPerformed(ev);
+        if (isEnabled()) {
+            super.actionPerformed(ev);
+        }
     }
 
     @Override
     public Action createContextAwareInstance(Lookup context) {
-        return new RunProjectWithJaCoCoAction();
+        return new MenuAntRunProject();
     }
 
     @Override

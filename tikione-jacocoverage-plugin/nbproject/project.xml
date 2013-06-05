@@ -195,6 +195,7 @@
             </module-dependencies>
             <public-packages>
                 <package>fr.tikione.jacocoverage.plugin</package>
+                <package>fr.tikione.jacocoverage.plugin.action</package>
                 <package>fr.tikione.jacocoverage.plugin.anno</package>
                 <package>fr.tikione.jacocoverage.plugin.config</package>
             </public-packages>
