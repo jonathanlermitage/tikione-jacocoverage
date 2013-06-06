@@ -2,6 +2,9 @@ package fr.tikione.jacocoverage.plugin;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -10,8 +13,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.IOUtils;
 import org.netbeans.api.project.Project;
+import org.openide.util.Exceptions;
 
 /**
  * Some utilities.
@@ -163,5 +169,71 @@ public class Utils {
             }
         }
         return content;
+    }
+
+    /**
+     * Compress a file to Zip. The archive contains an entry named as the source file.
+     *
+     * @param src the source file to compress.
+     * @param dst the zipped output file.
+     * @param entryname the name of the entry stored in the zipped file.
+     * @param async if {@code true}, the compression process will be done in a separate parallel thread, otherwise the living thread.
+     */
+    public static void zip(final File src, final File dst, final String entryname, boolean async) {
+        if (async) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        zip(src, dst, entryname);
+                    } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                }
+            }).start();
+        } else {
+            try {
+                zip(src, dst, entryname);
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+    }
+
+    /**
+     * Compress a file to Zip. The archive contains an entry named as the source file
+     *
+     * @param src the source file to compress.
+     * @param dst the zipped output file.
+     * @param entryname the name of the entry stored in the zipped file.
+     * @throws FileNotFoundException if the source file doesn't exist.
+     * @throws IOException if an error occurs during compression.
+     */
+    private static void zip(File src, File dst, String entryname)
+            throws FileNotFoundException,
+                   IOException {
+        byte[] buffer = new byte[1024];
+        FileOutputStream dstStrm = new FileOutputStream(dst);
+        try {
+            ZipOutputStream zipStrm = new ZipOutputStream(dstStrm);
+            try {
+                FileInputStream srcStrm = new FileInputStream(src);
+                try {
+                    ZipEntry entry = new ZipEntry(entryname);
+                    zipStrm.putNextEntry(entry);
+                    int len;
+                    while ((len = srcStrm.read(buffer)) > 0) {
+                        zipStrm.write(buffer, 0, len);
+                    }
+                } finally {
+                    srcStrm.close();
+                }
+                zipStrm.closeEntry();
+            } finally {
+                zipStrm.close();
+            }
+        } finally {
+            dstStrm.close();
+        }
     }
 }

@@ -130,7 +130,7 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
                                         progr.setInitialDelay(400);
                                         progr.start();
                                         progr.switchToIndeterminate();
-                                        
+
                                         // Wait for the end of the Ant task execution. We do it in a new thread otherwise it would
                                         // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
                                         // object provided by the NetBeans platform is not correctly wrapped.
@@ -144,7 +144,7 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
                                             JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                             final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
                                             new File(prjDir + Globals.JACOCOVERAGE_DATA_DIR).mkdirs();
-                                            
+
                                             // Remove existing highlighting (from a previous coverage task), show reports and apply
                                             // highlighting on each Java source file.
                                             AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
@@ -176,8 +176,15 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
                                             }
                                             // Leave a copy of the JaCoCo XML report in project's result dir and clear tmp data.
                                             File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT_DIR);
+                                            File xmlreportZip = new File(prjDir + Globals.XMLZIP_BACKUP_REPORT_DIR);
+                                            File binreportZip = new File(prjDir + Globals.BINZIP_BACKUP_REPORT_DIR);
                                             xmlreportCpy.delete();
+                                            xmlreportZip.delete();
+                                            binreportZip.delete();
                                             org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);
+                                            Utils.zip(xmlreportCpy, xmlreportZip, Globals.XMLZIP_BACKUP_REPORT_ENTRY, false);
+                                            Utils.zip(binreport, binreportZip, Globals.BINZIP_BACKUP_REPORT_ENTRY, false);
+                                            xmlreportCpy.delete();
                                             binreport.delete();
 
                                             long et = System.currentTimeMillis();
