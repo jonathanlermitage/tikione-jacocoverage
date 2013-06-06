@@ -27,7 +27,7 @@ import org.openide.util.Utilities;
                     surviveFocusChange = true)
 @ActionReference(path = "Shortcuts",
                  name = "O-F12")
-@NbBundle.Messages("CTL_ShortcutAntTestProject=Test with JaCoCoverage")
+@NbBundle.Messages("CTL_ShortcutAntTestProject=Test Project with JaCoCoverage")
 public final class ShortcutAntTestProject
         extends JaCoCoActionOnAnt
         implements ContextAwareAction {
