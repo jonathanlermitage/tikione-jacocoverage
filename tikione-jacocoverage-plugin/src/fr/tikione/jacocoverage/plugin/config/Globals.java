@@ -76,8 +76,18 @@ public class Globals {
     /** The folder where JaCoCo HTML reports are generated. */
     public static final String HTML_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "report.html" + File.separator;
 
-    /** The file where JaCoCo XML reports are stored. */
+    /** The file where zipped JaCoCo binary reports are stored. */
+    public static final String BINZIP_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec.zip";
+
+    public static final String BINZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.exec";
+
+    /** The file where raw JaCoCo XML reports are stored. */
     public static final String XML_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
+
+    /** The file where zipped JaCoCo XML reports are stored. */
+    public static final String XMLZIP_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml.zip";
+
+    public static final String XMLZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.xml";
 
     public static final String PRJ_CFG = "project.properties";
 
