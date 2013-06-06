@@ -177,26 +177,18 @@ public class Utils {
      * @param src the source file to compress.
      * @param dst the zipped output file.
      * @param entryname the name of the entry stored in the zipped file.
-     * @param async if {@code true}, the compression process will be done in a separate parallel thread, otherwise the living thread.
+     * @param async if {@code true}, the compression process will be done in a separate parallel thread, otherwise the current thread.
      */
     public static void zip(final File src, final File dst, final String entryname, boolean async) {
         if (async) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        zip(src, dst, entryname);
-                    } catch (IOException ex) {
-                        Exceptions.printStackTrace(ex);
-                    }
+                    zip(src, dst, entryname);
                 }
             }).start();
         } else {
-            try {
-                zip(src, dst, entryname);
-            } catch (IOException ex) {
-                Exceptions.printStackTrace(ex);
-            }
+            zip(src, dst, entryname);
         }
     }
 
@@ -207,33 +199,34 @@ public class Utils {
      * @param dst the zipped output file.
      * @param entryname the name of the entry stored in the zipped file.
      * @throws FileNotFoundException if the source file doesn't exist.
-     * @throws IOException if an error occurs during compression.
      */
-    private static void zip(File src, File dst, String entryname)
-            throws FileNotFoundException,
-                   IOException {
+    private static void zip(File src, File dst, String entryname) {
         byte[] buffer = new byte[1024];
-        FileOutputStream dstStrm = new FileOutputStream(dst);
         try {
-            ZipOutputStream zipStrm = new ZipOutputStream(dstStrm);
+            FileOutputStream dstStrm = new FileOutputStream(dst);
             try {
-                FileInputStream srcStrm = new FileInputStream(src);
+                ZipOutputStream zipStrm = new ZipOutputStream(dstStrm);
                 try {
-                    ZipEntry entry = new ZipEntry(entryname);
-                    zipStrm.putNextEntry(entry);
-                    int len;
-                    while ((len = srcStrm.read(buffer)) > 0) {
-                        zipStrm.write(buffer, 0, len);
+                    FileInputStream srcStrm = new FileInputStream(src);
+                    try {
+                        ZipEntry entry = new ZipEntry(entryname);
+                        zipStrm.putNextEntry(entry);
+                        int len;
+                        while ((len = srcStrm.read(buffer)) > 0) {
+                            zipStrm.write(buffer, 0, len);
+                        }
+                    } finally {
+                        srcStrm.close();
                     }
+                    zipStrm.closeEntry();
                 } finally {
-                    srcStrm.close();
+                    zipStrm.close();
                 }
-                zipStrm.closeEntry();
             } finally {
-                zipStrm.close();
+                dstStrm.close();
             }
-        } finally {
-            dstStrm.close();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
     }
 }
