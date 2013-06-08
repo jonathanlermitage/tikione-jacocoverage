@@ -108,6 +108,15 @@ public class Config {
     }
 
     /**
+     * Get configuration value: what to do with JaCoCo workfiles.
+     *
+     * @return configuration value.
+     */
+    public static int getJaCoCoWorkfilesRule() {
+        return pref.getInt(Globals.PROP_JACOCOWORKFILES_RULE, Globals.DEF_JACOCOWORKFILES_RULE);
+    }
+
+    /**
      * Set configuration value: show latest news in configuration panel.
      *
      * @param agentArg configuration value.
@@ -168,5 +177,14 @@ public class Config {
      */
     public static void setTheme(int theme) {
         pref.putInt(Globals.PROP_THEME, theme);
+    }
+
+    /**
+     * Set configuration value: what to do with JaCoCo workfiles.
+     *
+     * @param themePrefix configuration value.
+     */
+    public static void setJaCoCoWorkfilesRule(int rule) {
+        pref.putInt(Globals.PROP_JACOCOWORKFILES_RULE, rule);
     }
 }

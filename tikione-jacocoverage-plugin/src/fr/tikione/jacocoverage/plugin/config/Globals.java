@@ -40,6 +40,9 @@ public class Globals {
     /** User preference: JaCoCoverage themePrefix. */
     public static final String PROP_THEME = "JaCoCoverage.Editor.Theme";
 
+    /** User preference: what to do with JaCoCo workfiles. */
+    public static final String PROP_JACOCOWORKFILES_RULE = "JaCoCoverage.JaCoCoWorkfiles.Rule";
+
     /** User preference: show a minimal textual JaCoCo report in a NetBeans console tab. */
     public static final String PROP_ENABLE_CONSOLE_REPORT = "JaCoCoverage.NbConsole.EnableReport";
 
@@ -61,6 +64,9 @@ public class Globals {
     /** Default configuration value: JaCoCoverage themePrefix. */
     public static final int DEF_THEME = 0;
 
+    /** Default configuration value: what to do with JaCoCo workfiles. */
+    public static final int DEF_JACOCOWORKFILES_RULE = 0; // 0: keep, 1: keep zipped, 2: delete
+
     /** Default configuration value: show a minimal textual JaCoCo report in a NetBeans console tab. */
     public static final boolean DEF_ENABLE_CONSOLE_REPORT = true;
 
@@ -77,15 +83,17 @@ public class Globals {
     public static final String HTML_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "report.html" + File.separator;
 
     /** The file where zipped JaCoCo binary reports are stored. */
-    public static final String BINZIP_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec.zip";
+    public static final String BINZIP_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec.zip";
+
+    public static final String BIN_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec";
 
     public static final String BINZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.exec";
 
     /** The file where raw JaCoCo XML reports are stored. */
-    public static final String XML_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
+    public static final String XML_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
 
     /** The file where zipped JaCoCo XML reports are stored. */
-    public static final String XMLZIP_BACKUP_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml.zip";
+    public static final String XMLZIP_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml.zip";
 
     public static final String XMLZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.xml";
 

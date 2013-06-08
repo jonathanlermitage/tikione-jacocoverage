@@ -31,7 +31,6 @@ import org.openide.execution.ExecutorTask;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Exceptions;
-import org.openide.util.Lookup;
 import org.openide.util.RequestProcessor;
 import org.openide.util.Utilities;
 import org.xml.sax.SAXException;
@@ -61,11 +60,10 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
     /**
      * Enable the context action on supported projects only.
      *
-     * @param context the context the action is called from.
      * @param project the project the contextual action is called from.
      * @param antTask additional properties passed to the Ant task.
      */
-    public JaCoCoActionOnAnt(Lookup context, Project project, String antTask) {
+    public JaCoCoActionOnAnt(Project project, String antTask) {
         this.project = project;
         this.antTask = antTask;
     }
@@ -174,18 +172,7 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
                                                     NBUtils.colorDoc(project, jclass);
                                                 }
                                             }
-                                            // Leave a copy of the JaCoCo XML report in project's result dir and clear tmp data.
-                                            File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT_DIR);
-                                            File xmlreportZip = new File(prjDir + Globals.XMLZIP_BACKUP_REPORT_DIR);
-                                            File binreportZip = new File(prjDir + Globals.BINZIP_BACKUP_REPORT_DIR);
-                                            xmlreportCpy.delete();
-                                            xmlreportZip.delete();
-                                            binreportZip.delete();
-                                            org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);
-                                            Utils.zip(xmlreportCpy, xmlreportZip, Globals.XMLZIP_BACKUP_REPORT_ENTRY, false);
-                                            Utils.zip(binreport, binreportZip, Globals.BINZIP_BACKUP_REPORT_ENTRY, false);
-                                            xmlreportCpy.delete();
-                                            binreport.delete();
+                                            keepJaCoCoWorkfiles(binreport, xmlreport, prjDir);
 
                                             long et = System.currentTimeMillis();
                                             LOGGER.log(Level.INFO, "Coverage Collection Task took: {0} ms", et - st);
@@ -223,6 +210,32 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
                 }
             }
         });
+    }
+
+    private void keepJaCoCoWorkfiles(File binreport, File xmlreport, String prjDir)
+            throws IOException {
+        File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT);
+        File xmlreportZip = new File(prjDir + Globals.XMLZIP_BACKUP_REPORT);
+        File binreportCpy = new File(prjDir + Globals.BIN_BACKUP_REPORT);
+        File binreportZip = new File(prjDir + Globals.BINZIP_BACKUP_REPORT);
+        xmlreportCpy.delete();
+        xmlreportZip.delete();
+        binreportCpy.delete();
+        binreportZip.delete();
+        switch (Config.getJaCoCoWorkfilesRule()) {
+            case 0:
+                org.apache.commons.io.FileUtils.moveFile(binreport, binreportCpy);
+                org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);
+                break;
+            case 1:
+                Utils.zip(binreport, binreportZip, Globals.BINZIP_BACKUP_REPORT_ENTRY, false);
+                Utils.zip(xmlreport, xmlreportZip, Globals.XMLZIP_BACKUP_REPORT_ENTRY, false);
+                break;
+            case 2:
+                break;
+        }
+        binreport.delete();
+        xmlreport.delete();
     }
 
     public Project getProject() {

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -124,6 +125,9 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxShowLatestNews = new JCheckBox();
         jLabelColorTheme = new JLabel();
         jComboBoxColorTheme = new JComboBox();
+        jLabelWorkfiles = new JLabel();
+        jComboBoxWorkfiles = new JComboBox();
+        jLabelWorkfilesTips = new JLabel();
 
         jButtonResoreDefaults.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_defaults.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -238,6 +242,12 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelColorTheme, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelColorTheme.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(jLabelWorkfiles, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfiles.text")); // NOI18N
+
+        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original JaCoCo workfiles", "keep zipped JaCoCo workfiles", "delete JaCoCo workfiles" }));
+
+        Mnemonics.setLocalizedText(jLabelWorkfilesTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfilesTips.text")); // NOI18N
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,18 +265,12 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonResoreDefaults))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAntTaskParams))
+                        .addComponent(jTextFieldAntTaskParams)
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxEnableConsoleReport)
@@ -274,15 +278,26 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                             .addComponent(jCheckBoxShowLatestNews)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jCheckBoxOpenHtmlReport)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jCheckBoxOpenHtmlReport))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBoxEnableHighlighting)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabelColorTheme)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelWorkfiles)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelWorkfilesTips)))
+                        .addGap(0, 58, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBoxEnableHighlighting)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelColorTheme)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -297,17 +312,22 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jCheckBoxEnableHtmlReport)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxOpenHtmlReport)
-                .addGap(21, 21, 21)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelWorkfiles)
+                    .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelWorkfilesTips))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(11, 11, 11)
                 .addComponent(jCheckBoxShowLatestNews)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonResoreDefaults)
@@ -331,6 +351,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxShowLatestNews.setSelected(Globals.DEF_SHOW_LATEST_NEWS);
         jComboBoxColorTheme.setSelectedIndex(Globals.DEF_THEME);
         jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+        jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
         showLatestNews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
@@ -378,6 +399,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxShowLatestNews.setSelected(Config.isShowLatestNews());
         jComboBoxColorTheme.setSelectedIndex(Config.getTheme());
         jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+        jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
         showLatestNews();
     }
 
@@ -390,6 +412,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
         Config.setOpenHtmlReport(jCheckBoxOpenHtmlReport.isSelected());
         Config.setShowLatestNews(jCheckBoxShowLatestNews.isSelected());
         Config.setTheme(jComboBoxColorTheme.getSelectedIndex());
+        Config.setJaCoCoWorkfilesRule(jComboBoxWorkfiles.getSelectedIndex());
         Config.flush();
     }
 
@@ -435,9 +458,12 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxOpenHtmlReport;
     private JCheckBox jCheckBoxShowLatestNews;
     private JComboBox jComboBoxColorTheme;
+    private JComboBox jComboBoxWorkfiles;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
     private JLabel jLabelColorTheme;
+    private JLabel jLabelWorkfiles;
+    private JLabel jLabelWorkfilesTips;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreaLatestNews;
     private JTextField jTextFieldAntTaskParams;
