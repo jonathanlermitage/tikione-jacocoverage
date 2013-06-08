@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Properties;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
-import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -52,7 +51,7 @@ public class MenuAntRunProject
     }
 
     public MenuAntRunProject(Lookup context) {
-        super(context.lookup(Project.class), "run");
+        super("run");
         setEnabled(Utils.isProjectSupported(getProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());

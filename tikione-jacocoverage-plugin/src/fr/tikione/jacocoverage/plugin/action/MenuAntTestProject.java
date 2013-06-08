@@ -5,7 +5,6 @@ import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
-import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -46,7 +45,7 @@ public final class MenuAntTestProject
     }
 
     public MenuAntTestProject(Lookup context) {
-        super(context.lookup(Project.class), "test");
+        super("test");
         setEnabled(Utils.isProjectSupported(getProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntTestProject());

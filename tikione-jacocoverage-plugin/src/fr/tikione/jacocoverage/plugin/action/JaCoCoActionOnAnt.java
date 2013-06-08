@@ -9,6 +9,7 @@ import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
 import fr.tikione.jacocoverage.plugin.config.Config;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,17 +40,17 @@ import org.xml.sax.SAXException;
  * A toolkit that launches Ant tasks with the JaCoCo JavaAgent, colorizes Java source files and shows a coverage report.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqRequestProcessor">DevFaqRequestProcessor</a> for NetBeans threading tweaks.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionContextSensitive">DevFaqActionContextSensitive</a> for context action tweaks.
+ * <br/>See <a href="http://wiki.netbeans.org/DevFaqAddGlobalContext">DevFaqAddGlobalContext</a> for global context and project tweaks.
  *
  * @author Jonathan Lermitage
  */
-public abstract class JaCoCoActionOnAnt extends AbstractAction {
+public abstract class JaCoCoActionOnAnt
+        extends AbstractAction
+        implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(JaCoCoActionOnAnt.class.getName());
-
-    /** The project the contextual action is called from. */
-    private final Project project;
 
     /** Additional properties passed to the Ant task. */
     private final Properties addAntTargetProps = new Properties();
@@ -63,13 +64,13 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
      * @param project the project the contextual action is called from.
      * @param antTask additional properties passed to the Ant task.
      */
-    public JaCoCoActionOnAnt(Project project, String antTask) {
-        this.project = project;
+    public JaCoCoActionOnAnt(String antTask) {
         this.antTask = antTask;
     }
 
     public @Override
     void actionPerformed(ActionEvent ae) {
+        final Project project = getProject();
         new RequestProcessor("JaCoCoverage Action Task", 3, true).post(new Runnable() {
             @Override
             public void run() {
@@ -239,7 +240,7 @@ public abstract class JaCoCoActionOnAnt extends AbstractAction {
     }
 
     public Project getProject() {
-        return project;
+        return Utilities.actionsGlobalContext().lookup(Project.class);
     }
 
     public Properties getAddAntTargetProps() {

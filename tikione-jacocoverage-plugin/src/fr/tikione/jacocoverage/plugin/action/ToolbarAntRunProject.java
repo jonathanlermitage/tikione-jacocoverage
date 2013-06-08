@@ -46,14 +46,15 @@ public class ToolbarAntRunProject
     }
 
     public ToolbarAntRunProject(Lookup context) {
-        super(context.lookup(Project.class), "run");
+        super("run");
         putValue(Action.NAME, Bundle.CTL_ToolbarAntRunProject());
     }
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (Utils.isProjectSupported(getProject())) {
-            FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
+        Project prj = getProject();
+        if (Utils.isProjectSupported(prj)) {
+            FileObject prjPropsFo = prj.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
             InputStream ins = null;
             try {

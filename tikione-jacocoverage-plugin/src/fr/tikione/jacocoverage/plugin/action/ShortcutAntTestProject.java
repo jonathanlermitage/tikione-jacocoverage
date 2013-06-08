@@ -3,7 +3,6 @@ package fr.tikione.jacocoverage.plugin.action;
 import fr.tikione.jacocoverage.plugin.Utils;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
-import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -39,7 +38,7 @@ public final class ShortcutAntTestProject
     }
 
     public ShortcutAntTestProject(Lookup context) {
-        super(context.lookup(Project.class), "test");
+        super("test");
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ShortcutAntTestProject());
     }

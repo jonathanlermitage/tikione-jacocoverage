@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import javax.swing.Action;
-import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -44,7 +43,7 @@ public class ShortcutAntRunProject
     }
 
     public ShortcutAntRunProject(Lookup context) {
-        super(context.lookup(Project.class), "run");
+        super("run");
         putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());
     }
 
