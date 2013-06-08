@@ -52,7 +52,7 @@ public class MenuAntRunProject
     }
 
     public MenuAntRunProject(Lookup context) {
-        super(context, context.lookup(Project.class), "run");
+        super(context.lookup(Project.class), "run");
         setEnabled(Utils.isProjectSupported(getProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());

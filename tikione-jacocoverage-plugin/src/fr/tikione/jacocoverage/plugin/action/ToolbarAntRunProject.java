@@ -46,7 +46,7 @@ public class ToolbarAntRunProject
     }
 
     public ToolbarAntRunProject(Lookup context) {
-        super(context, context.lookup(Project.class), "run");
+        super(context.lookup(Project.class), "run");
         putValue(Action.NAME, Bundle.CTL_ToolbarAntRunProject());
     }
 

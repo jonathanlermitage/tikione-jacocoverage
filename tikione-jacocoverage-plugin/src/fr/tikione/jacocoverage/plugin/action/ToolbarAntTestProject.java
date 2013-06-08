@@ -42,7 +42,7 @@ public class ToolbarAntTestProject
     }
 
     public ToolbarAntTestProject(Lookup context) {
-        super(context, context.lookup(Project.class), "test");
+        super(context.lookup(Project.class), "test");
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ShortcutAntTestProject());
     }

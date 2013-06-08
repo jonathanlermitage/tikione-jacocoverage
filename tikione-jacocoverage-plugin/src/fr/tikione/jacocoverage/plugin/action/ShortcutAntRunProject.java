@@ -44,7 +44,7 @@ public class ShortcutAntRunProject
     }
 
     public ShortcutAntRunProject(Lookup context) {
-        super(context, context.lookup(Project.class), "run");
+        super(context.lookup(Project.class), "run");
         putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());
     }
 

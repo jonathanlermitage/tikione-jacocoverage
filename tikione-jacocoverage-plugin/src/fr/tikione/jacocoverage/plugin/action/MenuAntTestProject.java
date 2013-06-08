@@ -46,7 +46,7 @@ public final class MenuAntTestProject
     }
 
     public MenuAntTestProject(Lookup context) {
-        super(context, context.lookup(Project.class), "test");
+        super(context.lookup(Project.class), "test");
         setEnabled(Utils.isProjectSupported(getProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntTestProject());
