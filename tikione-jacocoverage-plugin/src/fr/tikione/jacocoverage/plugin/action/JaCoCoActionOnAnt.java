@@ -58,7 +58,6 @@ public abstract class JaCoCoActionOnAnt
     /**
      * Enable the context action on supported projects only.
      *
-     * @param project the project the contextual action is called from.
      * @param antTask additional properties passed to the Ant task.
      */
     public JaCoCoActionOnAnt(String antTask) {

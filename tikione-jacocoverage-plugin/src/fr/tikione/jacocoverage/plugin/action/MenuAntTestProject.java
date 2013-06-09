@@ -34,7 +34,7 @@ import org.openide.util.actions.Presenter;
                  position = 1985,
                  separatorAfter = 1986)
 @NbBundle.Messages("CTL_MenuAntTestProject=Test with JaCoCoverage")
-public final class MenuAntTestProject
+public class MenuAntTestProject
         extends JaCoCoActionOnAnt
         implements ContextAwareAction, LookupListener, Presenter.Popup {
 
