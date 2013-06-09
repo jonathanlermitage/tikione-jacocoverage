@@ -1,4 +1,4 @@
-package fr.tikione.jacocoverage.plugin;
+package fr.tikione.jacocoverage.plugin.util;
 
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;

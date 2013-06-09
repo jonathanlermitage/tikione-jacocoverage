@@ -1,7 +1,7 @@
 package fr.tikione.jacocoverage.plugin.config;
 
-import fr.tikione.jacocoverage.plugin.NBUtils;
-import fr.tikione.jacocoverage.plugin.Utils;
+import fr.tikione.jacocoverage.plugin.util.NBUtils;
+import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -25,8 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.ListCellRenderer;
-import static javax.swing.SwingConstants.CENTER;
-import static javax.swing.SwingConstants.LEFT;
+import javax.swing.SwingConstants;
 import org.apache.commons.io.IOUtils;
 import org.openide.awt.Mnemonics;
 import org.openide.util.Exceptions;
@@ -426,8 +425,8 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
 
         ComboBoxRenderer() {
             setOpaque(true);
-            setHorizontalAlignment(LEFT);
-            setVerticalAlignment(CENTER);
+            setHorizontalAlignment(SwingConstants.LEFT);
+            setVerticalAlignment(SwingConstants.CENTER);
         }
 
         @Override

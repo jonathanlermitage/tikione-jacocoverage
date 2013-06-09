@@ -1,8 +1,8 @@
 package fr.tikione.jacocoverage.plugin.action;
 
-import fr.tikione.jacocoverage.plugin.NBUtils;
-import fr.tikione.jacocoverage.plugin.Utils;
 import fr.tikione.jacocoverage.plugin.config.Globals;
+import fr.tikione.jacocoverage.plugin.util.NBUtils;
+import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import javax.swing.JMenuItem;

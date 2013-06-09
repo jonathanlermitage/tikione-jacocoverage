@@ -1,4 +1,4 @@
-package fr.tikione.jacocoverage.plugin;
+package fr.tikione.jacocoverage.plugin.util;
 
 import java.io.File;
 import java.io.FileFilter;
