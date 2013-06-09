@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import fr.tikione.jacocoverage.plugin.Utils;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -20,7 +22,6 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 import org.openide.util.actions.Presenter;
 
 /**
@@ -47,17 +48,14 @@ public class MenuAntRunProject
     private static final long serialVersionUID = 1L;
 
     public MenuAntRunProject() {
-        this(Utilities.actionsGlobalContext());
-    }
-
-    public MenuAntRunProject(Lookup context) {
         super("run");
-        setEnabled(Utils.isProjectSupported(getProject()));
+        Project project = NBUtils.getSelectedProject();
+        setEnabled(Utils.isProjectSupported(project));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());
         putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.RUN_ICON, false));
         if (isEnabled()) { // Don't try to enable if project's type is not supported.
-            FileObject prjPropsFo = getProject().getProjectDirectory().getFileObject("nbproject/project.properties");
+            FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
             InputStream ins = null;
             try {

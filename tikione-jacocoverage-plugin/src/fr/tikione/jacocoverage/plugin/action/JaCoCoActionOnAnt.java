@@ -52,9 +52,6 @@ public abstract class JaCoCoActionOnAnt
 
     private static final Logger LOGGER = Logger.getLogger(JaCoCoActionOnAnt.class.getName());
 
-    /** Additional properties passed to the Ant task. */
-    private final Properties addAntTargetProps = new Properties();
-
     /** The Ant task to launch. */
     private final String antTask;
 
@@ -70,7 +67,7 @@ public abstract class JaCoCoActionOnAnt
 
     public @Override
     void actionPerformed(ActionEvent ae) {
-        final Project project = getProject();
+        final Project project = NBUtils.getSelectedProject();
         new RequestProcessor("JaCoCoverage Action Task", 3, true).post(new Runnable() {
             @Override
             public void run() {
@@ -113,7 +110,6 @@ public abstract class JaCoCoActionOnAnt
                             // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
                             // appended to the existing list of JVM arguments that is given to the Ant task.
                             Properties targetProps = env.getProperties();
-                            targetProps.putAll(addAntTargetProps);
                             String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
                             targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                             env.setProperties(targetProps);
@@ -237,13 +233,5 @@ public abstract class JaCoCoActionOnAnt
         }
         binreport.delete();
         xmlreport.delete();
-    }
-
-    public Project getProject() {
-        return Utilities.actionsGlobalContext().lookup(Project.class);
-    }
-
-    public Properties getAddAntTargetProps() {
-        return addAntTargetProps;
     }
 }

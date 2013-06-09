@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import fr.tikione.jacocoverage.plugin.Utils;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
@@ -10,7 +11,6 @@ import org.openide.awt.DynamicMenuContent;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 
 /**
  * The "Test with JaCoCoverage" shortcut action registration.
@@ -34,10 +34,6 @@ public final class ShortcutAntTestProject
     private static final long serialVersionUID = 1L;
 
     public ShortcutAntTestProject() {
-        this(Utilities.actionsGlobalContext());
-    }
-
-    public ShortcutAntTestProject(Lookup context) {
         super("test");
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ShortcutAntTestProject());
@@ -45,13 +41,13 @@ public final class ShortcutAntTestProject
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (Utils.isProjectSupported(getProject())) {
+        if (Utils.isProjectSupported(NBUtils.getSelectedProject())) {
             super.actionPerformed(ev);
         }
     }
 
     @Override
     public Action createContextAwareInstance(Lookup context) {
-        return new ShortcutAntTestProject(context);
+        return new ShortcutAntTestProject();
     }
 }

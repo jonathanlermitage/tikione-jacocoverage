@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import fr.tikione.jacocoverage.plugin.Utils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +12,10 @@ import org.netbeans.api.project.Project;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
+import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileObject;
-import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
-import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 
 /**
  * The "Run with JaCoCoverage" toolbar action registration.
@@ -37,24 +36,21 @@ import org.openide.util.Utilities;
 @NbBundle.Messages("CTL_ToolbarAntRunProject=Run Project with JaCoCoverage")
 public class ToolbarAntRunProject
         extends JaCoCoActionOnAnt
-        implements ContextAwareAction, ActionListener {
+        implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
     public ToolbarAntRunProject() {
-        this(Utilities.actionsGlobalContext());
-    }
-
-    public ToolbarAntRunProject(Lookup context) {
         super("run");
+        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, false);
         putValue(Action.NAME, Bundle.CTL_ToolbarAntRunProject());
     }
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        Project prj = getProject();
-        if (Utils.isProjectSupported(prj)) {
-            FileObject prjPropsFo = prj.getProjectDirectory().getFileObject("nbproject/project.properties");
+        Project project = NBUtils.getSelectedProject();
+        if (Utils.isProjectSupported(project)) {
+            FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
             InputStream ins = null;
             try {
@@ -76,10 +72,5 @@ public class ToolbarAntRunProject
                 }
             }
         }
-    }
-
-    @Override
-    public Action createContextAwareInstance(Lookup context) {
-        return new ToolbarAntRunProject();
     }
 }

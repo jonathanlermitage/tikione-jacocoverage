@@ -30,6 +30,7 @@ import org.openide.nodes.Node;
 import org.openide.text.Line;
 import org.openide.text.NbDocument;
 import org.openide.util.Exceptions;
+import org.openide.util.Utilities;
 import org.openide.windows.IOProvider;
 
 /**
@@ -238,5 +239,9 @@ public class NBUtils {
      */
     public static String getProjectName(Project project) {
         return ProjectUtils.getInformation(project).getName();
+    }
+
+    public static Project getSelectedProject() {
+        return Utilities.actionsGlobalContext().lookup(Project.class);
     }
 }

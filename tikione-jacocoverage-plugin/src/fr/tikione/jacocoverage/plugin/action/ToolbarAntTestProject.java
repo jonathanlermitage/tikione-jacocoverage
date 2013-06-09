@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import fr.tikione.jacocoverage.plugin.Utils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,10 +9,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.awt.DynamicMenuContent;
-import org.openide.util.ContextAwareAction;
-import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 
 /**
  * The "Test with JaCoCoverage" toolbar action registration.
@@ -32,29 +30,20 @@ import org.openide.util.Utilities;
 @NbBundle.Messages("CTL_ToolbarAntTestProject=Test Project with JaCoCoverage")
 public class ToolbarAntTestProject
         extends JaCoCoActionOnAnt
-        implements ContextAwareAction, ActionListener {
+        implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
     public ToolbarAntTestProject() {
-        this(Utilities.actionsGlobalContext());
-    }
-
-    public ToolbarAntTestProject(Lookup context) {
         super("test");
-        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, false);
         putValue(Action.NAME, Bundle.CTL_ShortcutAntTestProject());
     }
 
     @Override
     public void actionPerformed(ActionEvent ev) {
-        if (Utils.isProjectSupported(getProject())) {
+        if (Utils.isProjectSupported(NBUtils.getSelectedProject())) {
             super.actionPerformed(ev);
         }
-    }
-
-    @Override
-    public Action createContextAwareInstance(Lookup context) {
-        return new ToolbarAntTestProject(context);
     }
 }

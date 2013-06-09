@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.NBUtils;
 import fr.tikione.jacocoverage.plugin.Utils;
 import fr.tikione.jacocoverage.plugin.config.Globals;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,6 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
-import org.openide.util.Utilities;
 import org.openide.util.actions.Presenter;
 
 /**
@@ -41,12 +41,8 @@ public final class MenuAntTestProject
     private static final long serialVersionUID = 1L;
 
     public MenuAntTestProject() {
-        this(Utilities.actionsGlobalContext());
-    }
-
-    public MenuAntTestProject(Lookup context) {
         super("test");
-        setEnabled(Utils.isProjectSupported(getProject()));
+        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntTestProject());
         putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
@@ -61,7 +57,7 @@ public final class MenuAntTestProject
 
     @Override
     public Action createContextAwareInstance(Lookup context) {
-        return new MenuAntTestProject(context);
+        return new MenuAntTestProject();
     }
 
     @Override
