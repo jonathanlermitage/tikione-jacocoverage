@@ -7,7 +7,6 @@ import javax.swing.Action;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
-import org.openide.awt.DynamicMenuContent;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -35,7 +34,6 @@ public final class ShortcutAntTestProject
 
     public ShortcutAntTestProject() {
         super("test");
-        putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ShortcutAntTestProject());
     }
 

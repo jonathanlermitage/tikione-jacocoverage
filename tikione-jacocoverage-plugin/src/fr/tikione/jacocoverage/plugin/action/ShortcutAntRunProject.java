@@ -41,7 +41,7 @@ public class ShortcutAntRunProject
 
     public ShortcutAntRunProject() {
         super("run");
-        putValue(Action.NAME, Bundle.CTL_MenuAntRunProject());
+        putValue(Action.NAME, Bundle.CTL_ShortcutAntRunProject());
     }
 
     @Override
