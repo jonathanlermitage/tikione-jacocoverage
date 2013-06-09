@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 OpenIDE-Module: fr.tikione.jacocoverage.plugin/1
 OpenIDE-Module-Layer: fr/tikione/jacocoverage/plugin/layer.xml
 OpenIDE-Module-Localizing-Bundle: fr/tikione/jacocoverage/plugin/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.2.1.20130609.1851
+OpenIDE-Module-Specification-Version: 1.2.1.20130609.2228
 OpenIDE-Module-Needs: org.openide.filesystems.FileUtil.toFileObject
