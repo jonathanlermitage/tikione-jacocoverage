@@ -1,5 +1,11 @@
 ## JaCoCoverage Change Log
 
+### Latest Development Build (2013-06-09)
+* added an option to keep JaCoCo binary and XML report files, in their original form or compressed with Zip format.
+* updated JaCoCo library to 0.6.3.
+* removed Lombok 0.11.8 lib since it is not compatible with JDK8 compiler.
+* removed registration of JaCoCo Ant Library into NetBeans.
+
 ### Version 1.2.0.20130602.325 (2013-06-02)
 * improved code highlighting with glyphs in left margin and additional information in lines tooltips.
 * stabilization and optimization: JaCoCoverage task now runs with a RequestProcessor limited to 3 maximum threads.
