@@ -47,6 +47,7 @@ public class NBUtils {
      * Close a NetBeans console tab.
      *
      * @param tabName the name on the tab.
+     * @throws IOException if an I/O error occurs.
      */
     public static void closeConsoleTab(String tabName)
             throws IOException {
@@ -132,7 +133,7 @@ public class NBUtils {
     /**
      * launch the default browser to display an URL.
      *
-     * @param uri the URL to display.
+     * @param url the URL to display.
      */
     public static void extBrowser(String url) {
         try {
