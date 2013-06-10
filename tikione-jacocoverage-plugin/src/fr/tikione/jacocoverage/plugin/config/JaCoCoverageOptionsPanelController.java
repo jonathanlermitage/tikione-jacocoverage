@@ -19,7 +19,7 @@ import org.openide.util.NbBundle;
         keywords = "#AdvancedOption_Keywords_JaCoCoverage",
         keywordsCategory = "Java/JaCoCoverage")
 @NbBundle.Messages({"AdvancedOption_DisplayName_JaCoCoverage=JaCoCoverage", "AdvancedOption_Keywords_JaCoCoverage=jacoco"})
-public final class JaCoCoverageOptionsPanelController extends OptionsPanelController {
+public class JaCoCoverageOptionsPanelController extends OptionsPanelController {
 
     private JaCoCoveragePanel panel;
 

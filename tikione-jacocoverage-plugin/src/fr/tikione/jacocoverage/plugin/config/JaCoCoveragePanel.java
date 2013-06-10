@@ -37,7 +37,7 @@ import org.openide.util.RequestProcessor;
  *
  * @author Jonathan Lermitage
  */
-final class JaCoCoveragePanel extends javax.swing.JPanel {
+class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,7 +49,7 @@ final class JaCoCoveragePanel extends javax.swing.JPanel {
             ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_default.png"));
             ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_norwaytoday.png"));
             thNetBeansImg.setDescription("NetBeans (default)");
-            thNorwaytoday.setDescription("Norway Today (dark)");
+            thNorwaytoday.setDescription("Norway Today");
             jComboBoxColorTheme.addItem(thNetBeansImg);
             jComboBoxColorTheme.addItem(thNorwaytoday);
         } catch (IOException ex) {

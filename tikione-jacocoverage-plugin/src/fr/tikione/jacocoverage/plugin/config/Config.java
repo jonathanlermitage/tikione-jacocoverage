@@ -119,7 +119,7 @@ public class Config {
     /**
      * Set configuration value: show latest news in configuration panel.
      *
-     * @param agentArg configuration value.
+     * @param show configuration value.
      */
     public static void setShowLatestNews(boolean show) {
         pref.putBoolean(Globals.PROP_SHOW_LATEST_NEWS, show);
@@ -173,7 +173,7 @@ public class Config {
     /**
      * Set configuration value: JaCoCoverage themePrefix.
      *
-     * @param themePrefix configuration value.
+     * @param theme configuration value.
      */
     public static void setTheme(int theme) {
         pref.putInt(Globals.PROP_THEME, theme);
@@ -182,7 +182,7 @@ public class Config {
     /**
      * Set configuration value: what to do with JaCoCo workfiles.
      *
-     * @param themePrefix configuration value.
+     * @param rule configuration value.
      */
     public static void setJaCoCoWorkfilesRule(int rule) {
         pref.putInt(Globals.PROP_JACOCOWORKFILES_RULE, rule);
