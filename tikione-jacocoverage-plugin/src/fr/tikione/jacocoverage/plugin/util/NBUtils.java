@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -243,6 +244,14 @@ public class NBUtils {
     }
 
     public static Project getSelectedProject() {
-        return Utilities.actionsGlobalContext().lookup(Project.class);
+        //return Utilities.actionsGlobalContext().lookup(Project.class);
+        Project project;
+        Collection<? extends Project> prjs = Utilities.actionsGlobalContext().lookupAll(Project.class);
+        if (prjs.size() == 1) {
+            project = prjs.iterator().next();
+        } else {
+            project = null;
+        }
+        return project;
     }
 }
