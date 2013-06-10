@@ -20,6 +20,8 @@ public class Globals {
     @StaticResource
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
 
+    /** Color themes are associated to XML configuration files: here are their filename prefix.
+     See the {@code fr.tikione.jacocoverage.plugin.resources} package for XML configuration files. */
     public static final List<String> THEME_PREFIX = Arrays.asList("", "norwaytoday__");
 
     /** The URL of remote file describing JaCoCoverage latest news. */
@@ -82,21 +84,25 @@ public class Globals {
     /** The folder where JaCoCo HTML reports are generated. */
     public static final String HTML_REPORT_DIR = JACOCOVERAGE_DATA_DIR + "report.html" + File.separator;
 
-    /** The file where zipped JaCoCo binary reports are stored. */
-    public static final String BINZIP_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec.zip";
-
-    public static final String BIN_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec";
-
+    /** The name of the entry stored in the zipped JaCoCo binary report. */
     public static final String BINZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.exec";
 
-    /** The file where raw JaCoCo XML reports are stored. */
-    public static final String XML_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
+    /** The name of the entry stored in the zipped JaCoCo XML report. */
+    public static final String XMLZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.xml";
+
+    /** The file where zipped JaCoCo binary reports are stored. */
+    public static final String BINZIP_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec.zip";
 
     /** The file where zipped JaCoCo XML reports are stored. */
     public static final String XMLZIP_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml.zip";
 
-    public static final String XMLZIP_BACKUP_REPORT_ENTRY = "jacoco.latest.xml";
+    /** The file where raw JaCoCo reports are stored. */
+    public static final String BIN_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.exec";
 
+    /** The file where XML JaCoCo reports are stored. */
+    public static final String XML_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
+
+    /** Project's JaCoCoverage properties. */
     public static final String PRJ_CFG = "project.properties";
 
     private Globals() {
