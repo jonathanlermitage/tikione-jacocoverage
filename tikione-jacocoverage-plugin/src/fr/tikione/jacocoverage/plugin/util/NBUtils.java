@@ -243,15 +243,28 @@ public class NBUtils {
         return ProjectUtils.getInformation(project).getName();
     }
 
+    /**
+     * Get the selected project. Return null if multiple projects are selected.
+     *
+     * @return the selected project or null if none or many.
+     */
     public static Project getSelectedProject() {
-        //return Utilities.actionsGlobalContext().lookup(Project.class);
         Project project;
-        Collection<? extends Project> prjs = Utilities.actionsGlobalContext().lookupAll(Project.class);
+        Collection<? extends Project> prjs = getAllSelectedProjects();
         if (prjs.size() == 1) {
             project = prjs.iterator().next();
         } else {
             project = null;
         }
         return project;
+    }
+
+    /**
+     * Get every selected projects.
+     *
+     * @return the selected projects.
+     */
+    public static Collection<? extends Project> getAllSelectedProjects() {
+        return Utilities.actionsGlobalContext().lookupAll(Project.class);
     }
 }
