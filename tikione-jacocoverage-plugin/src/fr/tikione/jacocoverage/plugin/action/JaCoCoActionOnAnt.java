@@ -147,8 +147,7 @@ public abstract class JaCoCoActionOnAnt
                             if (0 == executeRes && binreport.exists()) {
                                 long st = System.currentTimeMillis();
                                 // Load the generated JaCoCo coverage report.
-                                File classDir = new File(
-                                        prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
+                                File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
                                 File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
                                 JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
                                 final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
@@ -167,12 +166,10 @@ public abstract class JaCoCoActionOnAnt
                                 }
                                 if (enblHtmlReport) {
                                     reportdir.mkdirs();
-                                    String report = JaCoCoReportAnalyzer.toHtmlReport(
-                                            binreport, reportdir, classDir, srcDir, prjname);
+                                    String report = JaCoCoReportAnalyzer.toHtmlReport(binreport, reportdir, classDir, srcDir, prjname);
                                     if (openHtmlReport) {
                                         try {
-                                            HtmlBrowser.URLDisplayer.getDefault().showURL(
-                                                    Utilities.toURI(new File(report)).toURL());
+                                            HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
                                         } catch (MalformedURLException ex) {
                                             Exceptions.printStackTrace(ex);
                                         }
