@@ -80,10 +80,26 @@ public abstract class JaCoCoActionOnAnt
         });
     }
 
-    private void runJacocoAnttask(final Project project) {
+    /**
+     * Run an Ant task with JaCoCo Ant subtask, collect and display coverage data.
+     *
+     * @param project the project to launch Ant target from.
+     * @throws IOException if an I/O error occurs.
+     */
+    private void runJacocoAnttask(final Project project)
+            throws IOException {
         // TODO for GitHub #5 (https://github.com/jonathanlermitage/tikione-jacocoverage/issues/5).
     }
 
+    /**
+     * Run an Ant task with a JaCoCo Java Agent, collect and display coverage data.
+     *
+     * @param project the project to launch Ant target from.
+     * @throws IOException if an I/O error occurs.
+     * @deprecated prefer {@link #runJacocoAnttask(org.netbeans.api.project.Project) method since the JaCoCo Java Agent has
+     *             been replaced by an Ant task.
+     */
+    @Deprecated
     private void runJacocoJavaagent(final Project project)
             throws IOException {
         // Retrieve JaCoCoverage preferences.
@@ -213,6 +229,14 @@ public abstract class JaCoCoActionOnAnt
         }
     }
 
+    /**
+     *
+     * 
+     * @param binreport
+     * @param xmlreport
+     * @param prjDir
+     * @throws IOException
+     */
     private void keepJaCoCoWorkfiles(File binreport, File xmlreport, String prjDir)
             throws IOException {
         File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT);
