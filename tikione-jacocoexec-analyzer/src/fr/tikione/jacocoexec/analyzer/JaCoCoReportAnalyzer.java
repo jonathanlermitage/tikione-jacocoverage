@@ -72,6 +72,7 @@ public class JaCoCoReportAnalyzer {
      * @param reportdir the folder to store HTML report.
      * @param prjClassesDir the directory containing project's compiled classes.
      * @param prjSourcesDir the directory containing project's Java source files.
+     * @param projectName the project's name.
      * @return the absolute path of HTML report's {@code index.html} file.
      * @throws FileNotFoundException if the JaCoCo binary report, compiled classes or Java sources files directory can't be found.
      * @throws IOException if an I/O error occurs.
@@ -153,6 +154,7 @@ public class JaCoCoReportAnalyzer {
      *
      * @param coverageData the JaCoCo coverage data to show.
      * @param tabName the name of the NetBeans console tab to open.
+     * @throws IOException if a NetBeans console related error occurs.
      */
     public static void toConsoleReport(Map<String, JavaClass> coverageData, String tabName)
             throws IOException {
