@@ -26,10 +26,10 @@ import org.openide.util.Exceptions;
  */
 public class Utils {
 
-    /** Regex to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    /** Regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
     private static final String PA_NBPROPKEY_SHORTCUT = "\\$\\{([^\\}]+)\\}";
 
-    /** Compiled regex to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    /** Compiled regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
     private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
 
     private Utils() {
@@ -66,7 +66,7 @@ public class Utils {
     }
 
     /**
-     * Get the JaCoCo bnary report file of the given project.
+     * Get the JaCoCo binary report file of the given project.
      *
      * @param project the project to get JaCoCo report file.
      * @return the JaCoCo report file.
@@ -108,7 +108,7 @@ public class Utils {
 
     /**
      * Indicate if a project is supported by JaCoCoverage.
-     * See http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes for help.
+     * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes">DevFaqActionAllAvailableProjectTypes</a> for help.
      *
      * @param project the project.
      * @return true if supported, otherwise false.
