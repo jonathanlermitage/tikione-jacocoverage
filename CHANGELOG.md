@@ -7,6 +7,7 @@
 * removed Lombok 0.11.8 lib since it is not compatible with JDK8 compiler.
 * removed registration of JaCoCo Ant Library into NetBeans.
 * disabled JaCoCoverage action items when multiple projects are selected.
+* *built with NetBeans 7.3.1 and Oracle JDK6.*
 
 ### Version 1.2.0.20130602.325 (2013-06-02)
 * improved code highlighting with glyphs in left margin and additional information in lines tooltips.
