@@ -1,6 +1,7 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Build (2013-06-10)
+### Version 1.2.1.20130612.1950 (2013-06-12)
+* fixed: hide action menu items when disabled.
 * added an option to keep JaCoCo binary and XML report files, in their original form or compressed with Zip format.
 * updated JaCoCo library to 0.6.3.
 * removed Lombok 0.11.8 lib since it is not compatible with JDK8 compiler.

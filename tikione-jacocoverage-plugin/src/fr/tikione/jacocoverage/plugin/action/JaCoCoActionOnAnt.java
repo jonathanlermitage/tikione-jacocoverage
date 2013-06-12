@@ -55,6 +55,9 @@ public abstract class JaCoCoActionOnAnt
     /** The Ant task to launch. */
     private final String antTask;
 
+    /** Additional properties passed to the Ant task. */
+    private final Properties addAntTargetProps = new Properties();
+
     /**
      * Enable the context action on supported projects only.
      *
@@ -96,10 +99,8 @@ public abstract class JaCoCoActionOnAnt
      *
      * @param project the project to launch Ant target from.
      * @throws IOException if an I/O error occurs.
-     * @deprecated prefer {@link #runJacocoAnttask(org.netbeans.api.project.Project) method since the JaCoCo Java Agent has
-     *             been replaced by an Ant task.
      */
-    @Deprecated
+//    @Deprecated
     private void runJacocoJavaagent(final Project project)
             throws IOException {
         // Retrieve JaCoCoverage preferences.
@@ -140,6 +141,7 @@ public abstract class JaCoCoActionOnAnt
                 // Add the customized JaCoCo JavaAgent to the JVM arguments given to the Ant task. The JaCoCo JavaAgent is
                 // appended to the existing list of JVM arguments that is given to the Ant task.
                 Properties targetProps = env.getProperties();
+                targetProps.putAll(addAntTargetProps);
                 String prjJvmArgs = Utils.getProperty(prjProps, "run.jvmargs");
                 targetProps.put("run.jvmargs", prjJvmArgs + "  -javaagent:" + antTaskJavaagentParam);
                 env.setProperties(targetProps);
@@ -261,5 +263,9 @@ public abstract class JaCoCoActionOnAnt
         }
         binreport.delete();
         xmlreport.delete();
+    }
+
+    public Properties getAddAntTargetProps() {
+        return addAntTargetProps;
     }
 }
