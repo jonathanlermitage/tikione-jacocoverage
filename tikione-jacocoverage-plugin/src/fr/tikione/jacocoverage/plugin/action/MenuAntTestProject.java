@@ -13,8 +13,6 @@ import org.openide.awt.DynamicMenuContent;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
-import org.openide.util.LookupEvent;
-import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
@@ -36,7 +34,7 @@ import org.openide.util.actions.Presenter;
 @NbBundle.Messages("CTL_MenuAntTestProject=Test with JaCoCoverage")
 public class MenuAntTestProject
         extends JaCoCoActionOnAnt
-        implements ContextAwareAction, LookupListener, Presenter.Popup {
+        implements ContextAwareAction, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,13 +57,11 @@ public class MenuAntTestProject
     public Action createContextAwareInstance(Lookup context) {
         return new MenuAntTestProject();
     }
-
-    @Override
-    public void resultChanged(LookupEvent ev) {
-    }
-
+    
     @Override
     public JMenuItem getPopupPresenter() {
-        return new JMenuItem(this);
+        JMenuItem menuitem = new JMenuItem(this);
+        menuitem.putClientProperty(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+        return menuitem;
     }
 }
