@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -25,8 +24,6 @@ import org.openide.util.Exceptions;
  * @author Jonathan Lermitage
  */
 public class Utils {
-
-    private static final Logger LOGGER = Logger.getLogger(Utils.class.getName());
 
     /** Regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
     private static final String PA_NBPROPKEY_SHORTCUT = "\\$\\{([^\\}]+)\\}";
@@ -123,9 +120,10 @@ public class Utils {
     public static boolean isIntructionFinished(String inst) {
         String trim = org.apache.commons.lang3.StringUtils.strip(inst);
         boolean finished = trim.endsWith(";") || trim.endsWith("}") || trim.endsWith("{");
-        if (!finished) {
-            // Remove comments and check again.
-            trim = org.apache.commons.lang3.StringUtils.strip(trim.replaceAll("//.*$", "").replaceAll("/\\*.*\\*/", ""));
+        if (!finished && (trim.contains(";") || trim.contains("}") || trim.contains("{"))) {
+            // Remove strings (a string could contains a semi-colon) and comments and check again.
+            trim = trim.replaceAll("\\\\\"", "").replaceAll("\".*\"", "");
+            trim = org.apache.commons.lang3.StringUtils.strip(trim.replaceAll(";[^;]*//.*$", ";").replaceAll("/\\*.*\\*/", ""));
             finished = trim.endsWith(";") || trim.endsWith("}") || trim.endsWith("{");
         }
         return finished;
