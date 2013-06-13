@@ -99,8 +99,9 @@ public abstract class JaCoCoActionOnAnt
      *
      * @param project the project to launch Ant target from.
      * @throws IOException if an I/O error occurs.
+     * @deprecated consider using {@link JaCoCoActionOnAnt#runJacocoAnttask(org.netbeans.api.project.Project) instead.
      */
-//    @Deprecated
+    @Deprecated
     private void runJacocoJavaagent(final Project project)
             throws IOException {
         // Retrieve JaCoCoverage preferences.
@@ -195,7 +196,7 @@ public abstract class JaCoCoActionOnAnt
                                 }
                                 if (enblHighlight) {
                                     for (final JavaClass jclass : coverageData.values()) {
-                                        NBUtils.colorDoc(project, jclass);
+                                        NBUtils.colorDoc(project, jclass, true, srcDir);
                                     }
                                 }
                                 keepJaCoCoWorkfiles(binreport, xmlreport, prjDir);
