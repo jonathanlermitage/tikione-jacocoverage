@@ -196,7 +196,7 @@ public abstract class JaCoCoActionOnAnt
                                 }
                                 if (enblHighlight) {
                                     for (final JavaClass jclass : coverageData.values()) {
-                                        NBUtils.colorDoc(project, jclass, true, srcDir);
+                                        NBUtils.colorDoc(project, jclass, Config.isEnblHighlightingExtended(), srcDir);
                                     }
                                 }
                                 keepJaCoCoWorkfiles(binreport, xmlreport, prjDir);

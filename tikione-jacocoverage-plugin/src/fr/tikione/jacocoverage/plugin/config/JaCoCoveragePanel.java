@@ -127,6 +127,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jLabelWorkfiles = new JLabel();
         jComboBoxWorkfiles = new JComboBox();
         jLabelWorkfilesTips = new JLabel();
+        jCheckBoxEnableHighlightingExtended = new JCheckBox();
 
         jButtonResoreDefaults.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_defaults.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -247,6 +248,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelWorkfilesTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfilesTips.text")); // NOI18N
 
+        Mnemonics.setLocalizedText(jCheckBoxEnableHighlightingExtended, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxEnableHighlightingExtended.text")); // NOI18N
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -290,13 +293,17 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                                 .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelWorkfilesTips)))
-                        .addGap(0, 58, Short.MAX_VALUE))
+                        .addGap(0, 28, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jCheckBoxEnableHighlightingExtended)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -305,6 +312,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jCheckBoxEnableHighlighting)
                     .addComponent(jLabelColorTheme)
                     .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxEnableHighlightingExtended)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxEnableConsoleReport)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -324,8 +333,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addComponent(jLabelAntTaskParamsTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jCheckBoxShowLatestNews)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -351,6 +360,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jComboBoxColorTheme.setSelectedIndex(Globals.DEF_THEME);
         jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
         jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
+        jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
+        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
         showLatestNews();
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
@@ -384,6 +395,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
     private void jCheckBoxEnableHighlightingActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEnableHighlightingActionPerformed
         jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
     }//GEN-LAST:event_jCheckBoxEnableHighlightingActionPerformed
 
     /** Load user preferences and configure UI. */
@@ -399,6 +411,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jComboBoxColorTheme.setSelectedIndex(Config.getTheme());
         jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
         jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
+        jCheckBoxEnableHighlightingExtended.setSelected(Config.isEnblHighlightingExtended());
+        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
         showLatestNews();
     }
 
@@ -412,6 +426,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         Config.setShowLatestNews(jCheckBoxShowLatestNews.isSelected());
         Config.setTheme(jComboBoxColorTheme.getSelectedIndex());
         Config.setJaCoCoWorkfilesRule(jComboBoxWorkfiles.getSelectedIndex());
+        Config.setEnblHighlightingExtended(jCheckBoxEnableHighlightingExtended.isSelected());
         Config.flush();
     }
 
@@ -453,6 +468,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JButton jButtonSocialTwitter;
     private JCheckBox jCheckBoxEnableConsoleReport;
     private JCheckBox jCheckBoxEnableHighlighting;
+    private JCheckBox jCheckBoxEnableHighlightingExtended;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
     private JCheckBox jCheckBoxShowLatestNews;

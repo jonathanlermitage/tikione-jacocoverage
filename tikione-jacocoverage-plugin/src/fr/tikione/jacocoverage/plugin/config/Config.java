@@ -72,6 +72,15 @@ public class Config {
     }
 
     /**
+     * Get configuration value: enable extended code highlighting.
+     *
+     * @return configuration value.
+     */
+    public static boolean isEnblHighlightingExtended() {
+        return pref.getBoolean(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
+    }
+
+    /**
      * Get configuration value: generate a complete HTML JaCoCo report.
      *
      * @return configuration value.
@@ -150,6 +159,15 @@ public class Config {
      */
     public static void setEnblHighlighting(boolean enbl) {
         pref.putBoolean(Globals.PROP_ENABLE_HIGHLIGHT, enbl);
+    }
+
+    /**
+     * Set configuration value: enable extended code highlighting.
+     *
+     * @param enbl configuration value.
+     */
+    public static void setEnblHighlightingExtended(boolean enbl) {
+        pref.putBoolean(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, enbl);
     }
 
     /**

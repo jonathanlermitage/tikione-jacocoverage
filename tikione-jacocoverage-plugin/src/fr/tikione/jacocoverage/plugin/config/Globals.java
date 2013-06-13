@@ -36,6 +36,9 @@ public class Globals {
     /** User preference: show latest news in configuration panel. */
     public static final String PROP_SHOW_LATEST_NEWS = "JaCoCoverage.ConfigPanel.ShowLatestNews";
 
+    /** User preference: enable extended code highlighting. */
+    public static final String PROP_ENABLE_HIGHLIGHTEXTENDED = "JaCoCoverage.Editor.EnableCodeHighlightingExtended";
+
     /** User preference: enable code highlighting. */
     public static final String PROP_ENABLE_HIGHLIGHT = "JaCoCoverage.Editor.EnableCodeHighlighting";
 
@@ -62,6 +65,9 @@ public class Globals {
 
     /** Default configuration value: enable code highlighting. */
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;
+
+    /** Default configuration value: enable extended code highlighting. */
+    public static final boolean DEF_ENABLE_HIGHLIGHTEXTENDED = false;
 
     /** Default configuration value: JaCoCoverage themePrefix. */
     public static final int DEF_THEME = 0;
