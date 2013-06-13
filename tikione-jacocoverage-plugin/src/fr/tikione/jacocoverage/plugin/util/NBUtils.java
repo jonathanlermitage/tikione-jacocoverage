@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import javax.swing.text.StyledDocument;
 import org.netbeans.api.java.classpath.GlobalPathRegistry;
@@ -41,6 +42,8 @@ import org.openide.windows.IOProvider;
  */
 public class NBUtils {
 
+    private static final Logger LOGGER = Logger.getLogger(NBUtils.class.getName());
+
     private NBUtils() {
     }
 
@@ -60,8 +63,11 @@ public class NBUtils {
      *
      * @param project the project containing the Java class.
      * @param jclass the Java class informations and coverage data.
+     * @param multiLnInst enable coloring of multi-lines instructions.
+     * @param srcDir the folder containing Java sources. Needed only if {@code multiLnInst} is true, otherwise you can use {@code null}.
      */
-    public static void colorDoc(Project project, JavaClass jclass) {
+    @SuppressWarnings("AssignmentToForLoopParameter")
+    public static void colorDoc(Project project, JavaClass jclass, boolean multiLnInst, File srcDir) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
         String prjId = getProjectId(project);
         int theme = Config.getTheme();
@@ -73,14 +79,14 @@ public class NBUtils {
                     DataObject dataObject = DataObject.find(fileObject);
                     Node node = dataObject.getNodeDelegate();
                     EditorCookie editorCookie = node.getLookup().lookup(EditorCookie.class);
+                    Map<Integer, fr.tikione.jacocoexec.analyzer.CoverageStateEnum> coverage = jclass.getCoverage();
+                    Map<Integer, String> coverageDesc = jclass.getCoverageDesc();
                     if (editorCookie != null) {
                         StyledDocument doc = editorCookie.openDocument();
                         if (doc != null) {
                             int startLine = 0;
                             int endLine = NbDocument.findLineNumber(doc, doc.getLength());
                             Line.Set lineset = editorCookie.getLineSet();
-                            Map<Integer, fr.tikione.jacocoexec.analyzer.CoverageStateEnum> coverage = jclass.getCoverage();
-                            Map<Integer, String> coverageDesc = jclass.getCoverageDesc();
                             for (int covIdx : coverage.keySet()) {
                                 if (covIdx >= startLine && covIdx <= endLine) {
                                     Line line = lineset.getOriginal(covIdx);
@@ -117,6 +123,44 @@ public class NBUtils {
                                     }
                                     annotation.attach(line);
                                     line.addPropertyChangeListener(annotation);
+                                }
+                            }
+                            if (multiLnInst) {
+                                File javafile = new File(srcDir, jclass.getPackageName() + jclass.getClassName());
+                                List<String> javalines = org.apache.commons.io.FileUtils.readLines(javafile);
+                                int nblines = javalines.size();
+                                for (int lineIdx = 0; lineIdx < nblines; lineIdx++) {
+                                    boolean isCovered = coverage.containsKey(lineIdx);
+                                    boolean isCoveredDesc = coverageDesc.containsKey(lineIdx);
+                                    if ((isCovered || isCoveredDesc)
+                                            && (lineIdx + 1 < nblines)
+                                            && (!coverage.containsKey(lineIdx + 1) && !coverageDesc.containsKey(lineIdx + 1))
+                                            && (!Utils.isIntructionFinished(javalines.get(lineIdx)))) {
+                                        EditorCoverageStateEnum coverageState;
+                                        switch (coverage.get(lineIdx)) {
+                                            case COVERED:
+                                                coverageState = EditorCoverageStateEnum.COVERED;
+                                                break;
+                                            case NOT_COVERED:
+                                                coverageState = EditorCoverageStateEnum.NOT_COVERED;
+                                                break;
+                                            case PARTIALLY_COVERED:
+                                                coverageState = EditorCoverageStateEnum.PARTIALLY_COVERED;
+                                                break;
+                                            default:
+                                                coverageState = EditorCoverageStateEnum.COVERED;
+                                        }
+                                        coverage.put(lineIdx + 1, coverage.get(lineIdx));
+                                        AbstractCoverageAnnotation annotation = new CoverageAnnotation(
+                                                coverageState,
+                                                prjId,
+                                                jclass.getPackageName() + jclass.getClassName(),
+                                                lineIdx + 1,
+                                                theme);
+                                        Line line = lineset.getOriginal(lineIdx + 1);
+                                        annotation.attach(line);
+                                        line.addPropertyChangeListener(annotation);
+                                    }
                                 }
                             }
                         }

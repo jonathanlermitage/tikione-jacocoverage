@@ -3,7 +3,6 @@ package fr.tikione.jacocoverage.plugin.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +30,12 @@ public class Utils {
 
     /** Compiled regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
     private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
+
+    /** The white-space character ({@code &#92;u0020}). */
+    public static final char SPACE = '\u0020';
+
+    /** The tabulation character ({@code &#92;u0009}). */
+    public static final char TAB = '\u0009';
 
     private Utils() {
     }
@@ -107,6 +112,17 @@ public class Utils {
     }
 
     /**
+     * Indicate if a Java line describes a finished instruction, otherwise a part of a multi-line instruction (or no instruction).
+     *
+     * @param inst the Java line.
+     * @return {@code true} if instruction is finished, otherwise {@code false}.
+     */
+    public static boolean isIntructionFinished(String inst) {
+        String trim = tTrim(inst);
+        return trim.endsWith(";") || trim.endsWith("}") || trim.endsWith("{");
+    }
+
+    /**
      * Indicate if a project is supported by JaCoCoverage.
      * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes">DevFaqActionAllAvailableProjectTypes</a> for help.
      *
@@ -169,6 +185,28 @@ public class Utils {
             }
         }
         return content;
+    }
+
+    /**
+     * Return a copy of the string, with leading and trailing {@link #SPACE} and {@link #TAB} omitted.
+     *
+     * @param str the string.
+     * @return A copy of this string with leading and trailing white-space/tab removed, or this string if it has no leading or trailing
+     *         white-space/tab.
+     */
+    public static String tTrim(String str) {
+        int strlen = str.length();
+        int endpos = strlen;
+        int startpos = 0;
+        char[] val = new char[strlen];
+        str.getChars(0, strlen, val, 0);
+        while ((startpos < strlen) && ((val[startpos] == SPACE) || (val[startpos] == TAB))) {
+            startpos++;
+        }
+        while ((endpos > startpos) && ((val[endpos - 1] == SPACE) || (val[endpos - 1] == TAB))) {
+            endpos--;
+        }
+        return ((startpos > 0) || (endpos < strlen)) ? str.substring(startpos, endpos) : str;
     }
 
     /**
