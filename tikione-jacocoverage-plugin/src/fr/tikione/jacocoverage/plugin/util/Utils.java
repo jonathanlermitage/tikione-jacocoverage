@@ -118,7 +118,7 @@ public class Utils {
      * @return {@code true} if instruction is finished, otherwise {@code false}.
      */
     public static boolean isIntructionFinished(String inst) {
-        String trim = tTrim(inst);
+        String trim = org.apache.commons.lang3.StringUtils.strip(inst);
         return trim.endsWith(";") || trim.endsWith("}") || trim.endsWith("{");
     }
 
@@ -185,28 +185,6 @@ public class Utils {
             }
         }
         return content;
-    }
-
-    /**
-     * Return a copy of the string, with leading and trailing {@link #SPACE} and {@link #TAB} omitted.
-     *
-     * @param str the string.
-     * @return A copy of this string with leading and trailing white-space/tab removed, or this string if it has no leading or trailing
-     *         white-space/tab.
-     */
-    public static String tTrim(String str) {
-        int strlen = str.length();
-        int endpos = strlen;
-        int startpos = 0;
-        char[] val = new char[strlen];
-        str.getChars(0, strlen, val, 0);
-        while ((startpos < strlen) && ((val[startpos] == SPACE) || (val[startpos] == TAB))) {
-            startpos++;
-        }
-        while ((endpos > startpos) && ((val[endpos - 1] == SPACE) || (val[endpos - 1] == TAB))) {
-            endpos--;
-        }
-        return ((startpos > 0) || (endpos < strlen)) ? str.substring(startpos, endpos) : str;
     }
 
     /**
