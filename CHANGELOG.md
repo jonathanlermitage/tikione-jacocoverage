@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### Latest Development Build (2013-06-13)
+* added coloration of multi-line instructions (can be enabled in options panel).
+
 ### Version 1.2.1.20130612.1950 (2013-06-12)
 * fixed: hide action menu items when disabled.
 * added an option to keep JaCoCo binary and XML report files, in their original form or compressed with Zip format.
