@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import javax.swing.text.StyledDocument;
 import org.netbeans.api.java.classpath.GlobalPathRegistry;
@@ -41,8 +40,6 @@ import org.openide.windows.IOProvider;
  * @author Jonathan Lermitage
  */
 public class NBUtils {
-
-    private static final Logger LOGGER = Logger.getLogger(NBUtils.class.getName());
 
     private NBUtils() {
     }
