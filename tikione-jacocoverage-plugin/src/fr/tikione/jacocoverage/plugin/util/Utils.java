@@ -77,8 +77,8 @@ public class Utils {
      * @return the JaCoCo report file.
      */
     public static File getJacocoBinReportFile(Project project) {
-        String jacocoExecPath = NBUtils.getProjectDir(project) + File.separator + "jacoco.exec";
-        return new File(jacocoExecPath);
+        // FIXED GitHub #9: JavaAgent doesn't allow comma in report file's path (comma is used to separate parameters).
+        return new File(System.getProperty("java.io.tmpdir"), "jacoco.exec-" + System.nanoTime());
     }
 
     /**

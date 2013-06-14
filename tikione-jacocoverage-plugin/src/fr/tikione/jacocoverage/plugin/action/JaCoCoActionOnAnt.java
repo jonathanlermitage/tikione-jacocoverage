@@ -130,7 +130,7 @@ public abstract class JaCoCoActionOnAnt
                 String antTaskJavaagentParam = Config.getAntTaskJavaagentArg()
                         .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
                         .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"))
-                        .replace("destfile=jacoco.exec", "destfile=\"" + prjDir + "jacoco.exec\"");
+                        .replace("destfile=jacoco.exec", "destfile=\"" + binreport.getAbsolutePath() + "\"");
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                 DataObject dataObj = DataObject.find(scriptToExecute);

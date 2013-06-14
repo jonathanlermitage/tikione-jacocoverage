@@ -1,6 +1,7 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Build (2013-06-13)
+### Latest Development Build (2013-06-14)
+* fixed GitHub #9: JavaAgent didn't generate report if its path contained comma.
 * added coloration of multi-line instructions (can be enabled in options panel).
 
 ### Version 1.2.1.20130612.1950 (2013-06-12)
