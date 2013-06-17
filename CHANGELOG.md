@@ -1,8 +1,8 @@
 ## JaCoCoverage Change Log
 
-### Latest Development Build (2013-06-16)
+### Version 1.2.2.20130617.1157 (2013-06-17)
 * fixed GitHub #9: JavaAgent didn't generate report if its path contained comma.
-* minor UI fixes in options panel (relevant on GTK based L&F, like Ubuntu).
+* minor UI fixes in options panel (relevant on systems with large fonts, like Ubuntu).
 * added coloration of multi-line instructions (can be enabled in options panel).
 
 ### Version 1.2.1.20130612.1950 (2013-06-12)

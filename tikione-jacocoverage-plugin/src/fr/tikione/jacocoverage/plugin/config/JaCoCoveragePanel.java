@@ -244,7 +244,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelWorkfiles, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfiles.text")); // NOI18N
 
-        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original JaCoCo workfiles", "keep zipped JaCoCo workfiles", "delete JaCoCo workfiles" }));
+        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
 
         Mnemonics.setLocalizedText(jLabelWorkfilesTips, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfilesTips.text")); // NOI18N
 
@@ -291,13 +291,12 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(0, 0, 0)
                                 .addComponent(jLabelWorkfiles)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelWorkfilesTips)
-                                .addGap(14, 14, 14))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -338,7 +337,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addComponent(jCheckBoxShowLatestNews)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
