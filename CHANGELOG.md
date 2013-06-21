@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### Development Version (2013-06-21)
+* disabled NetBeans Modules support (will be fixed later).
+
 ### Version 1.2.2.20130617.1157 (2013-06-17)
 * fixed GitHub #9: JavaAgent didn't generate report if its path contained comma.
 * minor UI fixes in options panel (relevant on systems with large fonts, like Ubuntu).
