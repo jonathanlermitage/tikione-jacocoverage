@@ -1,7 +1,8 @@
 ## JaCoCoverage Change Log
 
-### Development Version (2013-06-21)
+### Development Version (2013-06-22)
 * disabled NetBeans Module projects support (will be fixed later).
+* coloration of multi-line instructions is now enabled in default configuration.
 
 ### Version 1.2.2.20130617.1157 (2013-06-17)
 * fixed GitHub #9: JavaAgent didn't generate report if its path contained comma.
