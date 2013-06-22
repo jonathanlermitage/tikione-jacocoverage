@@ -7,6 +7,9 @@
             <suite-component/>
             <module-dependencies/>
             <public-packages>
+                <package>javax.json</package>
+                <package>javax.json.spi</package>
+                <package>javax.json.stream</package>
                 <package>org.apache.commons.io</package>
                 <package>org.apache.commons.io.comparator</package>
                 <package>org.apache.commons.io.filefilter</package>
@@ -25,7 +28,12 @@
                 <package>org.apache.commons.lang3.text.translate</package>
                 <package>org.apache.commons.lang3.time</package>
                 <package>org.apache.commons.lang3.tuple</package>
+                <package>org.glassfish.json</package>
             </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/javax.json-1.0.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/javax.json-1.0.jar</binary-origin>
+            </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/commons-io-2.4.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/commons-io-2.4.jar</binary-origin>
