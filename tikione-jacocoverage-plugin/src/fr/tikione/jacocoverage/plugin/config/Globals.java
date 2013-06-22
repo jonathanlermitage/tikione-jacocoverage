@@ -67,7 +67,7 @@ public class Globals {
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;
 
     /** Default configuration value: enable extended code highlighting. */
-    public static final boolean DEF_ENABLE_HIGHLIGHTEXTENDED = false;
+    public static final boolean DEF_ENABLE_HIGHLIGHTEXTENDED = true;
 
     /** Default configuration value: JaCoCoverage themePrefix. */
     public static final int DEF_THEME = 0;
