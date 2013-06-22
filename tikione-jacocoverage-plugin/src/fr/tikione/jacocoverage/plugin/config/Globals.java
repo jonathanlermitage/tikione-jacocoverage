@@ -30,6 +30,9 @@ public class Globals {
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
     public static final String TXTREPORT_TABNAME = " (jacocoverage report)";
 
+    /** Project preference: override globals. */
+    public static final String PROP_PRJ_OVERRIDE_GLOBALS = "JaCoCoverage.Prj.OverrideGlobals";
+
     /** User preference: customization of the JavaAgent passed to the Ant task. */
     public static final String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
 
@@ -56,6 +59,9 @@ public class Globals {
 
     /** User preference: automatically open generated complete HTML JaCoCo report. */
     public static final String PROP_AUTOOPEN_HTML_REPORT = "JaCoCoverage.Html.AutoOpenReport";
+
+    /** Default project's configuration value: override globals. */
+    public static final boolean DEF_PRJ_OVERRIDE_GLOBALS = false;
 
     /** Default configuration value: the JavaAgent arguments passed to the Ant task. */
     public static final String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
