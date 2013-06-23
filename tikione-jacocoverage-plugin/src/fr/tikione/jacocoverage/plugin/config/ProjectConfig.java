@@ -14,6 +14,8 @@ public class ProjectConfig {
 
     private final File prjCfgFile;
 
+    private final ObjectMapper mapper = new ObjectMapper();
+
     private static final Map<File, ProjectConfig> prjCfgs = Collections.synchronizedMap(new HashMap<File, ProjectConfig>(8));
 
     public static ProjectConfig forFile(File prjCfgFile)
@@ -37,7 +39,6 @@ public class ProjectConfig {
             throws IOException {
         pref.clear();
         if (prjCfgFile.exists()) {
-            ObjectMapper mapper = new ObjectMapper();
             pref.putAll(mapper.readValue(prjCfgFile, Properties.class));
         }
     }
@@ -45,10 +46,7 @@ public class ProjectConfig {
     public void store()
             throws IOException {
         if (prjCfgFile.delete()) {
-            if (pref != null) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.writeValue(prjCfgFile, pref);
-            }
+            mapper.writeValue(prjCfgFile, pref);
         } else {
             throw new IOException("Cannot write project's jacocoverage config to: " + prjCfgFile);
         }
@@ -73,21 +71,6 @@ public class ProjectConfig {
     public void setOverrideGlobals(boolean enbl) {
         pref.setProperty(Globals.PROP_PRJ_OVERRIDE_GLOBALS, Boolean.toString(enbl));
     }
-    
-    /**
-     * Get configuration value: show latest news in configuration panel.
-     *
-     * @return configuration value.
-     */
-    public boolean isShowLatestNews() {
-        boolean res;
-        if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(pref.getProperty(Globals.PROP_SHOW_LATEST_NEWS, Boolean.toString(Globals.DEF_SHOW_LATEST_NEWS)));
-        } else {
-            res = Config.isShowLatestNews();
-        }
-        return res;
-    }
 
     /**
      * Get configuration value: show a minimal textual JaCoCo report in a NetBeans console tab.
@@ -95,8 +78,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public boolean isEnblConsoleReport() {
-        return Boolean.parseBoolean(pref.getProperty(
-                Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(Globals.DEF_ENABLE_CONSOLE_REPORT)));
+        boolean res;
+        if (isOverrideGlobals()) {
+            res = Boolean.parseBoolean(pref.getProperty(
+                    Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(Globals.DEF_ENABLE_CONSOLE_REPORT)));
+        } else {
+            res = Config.isEnblConsoleReport();
+        }
+        return res;
     }
 
     /**
@@ -105,8 +94,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public boolean isEnblHighlighting() {
-        return Boolean.parseBoolean(pref.getProperty(
-                Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHT)));
+        boolean res;
+        if (isOverrideGlobals()) {
+            res = Boolean.parseBoolean(pref.getProperty(
+                    Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHT)));
+        } else {
+            res = Config.isEnblHighlighting();
+        }
+        return res;
     }
 
     /**
@@ -115,8 +110,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public boolean isEnblHighlightingExtended() {
-        return Boolean.parseBoolean(pref.getProperty(
-                Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED)));
+        boolean res;
+        if (isOverrideGlobals()) {
+            res = Boolean.parseBoolean(pref.getProperty(
+                    Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED)));
+        } else {
+            res = Config.isEnblHighlightingExtended();
+        }
+        return res;
     }
 
     /**
@@ -125,8 +126,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public boolean isEnblHtmlReport() {
-        return Boolean.parseBoolean(pref.getProperty(
-                Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(Globals.DEF_ENABLE_HTML_REPORT)));
+        boolean res;
+        if (isOverrideGlobals()) {
+            res = Boolean.parseBoolean(pref.getProperty(
+                    Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(Globals.DEF_ENABLE_HTML_REPORT)));
+        } else {
+            res = Config.isEnblHtmlReport();
+        }
+        return res;
     }
 
     /**
@@ -135,8 +142,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public boolean isOpenHtmlReport() {
-        return Boolean.parseBoolean(pref.getProperty(
-                Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(Globals.DEF_AUTOOPEN_HTML_REPORT)));
+        boolean res;
+        if (isOverrideGlobals()) {
+            res = Boolean.parseBoolean(pref.getProperty(
+                    Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(Globals.DEF_AUTOOPEN_HTML_REPORT)));
+        } else {
+            res = Config.isOpenHtmlReport();
+        }
+        return res;
     }
 
     /**
@@ -145,7 +158,13 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public String getAntTaskJavaagentArg() {
-        return pref.getProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+        String res;
+        if (isOverrideGlobals()) {
+            res = pref.getProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+        } else {
+            res = Config.getAntTaskJavaagentArg();
+        }
+        return res;
     }
 
     /**
@@ -154,8 +173,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public int getTheme() {
-        return Integer.parseInt(pref.getProperty(
-                Globals.PROP_THEME, Integer.toString(Globals.DEF_THEME)));
+        int res;
+        if (isOverrideGlobals()) {
+            res = Integer.parseInt(pref.getProperty(
+                    Globals.PROP_THEME, Integer.toString(Globals.DEF_THEME)));
+        } else {
+            res = Config.getTheme();
+        }
+        return res;
     }
 
     /**
@@ -164,17 +189,14 @@ public class ProjectConfig {
      * @return configuration value.
      */
     public int getJaCoCoWorkfilesRule() {
-        return Integer.parseInt(pref.getProperty(
-                Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(Globals.DEF_JACOCOWORKFILES_RULE)));
-    }
-
-    /**
-     * Set configuration value: show latest news in configuration panel.
-     *
-     * @param show configuration value.
-     */
-    public void setShowLatestNews(boolean show) {
-        pref.setProperty(Globals.PROP_SHOW_LATEST_NEWS, Boolean.toString(show));
+        int res;
+        if (isOverrideGlobals()) {
+            res = Integer.parseInt(pref.getProperty(
+                    Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(Globals.DEF_JACOCOWORKFILES_RULE)));
+        } else {
+            res = Config.getJaCoCoWorkfilesRule();
+        }
+        return res;
     }
 
     /**
@@ -183,7 +205,11 @@ public class ProjectConfig {
      * @param agentArg configuration value.
      */
     public void setAntTaskJavaagentArg(String agentArg) {
-        pref.setProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
+        } else {
+            Config.setAntTaskJavaagentArg(agentArg);
+        }
     }
 
     /**
@@ -192,7 +218,11 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setEnblConsoleReport(boolean enbl) {
-        pref.setProperty(Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(enbl));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(enbl));
+        } else {
+            Config.setEnblConsoleReport(enbl);
+        }
     }
 
     /**
@@ -201,7 +231,11 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setEnblHighlighting(boolean enbl) {
-        pref.setProperty(Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(enbl));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(enbl));
+        } else {
+            Config.setEnblHighlighting(enbl);
+        }
     }
 
     /**
@@ -210,7 +244,11 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setEnblHighlightingExtended(boolean enbl) {
-        pref.setProperty(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(enbl));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(enbl));
+        } else {
+            Config.setEnblHighlightingExtended(enbl);
+        }
     }
 
     /**
@@ -219,7 +257,11 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setEnblHtmlReport(boolean enbl) {
-        pref.setProperty(Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(enbl));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(enbl));
+        } else {
+            Config.setEnblHtmlReport(enbl);
+        }
     }
 
     /**
@@ -228,7 +270,11 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setOpenHtmlReport(boolean enbl) {
-        pref.setProperty(Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(enbl));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(enbl));
+        } else {
+            Config.setOpenHtmlReport(enbl);
+        }
     }
 
     /**
@@ -237,7 +283,11 @@ public class ProjectConfig {
      * @param theme configuration value.
      */
     public void setTheme(int theme) {
-        pref.setProperty(Globals.PROP_THEME, Integer.toString(theme));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_THEME, Integer.toString(theme));
+        } else {
+            Config.setTheme(theme);
+        }
     }
 
     /**
@@ -246,6 +296,10 @@ public class ProjectConfig {
      * @param rule configuration value.
      */
     public void setJaCoCoWorkfilesRule(int rule) {
-        pref.setProperty(Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(rule));
+        if (isOverrideGlobals()) {
+            pref.setProperty(Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(rule));
+        } else {
+            Config.setJaCoCoWorkfilesRule(rule);
+        }
     }
 }
