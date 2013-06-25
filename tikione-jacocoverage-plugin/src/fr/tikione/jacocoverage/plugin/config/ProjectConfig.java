@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Plugin's configuration handler at project's level.
+ *
+ * @author Jonathan Lermitage
+ */
 public class ProjectConfig {
 
     private final Properties pref = new Properties();
@@ -18,6 +23,13 @@ public class ProjectConfig {
 
     private static final Map<File, ProjectConfig> prjCfgs = Collections.synchronizedMap(new HashMap<File, ProjectConfig>(8));
 
+    /**
+     * Get project's configuration handler.
+     *
+     * @param prjCfgFile the project to get configuration handler from.
+     * @return project's configuration handler.
+     * @throws IOException if cannot load configuration.
+     */
     public static ProjectConfig forFile(File prjCfgFile)
             throws IOException {
         ProjectConfig pc;
@@ -35,6 +47,11 @@ public class ProjectConfig {
         this.prjCfgFile = prjCfgFile;
     }
 
+    /**
+     * Load project's configuration.
+     *
+     * @throws IOException if cannot load configuration.
+     */
     public void load()
             throws IOException {
         pref.clear();
@@ -43,6 +60,11 @@ public class ProjectConfig {
         }
     }
 
+    /**
+     * Store project's configuration.
+     *
+     * @throws IOException if cannot store configuration.
+     */
     public void store()
             throws IOException {
         if (prjCfgFile.delete()) {
