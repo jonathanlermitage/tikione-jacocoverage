@@ -77,8 +77,16 @@ public class Utils {
      * @return the JaCoCo report file.
      */
     public static File getJacocoBinReportFile(Project project) {
-        // FIXED GitHub #9: JavaAgent doesn't allow comma in report file's path (comma is used to separate parameters).
-        return new File(System.getProperty("java.io.tmpdir"), "jacoco.exec-" + System.nanoTime());
+        String prjdir = NBUtils.getProjectDir(project);
+        String bindir;
+        if (prjdir.contains(",") || prjdir.contains(";") || prjdir.contains("=")) {
+            // FIXED GitHub #9 JavaAgent doesn't allow comma in report file's path (comma is used to separate parameters).
+            // FIXED 20130625 extended GitHub #9 principle to other sensible characters.
+            bindir= System.getProperty("java.io.tmpdir");
+        } else {
+            bindir = prjdir;
+        }
+        return new File(bindir, "jacoco.exec-" + System.nanoTime());
     }
 
     /**
