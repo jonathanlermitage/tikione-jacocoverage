@@ -115,7 +115,7 @@ public class Globals {
     public static final String XML_BACKUP_REPORT = JACOCOVERAGE_DATA_DIR + "jacoco.latest.xml";
 
     /** Project's JaCoCoverage properties. */
-    public static final String PRJ_CFG = "project.properties";
+    public static final String PRJ_CFG = JACOCOVERAGE_DATA_DIR + "project.json";
 
     private Globals() {
     }

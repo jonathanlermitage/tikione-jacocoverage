@@ -1,19 +1,55 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+import fr.tikione.jacocoverage.plugin.util.NBUtils;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle;
+import org.netbeans.api.project.Project;
 import org.openide.awt.Mnemonics;
+import org.openide.util.Exceptions;
+import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 
 public class JPanelPrjcfgAntJavase extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    /** Creates new form JPanelPrjcfgAntJavase */
-    public JPanelPrjcfgAntJavase() {
+    private File prjCfgFile;
+
+    /**
+     * Creates new form JPanelPrjcfgAntJavase.
+     *
+     * @param context
+     */
+    public JPanelPrjcfgAntJavase(Lookup context) {
+        super();
         initComponents();
+        Project project = NBUtils.getSelectedProject();
+        prjCfgFile = new File(NBUtils.getProjectDir(project), Globals.PRJ_CFG);
+        load();
+    }
+
+    private void load() {
+        try {
+            ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
+            jRadioButtonUseGlobalOptions.setSelected(!prjCfg.isOverrideGlobals());
+            jRadioButtonUseProjectSpecificOptions.setSelected(prjCfg.isOverrideGlobals());
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+
+    private void store() {
+        try {
+            ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
+            prjCfg.setOverrideGlobals(jRadioButtonUseProjectSpecificOptions.isSelected());
+            prjCfg.store();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
 
     /** 
