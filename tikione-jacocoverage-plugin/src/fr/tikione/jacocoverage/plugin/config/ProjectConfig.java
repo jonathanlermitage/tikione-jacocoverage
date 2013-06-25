@@ -67,10 +67,10 @@ public class ProjectConfig {
      */
     public void store()
             throws IOException {
-        if (prjCfgFile.delete()) {
-            mapper.writeValue(prjCfgFile, pref);
-        } else {
+        if (prjCfgFile.exists() && !prjCfgFile.delete()) {
             throw new IOException("Cannot write project's jacocoverage config to: " + prjCfgFile);
+        } else {
+            mapper.writeValue(prjCfgFile, pref);
         }
     }
 
