@@ -13,7 +13,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 
-public class JPanelPrjcfgAntJavase extends javax.swing.JPanel {
+public class JPanelPrjcfgAntJavase extends javax.swing.JPanel implements IStorable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,8 @@ public class JPanelPrjcfgAntJavase extends javax.swing.JPanel {
         }
     }
 
-    private void store() {
+    @Override
+    public void store() {
         try {
             ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
             prjCfg.setOverrideGlobals(jRadioButtonUseProjectSpecificOptions.isSelected());
