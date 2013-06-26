@@ -1,6 +1,7 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import org.netbeans.api.project.Project;
 import org.openide.awt.Mnemonics;
@@ -190,7 +192,11 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
         jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
 
+        jLabelWorkfilesTips.setBackground(new Color(255, 255, 255));
+        jLabelWorkfilesTips.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"))); // NOI18N
         Mnemonics.setLocalizedText(jLabelWorkfilesTips, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jLabelWorkfilesTips.text")); // NOI18N
+        jLabelWorkfilesTips.setVerticalAlignment(SwingConstants.TOP);
+        jLabelWorkfilesTips.setVerticalTextPosition(SwingConstants.TOP);
 
         jButtonSocialTwitter.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/social_twitter.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonSocialTwitter, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonSocialTwitter.text")); // NOI18N
@@ -264,38 +270,37 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addContainerGap()
                 .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
-                        .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jCheckBoxEnableHighlightingExtended))
-                            .addComponent(jCheckBoxEnableHighlighting)
-                            .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
-                                    .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jCheckBoxEnableConsoleReport)
-                                        .addComponent(jCheckBoxEnableHtmlReport)
-                                        .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
-                                            .addGap(21, 21, 21)
-                                            .addComponent(jCheckBoxOpenHtmlReport)))
-                                    .addGap(1, 1, 1))
-                                .addGroup(GroupLayout.Alignment.TRAILING, jPanelGeneralOptionsLayout.createSequentialGroup()
-                                    .addComponent(jLabelWorkfiles)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelWorkfilesTips))))
+                        .addGap(21, 21, 21)
+                        .addComponent(jCheckBoxOpenHtmlReport)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
+                        .addComponent(jLabelWorkfiles)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
-                        .addComponent(jButtonSocialTwitter, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSocialFacebook, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSocialGithub, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSocialJojohome, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonOnlineHelp)))
-                .addContainerGap())
+                        .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
+                                .addComponent(jButtonSocialTwitter, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSocialFacebook, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSocialGithub, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSocialJojohome, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonOnlineHelp))
+                            .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
+                                .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxEnableConsoleReport)
+                                    .addComponent(jCheckBoxEnableHtmlReport)
+                                    .addGroup(jPanelGeneralOptionsLayout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jCheckBoxEnableHighlightingExtended))
+                                    .addComponent(jCheckBoxEnableHighlighting))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabelWorkfilesTips, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanelGeneralOptionsLayout.setVerticalGroup(
             jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -313,9 +318,10 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelWorkfiles)
-                    .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelWorkfilesTips))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                    .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonOnlineHelp)
                     .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -389,7 +395,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                     .addGroup(jPanelPackageFilteringLayout.createSequentialGroup()
                         .addComponent(jLabelSelectPackages)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))
+                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelPackageFilteringLayout.setVerticalGroup(
@@ -405,7 +411,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jButtonUnselectAll)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonInvertAll)
-                        .addGap(0, 81, Short.MAX_VALUE))
+                        .addGap(0, 112, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
