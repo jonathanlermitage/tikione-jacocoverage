@@ -59,6 +59,7 @@ public class ProjectConfig {
     public void load()
             throws IOException {
         pref.clear();
+        prjCfgFile.getParentFile().mkdirs();
         if (prjCfgFile.exists()) {
             pref.putAll(mapper.readValue(prjCfgFile, Properties.class));
         }
@@ -71,6 +72,7 @@ public class ProjectConfig {
      */
     public void store()
             throws IOException {
+        prjCfgFile.getParentFile().mkdirs();
         if (prjCfgFile.exists() && !prjCfgFile.delete()) {
             throw new IOException("Cannot write project's jacocoverage config to: " + prjCfgFile);
         } else {
