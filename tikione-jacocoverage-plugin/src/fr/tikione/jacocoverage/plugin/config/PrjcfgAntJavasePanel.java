@@ -102,18 +102,16 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     }
 
     private void enableProjectsideCfgUI(boolean enable) {
-        jCheckBoxEnableConsoleReport.setEnabled(enable);
-        jCheckBoxEnableHighlighting.setEnabled(enable);
-        jCheckBoxEnableHtmlReport.setEnabled(enable);
-        jComboBoxWorkfiles.setEnabled(enable);
-        jLabelWorkfiles.setEnabled(enable);
-        jLabelWorkfilesTips.setEnabled(enable);
+        jTabbedPanePrjOpts.setVisible(enable);
         if (enable) {
+            jCheckBoxEnableConsoleReport.setEnabled(enable);
+            jCheckBoxEnableHighlighting.setEnabled(enable);
+            jCheckBoxEnableHtmlReport.setEnabled(enable);
+            jComboBoxWorkfiles.setEnabled(enable);
+            jLabelWorkfiles.setEnabled(enable);
+            jLabelWorkfilesTips.setEnabled(enable);
             jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
             jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
-        } else {
-            jCheckBoxEnableHighlightingExtended.setEnabled(false);
-            jCheckBoxOpenHtmlReport.setEnabled(false);
         }
     }
 
