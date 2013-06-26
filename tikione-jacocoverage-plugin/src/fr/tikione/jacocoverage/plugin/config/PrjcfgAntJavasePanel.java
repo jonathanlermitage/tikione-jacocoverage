@@ -64,6 +64,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         // </editor-fold>
         prjCfgFile = new File(NBUtils.getProjectDir(context.lookup(Project.class)), Globals.PRJ_CFG);
         load();
+        jTablePackageFilter.setModel(new PackageFilterModel());
     }
 
     private void load() {
