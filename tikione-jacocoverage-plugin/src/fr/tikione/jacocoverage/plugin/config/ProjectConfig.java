@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Plugin's configuration handler at project's level.
+ * Plugin's configuration handler at project level.
  *
  * @author Jonathan Lermitage
  */
