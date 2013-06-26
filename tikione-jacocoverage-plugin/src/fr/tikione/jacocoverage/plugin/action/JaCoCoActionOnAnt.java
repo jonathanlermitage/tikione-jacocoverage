@@ -4,8 +4,8 @@ import fr.tikione.jacocoexec.analyzer.JaCoCoReportAnalyzer;
 import fr.tikione.jacocoexec.analyzer.JaCoCoXmlReportParser;
 import fr.tikione.jacocoexec.analyzer.JavaClass;
 import fr.tikione.jacocoverage.plugin.anno.AbstractCoverageAnnotation;
-import fr.tikione.jacocoverage.plugin.config.Config;
 import fr.tikione.jacocoverage.plugin.config.Globals;
+import fr.tikione.jacocoverage.plugin.config.ProjectConfig;
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
 import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.event.ActionEvent;
@@ -105,10 +105,11 @@ public abstract class JaCoCoActionOnAnt
     private void runJacocoJavaagent(final Project project)
             throws IOException {
         // Retrieve JaCoCoverage preferences.
-        final boolean enblHighlight = Config.isEnblHighlighting();
-        final boolean enblConsoleReport = Config.isEnblConsoleReport();
-        final boolean enblHtmlReport = Config.isEnblHtmlReport();
-        final boolean openHtmlReport = Config.isOpenHtmlReport();
+        final ProjectConfig cfg = ProjectConfig.forFile(new File(NBUtils.getProjectDir(project), Globals.PRJ_CFG));
+        final boolean enblHighlight = cfg.isEnblHighlighting();
+        final boolean enblConsoleReport = cfg.isEnblConsoleReport();
+        final boolean enblHtmlReport = cfg.isEnblHtmlReport();
+        final boolean openHtmlReport = cfg.isOpenHtmlReport();
 
         if (enblHighlight || enblConsoleReport || enblHtmlReport) {
             // Retrieve project properties.
@@ -127,7 +128,7 @@ public abstract class JaCoCoActionOnAnt
                 DialogDisplayer.getDefault().notify(nd);
             } else {
                 // Apply JaCoCo JavaAgent customization.
-                String antTaskJavaagentParam = Config.getAntTaskJavaagentArg()
+                String antTaskJavaagentParam = cfg.getAntTaskJavaagentArg()
                         .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
                         .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"))
                         .replace("destfile=jacoco.exec", "destfile=\"" + binreport.getAbsolutePath() + "\"");
@@ -196,10 +197,10 @@ public abstract class JaCoCoActionOnAnt
                                 }
                                 if (enblHighlight) {
                                     for (final JavaClass jclass : coverageData.values()) {
-                                        NBUtils.colorDoc(project, jclass, Config.isEnblHighlightingExtended(), srcDir);
+                                        NBUtils.colorDoc(project, jclass, cfg.isEnblHighlightingExtended(), srcDir);
                                     }
                                 }
-                                keepJaCoCoWorkfiles(binreport, xmlreport, prjDir);
+                                keepJaCoCoWorkfiles(binreport, xmlreport, prjDir, cfg.getJaCoCoWorkfilesRule());
 
                                 long et = System.currentTimeMillis();
                                 LOGGER.log(Level.INFO, "Coverage Collection Task took: {0} ms", et - st);
@@ -233,14 +234,15 @@ public abstract class JaCoCoActionOnAnt
     }
 
     /**
-     *
+     * Apply retention policy on JaCoCo workfiles.
      * 
-     * @param binreport
-     * @param xmlreport
-     * @param prjDir
-     * @throws IOException
+     * @param binreport JaCoCo binary report file.
+     * @param xmlreport JaCoCo XML report file.
+     * @param prjDir project directory.
+     * @param wfrule retention policy.
+     * @throws IOException if workfiles can't be removed or moved.
      */
-    private void keepJaCoCoWorkfiles(File binreport, File xmlreport, String prjDir)
+    private void keepJaCoCoWorkfiles(File binreport, File xmlreport, String prjDir, int wfrule)
             throws IOException {
         File xmlreportCpy = new File(prjDir + Globals.XML_BACKUP_REPORT);
         File xmlreportZip = new File(prjDir + Globals.XMLZIP_BACKUP_REPORT);
@@ -250,7 +252,7 @@ public abstract class JaCoCoActionOnAnt
         xmlreportZip.delete();
         binreportCpy.delete();
         binreportZip.delete();
-        switch (Config.getJaCoCoWorkfilesRule()) {
+        switch (wfrule) {
             case 0:
                 org.apache.commons.io.FileUtils.moveFile(binreport, binreportCpy);
                 org.apache.commons.io.FileUtils.moveFile(xmlreport, xmlreportCpy);

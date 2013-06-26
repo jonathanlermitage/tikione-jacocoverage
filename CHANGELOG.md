@@ -1,11 +1,13 @@
 ## JaCoCoverage Change Log
 
-### Development Version (2013-06-22)
+### Development Version (2013-06-26)
+* GitHub #11 added configuration at project level.
+* GitHub #14 fixed MissingResourceException when assertions (-ea switch) are enabled.
 * disabled NetBeans Module projects support (will be fixed later).
 * coloration of multi-line instructions is now enabled in default configuration.
 
 ### Version 1.2.2.20130617.1157 (2013-06-17)
-* fixed GitHub #9: JavaAgent didn't generate report if its path contained comma.
+* GitHub #9 fixed JavaAgent didn't generate report if its path contained comma.
 * minor UI fixes in options panel (relevant on systems with large fonts, like Ubuntu).
 * added coloration of multi-line instructions (can be enabled in options panel).
 

@@ -117,7 +117,7 @@
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="jCheckBoxShowLatestNews" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="58" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="27" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">

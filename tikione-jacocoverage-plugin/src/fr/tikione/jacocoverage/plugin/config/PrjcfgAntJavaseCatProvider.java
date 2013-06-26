@@ -7,7 +7,7 @@ import org.netbeans.spi.project.ui.support.ProjectCustomizer.Category;
 import org.openide.util.Lookup;
 
 /**
- * JaCoCoverage configuration at project's level.
+ * JaCoCoverage configuration category at project level.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAddProjectCustomizer">DevFaqActionAddProjectCustomizer</a> for integration.
  *
  * @author Jonathan Lermitage
@@ -15,7 +15,7 @@ import org.openide.util.Lookup;
 @ProjectCustomizer.CompositeCategoryProvider.Registration(
         projectType = "org-netbeans-modules-java-j2seproject",
         position = 1400)
-public class ProjectCustomizerAntJavase implements ProjectCustomizer.CompositeCategoryProvider {
+public class PrjcfgAntJavaseCatProvider implements ProjectCustomizer.CompositeCategoryProvider {
 
     private Category cat;
 
@@ -30,7 +30,7 @@ public class ProjectCustomizerAntJavase implements ProjectCustomizer.CompositeCa
 
     public @Override
     JComponent createComponent(Category category, Lookup context) {
-        JPanel panel = new JPanelPrjcfgAntJavase(context);
+        JPanel panel = new PrjcfgAntJavasePanel(context);
         cat.setStoreListener(new PrjcfgAntJavaseListener((IStorable) panel));
         return panel;
     }

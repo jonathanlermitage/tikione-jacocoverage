@@ -55,6 +55,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
+        // <editor-fold defaultstate="collapsed" desc="Tooltips">
         // Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
         jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
                 + "https://twitter.com/JLermitage" + "</body></html>");
@@ -66,6 +67,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 + "http://netbeanscolors.org" + "</body></html>");
         jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
                 + "http://jacocoverage.tikione.fr/redirect/help/" + "</body></html>");
+        // </editor-fold>
     }
 
     private void showLatestNews() {

@@ -1,6 +1,7 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -45,6 +46,9 @@ public class ProjectConfig {
 
     private ProjectConfig(File prjCfgFile) {
         this.prjCfgFile = prjCfgFile;
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
+        mapper.enable(SerializationFeature.EAGER_SERIALIZER_FETCH);
     }
 
     /**
