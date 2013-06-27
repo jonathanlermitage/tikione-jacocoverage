@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +39,8 @@ public class Utils {
 
     /** The tabulation character ({@code &#92;u0009}). */
     public static final char TAB = '\u0009';
+
+    private static final String[] JAVA_EXT_ARR = new String[]{"java"};
 
     private Utils() {
     }
@@ -82,7 +87,7 @@ public class Utils {
         if (prjdir.contains(",") || prjdir.contains(";") || prjdir.contains("=")) {
             // FIXED GitHub #9 JavaAgent doesn't allow comma in report file's path (comma is used to separate parameters).
             // FIXED 20130625 extended GitHub #9 principle to other sensible characters.
-            bindir= System.getProperty("java.io.tmpdir");
+            bindir = System.getProperty("java.io.tmpdir");
         } else {
             bindir = prjdir;
         }
@@ -150,8 +155,8 @@ public class Utils {
             supported = false;
         } else {
             String projectClass = project.getClass().getName();
-            if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")
-                    /*|| projectClass.equals("org.netbeans.modules.apisupport.project.NbModuleProject")*/) {
+            if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")) {
+                // TODO for NetBeans Modules support "org.netbeans.modules.apisupport.project.NbModuleProject".
                 supported = true;
             } else {
                 supported = false;
@@ -179,6 +184,18 @@ public class Utils {
             folders.addAll(listFolders(subfolder));
         }
         return folders;
+    }
+
+    public static Map<File, List<File>> listPkgAndClasses(File root) {
+        Map<File, List<File>> pkgAndClasses = new LinkedHashMap<File, List<File>>(16);
+        List<File> pkgs = listFolders(root);
+        Collections.sort(pkgs);
+        for (File pkg : pkgs) {
+            List<File> classes = new ArrayList<File>(org.apache.commons.io.FileUtils.listFiles(pkg, JAVA_EXT_ARR, false));
+            Collections.sort(classes);
+            pkgAndClasses.put(pkg, classes);
+        }
+        return pkgAndClasses;
     }
 
     /**

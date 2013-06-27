@@ -1,6 +1,6 @@
 package fr.tikione.jacocoverage.plugin.config;
 
-import java.awt.Image;
+import javax.swing.Icon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,10 +14,10 @@ public class PackageFilterModel extends DefaultTableModel {
 
     /** Table columns type. */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private final Class<Object>[] types = new Class[]{Image.class, String.class, Boolean.class};
+    private final Class<Object>[] types = new Class[]{Boolean.class, Icon.class, String.class};
 
     /** Indicates if table columns are editable. */
-    private final boolean[] canEdit = new boolean[]{false, false, true};
+    private final boolean[] canEdit = new boolean[]{true, false, false};
 
     @Override
     public Class<Object> getColumnClass(int columnIndex) {
@@ -31,8 +31,8 @@ public class PackageFilterModel extends DefaultTableModel {
 
     public PackageFilterModel() {
         super(new Object[][]{}, new String[]{
+            "Cover",
             "",
-            "Packages and Classes",
-            "Cover"});
+            "Packages and Classes"});
     }
 }

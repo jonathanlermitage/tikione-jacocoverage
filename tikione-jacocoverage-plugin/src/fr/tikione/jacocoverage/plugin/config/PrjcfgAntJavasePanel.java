@@ -1,13 +1,19 @@
 package fr.tikione.jacocoverage.plugin.config;
 
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
+import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.regex.Matcher;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -26,6 +32,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import org.netbeans.api.project.Project;
 import org.openide.awt.Mnemonics;
+import org.openide.filesystems.FileObject;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -39,14 +46,25 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
     private static final long serialVersionUID = 1L;
 
+    /** The file to save project side configuration. */
     private File prjCfgFile;
+
+    /** The folder that contains project's Java sources. */
+    private File prjSrcDir;
+
+    /** The model used to handle packages filter table. */
+    private DefaultTableModel pkgfltModel;
 
     /**
      * Creates new form PrjcfgAntJavasePanel.
      *
      * @param context
+     * @throws FileNotFoundException
+     * @throws IOException
      */
-    public PrjcfgAntJavasePanel(Lookup context) {
+    public PrjcfgAntJavasePanel(Lookup context)
+            throws FileNotFoundException,
+                   IOException {
         super();
         initComponents();
         // <editor-fold defaultstate="collapsed" desc="Tooltips">
@@ -62,9 +80,17 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
                 + "http://jacocoverage.tikione.fr/redirect/help/" + "</body></html>");
         // </editor-fold>
-        prjCfgFile = new File(NBUtils.getProjectDir(context.lookup(Project.class)), Globals.PRJ_CFG);
+        Project prj = context.lookup(Project.class);
+        prjCfgFile = new File(NBUtils.getProjectDir(prj), Globals.PRJ_CFG);
+
+        // Get project sources folder.
+        String prjDir = NBUtils.getProjectDir(prj) + File.separator;
+        FileObject prjPropsFo = prj.getProjectDirectory().getFileObject("nbproject/project.properties");
+        Properties prjProps = new Properties();
+        prjProps.load(prjPropsFo.getInputStream());
+        prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
+
         load();
-        jTablePackageFilter.setModel(new PackageFilterModel());
     }
 
     private void load() {
@@ -80,6 +106,33 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
             jCheckBoxOpenHtmlReport.setSelected(prjCfg.isOpenHtmlReport());
             jComboBoxWorkfiles.setSelectedIndex(prjCfg.getJaCoCoWorkfilesRule());
             enableProjectsideCfgUI(overrideGlobals);
+
+            // Load and fill packages filter model.
+            pkgfltModel = new PackageFilterModel();
+            jTablePackageFilter.setModel(pkgfltModel);
+            jTablePackageFilter.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTablePackageFilter.getColumnModel().getColumn(0).setMinWidth(0);
+            jTablePackageFilter.getColumnModel().getColumn(0).setMaxWidth(200);
+            jTablePackageFilter.getColumnModel().getColumn(1).setPreferredWidth(20);
+            jTablePackageFilter.getColumnModel().getColumn(1).setMinWidth(0);
+            jTablePackageFilter.getColumnModel().getColumn(1).setMaxWidth(200);
+            Map<File, List<File>> pkgAndClasses = Utils.listPkgAndClasses(prjSrcDir);
+            ImageIcon pkgIcon = new ImageIcon(getClass().getResource(
+                    "/fr/tikione/jacocoverage/plugin/resources/icon/netbeans_java_package.png"));
+            ImageIcon classIcon = new ImageIcon(getClass().getResource(
+                    "/fr/tikione/jacocoverage/plugin/resources/icon/netbeans_java_class.png"));
+            for (File pkg : pkgAndClasses.keySet()) {
+                List<File> classes = pkgAndClasses.get(pkg);
+                if (!classes.isEmpty()) {
+                    String pkgName = pkg.getAbsolutePath()
+                            .substring(prjSrcDir.getAbsolutePath().length() + 1)
+                            .replaceAll(Matcher.quoteReplacement(File.separator), ".");
+                    pkgfltModel.addRow(new Object[]{true, pkgIcon, pkgName});
+                    for (File clazz : classes) {
+                        pkgfltModel.addRow(new Object[]{true, classIcon, pkgName + '.' + clazz.getName()});
+                    }
+                }
+            }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -341,33 +394,12 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
             },
             new String [] {
-                "", "Packages and Classes", "Select"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Object.class, String.class, Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTablePackageFilter.setRowSelectionAllowed(false);
         jTablePackageFilter.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTablePackageFilter);
-        jTablePackageFilter.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jTablePackageFilter.getColumnModel().getColumn(0).setHeaderValue(NbBundle.getMessage(PrjcfgAntJavasePanel.class, "JPanelPrjcfgAntJavase.jTablePackageFilter.columnModel.title1_1")); // NOI18N
-        jTablePackageFilter.getColumnModel().getColumn(1).setHeaderValue(NbBundle.getMessage(PrjcfgAntJavasePanel.class, "JPanelPrjcfgAntJavase.jTablePackageFilter.columnModel.title0_1")); // NOI18N
-        jTablePackageFilter.getColumnModel().getColumn(2).setResizable(false);
-        jTablePackageFilter.getColumnModel().getColumn(2).setPreferredWidth(20);
-        jTablePackageFilter.getColumnModel().getColumn(2).setHeaderValue(NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jTablePackageFilter.columnModel.title2_1")); // NOI18N
 
         Mnemonics.setLocalizedText(jButtonSelectAll, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonSelectAll.text")); // NOI18N
 
@@ -437,7 +469,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonUseProjectSpecificOptions)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPanePrjOpts))
+                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
