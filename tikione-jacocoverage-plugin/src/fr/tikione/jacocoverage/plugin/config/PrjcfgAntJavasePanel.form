@@ -37,7 +37,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jRadioButtonUseProjectSpecificOptions" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPanePrjOpts" max="32767" attributes="0"/>
+              <Component id="jTabbedPanePrjOpts" pref="297" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -126,7 +126,7 @@
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jLabelWorkfilesTips" alignment="1" pref="492" max="32767" attributes="0"/>
+                                  <Component id="jLabelWorkfilesTips" alignment="1" pref="441" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -393,14 +393,14 @@
                                   <Component id="jButtonInvertAll" max="32767" attributes="0"/>
                                   <Component id="jButtonUnselectAll" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jButtonSelectAll" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButtonRefresh" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonRefresh" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabelSelectPackages" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel1" pref="492" max="32767" attributes="0"/>
+                          <Component id="jLabel1" pref="441" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -421,7 +421,7 @@
                               <Component id="jButtonInvertAll" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonRefresh" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="69" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -455,10 +455,13 @@
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0"/>
                     </Property>
+                    <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ce" green="ce" red="ce" type="rgb"/>
+                    </Property>
                     <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                     <Property name="showVerticalLines" type="boolean" value="false"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -470,6 +473,9 @@
                   <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="PrjcfgAntJavasePanel.jButtonSelectAll.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectAllActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonUnselectAll">
               <Properties>
@@ -477,6 +483,9 @@
                   <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="PrjcfgAntJavasePanel.jButtonUnselectAll.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUnselectAllActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonInvertAll">
               <Properties>
@@ -484,16 +493,26 @@
                   <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="PrjcfgAntJavasePanel.jButtonInvertAll.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInvertAllActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="PrjcfgAntJavasePanel.jLabel1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
+                <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRefresh">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_refresh.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="PrjcfgAntJavasePanel.jButtonRefresh.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>

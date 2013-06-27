@@ -52,6 +52,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     /** The folder that contains project's Java sources. */
     private File prjSrcDir;
 
+    /** The list of packages and Java classes found on the project associated to the current configuration panel. */
     private Map<File, List<File>> pkgAndClasses;
 
     /** The model used to handle packages filter table. */
@@ -356,7 +357,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                                         .addComponent(jCheckBoxEnableHighlightingExtended))
                                     .addComponent(jCheckBoxEnableHighlighting))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabelWorkfilesTips, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                            .addComponent(jLabelWorkfilesTips, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanelGeneralOptionsLayout.setVerticalGroup(
@@ -402,18 +403,38 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
             }
         ));
+        jTablePackageFilter.setGridColor(new Color(206, 206, 206));
         jTablePackageFilter.setRowSelectionAllowed(false);
         jTablePackageFilter.setShowVerticalLines(false);
+        jTablePackageFilter.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePackageFilter);
 
         Mnemonics.setLocalizedText(jButtonSelectAll, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonSelectAll.text")); // NOI18N
+        jButtonSelectAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButtonSelectAllActionPerformed(evt);
+            }
+        });
 
         Mnemonics.setLocalizedText(jButtonUnselectAll, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonUnselectAll.text")); // NOI18N
+        jButtonUnselectAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButtonUnselectAllActionPerformed(evt);
+            }
+        });
 
         Mnemonics.setLocalizedText(jButtonInvertAll, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonInvertAll.text")); // NOI18N
+        jButtonInvertAll.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButtonInvertAllActionPerformed(evt);
+            }
+        });
 
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"))); // NOI18N
         Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jLabel1.text")); // NOI18N
+        jLabel1.setVerticalTextPosition(SwingConstants.TOP);
 
+        jButtonRefresh.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_refresh.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonRefresh, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonRefresh.text")); // NOI18N
         jButtonRefresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -435,11 +456,11 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                             .addComponent(jButtonInvertAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonUnselectAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonSelectAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRefresh)))
+                            .addComponent(jButtonRefresh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelPackageFilteringLayout.createSequentialGroup()
                         .addComponent(jLabelSelectPackages)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelPackageFilteringLayout.setVerticalGroup(
@@ -457,7 +478,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jButtonInvertAll)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRefresh)
-                        .addGap(0, 71, Short.MAX_VALUE))
+                        .addGap(0, 69, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -484,7 +505,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonUseProjectSpecificOptions)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPanePrjOpts))
+                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -527,6 +548,19 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private void jButtonRefreshActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         loadPkgFilter();
     }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    private void jButtonSelectAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSelectAllActionPerformed
+
+    private void jButtonUnselectAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonUnselectAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUnselectAllActionPerformed
+
+    private void jButtonInvertAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonInvertAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInvertAllActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroupUseGlobalOptions;
     private JButton jButtonInvertAll;

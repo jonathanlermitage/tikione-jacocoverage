@@ -2,6 +2,7 @@ package fr.tikione.jacocoverage.plugin.config;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import org.netbeans.spi.project.ui.support.ProjectCustomizer;
@@ -24,10 +25,12 @@ public class PrjcfgAntJavaseCatProvider implements ProjectCustomizer.CompositeCa
 
     public @Override
     Category createCategory(Lookup context) {
+        ImageIcon pluginIcon = new ImageIcon(getClass().getResource(
+                "/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_lightning.png"));
         cat = ProjectCustomizer.Category.create(
                 "JaCoCoverage",
                 "JaCoCoverage",
-                null);
+                pluginIcon.getImage());
         return cat;
     }
 
