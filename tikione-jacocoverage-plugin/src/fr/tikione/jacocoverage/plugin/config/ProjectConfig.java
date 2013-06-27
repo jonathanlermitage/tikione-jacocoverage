@@ -23,8 +23,9 @@ public class ProjectConfig {
 
     private static final Logger LOGGER = Logger.getLogger(ProjectConfig.class.getName());
 
-    /** The map of all configuration properties. First element contains common properties (in a {@code Properties} object). Second
-     element contains configuration for packages and classes filter (an {@code ArrayList} of excluded elements). */
+    /** The map of all configuration properties. Element {@link #JSON_GENERAL} contains common properties (in a {@code Properties}
+     object). Element {@link #JSON_PKGFILTER} contains configuration for packages and classes filter (an {@code ArrayList} of excluded
+     elements). */
     private final Map<String, Object> pref = new HashMap<String, Object>(4);
 
     /** The file used for configuration persistence. */
@@ -35,6 +36,12 @@ public class ProjectConfig {
 
     /** A general cache for project configuration instances. */
     private static final Map<File, ProjectConfig> prjCfgs = Collections.synchronizedMap(new HashMap<File, ProjectConfig>(8));
+
+    /** Key for map of configuration properties: commons properties. */
+    private static final String JSON_GENERAL = "preferences";
+
+    /** Key for map of configuration properties: packages and classes filter. */
+    private static final String JSON_PKGFILTER = "pkgclss.excludelist";
 
     /**
      * Get project's configuration handler.
@@ -58,20 +65,20 @@ public class ProjectConfig {
 
     private ProjectConfig(File prjCfgFile) {
         this.prjCfgFile = prjCfgFile;
-        pref.put("preferences", new Properties());
-        pref.put("pkgclss.excludelist", new ArrayList<String>(16));
+        pref.put(JSON_GENERAL, new Properties());
+        pref.put(JSON_PKGFILTER, new ArrayList<String>(16));
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
         mapper.enable(SerializationFeature.EAGER_SERIALIZER_FETCH);
     }
 
     private Properties getinternalPref() {
-        return (Properties) pref.get("preferences");
+        return (Properties) pref.get(JSON_GENERAL);
     }
 
     @SuppressWarnings("unchecked")
     private ArrayList<String> getPkgclssExclude() {
-        return (ArrayList<String>) pref.get("pkgclss.excludelist");
+        return (ArrayList<String>) pref.get(JSON_PKGFILTER);
     }
 
     /**
@@ -87,7 +94,7 @@ public class ProjectConfig {
         prjCfgFile.getParentFile().mkdirs();
         if (prjCfgFile.exists()) {
             try {
-                getinternalPref().putAll((Map<Object, Object>) mapper.readValue(prjCfgFile, Map.class).get("preferences"));
+                getinternalPref().putAll((Map<Object, Object>) mapper.readValue(prjCfgFile, Map.class).get(JSON_GENERAL));
             } catch (Exception ex) {
                 LOGGER.log(Level.INFO, "Project's JaCoCoverage configuration file format is outdated or invalid. Reset cause:", ex);
                 String msg = "The project's JaCoCoverage configuration file format is outdated or invalid.\n"
