@@ -186,6 +186,12 @@ public class Utils {
         return folders;
     }
 
+    /**
+     * Get a list of packages and classes contained in a given folder and its subfolders.
+     *
+     * @param root a folder that contains Java sources.
+     * @return a list of packages and classes.
+     */
     public static Map<File, List<File>> listPkgAndClasses(File root) {
         Map<File, List<File>> pkgAndClasses = new LinkedHashMap<File, List<File>>(16);
         List<File> pkgs = listFolders(root);
