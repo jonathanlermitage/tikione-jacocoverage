@@ -5,6 +5,7 @@
 * GitHub #14 fixed MissingResourceException when assertions (-ea switch) are enabled.
 * disabled NetBeans Module projects support (will be fixed later).
 * coloration of multi-line instructions is now enabled in default configuration.
+* internal: library modules are now hidden in Plugins Manager.
 
 ### Version 1.2.2.20130617.1157 (2013-06-17)
 * GitHub #9 fixed JavaAgent didn't generate report if its path contained comma.
