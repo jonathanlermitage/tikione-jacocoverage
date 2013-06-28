@@ -118,7 +118,10 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .replaceAll(Matcher.quoteReplacement(File.separator), ".");
                 pkgfltModel.addRow(new Object[]{true, pkgIcon, pkgName});
                 for (File clazz : classes) {
-                    pkgfltModel.addRow(new Object[]{true, classIcon, pkgName + '.' + clazz.getName()});
+                    String className = clazz.getName();
+                    if (!className.equals("package-info.java")) {
+                        pkgfltModel.addRow(new Object[]{true, classIcon, pkgName + '.' + className});
+                    }
                 }
             }
         }
@@ -560,7 +563,6 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private void jButtonInvertAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonInvertAllActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInvertAllActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroupUseGlobalOptions;
     private JButton jButtonInvertAll;
