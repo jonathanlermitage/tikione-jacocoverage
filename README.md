@@ -21,7 +21,7 @@ validated by the NetBeans Plugin Review staff and available in the NetBeans inte
 * You can get the latest stable development builds by registering the following **Update Center** into NetBeans: ``http://jacocoverage.tikione.fr/nbuc/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
 
 ### Development progression
-Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues?milestone=2&page=1&state=open).
+Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
 For details on previous and current versions, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
 ### Documentation and Media
