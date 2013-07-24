@@ -17,14 +17,14 @@
       <file name="norwaytoday__annotation_notcovered_glyph.xml" url="resources/norwaytoday__annotation_notcovered_glyph.xml"/>
     </folder>
   </folder>
-    <folder name="Projects">
-        <folder name="org-netbeans-modules-java-j2seproject">
-            <folder name="Customizer">
-                <file name="fr-tikione-jacocoverage-plugin-config-PrjcfgAntJavaseCatProvider.instance">
-                    <attr name="position" intvalue="1400"/>
-                </file>
-                <file name="fr-tikione-jacocoverage-plugin-config-ProjectCustomizerAntJavase.instance_hidden"/>
-            </folder>
-        </folder>
+  <folder name="Projects">
+    <folder name="org-netbeans-modules-java-j2seproject">
+      <folder name="Customizer">
+        <file name="fr-tikione-jacocoverage-plugin-config-PrjcfgAntJavaseCatProvider.instance">
+          <attr name="position" intvalue="1400"/>
+        </file>
+        <file name="fr-tikione-jacocoverage-plugin-config-ProjectCustomizerAntJavase.instance_hidden"/>
+      </folder>
     </folder>
+  </folder>
 </filesystem>

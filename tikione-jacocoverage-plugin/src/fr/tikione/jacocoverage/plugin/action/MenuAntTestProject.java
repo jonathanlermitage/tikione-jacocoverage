@@ -1,6 +1,5 @@
 package fr.tikione.jacocoverage.plugin.action;
 
-import fr.tikione.jacocoverage.plugin.config.Globals;
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
 import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,6 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.awt.DynamicMenuContent;
 import org.openide.util.ContextAwareAction;
-import org.openide.util.ImageUtilities;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
@@ -43,7 +41,7 @@ public class MenuAntTestProject
         setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject()));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntTestProject());
-        putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
+//        putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
     }
 
     @Override
