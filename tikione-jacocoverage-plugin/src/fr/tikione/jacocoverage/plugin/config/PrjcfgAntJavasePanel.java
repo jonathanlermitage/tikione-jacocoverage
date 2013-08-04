@@ -92,8 +92,14 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         Properties prjProps = new Properties();
         prjProps.load(prjPropsFo.getInputStream());
         prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-
+        
         load();
+        
+        jTablePackageFilter.setEnabled(false);
+        jButtonSelectAll.setEnabled(false);
+        jButtonInvertAll.setEnabled(false);
+        jButtonRefresh.setEnabled(false);
+        jButtonUnselectAll.setEnabled(false);
     }
 
     private void loadPkgFilter() {

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -79,6 +80,35 @@ public class ProjectConfig {
     @SuppressWarnings("unchecked")
     private ArrayList<String> getPkgclssExclude() {
         return (ArrayList<String>) pref.get(JSON_PKGFILTER);
+    }
+
+    @SuppressWarnings("unchecked")
+    private ArrayList<String> getPkgclssExcludeCopy(FilterEnum filter) {
+        ArrayList<String> res;
+        ArrayList<String> base = (ArrayList<String>) pref.get(JSON_PKGFILTER);
+        switch (filter) {
+            case KEEPONLY_CLASS:
+                res = new ArrayList<String>((int) (base.size() / 1.20) + 1);
+                for (String elt : base) {
+                    if (elt.toLowerCase(Locale.US).endsWith(".java")) {
+                        res.add(elt);
+                    }
+                }
+                break;
+            case KEEPONLY_PKG:
+                res = new ArrayList<String>((int) (base.size() / 1.80) + 1);
+                for (String elt : base) {
+                    if (!elt.toLowerCase(Locale.US).endsWith(".java")) {
+                        res.add(elt);
+                    }
+                }
+                break;
+            case KEEP_ALL:
+            default:
+                res = new ArrayList<String>(base);
+                break;
+        }
+        return res;
     }
 
     /**

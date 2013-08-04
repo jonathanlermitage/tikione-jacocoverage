@@ -1,10 +1,12 @@
 ## JaCoCoverage Change Log
 
-### Development Version (2013-06-26)
+### Version 1.2.9.20130804.1649 (2013-08-04)
 * GitHub #11 added configuration at project level.
 * GitHub #14 fixed MissingResourceException when assertions (-ea switch) are enabled.
 * disabled NetBeans Module projects support (will be fixed later).
 * coloration of multi-line instructions is now enabled in default configuration.
+* removed actions from NetBeans toolbar.
+* removed actions icons.
 * internal: library modules are now hidden in Plugins Manager.
 
 ### Version 1.2.2.20130617.1157 (2013-06-17)
