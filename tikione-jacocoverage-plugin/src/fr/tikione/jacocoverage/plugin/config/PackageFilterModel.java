@@ -17,8 +17,7 @@ public class PackageFilterModel extends DefaultTableModel {
     private final Class<Object>[] types = new Class[]{Boolean.class, Icon.class, String.class};
 
     /** Indicates if table columns are editable. */
-//    private final boolean[] canEdit = new boolean[]{true, false, false};
-    private final boolean[] canEdit = new boolean[]{false, false, false};
+    private final boolean[] canEdit = new boolean[]{true, false, false};
 
     @Override
     public Class<Object> getColumnClass(int columnIndex) {

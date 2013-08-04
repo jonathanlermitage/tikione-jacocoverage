@@ -94,12 +94,6 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
         
         load();
-        
-        jTablePackageFilter.setEnabled(false);
-        jButtonSelectAll.setEnabled(false);
-        jButtonInvertAll.setEnabled(false);
-        jButtonRefresh.setEnabled(false);
-        jButtonUnselectAll.setEnabled(false);
     }
 
     private void loadPkgFilter() {
@@ -366,7 +360,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                                         .addComponent(jCheckBoxEnableHighlightingExtended))
                                     .addComponent(jCheckBoxEnableHighlighting))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabelWorkfilesTips, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                            .addComponent(jLabelWorkfilesTips, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanelGeneralOptionsLayout.setVerticalGroup(
@@ -386,7 +380,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelWorkfiles)
                     .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelGeneralOptionsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -468,7 +462,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                             .addComponent(jButtonRefresh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelPackageFilteringLayout.createSequentialGroup()
                         .addComponent(jLabelSelectPackages)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 162, Short.MAX_VALUE))
                     .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -487,7 +481,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jButtonInvertAll)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRefresh)
-                        .addGap(0, 69, Short.MAX_VALUE))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
