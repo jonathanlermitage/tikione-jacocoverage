@@ -199,7 +199,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         jCheckBoxEnableHtmlReport = new JCheckBox();
         jCheckBoxOpenHtmlReport = new JCheckBox();
         jLabelWorkfiles = new JLabel();
-        jComboBoxWorkfiles = new JComboBox();
+        jComboBoxWorkfiles = new JComboBox<>();
         jLabelWorkfilesTips = new JLabel();
         jButtonSocialTwitter = new JButton();
         jButtonSocialFacebook = new JButton();
@@ -254,7 +254,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
         Mnemonics.setLocalizedText(jLabelWorkfiles, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jLabelWorkfiles.text")); // NOI18N
 
-        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
+        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel<>(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
 
         jLabelWorkfilesTips.setBackground(new Color(255, 255, 255));
         jLabelWorkfilesTips.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"))); // NOI18N
@@ -484,7 +484,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jButtonInvertAll)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRefresh)
-                        .addGap(0, 47, Short.MAX_VALUE))
+                        .addGap(0, 63, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -511,7 +511,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonUseProjectSpecificOptions)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                .addComponent(jTabbedPanePrjOpts))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -582,7 +582,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private JCheckBox jCheckBoxEnableHighlightingExtended;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
-    private JComboBox jComboBoxWorkfiles;
+    private JComboBox<String> jComboBoxWorkfiles;
     private JLabel jLabel1;
     private JLabel jLabelSelectPackages;
     private JLabel jLabelWorkfiles;

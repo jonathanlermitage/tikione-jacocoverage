@@ -1,9 +1,9 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+import fr.tikione.jacocoverage.plugin.util.IcoTxtComboBoxRenderer;
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
 import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,19 +13,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import org.apache.commons.io.IOUtils;
 import org.openide.awt.Mnemonics;
@@ -46,13 +43,16 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         initComponents();
         try {
             // Add "NetBeans (default)" and "Norway Today (dark)" themes with colors preview.
-            jComboBoxColorTheme.setRenderer(new ComboBoxRenderer());
+            jComboBoxColorTheme.setRenderer(new IcoTxtComboBoxRenderer());
             ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_default.png"));
             ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_norwaytoday.png"));
             thNetBeansImg.setDescription("NetBeans (default)");
             thNorwaytoday.setDescription("Norway Today");
             jComboBoxColorTheme.addItem(thNetBeansImg);
             jComboBoxColorTheme.addItem(thNorwaytoday);
+
+            jComboBoxWorkfiles.setModel(new javax.swing.DefaultComboBoxModel<>(
+                    new String[]{"keep original workfiles", "keep zipped workfiles", "delete workfiles"}));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -126,9 +126,9 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jTextAreaLatestNews = new JTextArea();
         jCheckBoxShowLatestNews = new JCheckBox();
         jLabelColorTheme = new JLabel();
-        jComboBoxColorTheme = new JComboBox();
+        jComboBoxColorTheme = new JComboBox<>();
         jLabelWorkfiles = new JLabel();
-        jComboBoxWorkfiles = new JComboBox();
+        jComboBoxWorkfiles = new JComboBox<>();
         jCheckBoxEnableHighlightingExtended = new JCheckBox();
         jLabelWorkfilesTips = new JLabel();
 
@@ -247,8 +247,6 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
         Mnemonics.setLocalizedText(jLabelWorkfiles, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelWorkfiles.text")); // NOI18N
 
-        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
-
         Mnemonics.setLocalizedText(jCheckBoxEnableHighlightingExtended, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxEnableHighlightingExtended.text")); // NOI18N
 
         jLabelWorkfilesTips.setBackground(new Color(255, 255, 255));
@@ -293,14 +291,13 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                                 .addComponent(jLabelColorTheme)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxColorTheme, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 58, Short.MAX_VALUE))
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabelWorkfiles)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelAntTaskParams, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -342,7 +339,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addComponent(jCheckBoxShowLatestNews)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -443,32 +440,6 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     boolean valid() {
         return true;
     }
-
-    private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
-
-        private static final long serialVersionUID = 1L;
-
-        ComboBoxRenderer() {
-            setOpaque(true);
-            setHorizontalAlignment(SwingConstants.LEFT);
-            setVerticalAlignment(SwingConstants.CENTER);
-        }
-
-        @Override
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            if (isSelected) {
-                setBackground(list.getSelectionBackground());
-                setForeground(list.getSelectionForeground());
-            } else {
-                setBackground(list.getBackground());
-                setForeground(list.getForeground());
-            }
-            ImageIcon icon = (ImageIcon) value;
-            setText(icon.getDescription());
-            setIcon(icon);
-            return this;
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonOnlineHelp;
     private JButton jButtonResoreDefaults;
@@ -482,8 +453,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
     private JCheckBox jCheckBoxShowLatestNews;
-    private JComboBox jComboBoxColorTheme;
-    private JComboBox jComboBoxWorkfiles;
+    private JComboBox<Object> jComboBoxColorTheme;
+    private JComboBox<String> jComboBoxWorkfiles;
     private JLabel jLabelAntTaskParams;
     private JLabel jLabelAntTaskParamsTips;
     private JLabel jLabelColorTheme;
