@@ -1,7 +1,7 @@
 ## JaCoCoverage Change Log
 
 ### Latest DevBuild (Version 1.3.0 scheduled for NetBeans 7.4, which runs on JDK7 only)
-# fixed: unclosed input stream on project's properties.
+* fixed: unclosed input stream on project's properties.
 * *built with NetBeans 7.3.1 and Oracle JDK7.*
 
 ### Version 1.2.9.20130804.1649 (2013-08-04)
