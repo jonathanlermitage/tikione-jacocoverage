@@ -74,9 +74,7 @@ public abstract class JaCoCoActionOnAnt
             public void run() {
                 try {
                     runJacocoJavaagent(NBUtils.getSelectedProject());
-                } catch (IllegalArgumentException ex) {
-                    Exceptions.printStackTrace(ex);
-                } catch (IOException ex) {
+                } catch (        IllegalArgumentException | IOException ex) {
                     Exceptions.printStackTrace(ex);
                 }
             }
@@ -216,9 +214,7 @@ public abstract class JaCoCoActionOnAnt
                             Exceptions.printStackTrace(ex);
                         } catch (IOException ex) {
                             Exceptions.printStackTrace(ex);
-                        } catch (ParserConfigurationException ex) {
-                            Exceptions.printStackTrace(ex);
-                        } catch (SAXException ex) {
+                        } catch (                ParserConfigurationException | SAXException ex) {
                             Exceptions.printStackTrace(ex);
                         } finally {
                             progr.finish();

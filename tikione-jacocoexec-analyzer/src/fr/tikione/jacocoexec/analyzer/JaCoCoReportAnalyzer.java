@@ -163,7 +163,7 @@ public class JaCoCoReportAnalyzer {
             io.getOut().reset();
             IOColorPrint.print(io, "=== JaCoCoverage report (powered by JaCoCo from EclEmma) ===\n", Color.GRAY);
             IOColorPrint.print(io, "Covered | Partially covered | Not covered | Java Class\n\n", Color.GRAY);
-            List<JavaClass> sortedClasses = new ArrayList<JavaClass>(coverageData.values());
+            List<JavaClass> sortedClasses = new ArrayList<>(coverageData.values());
             Collections.sort(sortedClasses);
             for (JavaClass jclass : sortedClasses) {
                 IOColorPrint.print(io, String.format("%5s", jclass.getNbCoveredLines()), CONSOLE_COVERED);

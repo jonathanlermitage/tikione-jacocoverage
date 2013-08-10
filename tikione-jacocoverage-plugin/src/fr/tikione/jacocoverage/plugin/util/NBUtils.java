@@ -232,7 +232,7 @@ public class NBUtils {
      * @return a list of Java package names.
      */
     public static List<String> getProjectJavaPackages(Project project, Properties prjProps) {
-        List<String> packages = new ArrayList<String>(8);
+        List<String> packages = new ArrayList<>(8);
         String srcFolderName = Utils.getProperty(prjProps, "src.dir");
         List<File> packagesAsFolders = Utils.listFolders(
                 new File(NBUtils.getProjectDir(project) + File.separator + srcFolderName + File.separator));

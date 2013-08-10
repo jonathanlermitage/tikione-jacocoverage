@@ -65,7 +65,7 @@ public class Utils {
      * @return all the strings matched (in an ArrayList).
      */
     public static List<String> getGroupsFromRegex(String src, Pattern pattern, int expectedNbMatchs) {
-        List<String> res = new ArrayList<String>(expectedNbMatchs);
+        List<String> res = new ArrayList<>(expectedNbMatchs);
         Matcher matcher = pattern.matcher(src);
         while (matcher.find()) {
             for (int group = 1; group <= matcher.groupCount(); group++) {
@@ -172,7 +172,7 @@ public class Utils {
      * @return a list of subfolders.
      */
     public static List<File> listFolders(File root) {
-        List<File> folders = new ArrayList<File>(16);
+        List<File> folders = new ArrayList<>(16);
         File[] subfolders = root.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
@@ -193,11 +193,11 @@ public class Utils {
      * @return a list of packages and classes.
      */
     public static Map<File, List<File>> listPkgAndClasses(File root) {
-        Map<File, List<File>> pkgAndClasses = new LinkedHashMap<File, List<File>>(16);
+        Map<File, List<File>> pkgAndClasses = new LinkedHashMap<>(16);
         List<File> pkgs = listFolders(root);
         Collections.sort(pkgs);
         for (File pkg : pkgs) {
-            List<File> classes = new ArrayList<File>(org.apache.commons.io.FileUtils.listFiles(pkg, JAVA_EXT_ARR, false));
+            List<File> classes = new ArrayList<>(org.apache.commons.io.FileUtils.listFiles(pkg, JAVA_EXT_ARR, false));
             Collections.sort(classes);
             pkgAndClasses.put(pkg, classes);
         }
@@ -257,27 +257,21 @@ public class Utils {
     private static void zip(File src, File dst, String entryname) {
         byte[] buffer = new byte[1024];
         try {
-            FileOutputStream dstStrm = new FileOutputStream(dst);
-            try {
+            try (FileOutputStream dstStrm = new FileOutputStream(dst)) {
                 ZipOutputStream zipStrm = new ZipOutputStream(dstStrm);
                 try {
-                    FileInputStream srcStrm = new FileInputStream(src);
-                    try {
+                    try (FileInputStream srcStrm = new FileInputStream(src)) {
                         ZipEntry entry = new ZipEntry(entryname);
                         zipStrm.putNextEntry(entry);
                         int len;
                         while ((len = srcStrm.read(buffer)) > 0) {
                             zipStrm.write(buffer, 0, len);
                         }
-                    } finally {
-                        srcStrm.close();
                     }
                     zipStrm.closeEntry();
                 } finally {
                     zipStrm.close();
                 }
-            } finally {
-                dstStrm.close();
             }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);

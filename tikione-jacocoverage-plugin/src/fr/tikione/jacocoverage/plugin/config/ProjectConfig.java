@@ -27,7 +27,7 @@ public class ProjectConfig {
     /** The map of all configuration properties. Element {@link #JSON_GENERAL} contains common properties (in a {@code Properties}
      object). Element {@link #JSON_PKGFILTER} contains configuration for packages and classes filter (an {@code ArrayList} of excluded
      elements). */
-    private final Map<String, Object> pref = new HashMap<String, Object>(4);
+    private final Map<String, Object> pref = new HashMap<>(4);
 
     /** The file used for configuration persistence. */
     private final File prjCfgFile;
@@ -88,7 +88,7 @@ public class ProjectConfig {
         ArrayList<String> base = (ArrayList<String>) pref.get(JSON_PKGFILTER);
         switch (filter) {
             case KEEPONLY_CLASS:
-                res = new ArrayList<String>((int) (base.size() / 1.20) + 1);
+                res = new ArrayList<>((int) (base.size() / 1.20) + 1);
                 for (String elt : base) {
                     if (elt.toLowerCase(Locale.US).endsWith(".java")) {
                         res.add(elt);
@@ -96,7 +96,7 @@ public class ProjectConfig {
                 }
                 break;
             case KEEPONLY_PKG:
-                res = new ArrayList<String>((int) (base.size() / 1.80) + 1);
+                res = new ArrayList<>((int) (base.size() / 1.80) + 1);
                 for (String elt : base) {
                     if (!elt.toLowerCase(Locale.US).endsWith(".java")) {
                         res.add(elt);
@@ -105,7 +105,7 @@ public class ProjectConfig {
                 break;
             case KEEP_ALL:
             default:
-                res = new ArrayList<String>(base);
+                res = new ArrayList<>(base);
                 break;
         }
         return res;
