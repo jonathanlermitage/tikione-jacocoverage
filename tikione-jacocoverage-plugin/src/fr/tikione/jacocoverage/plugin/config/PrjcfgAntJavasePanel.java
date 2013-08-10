@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -90,7 +91,9 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         String prjDir = NBUtils.getProjectDir(prj) + File.separator;
         FileObject prjPropsFo = prj.getProjectDirectory().getFileObject("nbproject/project.properties");
         Properties prjProps = new Properties();
-        prjProps.load(prjPropsFo.getInputStream());
+        try (InputStream inputStream = prjPropsFo.getInputStream()) {
+            prjProps.load(inputStream);
+        }
         prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
         
         load();
