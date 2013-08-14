@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -73,42 +73,13 @@ public class ProjectConfig {
         mapper.enable(SerializationFeature.EAGER_SERIALIZER_FETCH);
     }
 
-    private Properties getinternalPref() {
+    private Properties getInternalPref() {
         return (Properties) pref.get(JSON_GENERAL);
     }
 
     @SuppressWarnings("unchecked")
-    private ArrayList<String> getPkgclssExclude() {
+    public ArrayList<String> getPkgclssExclude() {
         return (ArrayList<String>) pref.get(JSON_PKGFILTER);
-    }
-
-    @SuppressWarnings("unchecked")
-    private ArrayList<String> getPkgclssExcludeCopy(FilterEnum filter) {
-        ArrayList<String> res;
-        ArrayList<String> base = (ArrayList<String>) pref.get(JSON_PKGFILTER);
-        switch (filter) {
-            case KEEPONLY_CLASS:
-                res = new ArrayList<>((int) (base.size() / 1.20) + 1);
-                for (String elt : base) {
-                    if (elt.toLowerCase(Locale.US).endsWith(".java")) {
-                        res.add(elt);
-                    }
-                }
-                break;
-            case KEEPONLY_PKG:
-                res = new ArrayList<>((int) (base.size() / 1.80) + 1);
-                for (String elt : base) {
-                    if (!elt.toLowerCase(Locale.US).endsWith(".java")) {
-                        res.add(elt);
-                    }
-                }
-                break;
-            case KEEP_ALL:
-            default:
-                res = new ArrayList<>(base);
-                break;
-        }
-        return res;
     }
 
     /**
@@ -119,12 +90,13 @@ public class ProjectConfig {
     @SuppressWarnings("unchecked")
     public void load()
             throws IOException {
-        getinternalPref().clear();
+        getInternalPref().clear();
         getPkgclssExclude().clear();
         prjCfgFile.getParentFile().mkdirs();
         if (prjCfgFile.exists()) {
             try {
-                getinternalPref().putAll((Map<Object, Object>) mapper.readValue(prjCfgFile, Map.class).get(JSON_GENERAL));
+                getInternalPref().putAll((Map<Object, Object>) mapper.readValue(prjCfgFile, Map.class).get(JSON_GENERAL));
+                getPkgclssExclude().addAll((List<String>) mapper.readValue(prjCfgFile, Map.class).get(JSON_PKGFILTER));
             } catch (Exception ex) {
                 LOGGER.log(Level.INFO, "Project's JaCoCoverage configuration file format is outdated or invalid. Reset cause:", ex);
                 String msg = "The project's JaCoCoverage configuration file format is outdated or invalid.\n"
@@ -156,7 +128,7 @@ public class ProjectConfig {
      */
     public boolean isOverrideGlobals() {
         return Boolean.parseBoolean(
-                getinternalPref().getProperty(
+                getInternalPref().getProperty(
                 Globals.PROP_PRJ_OVERRIDE_GLOBALS, Boolean.toString(Globals.DEF_PRJ_OVERRIDE_GLOBALS)));
     }
 
@@ -166,7 +138,7 @@ public class ProjectConfig {
      * @param enbl configuration value.
      */
     public void setOverrideGlobals(boolean enbl) {
-        getinternalPref().setProperty(Globals.PROP_PRJ_OVERRIDE_GLOBALS, Boolean.toString(enbl));
+        getInternalPref().setProperty(Globals.PROP_PRJ_OVERRIDE_GLOBALS, Boolean.toString(enbl));
     }
 
     /**
@@ -177,7 +149,7 @@ public class ProjectConfig {
     public boolean isEnblConsoleReport() {
         boolean res;
         if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(getinternalPref().getProperty(
+            res = Boolean.parseBoolean(getInternalPref().getProperty(
                     Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(Globals.DEF_ENABLE_CONSOLE_REPORT)));
         } else {
             res = Config.isEnblConsoleReport();
@@ -193,7 +165,7 @@ public class ProjectConfig {
     public boolean isEnblHighlighting() {
         boolean res;
         if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(getinternalPref().getProperty(
+            res = Boolean.parseBoolean(getInternalPref().getProperty(
                     Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHT)));
         } else {
             res = Config.isEnblHighlighting();
@@ -209,7 +181,7 @@ public class ProjectConfig {
     public boolean isEnblHighlightingExtended() {
         boolean res;
         if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(getinternalPref().getProperty(
+            res = Boolean.parseBoolean(getInternalPref().getProperty(
                     Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED)));
         } else {
             res = Config.isEnblHighlightingExtended();
@@ -225,7 +197,7 @@ public class ProjectConfig {
     public boolean isEnblHtmlReport() {
         boolean res;
         if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(getinternalPref().getProperty(
+            res = Boolean.parseBoolean(getInternalPref().getProperty(
                     Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(Globals.DEF_ENABLE_HTML_REPORT)));
         } else {
             res = Config.isEnblHtmlReport();
@@ -241,7 +213,7 @@ public class ProjectConfig {
     public boolean isOpenHtmlReport() {
         boolean res;
         if (isOverrideGlobals()) {
-            res = Boolean.parseBoolean(getinternalPref().getProperty(
+            res = Boolean.parseBoolean(getInternalPref().getProperty(
                     Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(Globals.DEF_AUTOOPEN_HTML_REPORT)));
         } else {
             res = Config.isOpenHtmlReport();
@@ -257,7 +229,7 @@ public class ProjectConfig {
     public String getAntTaskJavaagentArg() {
         String res;
         if (isOverrideGlobals()) {
-            res = getinternalPref().getProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
+            res = getInternalPref().getProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
         } else {
             res = Config.getAntTaskJavaagentArg();
         }
@@ -272,7 +244,7 @@ public class ProjectConfig {
     public int getTheme() {
         int res;
         if (isOverrideGlobals()) {
-            res = Integer.parseInt(getinternalPref().getProperty(
+            res = Integer.parseInt(getInternalPref().getProperty(
                     Globals.PROP_THEME, Integer.toString(Globals.DEF_THEME)));
         } else {
             res = Config.getTheme();
@@ -288,7 +260,7 @@ public class ProjectConfig {
     public int getJaCoCoWorkfilesRule() {
         int res;
         if (isOverrideGlobals()) {
-            res = Integer.parseInt(getinternalPref().getProperty(
+            res = Integer.parseInt(getInternalPref().getProperty(
                     Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(Globals.DEF_JACOCOWORKFILES_RULE)));
         } else {
             res = Config.getJaCoCoWorkfilesRule();
@@ -303,7 +275,7 @@ public class ProjectConfig {
      */
     public void setAntTaskJavaagentArg(String agentArg) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
+            getInternalPref().setProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
         } else {
             Config.setAntTaskJavaagentArg(agentArg);
         }
@@ -316,7 +288,7 @@ public class ProjectConfig {
      */
     public void setEnblConsoleReport(boolean enbl) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(enbl));
+            getInternalPref().setProperty(Globals.PROP_ENABLE_CONSOLE_REPORT, Boolean.toString(enbl));
         } else {
             Config.setEnblConsoleReport(enbl);
         }
@@ -329,7 +301,7 @@ public class ProjectConfig {
      */
     public void setEnblHighlighting(boolean enbl) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(enbl));
+            getInternalPref().setProperty(Globals.PROP_ENABLE_HIGHLIGHT, Boolean.toString(enbl));
         } else {
             Config.setEnblHighlighting(enbl);
         }
@@ -342,7 +314,7 @@ public class ProjectConfig {
      */
     public void setEnblHighlightingExtended(boolean enbl) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(enbl));
+            getInternalPref().setProperty(Globals.PROP_ENABLE_HIGHLIGHTEXTENDED, Boolean.toString(enbl));
         } else {
             Config.setEnblHighlightingExtended(enbl);
         }
@@ -355,7 +327,7 @@ public class ProjectConfig {
      */
     public void setEnblHtmlReport(boolean enbl) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(enbl));
+            getInternalPref().setProperty(Globals.PROP_ENABLE_HTML_REPORT, Boolean.toString(enbl));
         } else {
             Config.setEnblHtmlReport(enbl);
         }
@@ -368,7 +340,7 @@ public class ProjectConfig {
      */
     public void setOpenHtmlReport(boolean enbl) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(enbl));
+            getInternalPref().setProperty(Globals.PROP_AUTOOPEN_HTML_REPORT, Boolean.toString(enbl));
         } else {
             Config.setOpenHtmlReport(enbl);
         }
@@ -381,7 +353,7 @@ public class ProjectConfig {
      */
     public void setTheme(int theme) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_THEME, Integer.toString(theme));
+            getInternalPref().setProperty(Globals.PROP_THEME, Integer.toString(theme));
         } else {
             Config.setTheme(theme);
         }
@@ -394,7 +366,7 @@ public class ProjectConfig {
      */
     public void setJaCoCoWorkfilesRule(int rule) {
         if (isOverrideGlobals()) {
-            getinternalPref().setProperty(Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(rule));
+            getInternalPref().setProperty(Globals.PROP_JACOCOWORKFILES_RULE, Integer.toString(rule));
         } else {
             Config.setJaCoCoWorkfilesRule(rule);
         }

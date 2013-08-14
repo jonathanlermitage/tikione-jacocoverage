@@ -53,8 +53,8 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     /** The folder that contains project's Java sources. */
     private File prjSrcDir;
 
-    /** The list of packages and Java classes found on the project associated to the current configuration panel. */
-    private Map<File, List<File>> pkgAndClasses;
+    /** The list of non-empty packages found on the project associated to the current configuration panel. */
+    private List<File> pkgs;
 
     /** The model used to handle packages filter table. */
     private DefaultTableModel pkgfltModel;
@@ -95,38 +95,31 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
             prjProps.load(inputStream);
         }
         prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-        
+
         load();
     }
 
     private void loadPkgFilter() {
-        pkgAndClasses = Utils.listPkgAndClasses(prjSrcDir);
-        pkgfltModel = new PackageFilterModel();
-        jTablePackageFilter.setModel(pkgfltModel);
-        jTablePackageFilter.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTablePackageFilter.getColumnModel().getColumn(0).setMinWidth(0);
-        jTablePackageFilter.getColumnModel().getColumn(0).setMaxWidth(200);
-        jTablePackageFilter.getColumnModel().getColumn(1).setPreferredWidth(20);
-        jTablePackageFilter.getColumnModel().getColumn(1).setMinWidth(0);
-        jTablePackageFilter.getColumnModel().getColumn(1).setMaxWidth(200);
-        ImageIcon pkgIcon = new ImageIcon(getClass().getResource(
-                "/fr/tikione/jacocoverage/plugin/resources/icon/netbeans_java_package.png"));
-        ImageIcon classIcon = new ImageIcon(getClass().getResource(
-                "/fr/tikione/jacocoverage/plugin/resources/icon/netbeans_java_class.png"));
-        for (File pkg : pkgAndClasses.keySet()) {
-            List<File> classes = pkgAndClasses.get(pkg);
-            if (!classes.isEmpty()) {
+        try {
+            ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
+            List<String> excludedPkg = prjCfg.getPkgclssExclude();
+            pkgs = Utils.listNonEmptyPkgs(prjSrcDir);
+            pkgfltModel = new PackageFilterModel();
+            jTablePackageFilter.setModel(pkgfltModel);
+            jTablePackageFilter.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTablePackageFilter.getColumnModel().getColumn(0).setMinWidth(0);
+            jTablePackageFilter.getColumnModel().getColumn(0).setMaxWidth(200);
+            jTablePackageFilter.getColumnModel().getColumn(1).setPreferredWidth(20);
+            jTablePackageFilter.getColumnModel().getColumn(1).setMinWidth(0);
+            jTablePackageFilter.getColumnModel().getColumn(1).setMaxWidth(200);
+            for (File pkg : pkgs) {
                 String pkgName = pkg.getAbsolutePath()
                         .substring(prjSrcDir.getAbsolutePath().length() + 1)
                         .replaceAll(Matcher.quoteReplacement(File.separator), ".");
-                pkgfltModel.addRow(new Object[]{true, pkgIcon, pkgName});
-                for (File clazz : classes) {
-                    String className = clazz.getName();
-                    if (!className.equals("package-info.java")) {
-                        pkgfltModel.addRow(new Object[]{true, classIcon, pkgName + '.' + className});
-                    }
-                }
+                pkgfltModel.addRow(new Object[]{!excludedPkg.contains(pkgName), Globals.ICO_NB_JAVA_PKG, pkgName});
             }
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
     }
 
@@ -153,6 +146,14 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     public void store() {
         try {
             ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
+            List<String> excludedPkg = prjCfg.getPkgclssExclude();
+            excludedPkg.clear();
+            Map<String, Boolean> exclusionMap = PackageFilterModel.packageFilterTableToMap((PackageFilterModel) pkgfltModel);
+            for (String pkg : exclusionMap.keySet()) {
+                if (!exclusionMap.get(pkg)) {
+                    excludedPkg.add(pkg);
+                }
+            }
             prjCfg.setOverrideGlobals(jRadioButtonUseProjectSpecificOptions.isSelected());
             prjCfg.setEnblHighlighting(jCheckBoxEnableHighlighting.isSelected());
             prjCfg.setEnblHighlightingExtended(jCheckBoxEnableHighlightingExtended.isSelected());
@@ -212,7 +213,6 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         jTablePackageFilter = new JTable();
         jButtonSelectAll = new JButton();
         jButtonUnselectAll = new JButton();
-        jButtonInvertAll = new JButton();
         jLabel1 = new JLabel();
         jButtonRefresh = new JButton();
 
@@ -429,13 +429,6 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
             }
         });
 
-        Mnemonics.setLocalizedText(jButtonInvertAll, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jButtonInvertAll.text")); // NOI18N
-        jButtonInvertAll.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                jButtonInvertAllActionPerformed(evt);
-            }
-        });
-
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"))); // NOI18N
         Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jLabel1.text")); // NOI18N
         jLabel1.setVerticalTextPosition(SwingConstants.TOP);
@@ -459,13 +452,12 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelPackageFilteringLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonInvertAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonUnselectAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonSelectAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonRefresh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelPackageFilteringLayout.createSequentialGroup()
                         .addComponent(jLabelSelectPackages)
-                        .addGap(0, 162, Short.MAX_VALUE))
+                        .addGap(0, 232, Short.MAX_VALUE))
                     .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -480,11 +472,9 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                         .addComponent(jButtonSelectAll)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonUnselectAll)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonInvertAll)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRefresh)
-                        .addGap(0, 63, Short.MAX_VALUE))
+                        .addGap(0, 79, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -511,7 +501,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonUseProjectSpecificOptions)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPanePrjOpts))
+                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -562,13 +552,8 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private void jButtonUnselectAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonUnselectAllActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUnselectAllActionPerformed
-
-    private void jButtonInvertAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonInvertAllActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonInvertAllActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroupUseGlobalOptions;
-    private JButton jButtonInvertAll;
     private JButton jButtonOnlineHelp;
     private JButton jButtonRefresh;
     private JButton jButtonSelectAll;

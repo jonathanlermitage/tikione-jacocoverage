@@ -44,8 +44,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         try {
             // Add "NetBeans (default)" and "Norway Today (dark)" themes with colors preview.
             jComboBoxColorTheme.setRenderer(new IcoTxtComboBoxRenderer());
-            ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_default.png"));
-            ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes("/fr/tikione/jacocoverage/plugin/resources/icon/theme_norwaytoday.png"));
+            ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_REGULAR));
+            ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_NORWAYTODAY));
             thNetBeansImg.setDescription("NetBeans (default)");
             thNorwaytoday.setDescription("Norway Today");
             jComboBoxColorTheme.addItem(thNetBeansImg);

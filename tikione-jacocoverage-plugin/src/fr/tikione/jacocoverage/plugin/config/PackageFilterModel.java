@@ -1,5 +1,7 @@
 package fr.tikione.jacocoverage.plugin.config;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,9 +32,15 @@ public class PackageFilterModel extends DefaultTableModel {
     }
 
     public PackageFilterModel() {
-        super(new Object[][]{}, new String[]{
-            "Cover",
-            "",
-            "Packages and Classes"});
+        super(new Object[][]{}, new String[]{"Cover", "", "Packages"});
+    }
+
+    public static Map<String, Boolean> packageFilterTableToMap(PackageFilterModel model) {
+        Map<String, Boolean> map = new LinkedHashMap<>(8);
+        int nbLines = model.getRowCount();
+        for (int line = 0; line < nbLines; line++) {
+            map.put((String) model.getValueAt(line, 2), (Boolean) model.getValueAt(line, 0));
+        }
+        return map;
     }
 }

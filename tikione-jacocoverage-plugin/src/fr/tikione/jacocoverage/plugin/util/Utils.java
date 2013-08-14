@@ -9,9 +9,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,6 +38,7 @@ public class Utils {
     /** The tabulation character ({@code &#92;u0009}). */
     public static final char TAB = '\u0009';
 
+    /** File extension(s) of Java files. */
     private static final String[] JAVA_EXT_ARR = new String[]{"java"};
 
     private Utils() {
@@ -187,21 +186,22 @@ public class Utils {
     }
 
     /**
-     * Get a list of packages and classes contained in a given folder and its subfolders.
+     * Get a list of non-empty (ie that contains Java files) packages contained in a given folder and its subfolders.
      *
      * @param root a folder that contains Java sources.
      * @return a list of packages and classes.
      */
-    public static Map<File, List<File>> listPkgAndClasses(File root) {
-        Map<File, List<File>> pkgAndClasses = new LinkedHashMap<>(16);
+    public static List<File> listNonEmptyPkgs(File root) {
+        List<File> resPkgs = new ArrayList<>(16);
         List<File> pkgs = listFolders(root);
         Collections.sort(pkgs);
         for (File pkg : pkgs) {
             List<File> classes = new ArrayList<>(org.apache.commons.io.FileUtils.listFiles(pkg, JAVA_EXT_ARR, false));
-            Collections.sort(classes);
-            pkgAndClasses.put(pkg, classes);
+            if (!classes.isEmpty()) {
+                resPkgs.add(pkg);
+            }
         }
-        return pkgAndClasses;
+        return resPkgs;
     }
 
     /**

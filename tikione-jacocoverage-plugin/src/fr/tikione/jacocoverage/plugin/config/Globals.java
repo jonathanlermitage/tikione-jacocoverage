@@ -3,6 +3,7 @@ package fr.tikione.jacocoverage.plugin.config;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.ImageIcon;
 import org.netbeans.api.annotations.common.StaticResource;
 
 /**
@@ -19,6 +20,16 @@ public class Globals {
     /** Icon attached to JaCoCoverage actions (run). */
     @StaticResource
     public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
+    
+    /** NetBeans icon representing a Java package. */
+    public static final ImageIcon ICO_NB_JAVA_PKG = new ImageIcon(PackageFilterModel.class.getResource(
+            "/fr/tikione/jacocoverage/plugin/resources/icon/netbeans_java_package.png"));
+    
+    /** Preview of the regular light theme. */
+    public static final String THEME_ICO_REGULAR = "/fr/tikione/jacocoverage/plugin/resources/icon/theme_default.png";
+    
+    /** Preview of the "Norway Today" dark theme. */
+    public static final String THEME_ICO_NORWAYTODAY = "/fr/tikione/jacocoverage/plugin/resources/icon/theme_norwaytoday.png";
 
     /** Color themes are associated to XML configuration files: here are their filename prefix.
      See the {@code fr.tikione.jacocoverage.plugin.resources} package for XML configuration files. */
