@@ -156,7 +156,7 @@ public class JaCoCoReportAnalyzer {
      * @param tabName the name of the NetBeans console tab to open.
      * @throws IOException if a NetBeans console related error occurs.
      */
-    public static void toConsoleReport(Map<String, JavaClass> coverageData, String tabName)
+    public static void toConsoleReport(Map<String, JavaClass> coverageData, String tabName, String jacocoCall)
             throws IOException {
         InputOutput io = IOProvider.getDefault().getIO(tabName, false);
         try {
@@ -189,6 +189,8 @@ public class JaCoCoReportAnalyzer {
                 }
                 IOColorPrint.print(io, jclass.getClassName() + '\n', classCovColor);
             }
+            IOColorPrint.print(io, "\nUsing JaCoCo JavaAgent arguments: ", Color.GRAY);
+            IOColorPrint.print(io, jacocoCall + "\n", Color.DARK_GRAY);
             IOColorPrint.print(io, "\nEnd of report\n", Color.GRAY);
             IOColorPrint.print(io, "You can ask questions and report bugs by visiting: ", Color.GRAY);
             IOColorPrint.print(io, "https://github.com/jonathanlermitage/tikione-jacocoverage", Color.BLUE);

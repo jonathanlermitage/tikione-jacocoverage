@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -74,7 +75,7 @@ public abstract class JaCoCoActionOnAnt
             public void run() {
                 try {
                     runJacocoJavaagent(NBUtils.getSelectedProject());
-                } catch (        IllegalArgumentException | IOException ex) {
+                } catch (IllegalArgumentException | IOException ex) {
                     Exceptions.printStackTrace(ex);
                 }
             }
@@ -126,10 +127,24 @@ public abstract class JaCoCoActionOnAnt
                 DialogDisplayer.getDefault().notify(nd);
             } else {
                 // Apply JaCoCo JavaAgent customization.
-                String antTaskJavaagentParam = cfg.getAntTaskJavaagentArg()
+                final String antTaskJavaagentParam;
+                List<String> excludeList = cfg.getPkgclssExclude();
+                StringBuilder exclude = new StringBuilder((excludeList.size() + 1) * 20);
+                if (cfg.isOverrideGlobals() && !excludeList.isEmpty()) {
+                    exclude.append(",excludes=");
+                    boolean first = true;
+                    for (String pkg : excludeList) {
+                        if (!first) {
+                            exclude.append(':');
+                        }
+                        exclude.append(pkg).append(".*");
+                        first = false;
+                    }
+                }
+                antTaskJavaagentParam = cfg.getAntTaskJavaagentArg()
                         .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
                         .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"))
-                        .replace("destfile=jacoco.exec", "destfile=\"" + binreport.getAbsolutePath() + "\"");
+                        .replace("destfile=jacoco.exec", "destfile=\"" + binreport.getAbsolutePath() + "\"") + exclude.toString();
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                 DataObject dataObj = DataObject.find(scriptToExecute);
@@ -176,7 +191,8 @@ public abstract class JaCoCoActionOnAnt
                                 AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
                                 String prjname = NBUtils.getProjectName(project);
                                 if (enblConsoleReport) {
-                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME);
+                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME,
+                                            antTaskJavaagentParam);
                                 }
                                 File reportdir = new File(prjDir + Globals.HTML_REPORT_DIR);
                                 if (reportdir.exists()) {
@@ -214,7 +230,7 @@ public abstract class JaCoCoActionOnAnt
                             Exceptions.printStackTrace(ex);
                         } catch (IOException ex) {
                             Exceptions.printStackTrace(ex);
-                        } catch (                ParserConfigurationException | SAXException ex) {
+                        } catch (ParserConfigurationException | SAXException ex) {
                             Exceptions.printStackTrace(ex);
                         } finally {
                             progr.finish();
