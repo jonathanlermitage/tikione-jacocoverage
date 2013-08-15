@@ -99,7 +99,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         load();
     }
 
-    private void loadPkgFilter() {
+    private void loadPkgFilter(LoadPkgFilterPolicy policy) {
         try {
             ProjectConfig prjCfg = ProjectConfig.forFile(prjCfgFile);
             List<String> excludedPkg = prjCfg.getPkgclssExclude();
@@ -116,7 +116,21 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 String pkgName = pkg.getAbsolutePath()
                         .substring(prjSrcDir.getAbsolutePath().length() + 1)
                         .replaceAll(Matcher.quoteReplacement(File.separator), ".");
-                pkgfltModel.addRow(new Object[]{!excludedPkg.contains(pkgName), Globals.ICO_NB_JAVA_PKG, pkgName});
+                boolean select;
+                switch (policy) {
+                    case SELECT_FROM_CONFIG:
+                        select = !excludedPkg.contains(pkgName);
+                        break;
+                    case SELECT_ALL:
+                        select = true;
+                        break;
+                    case SELECT_NONE:
+                        select = false;
+                        break;
+                    default:
+                        select = true;
+                }
+                pkgfltModel.addRow(new Object[]{select, Globals.ICO_NB_JAVA_PKG, pkgName});
             }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -136,7 +150,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
             jCheckBoxOpenHtmlReport.setSelected(prjCfg.isOpenHtmlReport());
             jComboBoxWorkfiles.setSelectedIndex(prjCfg.getJaCoCoWorkfilesRule());
             enableProjectsideCfgUI(overrideGlobals);
-            loadPkgFilter();
+            loadPkgFilter(LoadPkgFilterPolicy.SELECT_FROM_CONFIG);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -180,6 +194,15 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
             jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
         }
     }
+
+    /** How to load the package filter table. */
+    private enum LoadPkgFilterPolicy {
+
+        SELECT_FROM_CONFIG,
+        SELECT_ALL,
+        SELECT_NONE
+
+    };
 
     /** 
      * This method is called from within the constructor to initialize the form.
@@ -542,15 +565,15 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     }//GEN-LAST:event_jButtonOnlineHelpActionPerformed
 
     private void jButtonRefreshActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
-        loadPkgFilter();
+        loadPkgFilter(LoadPkgFilterPolicy.SELECT_FROM_CONFIG);
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     private void jButtonSelectAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectAllActionPerformed
-        // TODO add your handling code here:
+        loadPkgFilter(LoadPkgFilterPolicy.SELECT_ALL);
     }//GEN-LAST:event_jButtonSelectAllActionPerformed
 
     private void jButtonUnselectAllActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonUnselectAllActionPerformed
-        // TODO add your handling code here:
+        loadPkgFilter(LoadPkgFilterPolicy.SELECT_NONE);
     }//GEN-LAST:event_jButtonUnselectAllActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroupUseGlobalOptions;
