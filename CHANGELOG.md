@@ -1,6 +1,7 @@
 ## JaCoCoverage Change Log
 
-### Latest DevBuild (Version 1.3.0 scheduled for NetBeans 7.4, which runs on JDK7 only)
+### Version 1.3.0.20130815.1437 (2013-08-15)
+* *This is a (stable) pre-release build only; final build is scheduled for NetBeans 7.4.*
 * fixed: unclosed input stream on project's properties.
 * GitHub #12 added a package filter at project level.
 * *built with NetBeans 7.3.1 and Oracle JDK7.*
