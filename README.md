@@ -31,4 +31,4 @@ For details on previous and current versions, please check the [Changelog](https
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
 ### License
-LGPL License.
+[WTFPL](http://www.wtfpl.net) License.

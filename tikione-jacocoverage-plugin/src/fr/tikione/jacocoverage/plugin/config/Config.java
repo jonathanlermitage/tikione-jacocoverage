@@ -6,17 +6,14 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
 
 /**
- * Plugin's configuration handler.
+ * Plugin configuration handler.
  *
  * @author Jonathan Lermitage
  */
 public class Config {
 
-    /** JaCoCoverage plugin's preference singleton. */
+    /** JaCoCoverage plugin preference singleton. */
     private static final Preferences pref = NbPreferences.forModule(Config.class);
-
-    private Config() {
-    }
 
     /**
      * Ensures that future reads from this preference node and its descendants reflect any changes that were committed to the
@@ -42,15 +39,6 @@ public class Config {
         } catch (BackingStoreException ex) {
             Exceptions.printStackTrace(ex);
         }
-    }
-
-    /**
-     * Get configuration value: show latest news in configuration panel.
-     *
-     * @return configuration value.
-     */
-    public static boolean isShowLatestNews() {
-        return pref.getBoolean(Globals.PROP_SHOW_LATEST_NEWS, Globals.DEF_SHOW_LATEST_NEWS);
     }
 
     /**
@@ -99,15 +87,6 @@ public class Config {
     }
 
     /**
-     * Get configuration value: the JavaAgent arguments passed to the Ant task.
-     *
-     * @return configuration value.
-     */
-    public static String getAntTaskJavaagentArg() {
-        return pref.get(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
-    }
-
-    /**
      * Get configuration value: JaCoCoverage themePrefix.
      *
      * @return configuration value.
@@ -123,24 +102,6 @@ public class Config {
      */
     public static int getJaCoCoWorkfilesRule() {
         return pref.getInt(Globals.PROP_JACOCOWORKFILES_RULE, Globals.DEF_JACOCOWORKFILES_RULE);
-    }
-
-    /**
-     * Set configuration value: show latest news in configuration panel.
-     *
-     * @param show configuration value.
-     */
-    public static void setShowLatestNews(boolean show) {
-        pref.putBoolean(Globals.PROP_SHOW_LATEST_NEWS, show);
-    }
-
-    /**
-     * Set configuration value: the JavaAgent arguments passed to the Ant task.
-     *
-     * @param agentArg configuration value.
-     */
-    public static void setAntTaskJavaagentArg(String agentArg) {
-        pref.put(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
     }
 
     /**
@@ -204,5 +165,8 @@ public class Config {
      */
     public static void setJaCoCoWorkfilesRule(int rule) {
         pref.putInt(Globals.PROP_JACOCOWORKFILES_RULE, rule);
+    }
+
+    private Config() {
     }
 }

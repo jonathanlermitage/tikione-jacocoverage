@@ -34,4 +34,4 @@ A complete HTML coverage report:
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
 ### License
-LGPL License.
+[WTFPL](http://www.wtfpl.net) License.

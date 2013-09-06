@@ -35,9 +35,6 @@ public class Globals {
      See the {@code fr.tikione.jacocoverage.plugin.resources} package for XML configuration files. */
     public static final List<String> THEME_PREFIX = Arrays.asList("", "norwaytoday__");
 
-    /** The URL of remote file describing JaCoCoverage latest news. */
-    public static final String LATEST_NEWS_URL = "http://jacocoverage.tikione.fr/jacocoverage_latest_news.txt";
-
     /** The name of the NetBeans console tab where JaCoCo reports are displayed. */
     public static final String TXTREPORT_TABNAME = " (jacocoverage report)";
 
@@ -46,9 +43,6 @@ public class Globals {
 
     /** User preference: customization of the JavaAgent passed to the Ant task. */
     public static final String PROP_TEST_ANT_TASK_JAVAAGENT = "JaCoCoverage.JavaAgent.AntTaskJavaagent";
-
-    /** User preference: show latest news in configuration panel. */
-    public static final String PROP_SHOW_LATEST_NEWS = "JaCoCoverage.ConfigPanel.ShowLatestNews";
 
     /** User preference: enable extended code highlighting. */
     public static final String PROP_ENABLE_HIGHLIGHTEXTENDED = "JaCoCoverage.Editor.EnableCodeHighlightingExtended";
@@ -73,12 +67,6 @@ public class Globals {
 
     /** Default project's configuration value: override globals. */
     public static final boolean DEF_PRJ_OVERRIDE_GLOBALS = false;
-
-    /** Default configuration value: the JavaAgent arguments passed to the Ant task. */
-    public static final String DEF_TEST_ANT_TASK_JAVAAGENT = "\"{pathOfJacocoagentJar}\"=includes={appPackages},destfile=jacoco.exec";
-
-    /** Default configuration value: show latest news in configuration panel. */
-    public static final boolean DEF_SHOW_LATEST_NEWS = true;
 
     /** Default configuration value: enable code highlighting. */
     public static final boolean DEF_ENABLE_HIGHLIGHT = true;

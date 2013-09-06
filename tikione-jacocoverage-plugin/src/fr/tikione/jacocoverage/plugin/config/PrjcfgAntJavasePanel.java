@@ -74,15 +74,15 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         // <editor-fold defaultstate="collapsed" desc="Tooltips">
         // Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
         jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
-                + "https://twitter.com/JLermitage" + "</body></html>");
+                + "https://twitter.com/JLermitage</body></html>");
         jButtonSocialFacebook.setToolTipText("<html><body>Jonathan Lermitage on <b>Facebook</b> (author of JaCoCoverage)<br>"
-                + "https://www.facebook.com/jonathan.lermitage" + "</body></html>");
+                + "https://www.facebook.com/jonathan.lermitage</body></html>");
         jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
-                + "https://github.com/jonathanlermitage" + "</body></html>");
+                + "https://github.com/jonathanlermitage</body></html>");
         jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
-                + "http://netbeanscolors.org" + "</body></html>");
+                + "http://netbeanscolors.org</body></html>");
         jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
-                + "http://jacocoverage.tikione.fr/redirect/help/" + "</body></html>");
+                + "http://jacocoverage.tikione.fr/redirect/help/</body></html>");
         // </editor-fold>
         Project prj = context.lookup(Project.class);
         prjCfgFile = new File(NBUtils.getProjectDir(prj), Globals.PRJ_CFG);

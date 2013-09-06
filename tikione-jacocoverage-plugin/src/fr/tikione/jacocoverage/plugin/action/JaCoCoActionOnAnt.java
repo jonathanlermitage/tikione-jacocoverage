@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
@@ -98,9 +99,7 @@ public abstract class JaCoCoActionOnAnt
      *
      * @param project the project to launch Ant target from.
      * @throws IOException if an I/O error occurs.
-     * @deprecated consider using {@link JaCoCoActionOnAnt#runJacocoAnttask(org.netbeans.api.project.Project) instead.
      */
-    @Deprecated
     private void runJacocoJavaagent(final Project project)
             throws IOException {
         // Retrieve JaCoCoverage preferences.
@@ -115,7 +114,9 @@ public abstract class JaCoCoActionOnAnt
             final String prjDir = NBUtils.getProjectDir(project) + File.separator;
             FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
-            prjProps.load(prjPropsFo.getInputStream());
+            try (InputStream insPrjProps = prjPropsFo.getInputStream()) {
+                prjProps.load(insPrjProps);
+            }
 
             final File xmlreport = Utils.getJacocoXmlReportfile(project);
             final File binreport = Utils.getJacocoBinReportFile(project);
@@ -141,10 +142,9 @@ public abstract class JaCoCoActionOnAnt
                         first = false;
                     }
                 }
-                antTaskJavaagentParam = cfg.getAntTaskJavaagentArg()
-                        .replace("{pathOfJacocoagentJar}", NBUtils.getJacocoAgentJar().getAbsolutePath())
-                        .replace("{appPackages}", NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*"))
-                        .replace("destfile=jacoco.exec", "destfile=\"" + binreport.getAbsolutePath() + "\"") + exclude.toString();
+                antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
+                        + "\"=includes=" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
+                        + ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                 DataObject dataObj = DataObject.find(scriptToExecute);
@@ -280,6 +280,7 @@ public abstract class JaCoCoActionOnAnt
         xmlreport.delete();
     }
 
+    @SuppressWarnings("ReturnOfCollectionOrArrayField")
     public Properties getAddAntTargetProps() {
         return addAntTargetProps;
     }

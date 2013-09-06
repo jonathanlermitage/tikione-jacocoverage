@@ -24,17 +24,6 @@ public class ProjectConfig {
 
     private static final Logger LOGGER = Logger.getLogger(ProjectConfig.class.getName());
 
-    /** The map of all configuration properties. Element {@link #JSON_GENERAL} contains common properties (in a {@code Properties}
-     object). Element {@link #JSON_PKGFILTER} contains configuration for packages and classes filter (an {@code ArrayList} of excluded
-     elements). */
-    private final Map<String, Object> pref = new HashMap<>(4);
-
-    /** The file used for configuration persistence. */
-    private final File prjCfgFile;
-
-    /** JSon mapper. */
-    private final ObjectMapper mapper = new ObjectMapper();
-
     /** A general cache for project configuration instances. */
     private static final Map<File, ProjectConfig> prjCfgs = Collections.synchronizedMap(new HashMap<File, ProjectConfig>(8));
 
@@ -64,6 +53,17 @@ public class ProjectConfig {
         return pc;
     }
 
+    /** The map of all configuration properties. Element {@link #JSON_GENERAL} contains common properties (in a {@code Properties}
+     object). Element {@link #JSON_PKGFILTER} contains configuration for packages and classes filter (an {@code ArrayList} of excluded
+     elements). */
+    private final Map<String, Object> pref = new HashMap<>(4);
+
+    /** The file used for configuration persistence. */
+    private final File prjCfgFile;
+
+    /** JSon mapper. */
+    private final ObjectMapper mapper = new ObjectMapper();
+
     private ProjectConfig(File prjCfgFile) {
         this.prjCfgFile = prjCfgFile;
         pref.put(JSON_GENERAL, new Properties());
@@ -78,8 +78,9 @@ public class ProjectConfig {
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<String> getPkgclssExclude() {
-        return (ArrayList<String>) pref.get(JSON_PKGFILTER);
+    public List<String> getPkgclssExclude() {
+        ArrayList<String> pkgfilter = (ArrayList<String>) pref.get(JSON_PKGFILTER);
+        return pkgfilter == null ? Collections.<String>emptyList() : pkgfilter;
     }
 
     /**
@@ -222,21 +223,6 @@ public class ProjectConfig {
     }
 
     /**
-     * Get configuration value: the JavaAgent arguments passed to the Ant task.
-     *
-     * @return configuration value.
-     */
-    public String getAntTaskJavaagentArg() {
-        String res;
-        if (isOverrideGlobals()) {
-            res = getInternalPref().getProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, Globals.DEF_TEST_ANT_TASK_JAVAAGENT);
-        } else {
-            res = Config.getAntTaskJavaagentArg();
-        }
-        return res;
-    }
-
-    /**
      * Get configuration value: JaCoCoverage themePrefix.
      *
      * @return configuration value.
@@ -266,19 +252,6 @@ public class ProjectConfig {
             res = Config.getJaCoCoWorkfilesRule();
         }
         return res;
-    }
-
-    /**
-     * Set configuration value: the JavaAgent arguments passed to the Ant task.
-     *
-     * @param agentArg configuration value.
-     */
-    public void setAntTaskJavaagentArg(String agentArg) {
-        if (isOverrideGlobals()) {
-            getInternalPref().setProperty(Globals.PROP_TEST_ANT_TASK_JAVAAGENT, agentArg);
-        } else {
-            Config.setAntTaskJavaagentArg(agentArg);
-        }
     }
 
     /**
