@@ -1,5 +1,11 @@
 ## JaCoCoverage Change Log
 
+### Latest DevBuild: Version 1.3.1.20130906.1311 (2013-09-06)
+* Changed license to WTFPL (Do What the Fuck You Want to Public License, see http://www.wtfpl.net).
+* fixed: another unclosed input stream on project's properties.
+* Internal: some code reworked.
+* Added a About dialog.
+
 ### Version 1.3.0.20130815.1437 (2013-08-15)
 * *This is a (stable) pre-release build only; final build is scheduled for NetBeans 7.4.*
 * fixed: unclosed input stream on project's properties.
