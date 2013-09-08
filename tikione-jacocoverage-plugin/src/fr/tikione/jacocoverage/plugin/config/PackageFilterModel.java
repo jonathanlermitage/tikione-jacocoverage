@@ -36,7 +36,7 @@ public class PackageFilterModel extends DefaultTableModel {
     }
 
     public static Map<String, Boolean> packageFilterTableToMap(PackageFilterModel model) {
-        Map<String, Boolean> map = new LinkedHashMap<>(8);
+        Map<String, Boolean> map = new LinkedHashMap<String, Boolean>(8);
         int nbLines = model.getRowCount();
         for (int line = 0; line < nbLines; line++) {
             map.put((String) model.getValueAt(line, 2), (Boolean) model.getValueAt(line, 0));

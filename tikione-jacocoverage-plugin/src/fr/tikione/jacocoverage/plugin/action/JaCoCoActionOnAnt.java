@@ -76,7 +76,9 @@ public abstract class JaCoCoActionOnAnt
             public void run() {
                 try {
                     runJacocoJavaagent(NBUtils.getSelectedProject());
-                } catch (IllegalArgumentException | IOException ex) {
+                } catch (IllegalArgumentException ex) {
+                    Exceptions.printStackTrace(ex);
+                } catch (IOException ex) {
                     Exceptions.printStackTrace(ex);
                 }
             }
@@ -114,8 +116,11 @@ public abstract class JaCoCoActionOnAnt
             final String prjDir = NBUtils.getProjectDir(project) + File.separator;
             FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
-            try (InputStream insPrjProps = prjPropsFo.getInputStream()) {
+            InputStream insPrjProps = prjPropsFo.getInputStream();
+            try {
                 prjProps.load(insPrjProps);
+            } finally {
+                insPrjProps.close();
             }
 
             final File xmlreport = Utils.getJacocoXmlReportfile(project);
@@ -230,7 +235,9 @@ public abstract class JaCoCoActionOnAnt
                             Exceptions.printStackTrace(ex);
                         } catch (IOException ex) {
                             Exceptions.printStackTrace(ex);
-                        } catch (ParserConfigurationException | SAXException ex) {
+                        } catch (ParserConfigurationException ex) {
+                            Exceptions.printStackTrace(ex);
+                        } catch (SAXException ex) {
                             Exceptions.printStackTrace(ex);
                         } finally {
                             progr.finish();

@@ -17,13 +17,13 @@ public class JavaClass implements Comparable<JavaClass> {
     private final String className;
 
     /** Indicate the coverage state of class instructions. */
-    private final Map<Integer, CoverageStateEnum> coverage = new HashMap<>(256);
+    private final Map<Integer, CoverageStateEnum> coverage = new HashMap<Integer, CoverageStateEnum>(256);
 
     /** Indicate the coverage description of class instructions. */
-    private final Map<Integer, String> coverageDesc = new HashMap<>(128);
+    private final Map<Integer, String> coverageDesc = new HashMap<Integer, String>(128);
 
     /** Indicate the coverage state of class methods declarations. */
-    private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<>(32);
+    private final Map<Integer, CoverageStateEnum> methodCoverage = new HashMap<Integer, CoverageStateEnum>(32);
 
     /** Number of covered lines. */
     private int nbCoveredLines = 0;

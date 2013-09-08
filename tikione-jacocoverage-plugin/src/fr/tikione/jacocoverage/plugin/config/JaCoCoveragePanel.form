@@ -34,16 +34,8 @@
           <Component id="jLabelWorkfilesTips" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                      <Component id="jCheckBoxEnableHighlightingExtended" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="jCheckBoxEnableConsoleReport" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxEnableHtmlReport" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                      <Component id="jCheckBoxOpenHtmlReport" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="jCheckBoxEnableHighlighting" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -55,6 +47,13 @@
                       <Component id="jLabelWorkfiles" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBoxWorkfiles" min="-2" pref="200" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBoxEnableHighlightingExtended" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxOpenHtmlReport" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -287,8 +286,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelWorkfiles">
@@ -300,8 +298,7 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxWorkfiles">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxEnableHighlightingExtended">

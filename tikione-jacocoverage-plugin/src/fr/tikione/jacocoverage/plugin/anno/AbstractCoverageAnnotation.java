@@ -24,7 +24,7 @@ public abstract class AbstractCoverageAnnotation extends Annotation implements P
 
     /** A list of all registered living annotation. Used to know and clear annotations associated to a project. */
     private final static HashMap<String, HashMap<Integer, Annotation>> annotations = 
-            new HashMap<>(8);
+            new HashMap<String, HashMap<Integer, Annotation>>(8);
 
     /** Utility character. Projects are identified by the concatenation of their path, this utility character and the project's name. */
     private final static char KEY_JOIN_CHAR = ' ';
@@ -44,7 +44,7 @@ public abstract class AbstractCoverageAnnotation extends Annotation implements P
             String key = combineKey(projectName, classFullName);
             HashMap<Integer, Annotation> anns = annotations.get(key);
             if (anns == null) {
-                anns = new HashMap<>(256);
+                anns = new HashMap<Integer, Annotation>(256);
                 annotations.put(key, anns);
             }
             anns.put(lineNum, this);

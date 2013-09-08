@@ -56,7 +56,7 @@ public class ProjectConfig {
     /** The map of all configuration properties. Element {@link #JSON_GENERAL} contains common properties (in a {@code Properties}
      object). Element {@link #JSON_PKGFILTER} contains configuration for packages and classes filter (an {@code ArrayList} of excluded
      elements). */
-    private final Map<String, Object> pref = new HashMap<>(4);
+    private final Map<String, Object> pref = new HashMap<String, Object>(4);
 
     /** The file used for configuration persistence. */
     private final File prjCfgFile;

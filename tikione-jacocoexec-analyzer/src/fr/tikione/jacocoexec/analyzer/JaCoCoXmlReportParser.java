@@ -19,7 +19,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class JaCoCoXmlReportParser extends DefaultHandler {
 
     /** The coverage data of each Java class. */
-    private final Map<String, JavaClass> classes = new LinkedHashMap<>(32);
+    private final Map<String, JavaClass> classes = new LinkedHashMap<String, JavaClass>(32);
 
     /** Used to remember current Java package while XML parsing. */
     private String currentPackage = null;

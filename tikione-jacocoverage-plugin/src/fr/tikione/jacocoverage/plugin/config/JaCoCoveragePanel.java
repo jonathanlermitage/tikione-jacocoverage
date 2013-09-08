@@ -41,7 +41,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
             thNorwaytoday.setDescription("Norway Today");
             jComboBoxColorTheme.addItem(thNetBeansImg);
             jComboBoxColorTheme.addItem(thNorwaytoday);
-            jComboBoxWorkfiles.setModel(new javax.swing.DefaultComboBoxModel<>(
+            jComboBoxWorkfiles.setModel(new javax.swing.DefaultComboBoxModel(
                     new String[]{"keep original workfiles", "keep zipped workfiles", "delete workfiles"}));
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
@@ -80,9 +80,9 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxEnableHtmlReport = new JCheckBox();
         jCheckBoxOpenHtmlReport = new JCheckBox();
         jLabelColorTheme = new JLabel();
-        jComboBoxColorTheme = new JComboBox<>();
+        jComboBoxColorTheme = new JComboBox();
         jLabelWorkfiles = new JLabel();
-        jComboBoxWorkfiles = new JComboBox<>();
+        jComboBoxWorkfiles = new JComboBox();
         jCheckBoxEnableHighlightingExtended = new JCheckBox();
         jLabelWorkfilesTips = new JLabel();
         jButtonAbout = new JButton();
@@ -218,14 +218,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
             .addComponent(jLabelWorkfilesTips)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jCheckBoxEnableHighlightingExtended))
                     .addComponent(jCheckBoxEnableConsoleReport)
                     .addComponent(jCheckBoxEnableHtmlReport)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jCheckBoxOpenHtmlReport))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBoxEnableHighlighting)
                         .addGap(29, 29, 29)
@@ -235,7 +229,12 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelWorkfiles)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxEnableHighlightingExtended)
+                            .addComponent(jCheckBoxOpenHtmlReport))))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -364,8 +363,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxEnableHighlightingExtended;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
-    private JComboBox<Object> jComboBoxColorTheme;
-    private JComboBox<String> jComboBoxWorkfiles;
+    private JComboBox jComboBoxColorTheme;
+    private JComboBox jComboBoxWorkfiles;
     private JLabel jLabelColorTheme;
     private JLabel jLabelWorkfiles;
     private JLabel jLabelWorkfilesTips;

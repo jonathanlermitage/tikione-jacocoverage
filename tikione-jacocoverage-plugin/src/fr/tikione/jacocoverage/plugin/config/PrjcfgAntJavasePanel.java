@@ -91,8 +91,11 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         String prjDir = NBUtils.getProjectDir(prj) + File.separator;
         FileObject prjPropsFo = prj.getProjectDirectory().getFileObject("nbproject/project.properties");
         Properties prjProps = new Properties();
-        try (InputStream inputStream = prjPropsFo.getInputStream()) {
+        InputStream inputStream = prjPropsFo.getInputStream();
+        try {
             prjProps.load(inputStream);
+        } finally {
+            inputStream.close();
         }
         prjSrcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
 
@@ -223,7 +226,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         jCheckBoxEnableHtmlReport = new JCheckBox();
         jCheckBoxOpenHtmlReport = new JCheckBox();
         jLabelWorkfiles = new JLabel();
-        jComboBoxWorkfiles = new JComboBox<>();
+        jComboBoxWorkfiles = new JComboBox();
         jLabelWorkfilesTips = new JLabel();
         jButtonSocialTwitter = new JButton();
         jButtonSocialFacebook = new JButton();
@@ -277,7 +280,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
 
         Mnemonics.setLocalizedText(jLabelWorkfiles, NbBundle.getMessage(PrjcfgAntJavasePanel.class, "PrjcfgAntJavasePanel.jLabelWorkfiles.text")); // NOI18N
 
-        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel<>(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
+        jComboBoxWorkfiles.setModel(new DefaultComboBoxModel(new String[] { "keep original workfiles", "keep zipped workfiles", "delete workfiles" }));
 
         jLabelWorkfilesTips.setBackground(new Color(255, 255, 255));
         jLabelWorkfilesTips.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_information.png"))); // NOI18N
@@ -590,7 +593,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private JCheckBox jCheckBoxEnableHighlightingExtended;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
-    private JComboBox<String> jComboBoxWorkfiles;
+    private JComboBox jComboBoxWorkfiles;
     private JLabel jLabel1;
     private JLabel jLabelSelectPackages;
     private JLabel jLabelWorkfiles;

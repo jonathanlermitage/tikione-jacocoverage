@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
  *
  * @author Jonathan Lermitage
  */
-public class IcoTxtComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
+public class IcoTxtComboBoxRenderer extends JLabel implements ListCellRenderer {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class IcoTxtComboBoxRenderer extends JLabel implements ListCellRenderer<O
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Object> list, Object value, int index, boolean isSelected,
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
             boolean cellHasFocus) {
         if (isSelected) {
             setBackground(list.getSelectionBackground());
