@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: false
 OpenIDE-Module: fr.tikione.jacocoverage.ext/1
 OpenIDE-Module-Localizing-Bundle: fr/tikione/jacocoverage/ext/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.2.0.20130628.2113
+OpenIDE-Module-Specification-Version: 1.3.2.20130908.2138
 

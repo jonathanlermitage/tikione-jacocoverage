@@ -41,9 +41,6 @@ public class Utils {
     /** File extension(s) of Java files. */
     private static final String[] JAVA_EXT_ARR = new String[]{"java"};
 
-    private Utils() {
-    }
-
     /**
      * Check a regular expression.
      *
@@ -111,6 +108,7 @@ public class Utils {
      * @param key the key value to get value.
      * @return the key value.
      */
+    @SuppressWarnings("ValueOfIncrementOrDecrementUsed")
     public static String getProperty(Properties props, String key) {
         String value = props.getProperty(key, "");
         int security = 0;
@@ -254,27 +252,26 @@ public class Utils {
      * @param entryname the name of the entry stored in the zipped file.
      * @throws FileNotFoundException if the source file doesn't exist.
      */
+    @SuppressWarnings("NestedAssignment")
     private static void zip(File src, File dst, String entryname) {
         byte[] buffer = new byte[1024];
         try {
-            try (FileOutputStream dstStrm = new FileOutputStream(dst)) {
-                ZipOutputStream zipStrm = new ZipOutputStream(dstStrm);
-                try {
-                    try (FileInputStream srcStrm = new FileInputStream(src)) {
-                        ZipEntry entry = new ZipEntry(entryname);
-                        zipStrm.putNextEntry(entry);
-                        int len;
-                        while ((len = srcStrm.read(buffer)) > 0) {
-                            zipStrm.write(buffer, 0, len);
-                        }
+            try (FileOutputStream dstStrm = new FileOutputStream(dst); ZipOutputStream zipStrm = new ZipOutputStream(dstStrm)) {
+                try (FileInputStream srcStrm = new FileInputStream(src)) {
+                    ZipEntry entry = new ZipEntry(entryname);
+                    zipStrm.putNextEntry(entry);
+                    int len;
+                    while ((len = srcStrm.read(buffer)) > 0) {
+                        zipStrm.write(buffer, 0, len);
                     }
-                    zipStrm.closeEntry();
-                } finally {
-                    zipStrm.close();
                 }
+                zipStrm.closeEntry();
             }
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
+    }
+
+    private Utils() {
     }
 }

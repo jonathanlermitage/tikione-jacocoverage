@@ -41,9 +41,6 @@ import org.openide.windows.IOProvider;
  */
 public class NBUtils {
 
-    private NBUtils() {
-    }
-
     /**
      * Close a NetBeans console tab.
      *
@@ -307,5 +304,8 @@ public class NBUtils {
      */
     public static Collection<? extends Project> getAllSelectedProjects() {
         return Utilities.actionsGlobalContext().lookupAll(Project.class);
+    }
+
+    private NBUtils() {
     }
 }
