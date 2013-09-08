@@ -524,7 +524,7 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonUseProjectSpecificOptions)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                .addComponent(jTabbedPanePrjOpts, GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
