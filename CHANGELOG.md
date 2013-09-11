@@ -2,6 +2,7 @@
 
 ### DevBuild 1.3.2.20130911.1322 (2013-09-11)
 * GitHub #16 will now look for a "nbbuild.xml" file when the "build.xml" file is missing.
+* *built with NetBeans 7.3.1 and Oracle JDK7.*
 
 ### Version 1.3.1.20130908.1301 (2013-09-08)
 * changed license to WTFPL (Do What the Fuck You Want to Public License, see http://www.wtfpl.net).
@@ -11,7 +12,6 @@
 * *built with NetBeans 7.3.1 and Oracle JDK6 (a Git branch has been created for NetBeans 7.3.1 and JDK6 support).*
 
 ### Version 1.3.0.20130815.1437 (2013-08-15)
-* *this is a (stable) pre-release build only; final build is scheduled for NetBeans 7.4.*
 * fixed: unclosed input stream on project's properties.
 * GitHub #12 added a package filter at project level.
 * *built with NetBeans 7.3.1 and Oracle JDK7.*
