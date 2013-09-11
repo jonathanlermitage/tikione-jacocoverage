@@ -147,6 +147,9 @@ public abstract class JaCoCoActionOnAnt
                         + ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
+                if (scriptToExecute == null) { // Fix for GitHub #16
+                    scriptToExecute = project.getProjectDirectory().getFileObject("nbbuild", "xml");
+                }
                 DataObject dataObj = DataObject.find(scriptToExecute);
                 AntProjectCookie antCookie = dataObj.getLookup().lookup(AntProjectCookie.class);
 
