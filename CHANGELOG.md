@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### DevBuild 1.3.2.20130911.1322 (2013-09-11)
+* GitHub #16 now will look for a "nbbuild" XML file when the "build" XML file is missing.
+
 ### Version 1.3.1.20130908.1301 (2013-09-08)
 * Changed license to WTFPL (Do What the Fuck You Want to Public License, see http://www.wtfpl.net).
 * fixed: another unclosed input stream on project's properties.
