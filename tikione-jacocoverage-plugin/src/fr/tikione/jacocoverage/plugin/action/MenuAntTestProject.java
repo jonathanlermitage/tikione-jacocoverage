@@ -1,5 +1,6 @@
 package fr.tikione.jacocoverage.plugin.action;
 
+import fr.tikione.jacocoverage.plugin.util.NBProjectTypeEnum;
 import fr.tikione.jacocoverage.plugin.util.NBUtils;
 import fr.tikione.jacocoverage.plugin.util.Utils;
 import java.awt.event.ActionEvent;
@@ -38,10 +39,9 @@ public class MenuAntTestProject
 
     public MenuAntTestProject() {
         super("test");
-        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject()));
+        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_MenuAntTestProject());
-//        putValue(Action.SMALL_ICON, ImageUtilities.loadImageIcon(Globals.TEST_ICON, false));
     }
 
     @Override

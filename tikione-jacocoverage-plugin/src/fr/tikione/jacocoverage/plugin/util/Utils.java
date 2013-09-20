@@ -40,7 +40,7 @@ public class Utils {
 
     /** File extension(s) of Java files. */
     private static final String[] JAVA_EXT_ARR = new String[]{"java"};
-
+    
     /**
      * Check a regular expression.
      *
@@ -146,18 +146,13 @@ public class Utils {
      * @param project the project.
      * @return true if supported, otherwise false.
      */
-    public static boolean isProjectSupported(Project project) {
+    public static boolean isProjectSupported(Project project, NBProjectTypeEnum prjtype) {
         boolean supported;
         if (null == project) {
             supported = false;
         } else {
             String projectClass = project.getClass().getName();
-            if (projectClass.equals("org.netbeans.modules.java.j2seproject.J2SEProject")) {
-                // TODO for NetBeans Modules support "org.netbeans.modules.apisupport.project.NbModuleProject".
-                supported = true;
-            } else {
-                supported = false;
-            }
+            supported = projectClass.equals(prjtype.qname());
         }
         return supported;
     }
