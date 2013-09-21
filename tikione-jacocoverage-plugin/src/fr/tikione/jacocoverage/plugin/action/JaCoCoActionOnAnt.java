@@ -84,17 +84,6 @@ public abstract class JaCoCoActionOnAnt
     }
 
     /**
-     * Run an Ant task with JaCoCo Ant subtask, collect and display coverage data.
-     *
-     * @param project the project to launch Ant target from.
-     * @throws IOException if an I/O error occurs.
-     */
-    private void runJacocoAnttask(final Project project)
-            throws IOException {
-        // TODO for GitHub #5 (https://github.com/jonathanlermitage/tikione-jacocoverage/issues/5).
-    }
-
-    /**
      * Run an Ant task with a JaCoCo Java Agent, collect and display coverage data.
      *
      * @param project the project to launch Ant target from.
