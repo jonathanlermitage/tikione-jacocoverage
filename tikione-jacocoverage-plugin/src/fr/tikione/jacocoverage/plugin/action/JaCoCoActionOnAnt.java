@@ -183,8 +183,7 @@ public abstract class JaCoCoActionOnAnt
                                 AbstractCoverageAnnotation.removeAll(NBUtils.getProjectId(project));
                                 String prjname = NBUtils.getProjectName(project);
                                 if (enblConsoleReport) {
-                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME,
-                                            antTaskJavaagentParam);
+                                    JaCoCoReportAnalyzer.toConsoleReport(coverageData, prjname + Globals.TXTREPORT_TABNAME);
                                 }
                                 File reportdir = new File(prjDir + Globals.HTML_REPORT_DIR);
                                 if (reportdir.exists()) {
