@@ -8,7 +8,11 @@ package fr.tikione.jacocoverage.plugin.util;
 public enum NBProjectTypeEnum {
 
     J2SE,
-    NBMODULE;
+    NBMODULE,
+    J2EE_WEB,
+    J2EE,
+    J2EE_EAR,
+    J2EE_EJB;
 
     public String qname() {
         String qname;
@@ -18,6 +22,18 @@ public enum NBProjectTypeEnum {
                 break;
             case NBMODULE:
                 qname = "org.netbeans.modules.apisupport.project.NbModuleProject";
+                break;
+            case J2EE:
+                qname = "org-netbeans-modules-j2ee-archiveproject";
+                break;
+            case J2EE_EAR:
+                qname = "org-netbeans-modules-j2ee-earproject";
+                break;
+            case J2EE_EJB:
+                qname = "org-netbeans-modules-j2ee-ejbjarproject";
+                break;
+            case J2EE_WEB:
+                qname = "org.netbeans.modules.web.project.WebProject";
                 break;
             default:
                 qname = "n/a";

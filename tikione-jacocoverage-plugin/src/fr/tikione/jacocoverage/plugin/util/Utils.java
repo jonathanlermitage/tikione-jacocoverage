@@ -40,7 +40,7 @@ public class Utils {
 
     /** File extension(s) of Java files. */
     private static final String[] JAVA_EXT_ARR = new String[]{"java"};
-    
+
     /**
      * Check a regular expression.
      *
@@ -140,19 +140,23 @@ public class Utils {
     }
 
     /**
-     * Indicate if a project is supported by JaCoCoverage.
+     * Indicate if a project is about a certain type.
      * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes">DevFaqActionAllAvailableProjectTypes</a> for help.
      *
      * @param project the project.
+     * @param prjtype the targeted project type.
      * @return true if supported, otherwise false.
      */
-    public static boolean isProjectSupported(Project project, NBProjectTypeEnum prjtype) {
-        boolean supported;
-        if (null == project) {
-            supported = false;
-        } else {
+    public static boolean isProjectSupported(Project project, NBProjectTypeEnum... prjtype) {
+        boolean supported = false;
+        if (null != project) {
             String projectClass = project.getClass().getName();
-            supported = projectClass.equals(prjtype.qname());
+            PRJ: for (NBProjectTypeEnum type : prjtype) {
+                if (projectClass.equals(type.qname())) {
+                    supported = true;
+                    break PRJ;
+                }
+            }
         }
         return supported;
     }
