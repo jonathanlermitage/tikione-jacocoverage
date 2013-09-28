@@ -1,6 +1,10 @@
 ## JaCoCoverage Change Log
 
-### DevBuild 1.3.2.20130911.1322 (2013-09-11)
+### DevBuild 1.3.3.20130928.2324 (2013-09-28)
+* GitHub #17 added an action at project's level to remove coverage data from editor (Reset coverage data).
+* *built with NetBeans 7.4 RC1 and Oracle JDK7.*
+
+### Version 1.3.2.20130911.1322 (2013-09-11, not published)
 * GitHub #16 will now look for a "nbbuild.xml" file when the "build.xml" file is missing.
 * *built with NetBeans 7.3.1 and Oracle JDK7.*
 

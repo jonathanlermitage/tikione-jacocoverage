@@ -29,28 +29,33 @@ import org.openide.util.actions.Presenter;
  * @author Jan Lahoda (patch https://github.com/jonathanlermitage/tikione-jacocoverage/pull/3)
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.MenuAntRunProjectJ2SE")
-@ActionRegistration(displayName = "#CTL_MenuAntRunProjectJ2SE",
+          id = "fr.tikione.jacocoverage.plugin.action.ProjectAntRunJ2EE")
+@ActionRegistration(displayName = "#CTL_ProjectAntRunJ2EE",
                     lazy = false,
                     asynchronous = true,
                     surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
                  position = 1984,
                  separatorBefore = 1983)
-@NbBundle.Messages("CTL_MenuAntRunProjectJ2SE=Run with JaCoCoverage")
-public class MenuAntRunProjectJ2SE
+@NbBundle.Messages("CTL_ProjectAntRunJ2EE=Process JaCoCoverage report...")
+@SuppressWarnings("CloneableImplementsClone")
+public class ProjectAntRunJ2EE
         extends JaCoCoActionOnAnt
         implements ContextAwareAction, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
     @SuppressWarnings("NestedAssignment")
-    public MenuAntRunProjectJ2SE() {
+    public ProjectAntRunJ2EE() {
         super("run");
         Project project = NBUtils.getSelectedProject();
-        setEnabled(Utils.isProjectSupported(project, NBProjectTypeEnum.J2SE));
+        setEnabled(false && Utils.isProjectSupported(project, // TODO remove false for first release.
+                NBProjectTypeEnum.J2EE,
+                NBProjectTypeEnum.J2EE_EAR,
+                NBProjectTypeEnum.J2EE_EJB,
+                NBProjectTypeEnum.J2EE_WEB));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
-        putValue(Action.NAME, Bundle.CTL_MenuAntRunProjectJ2SE());
+        putValue(Action.NAME, Bundle.CTL_ProjectAntRunJ2EE());
         if (isEnabled()) { // Don't try to enable if project's type is not supported.
             FileObject prjPropsFo = project.getProjectDirectory().getFileObject("nbproject/project.properties");
             final Properties prjProps = new Properties();
@@ -58,9 +63,6 @@ public class MenuAntRunProjectJ2SE
             try {
                 if (prjPropsFo != null) {
                     prjProps.load(ins = prjPropsFo.getInputStream());
-                }
-                if (prjProps.getProperty("main.class", "").isEmpty()) {
-                    setEnabled(false);
                 }
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
@@ -85,7 +87,7 @@ public class MenuAntRunProjectJ2SE
 
     @Override
     public Action createContextAwareInstance(Lookup context) {
-        return new MenuAntRunProjectJ2SE();
+        return new ProjectAntRunJ2EE();
     }
 
     @Override

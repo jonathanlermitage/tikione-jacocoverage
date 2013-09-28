@@ -37,7 +37,6 @@ public enum NBProjectTypeEnum {
                 break;
             default:
                 qname = "n/a";
-
         }
         return qname;
     }

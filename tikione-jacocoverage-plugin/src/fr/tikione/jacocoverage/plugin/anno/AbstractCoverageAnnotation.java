@@ -20,7 +20,7 @@ import org.openide.text.Line;
  */
 public abstract class AbstractCoverageAnnotation extends Annotation implements PropertyChangeListener {
 
-    private int theme;
+    private final int theme;
 
     /** A list of all registered living annotation. Used to know and clear annotations associated to a project. */
     private final static HashMap<String, HashMap<Integer, Annotation>> annotations = 

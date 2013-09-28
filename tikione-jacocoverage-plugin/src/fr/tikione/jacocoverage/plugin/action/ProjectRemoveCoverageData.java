@@ -16,32 +16,31 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- * The "Test with JaCoCoverage" contextual action registration for J2SE projects.
- * Start the "test" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
- * @author Jonathan Lermitage
+ * @author Jonathan
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.MenuAntTestProjectJ2SE")
-@ActionRegistration(displayName = "#CTL_MenuAntTestProjectJ2SE",
+          id = "fr.tikione.jacocoverage.plugin.action.ProjectRemoveCoverageData")
+@ActionRegistration(displayName = "#CTL_ProjectRemoveCoverageData",
                     lazy = false,
                     asynchronous = true,
                     surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-                 position = 1985,
-                 separatorAfter = 1986)
-@NbBundle.Messages("CTL_MenuAntTestProjectJ2SE=Test with JaCoCoverage")
-public class MenuAntTestProjectJ2SE
-        extends JaCoCoActionOnAnt
+                 position = 1986,
+                 separatorAfter = 1987)
+@NbBundle.Messages("CTL_ProjectRemoveCoverageData=Reset coverage data")
+@SuppressWarnings("CloneableImplementsClone")
+public class ProjectRemoveCoverageData
+        extends RemovePrjCoverageAction
         implements ContextAwareAction, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;
 
-    public MenuAntTestProjectJ2SE() {
-        super("test");
+    public ProjectRemoveCoverageData() {
+        super();
         setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
-        putValue(Action.NAME, Bundle.CTL_MenuAntTestProjectJ2SE());
+        putValue(Action.NAME, Bundle.CTL_ProjectRemoveCoverageData());
     }
 
     @Override
@@ -53,9 +52,9 @@ public class MenuAntTestProjectJ2SE
 
     @Override
     public Action createContextAwareInstance(Lookup context) {
-        return new MenuAntTestProjectJ2SE();
+        return new ProjectRemoveCoverageData();
     }
-    
+
     @Override
     public JMenuItem getPopupPresenter() {
         JMenuItem menuitem = new JMenuItem(this);

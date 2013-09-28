@@ -46,6 +46,7 @@ import org.xml.sax.SAXException;
  *
  * @author Jonathan Lermitage
  */
+@SuppressWarnings("CloneableImplementsClone")
 public abstract class JaCoCoActionOnAnt
         extends AbstractAction
         implements ActionListener {

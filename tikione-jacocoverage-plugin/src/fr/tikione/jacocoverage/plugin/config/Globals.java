@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.ImageIcon;
-import org.netbeans.api.annotations.common.StaticResource;
 
 /**
  * Global data.
@@ -12,14 +11,6 @@ import org.netbeans.api.annotations.common.StaticResource;
  * @author Jonathan Lermitage
  */
 public class Globals {
-
-    /** Icon attached to JaCoCoverage actions (test, test-single). */
-    @StaticResource
-    public static final String TEST_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_test.png";
-
-    /** Icon attached to JaCoCoverage actions (run). */
-    @StaticResource
-    public static final String RUN_ICON = "fr/tikione/jacocoverage/plugin/resources/icon/famamfam_script_go.png";
     
     /** NetBeans icon representing a Java package. */
     public static final ImageIcon ICO_NB_JAVA_PKG = new ImageIcon(PackageFilterModel.class.getResource(

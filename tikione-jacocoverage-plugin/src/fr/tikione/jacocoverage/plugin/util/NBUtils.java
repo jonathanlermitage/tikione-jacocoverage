@@ -60,7 +60,7 @@ public class NBUtils {
      * @param multiLnInst enable coloring of multi-lines instructions.
      * @param srcDir the folder containing Java sources. Needed only if {@code multiLnInst} is true, otherwise you can use {@code null}.
      */
-    @SuppressWarnings("AssignmentToForLoopParameter")
+    @SuppressWarnings({"AssignmentToForLoopParameter", "UnnecessaryLabelOnBreakStatement"})
     public static void colorDoc(Project project, JavaClass jclass, boolean multiLnInst, File srcDir) {
         String classResource = jclass.getPackageName() + jclass.getClassName();
         String prjId = getProjectId(project);
