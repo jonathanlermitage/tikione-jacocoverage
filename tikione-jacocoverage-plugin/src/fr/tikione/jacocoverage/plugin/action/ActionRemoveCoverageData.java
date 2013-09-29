@@ -14,7 +14,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.RequestProcessor;
 
 /**
- * A toolkit that launches Ant tasks with the JaCoCo JavaAgent, colorizes Java source files and shows a coverage report.
+ * A toolkit that removed colorization from Java source files.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqRequestProcessor">DevFaqRequestProcessor</a> for NetBeans threading tweaks.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionContextSensitive">DevFaqActionContextSensitive</a> for context action tweaks.
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqAddGlobalContext">DevFaqAddGlobalContext</a> for global context and project tweaks.
@@ -22,18 +22,18 @@ import org.openide.util.RequestProcessor;
  * @author Jonathan Lermitage
  */
 @SuppressWarnings("CloneableImplementsClone")
-public abstract class RemovePrjCoverageAction
+public abstract class ActionRemoveCoverageData
         extends AbstractAction
         implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(RemovePrjCoverageAction.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ActionRemoveCoverageData.class.getName());
 
     /**
      * Enable the context action on supported projects only.
      */
-    public RemovePrjCoverageAction() {
+    public ActionRemoveCoverageData() {
     }
 
     @Override
@@ -51,9 +51,9 @@ public abstract class RemovePrjCoverageAction
     }
 
     /**
-     * Run an Ant task with a JaCoCo Java Agent, collect and display coverage data.
+     * Remove colorization from Java source files.
      *
-     * @param project the project to launch Ant target from.
+     * @param project the project to lthat contains Java sources.
      * @throws IOException if an I/O error occurs.
      */
     private void removePrjCoverageData(final Project project)

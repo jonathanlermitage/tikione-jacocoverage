@@ -16,7 +16,8 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- *
+ * The "TReset coverage data" contextual action registration for J2SE projects.
+
  * @author Jonathan
  */
 @ActionID(category = "Project",
@@ -31,7 +32,7 @@ import org.openide.util.actions.Presenter;
 @NbBundle.Messages("CTL_ProjectRemoveCoverageData=Reset coverage data")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectRemoveCoverageData
-        extends RemovePrjCoverageAction
+        extends ActionRemoveCoverageData
         implements ContextAwareAction, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;

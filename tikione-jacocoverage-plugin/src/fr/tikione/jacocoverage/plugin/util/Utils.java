@@ -147,6 +147,7 @@ public class Utils {
      * @param prjtype the targeted project type.
      * @return true if supported, otherwise false.
      */
+    @SuppressWarnings("UnnecessaryLabelOnBreakStatement")
     public static boolean isProjectSupported(Project project, NBProjectTypeEnum... prjtype) {
         boolean supported = false;
         if (null != project) {
@@ -253,7 +254,7 @@ public class Utils {
      */
     @SuppressWarnings("NestedAssignment")
     private static void zip(File src, File dst, String entryname) {
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[512];
         try {
             try (FileOutputStream dstStrm = new FileOutputStream(dst); ZipOutputStream zipStrm = new ZipOutputStream(dstStrm)) {
                 try (FileInputStream srcStrm = new FileInputStream(src)) {

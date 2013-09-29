@@ -40,7 +40,7 @@ import org.openide.util.actions.Presenter;
 @NbBundle.Messages("CTL_ProjectAntRunJ2SE=Run with JaCoCoverage")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectAntRunJ2SE
-        extends JaCoCoActionOnAnt
+        extends ActionJacocoOnAntTaskJ2SE
         implements ContextAwareAction, Presenter.Popup {
 
     private static final long serialVersionUID = 1L;

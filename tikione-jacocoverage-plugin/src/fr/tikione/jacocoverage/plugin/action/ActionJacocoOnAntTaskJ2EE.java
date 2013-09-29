@@ -18,18 +18,18 @@ import org.openide.util.RequestProcessor;
  * @author Jonathan Lermitage
  */
 @SuppressWarnings("CloneableImplementsClone")
-public abstract class JaCoCoActionOnAntJ2EE
+public abstract class ActionJacocoOnAntTaskJ2EE
         extends AbstractAction
         implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(JaCoCoActionOnAntJ2EE.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ActionJacocoOnAntTaskJ2EE.class.getName());
 
     /**
      * Enable the context action on supported projects only.
      */
-    public JaCoCoActionOnAntJ2EE() {
+    public ActionJacocoOnAntTaskJ2EE() {
     }
 
     @Override

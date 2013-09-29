@@ -47,13 +47,13 @@ import org.xml.sax.SAXException;
  * @author Jonathan Lermitage
  */
 @SuppressWarnings("CloneableImplementsClone")
-public abstract class JaCoCoActionOnAnt
+public abstract class ActionJacocoOnAntTaskJ2SE
         extends AbstractAction
         implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(JaCoCoActionOnAnt.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ActionJacocoOnAntTaskJ2SE.class.getName());
 
     /** The Ant task to launch. */
     private final String antTask;
@@ -66,7 +66,7 @@ public abstract class JaCoCoActionOnAnt
      *
      * @param antTask additional properties passed to the Ant task.
      */
-    public JaCoCoActionOnAnt(String antTask) {
+    public ActionJacocoOnAntTaskJ2SE(String antTask) {
         this.antTask = antTask;
     }
 

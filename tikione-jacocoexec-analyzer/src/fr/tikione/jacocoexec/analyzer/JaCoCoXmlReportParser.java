@@ -2,6 +2,7 @@ package fr.tikione.jacocoexec.analyzer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
@@ -64,7 +65,7 @@ public class JaCoCoXmlReportParser extends DefaultHandler {
      * @return coverage data.
      */
     public Map<String, JavaClass> getClasses() {
-        return classes;
+        return Collections.unmodifiableMap(classes);
     }
 
     @Override
