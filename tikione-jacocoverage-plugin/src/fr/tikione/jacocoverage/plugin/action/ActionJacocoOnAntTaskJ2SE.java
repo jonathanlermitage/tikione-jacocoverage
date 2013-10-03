@@ -133,8 +133,9 @@ public abstract class ActionJacocoOnAntTaskJ2SE
                     }
                 }
                 antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
-                        + "\"=includes=" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
+                        + "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
                         + ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
+                System.out.println("antTaskJavaagentParam=" + antTaskJavaagentParam);
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                 if (scriptToExecute == null) { // Fix for GitHub #16.
