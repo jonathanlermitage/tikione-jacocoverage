@@ -14,10 +14,11 @@ TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and th
 [Oracle JDK6](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (when NetBeans 7.4 will be released, JaCoCoverage will be built with JDK7, since it is the minimal JDK version for NetBeans 7.4). The latest version of NetBeans will always be used:
 don't expect support for older NetBeans versions (too much work and nobody uses them).
 
-### Download stable builds
+### Download stable and dev builds
 * Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage),
 validated by the NetBeans Plugin Review staff and available in the NetBeans integrated **Plugins Manager** (see ``Tools``, ``Plugins``,
 ``Available Plugins`` and look for the ``TikiOne JaCoCoverage Plugin`` plugin).
+* You can get the latest stable development builds by registering the following **Update Center** into NetBeans: ``http://jonathan.lermitage.free.fr/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
 
 ### Development progression
 Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
