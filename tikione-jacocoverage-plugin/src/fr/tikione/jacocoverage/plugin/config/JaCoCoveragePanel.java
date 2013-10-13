@@ -55,9 +55,9 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
                 + "https://github.com/jonathanlermitage</body></html>");
         jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
-                + "http://netbeanscolors.org</body></html>");
+                + "http://lermitage.biz</body></html>");
         jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
-                + "http://jacocoverage.tikione.fr/redirect/help/</body></html>");
+                + "https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md</body></html>");
         jButtonAbout.setToolTipText("<html><body>About JaCoCoverage</body></html>");
         // </editor-fold>
     }
@@ -300,11 +300,11 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonSocialGithubActionPerformed
 
     private void jButtonOnlineHelpActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonOnlineHelpActionPerformed
-        NBUtils.extBrowser("http://jacocoverage.tikione.fr/redirect/help/");
+        NBUtils.extBrowser("https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md");
     }//GEN-LAST:event_jButtonOnlineHelpActionPerformed
 
     private void jButtonSocialJojohomeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialJojohomeActionPerformed
-        NBUtils.extBrowser("http://netbeanscolors.org");
+        NBUtils.extBrowser("http://lermitage.biz");
     }//GEN-LAST:event_jButtonSocialJojohomeActionPerformed
 
     private void jCheckBoxEnableHtmlReportActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEnableHtmlReportActionPerformed
