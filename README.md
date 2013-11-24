@@ -1,3 +1,8 @@
+##### ``>> Project Status >>`` I am currently too much busy: other urgent projects, personal life, etc. I'll have more free time next year. Thx for your understanding.
+
+### --- project status: I am currently too much busy: other urgent projects, personnal life, etc. I'll have more free time next year.
+Thx for your understanding.
+
 ## JaCoCoverage Java7 Code Coverage for NetBeans
 
 * The JaCoCoverage Plugin is a NetBeans 7.3 plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
