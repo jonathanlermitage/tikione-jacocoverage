@@ -1,5 +1,9 @@
 ## JaCoCoverage Change Log
 
+### Version 1.3.4.20140306.1000 (2014-03-06)
+* updated JaCoCo library to 0.6.5.
+* *built with NetBeans 8.0RC1 and Oracle JDK7.*
+
 ### Version 1.3.3.20131214.1257 (2013-12-14)
 * GitHub #17 added an action at project's level to remove coverage data from editor (Reset coverage data).
 * added the default package to the list of covered packages.
