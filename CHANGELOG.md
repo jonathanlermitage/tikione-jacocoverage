@@ -1,5 +1,9 @@
 ## JaCoCoverage Change Log
 
+### Version 1.3.4.20140322.1836 (2014-03-22)
+* updated JaCoCo library to 0.7.0 to support Java8.
+* *built with NetBeans 8.0FCS and Oracle JDK7.*
+
 ### Version 1.3.4.20140306.1000 (2014-03-06)
 * updated JaCoCo library to 0.6.5.
 * *built with NetBeans 8.0RC1 and Oracle JDK7.*

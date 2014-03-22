@@ -3,5 +3,5 @@ AutoUpdate-Show-In-Client: false
 OpenIDE-Module: fr.tikione.jacoco.lib/1
 OpenIDE-Module-Layer: fr/tikione/jacoco/lib/layer.xml
 OpenIDE-Module-Localizing-Bundle: fr/tikione/jacoco/lib/Bundle.properties
-OpenIDE-Module-Specification-Version: 0.6.5.20140306.2055
+OpenIDE-Module-Specification-Version: 0.7.0.20140322.1834
 
