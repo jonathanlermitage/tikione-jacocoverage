@@ -170,7 +170,7 @@ public abstract class ActionJacocoOnAntTaskJ2SE
                             // freeze the current one. This is a workaround for a known and old NetBeans bug: the ExecutorTask
                             // object provided by the NetBeans platform is not correctly wrapped.
                             int executeRes = execute.result();
-                            if (0 == executeRes && binreport.exists()) {
+                            if (/*0 == executeRes && */binreport.exists()) {
                                 long st = System.currentTimeMillis();
                                 // Load the generated JaCoCo coverage report.
                                 File classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
