@@ -1,4 +1,4 @@
-##### ``>> Project Status >>`` I am currently too much busy: other urgent projects, personal life, a terrible lack of free time and a new job. Ant projects support is over, I prefer to integrate contributions and provide bugfixes only. I'll focus on Maven projects support only. Thx for your understanding.
+##### ``>> Project Status >>`` I am currently too much busy: other urgent projects, personal life, a terrible lack of free time and a new job. Ant projects support is over, I prefer to integrate contributions and provide bugfixes only. I'll focus on Maven projects support asap. Thx for your understanding.
 
 ## Java Code Coverage for NetBeans
 

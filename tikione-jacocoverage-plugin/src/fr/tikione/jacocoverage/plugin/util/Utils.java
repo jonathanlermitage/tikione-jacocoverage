@@ -152,6 +152,7 @@ public class Utils {
         boolean supported = false;
         if (null != project) {
             String projectClass = project.getClass().getName();
+            System.out.println("### projectClass = " + projectClass);
             PRJ: for (NBProjectTypeEnum type : prjtype) {
                 if (projectClass.equals(type.qname())) {
                     supported = true;
