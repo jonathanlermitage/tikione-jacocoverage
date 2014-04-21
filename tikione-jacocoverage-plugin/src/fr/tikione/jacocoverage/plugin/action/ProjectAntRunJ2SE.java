@@ -49,7 +49,7 @@ public class ProjectAntRunJ2SE
     public ProjectAntRunJ2SE() {
         super("run");
         Project project = NBUtils.getSelectedProject();
-        setEnabled(Utils.isProjectSupported(project, NBProjectTypeEnum.J2SE));
+        setEnabled(Utils.isProjectSupported(project, true, NBProjectTypeEnum.J2SE));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectAntRunJ2SE());
         if (isEnabled()) { // Don't try to enable if project's type is not supported.

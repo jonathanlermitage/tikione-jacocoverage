@@ -16,19 +16,19 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- * The "TReset coverage data" contextual action registration for J2SE projects.
-
- * @author Jonathan
+ * The "Reset coverage data" contextual action registration for J2SE and Maven projects.
+ *
+ * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.ProjectRemoveCoverageData")
+        id = "fr.tikione.jacocoverage.plugin.action.ProjectRemoveCoverageData")
 @ActionRegistration(displayName = "#CTL_ProjectRemoveCoverageData",
-                    lazy = false,
-                    asynchronous = true,
-                    surviveFocusChange = true)
+        lazy = false,
+        asynchronous = true,
+        surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-                 position = 1986,
-                 separatorAfter = 1987)
+        position = 1986,
+        separatorAfter = 1987)
 @NbBundle.Messages("CTL_ProjectRemoveCoverageData=Reset coverage data")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectRemoveCoverageData
@@ -39,7 +39,9 @@ public class ProjectRemoveCoverageData
 
     public ProjectRemoveCoverageData() {
         super();
-        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE));
+        setEnabled(
+                Utils.isProjectSupported(NBUtils.getSelectedProject(), true, NBProjectTypeEnum.J2SE)
+                || Utils.isProjectSupported(NBUtils.getSelectedProject(), false, NBProjectTypeEnum.MAVEN__ALL));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectRemoveCoverageData());
     }

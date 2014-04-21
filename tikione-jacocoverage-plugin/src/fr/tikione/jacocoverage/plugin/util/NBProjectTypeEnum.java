@@ -13,7 +13,8 @@ public enum NBProjectTypeEnum {
     J2EE,
     J2EE_EAR,
     J2EE_EJB,
-    MAVEN;
+    MAVEN,
+    MAVEN__ALL;
 
     public String qname() {
         String qname;
@@ -38,6 +39,9 @@ public enum NBProjectTypeEnum {
                 break;
             case MAVEN:
                 qname = "org.netbeans.modules.maven.NbMavenProjectImpl";
+                break;
+            case MAVEN__ALL:
+                qname = "org.netbeans.modules.maven";
                 break;
             default:
                 qname = "n/a";

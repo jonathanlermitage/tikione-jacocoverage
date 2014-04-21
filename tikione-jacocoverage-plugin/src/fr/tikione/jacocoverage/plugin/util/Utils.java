@@ -26,19 +26,29 @@ import org.openide.util.Exceptions;
  */
 public class Utils {
 
-    /** Regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    /**
+     * Regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects.
+     */
     private static final String PA_NBPROPKEY_SHORTCUT = "\\$\\{([^\\}]+)\\}";
 
-    /** Compiled regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects. */
+    /**
+     * Compiled regular expression to recognize "${key}" patterns in Properties files used by NetBeans projects.
+     */
     private static final Pattern CPA_NBPROPKEY_SHORTCUT = Pattern.compile(PA_NBPROPKEY_SHORTCUT);
 
-    /** The white-space character ({@code &#92;u0020}). */
+    /**
+     * The white-space character ({@code &#92;u0020}).
+     */
     public static final char SPACE = '\u0020';
 
-    /** The tabulation character ({@code &#92;u0009}). */
+    /**
+     * The tabulation character ({@code &#92;u0009}).
+     */
     public static final char TAB = '\u0009';
 
-    /** File extension(s) of Java files. */
+    /**
+     * File extension(s) of Java files.
+     */
     private static final String[] JAVA_EXT_ARR = new String[]{"java"};
 
     /**
@@ -144,17 +154,18 @@ public class Utils {
      * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes">DevFaqActionAllAvailableProjectTypes</a> for help.
      *
      * @param project the project.
+     * @param strict if true, check the entire project definition qname, otherwise check if the project definition qname starts with the given project type.
      * @param prjtype the targeted project type.
      * @return true if supported, otherwise false.
      */
     @SuppressWarnings("UnnecessaryLabelOnBreakStatement")
-    public static boolean isProjectSupported(Project project, NBProjectTypeEnum... prjtype) {
+    public static boolean isProjectSupported(Project project, boolean strict, NBProjectTypeEnum... prjtype) {
         boolean supported = false;
         if (null != project) {
             String projectClass = project.getClass().getName();
-            System.out.println("### projectClass = " + projectClass);
-            PRJ: for (NBProjectTypeEnum type : prjtype) {
-                if (projectClass.equals(type.qname())) {
+            PRJ:
+            for (NBProjectTypeEnum type : prjtype) {
+                if (strict ? projectClass.equals(type.qname()) : projectClass.startsWith(type.qname())) {
                     supported = true;
                     break PRJ;
                 }

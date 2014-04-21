@@ -43,7 +43,7 @@ public class ProjectMavenLoadReport
     public ProjectMavenLoadReport() {
         super();
         Project project = NBUtils.getSelectedProject();
-        setEnabled(Utils.isProjectSupported(project, NBProjectTypeEnum.MAVEN));
+        setEnabled(Utils.isProjectSupported(project, false, NBProjectTypeEnum.MAVEN__ALL));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectMavenLoadReport());
     }
