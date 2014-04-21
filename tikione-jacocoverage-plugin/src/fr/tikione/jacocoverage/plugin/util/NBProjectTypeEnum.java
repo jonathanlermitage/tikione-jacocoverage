@@ -48,4 +48,31 @@ public enum NBProjectTypeEnum {
         }
         return qname;
     }
+
+    /**
+     * If true, check the entire project definition qname, otherwise check if the project definition
+     * qname starts with the given project type.
+     *
+     * @return strict level.
+     */
+    public boolean isStrict() {
+        boolean isStrict;
+        switch (this) {
+            case J2SE:
+            case NBMODULE:
+            case J2EE:
+            case J2EE_EAR:
+            case J2EE_EJB:
+            case J2EE_WEB:
+            case MAVEN:
+                isStrict = true;
+                break;
+            case MAVEN__ALL:
+                isStrict = false;
+                break;
+            default:
+                isStrict = true;
+        }
+        return isStrict;
+    }
 }

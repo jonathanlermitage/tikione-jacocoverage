@@ -154,18 +154,17 @@ public class Utils {
      * <br/>See <a href="http://wiki.netbeans.org/DevFaqActionAllAvailableProjectTypes">DevFaqActionAllAvailableProjectTypes</a> for help.
      *
      * @param project the project.
-     * @param strict if true, check the entire project definition qname, otherwise check if the project definition qname starts with the given project type.
      * @param prjtype the targeted project type.
      * @return true if supported, otherwise false.
      */
     @SuppressWarnings("UnnecessaryLabelOnBreakStatement")
-    public static boolean isProjectSupported(Project project, boolean strict, NBProjectTypeEnum... prjtype) {
+    public static boolean isProjectSupported(Project project, NBProjectTypeEnum... prjtype) {
         boolean supported = false;
         if (null != project) {
             String projectClass = project.getClass().getName();
             PRJ:
             for (NBProjectTypeEnum type : prjtype) {
-                if (strict ? projectClass.equals(type.qname()) : projectClass.startsWith(type.qname())) {
+                if (type.isStrict() ? projectClass.equals(type.qname()) : projectClass.startsWith(type.qname())) {
                     supported = true;
                     break PRJ;
                 }
