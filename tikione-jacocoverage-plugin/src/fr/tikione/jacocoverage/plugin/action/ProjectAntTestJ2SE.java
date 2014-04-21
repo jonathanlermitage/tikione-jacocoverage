@@ -22,13 +22,13 @@ import org.openide.util.actions.Presenter;
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.ProjectAntTestJ2SE")
+        id = "fr.tikione.jacocoverage.plugin.action.ProjectAntTestJ2SE")
 @ActionRegistration(displayName = "#CTL_ProjectAntTestJ2SE",
-                    lazy = false,
-                    asynchronous = true,
-                    surviveFocusChange = true)
+        lazy = false,
+        asynchronous = true,
+        surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-                 position = 1985)
+        position = 1985)
 @NbBundle.Messages("CTL_ProjectAntTestJ2SE=Test with JaCoCoverage")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectAntTestJ2SE
@@ -55,7 +55,7 @@ public class ProjectAntTestJ2SE
     public Action createContextAwareInstance(Lookup context) {
         return new ProjectAntTestJ2SE();
     }
-    
+
     @Override
     public JMenuItem getPopupPresenter() {
         JMenuItem menuitem = new JMenuItem(this);

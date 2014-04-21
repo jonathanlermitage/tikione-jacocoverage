@@ -29,14 +29,14 @@ import org.openide.util.actions.Presenter;
  * @author Jan Lahoda (patch https://github.com/jonathanlermitage/tikione-jacocoverage/pull/3)
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.ProjectAntRunJ2SE")
+        id = "fr.tikione.jacocoverage.plugin.action.ProjectAntRunJ2SE")
 @ActionRegistration(displayName = "#CTL_ProjectAntRunJ2SE",
-                    lazy = false,
-                    asynchronous = true,
-                    surviveFocusChange = true)
+        lazy = false,
+        asynchronous = true,
+        surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-                 position = 1984,
-                 separatorBefore = 1983)
+        position = 1984,
+        separatorBefore = 1983)
 @NbBundle.Messages("CTL_ProjectAntRunJ2SE=Run with JaCoCoverage")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectAntRunJ2SE

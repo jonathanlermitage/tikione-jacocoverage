@@ -23,14 +23,14 @@ import org.openide.util.actions.Presenter;
  * @author Jonathan Lermitage
  */
 @ActionID(category = "Project",
-          id = "fr.tikione.jacocoverage.plugin.action.ProjectMavenLoadReport")
+        id = "fr.tikione.jacocoverage.plugin.action.ProjectMavenLoadReport")
 @ActionRegistration(displayName = "#CTL_ProjectMavenLoadReport",
-                    lazy = false,
-                    asynchronous = true,
-                    surviveFocusChange = true)
+        lazy = false,
+        asynchronous = true,
+        surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-                 position = 1984,
-                 separatorBefore = 1983)
+        position = 1984,
+        separatorBefore = 1983)
 @NbBundle.Messages("CTL_ProjectMavenLoadReport=Load Jacoco report")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectMavenLoadReport
