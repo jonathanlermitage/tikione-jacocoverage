@@ -43,8 +43,7 @@ public class ProjectMavenLoadReport
     public ProjectMavenLoadReport() {
         super();
         Project project = NBUtils.getSelectedProject();
-        // setEnabled(Utils.isProjectSupported(project, NBProjectTypeEnum.MAVEN__ALL));
-        setEnabled(false); // TODO reactivate after 1.3.5 release
+        setEnabled(Utils.isProjectSupported(project, NBProjectTypeEnum.MAVEN__ALL));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectMavenLoadReport());
     }
