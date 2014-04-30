@@ -1,6 +1,6 @@
 ## JaCoCoverage Change Log
 
-### Version 1.3.5.20140323.1440 (2014-03-23)
+### Version 1.3.5.20140430.2035 (2014-04-30)
 * GitHub #18 removed error while tests fail.
 
 ### Version 1.3.4.20140322.1836 (2014-03-22)
