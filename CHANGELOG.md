@@ -1,5 +1,11 @@
 ## JaCoCoverage Change Log
 
+### Version 1.3.5.20140430.2331 (2014-04-30)
+* updated Apache Commons Lang3 library to 3.3.2.
+* updated FasterXML Jackson Annotations lbrary to 2.2.3.
+* updated FasterXML Jackson Core library to 2.2.3.
+* updated FasterXML Jackson Databind library to 2.2.3.
+
 ### Version 1.3.5.20140430.2035 (2014-04-30)
 * GitHub #18 removed error while tests fail.
 

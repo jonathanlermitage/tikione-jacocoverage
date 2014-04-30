@@ -22,3 +22,7 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+!/tikione-jacocoverage-ext/release/modules/ext/jackson-annotations-2.2.3.jar
+!/tikione-jacocoverage-ext/release/modules/ext/jackson-core-2.2.3.jar
+!/tikione-jacocoverage-ext/release/modules/ext/commons-lang3-3.3.2.jar
+!/tikione-jacocoverage-ext/release/modules/ext/jackson-databind-2.2.3.jar

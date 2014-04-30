@@ -29,8 +29,8 @@ import org.openide.util.actions.Presenter;
         asynchronous = true,
         surviveFocusChange = true)
 @ActionReference(path = "Projects/Actions",
-        position = 1984,
-        separatorBefore = 1983)
+        position = 1884,
+        separatorBefore = 1883)
 @NbBundle.Messages("CTL_ProjectMavenLoadReport=Load Jacoco report")
 @SuppressWarnings("CloneableImplementsClone")
 public class ProjectMavenLoadReport
