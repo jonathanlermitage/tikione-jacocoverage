@@ -1,10 +1,11 @@
 ## JaCoCoverage Change Log
 
-### Version 1.3.5.20140430.2331 (2014-04-30)
+### Version 1.3.6.20140430.2331 (2014-04-30)
 * updated Apache Commons Lang3 library to 3.3.2.
 * updated FasterXML Jackson Annotations library to 2.2.3.
 * updated FasterXML Jackson Core library to 2.2.3.
 * updated FasterXML Jackson Databind library to 2.2.3.
+* *built with NetBeans 8.0FCS-patch1 and Oracle JDK7.*
 
 ### Version 1.3.5.20140430.2035 (2014-04-30)
 * GitHub #18 removed error while tests fail.
@@ -23,7 +24,7 @@
 * updated JaCoCo library to 0.6.4.
 * *built with NetBeans 7.4 and Oracle JDK7.*
 
-### Version 1.3.2.20130911.1322 (2013-09-11, not published)
+### Version 1.3.2.20130911.1322 (2013-09-11)
 * GitHub #16 will now look for a "nbbuild.xml" file when the "build.xml" file is missing.
 * *built with NetBeans 7.3.1 and Oracle JDK7.*
 
