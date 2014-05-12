@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### Version 1.3.7.20140512.1900 (2014-05-12)
+* updated JaCoCo library to 0.7.1 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
+
 ### Version 1.3.6.20140430.2331 (2014-04-30)
 * updated Apache Commons Lang3 library to 3.3.2.
 * updated FasterXML Jackson Annotations library to 2.2.3.
