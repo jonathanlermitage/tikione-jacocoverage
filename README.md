@@ -9,25 +9,23 @@ Ant target) is executed for the project. Currently the Java Application, Java Li
 Cobertura based plugins.
 * JaCoCo is a free code coverage library for Java, which has been created by the [EclEmma team](http://www.eclemma.org/jacoco/).
 
-TikiOne JaCoCoverage plugin is built with [NetBeans](http://netbeans.org) and the latest version of
-[Oracle JDK7](http://www.oracle.com/technetwork/java/javase/downloads/index.html). The latest version of NetBeans will always be used:
-don't expect support for older NetBeans versions (too much work and nobody uses them).
+TikiOne JaCoCoverage plugin is built with and for the [NetBeans 8.0 platform](http://netbeans.org) and the latest version of
+[Oracle JDK7](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
-### Download stable and dev builds
-* Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage),
-validated by the NetBeans Plugin Review staff and available in the NetBeans integrated **Plugins Manager** (see ``Tools``, ``Plugins``,
-``Available Plugins`` and look for the ``TikiOne JaCoCoverage Plugin`` plugin).
-* You can get the latest stable development builds by registering the following **Update Center** into NetBeans: ``http://lermitage.biz/nbuc/jacocoverage/updates.xml``. These builds integrate new features and updates that have been tested, there are no unstable nor experimental features inside. Future updates marked as "done" are integrated into the latest development builds, future updates marked as "under development" are not (otherwise they are not activated).
+### Download stable builds
+Stable builds are hosted on the NetBeans [Plugin Portal website](http://plugins.netbeans.org/plugin/48570/tikione-jacocoverage),
+validated by the NetBeans Plugin Review staff (I am also a member of this team) and available in the NetBeans integrated **Plugins Manager** (see ``Tools``, ``Plugins``,
+``Available Plugins`` and look for the ``TikiOne JaCoCoverage`` plugin).
 
 ### Development progression
 Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
 For details on previous and current versions, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
 ### Documentation and Media
-[Click Here!](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/DOCUMENTATION.md) (work in progress)
+[Click Here!](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/DOCUMENTATION.md)
 
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
 ### License
-[WTFPL](http://www.wtfpl.net) License.
+[WTFPL](http://www.wtfpl.net) License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
