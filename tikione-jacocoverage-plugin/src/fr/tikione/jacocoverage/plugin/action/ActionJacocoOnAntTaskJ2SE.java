@@ -133,8 +133,12 @@ public abstract class ActionJacocoOnAntTaskJ2SE
                     }
                 }
                 antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
-                        + "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
-                        + ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
+                        //+ "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
+                        //+ ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
+                        + "\"=destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString(); // TODO revert once j2ee works
+                
+                System.out.println("binreport=" + binreport.getAbsolutePath());
+
 
                 FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
                 if (scriptToExecute == null) { // Fix for GitHub #16.

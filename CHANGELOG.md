@@ -1,5 +1,10 @@
 ## JaCoCoverage Change Log
 
+### Version 1.3.8.20140919.2148 (2014-09-19)
+* updated JaCoCo library to 0.7.2 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
+* preparation for Java Web/EE/EJB/EAR projects support (will be activated once [NetBeans bug 246072](https://netbeans.org/bugzilla/show_bug.cgi?id=246072) is fixed).
+* *built with NetBeans 8.0.1FCS and Oracle JDK7.*
+
 ### Version 1.3.7.20140512.1900 (2014-05-12)
 * updated JaCoCo library to 0.7.1 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
 

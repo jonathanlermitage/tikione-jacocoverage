@@ -9,7 +9,7 @@ Ant target) is executed for the project. Currently the Java Application, Java Li
 Cobertura based plugins.
 * JaCoCo is a free code coverage library for Java, which has been created by the [EclEmma team](http://www.eclemma.org/jacoco/).
 
-TikiOne JaCoCoverage plugin is built with and for the [NetBeans 8.0 platform](http://netbeans.org) and the latest version of
+TikiOne JaCoCoverage plugin is built with and for the [NetBeans 8.0.1 platform](http://netbeans.org) and the latest version of
 [Oracle JDK7](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
 ### Download stable builds

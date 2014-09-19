@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -97,8 +98,8 @@ public class ProjectConfig {
         if (prjCfgFile.exists()) {
             try {
                 getInternalPref().putAll((Map<Object, Object>) mapper.readValue(prjCfgFile, Map.class).get(JSON_GENERAL));
-                getPkgclssExclude().addAll((List<String>) mapper.readValue(prjCfgFile, Map.class).get(JSON_PKGFILTER));
-            } catch (Exception ex) {
+                getPkgclssExclude().addAll((Collection<? extends String>) mapper.readValue(prjCfgFile, Map.class).get(JSON_PKGFILTER));
+            } catch (IOException ex) {
                 LOGGER.log(Level.INFO, "Project's JaCoCoverage configuration file format is outdated or invalid. Reset cause:", ex);
                 String msg = "The project's JaCoCoverage configuration file format is outdated or invalid.\n"
                         + "The configuration file has been reset to support new format.";

@@ -10,19 +10,19 @@
                 <package>com.vladium.emma.rt</package>
                 <package>org.jacoco.agent</package>
                 <package>org.jacoco.agent.rt</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.asm</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.asm.commons</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.asm.tree</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.data</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.instr</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.internal</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.internal.data</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.internal.flow</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.internal.instr</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.core.runtime</package>
-                <package>org.jacoco.agent.rt.internal_9dd1198.output</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.asm</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.asm.commons</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.asm.tree</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.data</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.instr</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.internal</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.internal.data</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.internal.flow</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.internal.instr</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.core.runtime</package>
+                <package>org.jacoco.agent.rt.internal_e6e56f0.output</package>
                 <package>org.jacoco.ant</package>
                 <package>org.jacoco.asm</package>
                 <package>org.jacoco.asm.commons</package>
@@ -37,6 +37,7 @@
                 <package>org.jacoco.core.internal.flow</package>
                 <package>org.jacoco.core.internal.instr</package>
                 <package>org.jacoco.core.runtime</package>
+                <package>org.jacoco.core.tools</package>
                 <package>org.jacoco.report</package>
                 <package>org.jacoco.report.check</package>
                 <package>org.jacoco.report.csv</package>

@@ -26,5 +26,13 @@
         <file name="fr-tikione-jacocoverage-plugin-config-ProjectCustomizerAntJavase.instance_hidden"/>
       </folder>
     </folder>
+    <folder name="org-netbeans-modules-web-project-webproject">
+      <folder name="Customizer">
+        <file name="fr-tikione-jacocoverage-plugin-config-PrjcfgAntJavaeewebCatProvider.instance">
+          <attr name="position" intvalue="1405"/>
+        </file>
+        <file name="fr-tikione-jacocoverage-plugin-config-ProjectCustomizerAntJavaee.instance_hidden"/>
+      </folder>
+    </folder>
   </folder>
 </filesystem>
