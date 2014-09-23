@@ -26,3 +26,11 @@ hs_err_pid*
 !/tikione-jacocoverage-ext/release/modules/ext/jackson-core-2.2.3.jar
 !/tikione-jacocoverage-ext/release/modules/ext/commons-lang3-3.3.2.jar
 !/tikione-jacocoverage-ext/release/modules/ext/jackson-databind-2.2.3.jar
+nbproject/private/platform-private.properties
+nbproject/private/private.xml
+tikione-jacocoexec-analyzer/nbproject/private/jonathanlermitage.cert
+tikione-jacocoexec-analyzer/nbproject/private/platform-private.properties
+tikione-jacocoexec-analyzer/nbproject/private/private.xml
+tikione-jacocoverage-plugin/nbproject/private/jonathanlermitage.cert
+tikione-jacocoverage-plugin/nbproject/private/platform-private.properties
+tikione-jacocoverage-plugin/nbproject/private/private.xml
