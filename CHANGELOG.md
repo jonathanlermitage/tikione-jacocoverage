@@ -1,6 +1,6 @@
 ## JaCoCoverage Change Log
 
-### Version 1.4.0.20141122.2340 (2014-09-19)
+### Version 1.4.0.20141122.2340 (2014-11-22)
 * GitHub #24 add Java Web/EE/EJB/EAR projects support.
 
 ### Version 1.3.8.20140919.2148 (2014-09-19)
