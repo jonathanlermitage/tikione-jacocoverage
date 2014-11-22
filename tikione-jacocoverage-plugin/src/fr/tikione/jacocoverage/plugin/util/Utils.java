@@ -113,6 +113,7 @@ public class Utils {
 
     /**
      * Get a key value from a Properties object, with support of NetBeans key references (aka "${key}").
+	 * TODO: fix crash with javaee 'build.classes.dir' property
      *
      * @param props the Properties object to load key value from.
      * @param key the key value to get value.

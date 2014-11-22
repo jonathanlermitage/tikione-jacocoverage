@@ -16,7 +16,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- * The "Test with JaCoCoverage" contextual action registration for J2SE projects.
+ * The "Test with JaCoCoverage" contextual action registration for Java projects.
  * Start the "test" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
  * @author Jonathan Lermitage
@@ -39,9 +39,9 @@ public class ProjectAntTestJ2SE
 
     public ProjectAntTestJ2SE() {
         super("test");
-        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE/*, 
+        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE, 
                 NBProjectTypeEnum.J2EE, NBProjectTypeEnum.J2EE_EAR, 
-                NBProjectTypeEnum.J2EE_EJB, NBProjectTypeEnum.J2EE_WEB*/));
+                NBProjectTypeEnum.J2EE_EJB, NBProjectTypeEnum.J2EE_WEB));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectAntTestJ2SE());
     }

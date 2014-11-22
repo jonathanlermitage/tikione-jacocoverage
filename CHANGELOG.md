@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### Version 1.4.0.20141122.2340 (2014-09-19)
+* GitHub #24 add Java Web/EE/EJB/EAR projects support.
+
 ### Version 1.3.8.20140919.2148 (2014-09-19)
 * updated JaCoCo library to 0.7.2 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
 * preparation for Java Web/EE/EJB/EAR projects support (will be activated once [NetBeans bug 246072](https://netbeans.org/bugzilla/show_bug.cgi?id=246072) is fixed).

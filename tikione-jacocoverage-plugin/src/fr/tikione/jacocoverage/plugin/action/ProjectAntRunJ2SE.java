@@ -22,7 +22,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- * The "Run with JaCoCoverage" contextual action registration for J2SE projects.
+ * The "Run with JaCoCoverage" contextual action registration for Java projects.
  * Start the "run" Ant task with the JaCoCo JavaAgent correctly configured, colorize Java source files and show a coverage report.
  *
  * @author Jonathan Lermitage
