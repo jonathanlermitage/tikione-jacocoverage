@@ -7,7 +7,7 @@ The JaCoCoverage Plugin is a Netbeans plugin that enhances the existing NetBeans
 The JaCoCoverage Plugin is based on JaCoCo: a library created by the [EclEmma team](http://www.eclemma.org/jacoco/). This library is able to generate coverage data when you launch a Java program.
 More precsisely, JaCoCoverage uses the JaCoCo Java Agent to enable coverage collections (i.e. a JaCoCo Java Agent is attached to your program).
 When your program terminates, JaCoCo generates coverage data and JaCoCoverage assures the coverage information integration in your NetBeans IDE.
-JaCoCo and JaCoCoverage support Java 7 and are also tested with Java 6. It may work with Java 5 too. The EclEmma team is currently working on Java 8 support.
+JaCoCo and JaCoCoverage support Java 7 and 8 and are also tested with Java 6. It may work with Java 5 too.
 
 ### Media
 NetBeans Java editor showing highlighted code. You can see covered, partially covered and not covered code, and annotations in the left margin:

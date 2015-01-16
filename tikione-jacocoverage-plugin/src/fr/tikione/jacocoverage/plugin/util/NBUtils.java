@@ -38,6 +38,7 @@ import org.openide.windows.IOProvider;
  * Some NetBeans related utilities.
  *
  * @author Jonathan Lermitage
+ * @author Graeme Ingleby
  */
 public class NBUtils {
 
@@ -120,7 +121,10 @@ public class NBUtils {
                                 }
                             }
                             if (multiLnInst) {
-                                File javafile = new File(srcDir, jclass.getPackageName() + jclass.getClassName());
+								// Patch by GWI
+                                //  old: File javafile = new File(srcDir, jclass.getPackageName() + jclass.getClassName());
+								//  new: File javafile = new File(fileObject.getPath());
+                                File javafile =  new File(fileObject.getPath());
                                 List<String> javalines = org.apache.commons.io.FileUtils.readLines(javafile);
                                 int nblines = javalines.size();
                                 for (int lineIdx = 0; lineIdx < nblines; lineIdx++) {

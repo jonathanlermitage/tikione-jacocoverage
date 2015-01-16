@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### Version 1.5.0.20150116.2200 (2015-01-16)
+* GitHub #10 add NetBeans Module projects support, provided by __Graeme Ingleby__.
+
 ### Version 1.4.0.20141122.2340 (2014-11-22)
 * GitHub #24 add Java Web/EE/EJB/EAR projects support.
 

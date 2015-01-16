@@ -46,6 +46,7 @@ import org.xml.sax.SAXException;
  * <br/>See <a href="http://wiki.netbeans.org/DevFaqAddGlobalContext">DevFaqAddGlobalContext</a> for global context and project tweaks.
  *
  * @author Jonathan Lermitage
+ * @author Graeme Ingleby
  */
 @SuppressWarnings("CloneableImplementsClone")
 public abstract class ActionJacocoOnAntTaskJ2SE
@@ -55,6 +56,8 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = Logger.getLogger(ActionJacocoOnAntTaskJ2SE.class.getName());
+
+	private static final String DEFAULT_EXCLUDES = "com.sun.*:org.apache.*:org.netbeans.*:junit.*:sun.*:org.openide.*:org.junit.*";
 
 	/** The Ant task to launch. */
 	private final String antTask;
@@ -134,9 +137,17 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 					}
 				}
 
-				antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
-						+ "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
-						+ ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
+				// GWI patch: If NetBeans Module Project - use different JavaAgent settings
+				final boolean isNBModule = Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.NBMODULE);
+				if (isNBModule) {
+					String excludes = prjProps.getProperty("jacoco.excludes");
+					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
+							+ "\"=destfile=\"" + binreport.getAbsolutePath() + "\"" + (excludes == null ? "" : ",excludes=" + excludes);
+				} else {
+					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
+							+ "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
+							+ ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
+				}
 
 				FileObject scriptToExecute = project.getProjectDirectory().getFileObject("build", "xml");
 				if (scriptToExecute == null) { // Fix for GitHub #16.
@@ -157,7 +168,12 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 				String prjJvmArgs;
 				final boolean isJ2EE = Utils.isProjectSupported(NBUtils.getSelectedProject(),
 						NBProjectTypeEnum.J2EE, NBProjectTypeEnum.J2EE_EAR, NBProjectTypeEnum.J2EE_EJB, NBProjectTypeEnum.J2EE_WEB);
-				if (isJ2EE) {
+
+				// GWI patch: If NetBeans Module Project - use different JavaAgent settings
+				if (isNBModule) {
+					prjJvmArgs = Utils.getProperty(prjProps, "test.run.args");
+					targetProps.put("test.run.args", prjJvmArgs + " -javaagent:" + antTaskJavaagentParam);
+				} else if (isJ2EE) {
 					prjJvmArgs = Utils.getProperty(prjProps, "runmain.jvmargs");
 					targetProps.put("runmain.jvmargs", prjJvmArgs + " -javaagent:" + antTaskJavaagentParam);
 				} else {
@@ -194,7 +210,14 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 									classDir = new File(prjDir + Utils.getProperty(prjProps, "build.classes.dir") + File.separator);
 								}
 								File srcDir = new File(prjDir + Utils.getProperty(prjProps, "src.dir") + File.separator);
-								JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
+
+								// GWI patch: If NBModule create a different XML Report
+								if (isNBModule) {
+									NBJaCoCoExtension.toXmlReport(binreport, xmlreport, project);
+								} else {
+									JaCoCoReportAnalyzer.toXmlReport(binreport, xmlreport, classDir, srcDir);
+								}
+
 								final Map<String, JavaClass> coverageData = JaCoCoXmlReportParser.getCoverageData(xmlreport);
 								new File(prjDir + Globals.JACOCOVERAGE_DATA_DIR).mkdirs();
 
@@ -211,7 +234,15 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 								}
 								if (enblHtmlReport) {
 									reportdir.mkdirs();
-									String report = JaCoCoReportAnalyzer.toHtmlReport(binreport, reportdir, classDir, srcDir, prjname);
+
+									// GWI patch: If NetBeans Module Project - use different HTML Report
+									String report;
+									if (isNBModule) {
+										report = NBJaCoCoExtension.toHTMLReport(binreport, reportdir, project);
+									} else {
+										report = JaCoCoReportAnalyzer.toHtmlReport(binreport, reportdir, classDir, srcDir, prjname);
+									}
+
 									if (openHtmlReport) {
 										try {
 											HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
@@ -221,8 +252,22 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 									}
 								}
 								if (enblHighlight) {
-									for (final JavaClass jclass : coverageData.values()) {
-										NBUtils.colorDoc(project, jclass, cfg.isEnblHighlightingExtended(), srcDir);
+
+									// GWI patch: GWI-Modified: New Coloring Code
+									if (isNBModule) {
+										for (final JavaClass jclass : coverageData.values()) {
+											try {
+												NBUtils.colorDoc(project, jclass, cfg.isEnblHighlightingExtended(), srcDir);
+											} catch (Throwable e) {
+												Logger.getGlobal().log(Level.SEVERE, 
+														"Failed to color: {0} {1}", 
+														new Object[]{jclass.getClassName(), srcDir});
+											}
+										}
+									} else {
+										for (final JavaClass jclass : coverageData.values()) {
+											NBUtils.colorDoc(project, jclass, cfg.isEnblHighlightingExtended(), srcDir);
+										}
 									}
 								}
 								keepJaCoCoWorkfiles(binreport, xmlreport, prjDir, cfg.getJaCoCoWorkfilesRule());

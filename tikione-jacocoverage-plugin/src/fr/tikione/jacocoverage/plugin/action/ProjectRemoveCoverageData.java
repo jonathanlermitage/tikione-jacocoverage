@@ -39,8 +39,7 @@ public class ProjectRemoveCoverageData
 
     public ProjectRemoveCoverageData() {
         super();
-        setEnabled(
-                Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE));
+        setEnabled(Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.J2SE, NBProjectTypeEnum.NBMODULE));
         putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
         putValue(Action.NAME, Bundle.CTL_ProjectRemoveCoverageData());
     }
