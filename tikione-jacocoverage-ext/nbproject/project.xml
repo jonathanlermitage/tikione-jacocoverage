@@ -57,15 +57,15 @@
             </public-packages>
             <class-path-extension>
                 <runtime-relative-path>ext/jackson-annotations-2.4.4.jar</runtime-relative-path>
-                <binary-origin>C:\NetBeans Projects\ant\tikione-jacocoverage-suite\tikione-jacocoverage-ext\release\modules\ext\jackson-annotations-2.4.4.jar</binary-origin>
+                <binary-origin>release/modules/ext/jackson-annotations-2.4.4.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/jackson-databind-2.4.4.jar</runtime-relative-path>
-                <binary-origin>C:\NetBeans Projects\ant\tikione-jacocoverage-suite\tikione-jacocoverage-ext\release\modules\ext\jackson-databind-2.4.4.jar</binary-origin>
+                <binary-origin>release/modules/ext/jackson-databind-2.4.4.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/jackson-core-2.4.4.jar</runtime-relative-path>
-                <binary-origin>C:\NetBeans Projects\ant\tikione-jacocoverage-suite\tikione-jacocoverage-ext\release\modules\ext\jackson-core-2.4.4.jar</binary-origin>
+                <binary-origin>release/modules/ext/jackson-core-2.4.4.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/commons-io-2.4.jar</runtime-relative-path>
