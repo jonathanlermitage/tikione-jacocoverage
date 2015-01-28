@@ -57,8 +57,8 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 
 	private static final Logger LOGGER = Logger.getLogger(ActionJacocoOnAntTaskJ2SE.class.getName());
 
-	private static final String DEFAULT_EXCLUDES = "com.sun.*:org.apache.*:org.netbeans.*:junit.*:sun.*:org.openide.*:org.junit.*";
-
+	// Will be used in a future release
+	//private static final String DEFAULT_EXCLUDES = "com.sun.*:org.apache.*:org.netbeans.*:junit.*:sun.*:org.openide.*:org.junit.*";
 	/** The Ant task to launch. */
 	private final String antTask;
 
@@ -144,8 +144,12 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
 							+ "\"=destfile=\"" + binreport.getAbsolutePath() + "\"" + (excludes == null ? "" : ",excludes=" + excludes);
 				} else {
+					String packagesToTest = NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*");
+					if (packagesToTest.length() > 1000) { // GitHub#26: JaCoCo seems to fail if the includes list is too long
+						packagesToTest = "*";
+					}
 					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
-							+ "\"=includes=*:" + NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*")
+							+ "\"=includes=" + packagesToTest
 							+ ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
 				}
 
@@ -259,8 +263,8 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 											try {
 												NBUtils.colorDoc(project, jclass, cfg.isEnblHighlightingExtended(), srcDir);
 											} catch (Throwable e) {
-												Logger.getGlobal().log(Level.SEVERE, 
-														"Failed to color: {0} {1}", 
+												Logger.getGlobal().log(Level.SEVERE,
+														"Failed to color: {0} {1}",
 														new Object[]{jclass.getClassName(), srcDir});
 											}
 										}
