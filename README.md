@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jonathanlermitage/tikione-jacocoverage.png?label=ready&title=Ready)](https://waffle.io/jonathanlermitage/tikione-jacocoverage)
 ## Java Code Coverage for NetBeans
 
 * The JaCoCoverage Plugin is a NetBeans plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
