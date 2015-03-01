@@ -1,7 +1,7 @@
 ## JaCoCoverage Change Log
 
 ### Version 1.5.1.20150301.1800 (2015-03-01)
-* Partial fix for GitHub #26
+* partial fix for GitHub #26
 * updated JaCoCo library to 0.7.4 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
 * *built with NetBeans 8.0.2FCS and Oracle JDK7.*
 
