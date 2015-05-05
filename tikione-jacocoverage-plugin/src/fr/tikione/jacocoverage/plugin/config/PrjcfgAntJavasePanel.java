@@ -48,10 +48,10 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     private static final long serialVersionUID = 1L;
 
     /** The file to save project side configuration. */
-    private File prjCfgFile;
+    private final File prjCfgFile;
 
     /** The folder that contains project's Java sources. */
-    private File prjSrcDir;
+    private final File prjSrcDir;
 
     /** The list of non-empty packages found on the project associated to the current configuration panel. */
     private List<File> pkgs;
