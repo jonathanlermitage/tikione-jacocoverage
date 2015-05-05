@@ -139,7 +139,10 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 
 				// GWI patch: If NetBeans Module Project - use different JavaAgent settings
 				final boolean isNBModule = Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.NBMODULE);
-				final String jacocoAgentJarAbsPath = NBUtils.getJacocoAgentJar().getAbsolutePath();
+				String jacocoAgentJarAbsPath = NBUtils.getJacocoAgentJar().getAbsolutePath();
+				
+				
+				
 				if (isNBModule) {
 					String excludes = prjProps.getProperty("jacoco.excludes");
 					antTaskJavaagentParam = "\"" + jacocoAgentJarAbsPath
