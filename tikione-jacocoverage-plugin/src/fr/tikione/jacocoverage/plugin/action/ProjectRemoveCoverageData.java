@@ -16,7 +16,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.actions.Presenter;
 
 /**
- * The "Reset coverage data" contextual action registration for Ant J2SE and Maven projects.
+ * The "Reset coverage data" contextual action registration for Ant projects.
  *
  * @author Jonathan Lermitage
  */
