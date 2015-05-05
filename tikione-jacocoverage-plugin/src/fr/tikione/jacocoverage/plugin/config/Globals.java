@@ -107,6 +107,12 @@ public class Globals {
     /** Project's JaCoCoverage properties. */
     public static final String PRJ_CFG = JACOCOVERAGE_DATA_DIR + "project.json";
 
+    /** User preferance: use a custom JaCoCo jar instead of the bundled version. */
+    public static final boolean PROP_USE_CUSTOM_JACOCO_JAR = false;
+
+    /** Default configuration value: use a custom JaCoCo jar instead of the bundled version. */
+    public static final boolean DEF_USE_CUSTOM_JACOCO_JAR = false;
+
     private Globals() {
     }
 }
