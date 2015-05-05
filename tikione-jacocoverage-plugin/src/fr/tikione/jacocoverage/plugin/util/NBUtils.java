@@ -195,14 +195,14 @@ public class NBUtils {
         return InstalledFileLocator.getDefault().locate("modules/ext/jacocoagent.jar", "fr.tikione.jacoco.lib", false);
     }
 
-    /**
-     * Get the JaCoCo-Ant JAR file that is registered in the IDE.
-     *
-     * @return the JaCoCo-Ant JAR.
-     */
-    public static File getJacocoAntJar() {
-        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoant.jar", "fr.tikione.jacoco.lib", false);
-    }
+//    /**
+//     * Get the JaCoCo-Ant JAR file that is registered in the IDE.
+//     *
+//     * @return the JaCoCo-Ant JAR.
+//     */
+//    public static File getJacocoAntJar() {
+//        return InstalledFileLocator.getDefault().locate("modules/ext/jacocoant.jar", "fr.tikione.jacoco.lib", false);
+//    }
 
     /**
      * Get the full path of the directory containing a given project.

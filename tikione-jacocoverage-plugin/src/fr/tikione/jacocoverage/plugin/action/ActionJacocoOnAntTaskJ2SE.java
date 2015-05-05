@@ -139,16 +139,17 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 
 				// GWI patch: If NetBeans Module Project - use different JavaAgent settings
 				final boolean isNBModule = Utils.isProjectSupported(NBUtils.getSelectedProject(), NBProjectTypeEnum.NBMODULE);
+				final String jacocoAgentJarAbsPath = NBUtils.getJacocoAgentJar().getAbsolutePath();
 				if (isNBModule) {
 					String excludes = prjProps.getProperty("jacoco.excludes");
-					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
+					antTaskJavaagentParam = "\"" + jacocoAgentJarAbsPath
 							+ "\"=destfile=\"" + binreport.getAbsolutePath() + "\"" + (excludes == null ? "" : ",excludes=" + excludes);
 				} else {
 					String packagesToTest = NBUtils.getProjectJavaPackagesAsStr(project, prjProps, ":", ".*");
 					if (packagesToTest.length() > 1000) { // GitHub#26: JaCoCo seems to fail if the includes list is too long
 						packagesToTest = "*";
 					}
-					antTaskJavaagentParam = "\"" + NBUtils.getJacocoAgentJar().getAbsolutePath()
+					antTaskJavaagentParam = "\"" + jacocoAgentJarAbsPath
 							+ "\"=includes=" + packagesToTest
 							+ ",destfile=\"" + binreport.getAbsolutePath() + "\"" + exclude.toString();
 				}
