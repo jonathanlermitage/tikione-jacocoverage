@@ -8,8 +8,13 @@ import org.netbeans.spi.project.ui.support.ProjectCustomizer;
  *
  * @author Jonathan Lermitage
  */
-@ProjectCustomizer.CompositeCategoryProvider.Registration(
-        projectType = "org-netbeans-modules-java-j2seproject",
-        position = 1400)
+@ProjectCustomizer.CompositeCategoryProvider.Registrations({
+	@ProjectCustomizer.CompositeCategoryProvider.Registration(
+			projectType = "org-netbeans-modules-java-j2seproject",
+			position = 1400),
+	@ProjectCustomizer.CompositeCategoryProvider.Registration(
+			projectType = "org-netbeans-modules-apisupport-project",
+			position = 1401)
+})
 public class PrjcfgAntJavaseCatProvider extends PrjcfgAntAbstractCatProvider implements ProjectCustomizer.CompositeCategoryProvider {
 }
