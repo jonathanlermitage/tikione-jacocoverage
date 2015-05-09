@@ -17,7 +17,7 @@ public class AboutDialog extends javax.swing.JDialog {
         int posX = (screenWidth / 2) - (this.getWidth() / 2);
         int posY = (screenHeight / 2) - (this.getHeight() / 2);
         this.setBounds(posX, posY, this.getWidth(), this.getHeight());
-        jLabelAbout.setText("<html>Copyright © 2013 Jonathan Lermitage &lt;jonathan.lermitage@gmail.com&gt;<br>\n"
+        jLabelAbout.setText("<html>Copyright © 2013-2015 Jonathan Lermitage &lt;jonathan.lermitage@gmail.com&gt;<br>\n"
                 + "This work is free. You can redistribute it and/or modify it under the\n"
                 + "terms of the Do What The Fuck You Want To Public License, Version 2,\n"
                 + "as published by Sam Hocevar. See http://www.wtfpl.net for more details.</html>");
@@ -66,14 +66,14 @@ public class AboutDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelAbout, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButtonSeeWTFPL, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                    .addComponent(jButtonSeeWTFPL, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelAbout, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(jLabelAbout, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addComponent(jButtonSeeWTFPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

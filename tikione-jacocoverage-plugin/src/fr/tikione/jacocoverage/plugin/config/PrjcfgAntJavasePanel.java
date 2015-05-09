@@ -80,9 +80,9 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
         jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
                 + "https://github.com/jonathanlermitage</body></html>");
         jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
-                + "http://netbeanscolors.org</body></html>");
+                + "http://lermitage.biz</body></html>");
         jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
-                + "http://jacocoverage.tikione.fr/redirect/help/</body></html>");
+                + "https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md</body></html>");
         // </editor-fold>
         Project prj = context.lookup(Project.class);
         prjCfgFile = new File(NBUtils.getProjectDir(prj), Globals.PRJ_CFG);
@@ -557,11 +557,11 @@ public class PrjcfgAntJavasePanel extends javax.swing.JPanel implements IStorabl
     }//GEN-LAST:event_jButtonSocialGithubActionPerformed
 
     private void jButtonSocialJojohomeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialJojohomeActionPerformed
-        NBUtils.extBrowser("http://netbeanscolors.org");
+        NBUtils.extBrowser("http://lermitage.biz");
     }//GEN-LAST:event_jButtonSocialJojohomeActionPerformed
 
     private void jButtonOnlineHelpActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonOnlineHelpActionPerformed
-        NBUtils.extBrowser("http://jacocoverage.tikione.fr/redirect/help/");
+        NBUtils.extBrowser("https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md");
     }//GEN-LAST:event_jButtonOnlineHelpActionPerformed
 
     private void jButtonRefreshActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
