@@ -8,6 +8,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import org.openide.awt.Mnemonics;
@@ -86,6 +89,12 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jCheckBoxEnableHighlightingExtended = new JCheckBox();
         jLabelWorkfilesTips = new JLabel();
         jButtonAbout = new JButton();
+        jLabelUseBundledJaCoCoJar = new JLabel();
+        jCheckBoxUseBundledJaCoCoJar = new JCheckBox();
+        jTextFieldUseCustomJaCoCoJar = new JTextField();
+        jLabel1 = new JLabel();
+        jButtonSelectCustomJaCoCoJar = new JButton();
+        jLabel2 = new JLabel();
 
         jButtonResoreDefaults.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_defaults.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -197,10 +206,38 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
+        Mnemonics.setLocalizedText(jLabelUseBundledJaCoCoJar, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelUseBundledJaCoCoJar.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jCheckBoxUseBundledJaCoCoJar, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jCheckBoxUseBundledJaCoCoJar.text")); // NOI18N
+        jCheckBoxUseBundledJaCoCoJar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxUseBundledJaCoCoJarActionPerformed(evt);
+            }
+        });
+
+        jTextFieldUseCustomJaCoCoJar.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldUseCustomJaCoCoJar.text")); // NOI18N
+        jTextFieldUseCustomJaCoCoJar.setEnabled(false);
+
+        Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
+
+        Mnemonics.setLocalizedText(jButtonSelectCustomJaCoCoJar, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonSelectCustomJaCoCoJar.text")); // NOI18N
+        jButtonSelectCustomJaCoCoJar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButtonSelectCustomJaCoCoJarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setForeground(new Color(0, 102, 255));
+        Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
+        jLabel2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButtonSocialTwitter, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -219,13 +256,13 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jCheckBoxEnableHighlightingExtended))
+                        .addComponent(jLabelUseBundledJaCoCoJar)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxUseBundledJaCoCoJar)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
                     .addComponent(jCheckBoxEnableConsoleReport)
                     .addComponent(jCheckBoxEnableHtmlReport)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jCheckBoxOpenHtmlReport))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBoxEnableHighlighting)
                         .addGap(29, 29, 29)
@@ -235,11 +272,22 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelWorkfiles)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxEnableHighlightingExtended)
+                            .addComponent(jCheckBoxOpenHtmlReport))))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldUseCustomJaCoCoJar)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSelectCustomJaCoCoJar))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxEnableHighlighting)
@@ -257,6 +305,16 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelWorkfiles)
                     .addComponent(jComboBoxWorkfiles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUseBundledJaCoCoJar)
+                    .addComponent(jCheckBoxUseBundledJaCoCoJar)
+                    .addComponent(jLabel2))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldUseCustomJaCoCoJar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButtonSelectCustomJaCoCoJar))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -321,6 +379,24 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         about.setVisible(true);
     }//GEN-LAST:event_jButtonAboutActionPerformed
 
+    private void jCheckBoxUseBundledJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
+        // TODO hide/unhide custom jacoco jar path
+		
+		
+    }//GEN-LAST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
+
+    private void jButtonSelectCustomJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectCustomJaCoCoJarActionPerformed
+        // TODO select custom jacoco path
+		
+		
+    }//GEN-LAST:event_jButtonSelectCustomJaCoCoJarActionPerformed
+
+    private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO redirect to jacoco website for download
+		
+		
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /** Load user preferences and configure UI. */
     void load() {
         Config.sync();
@@ -355,6 +431,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JButton jButtonAbout;
     private JButton jButtonOnlineHelp;
     private JButton jButtonResoreDefaults;
+    private JButton jButtonSelectCustomJaCoCoJar;
     private JButton jButtonSocialFacebook;
     private JButton jButtonSocialGithub;
     private JButton jButtonSocialJojohome;
@@ -364,10 +441,15 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxEnableHighlightingExtended;
     private JCheckBox jCheckBoxEnableHtmlReport;
     private JCheckBox jCheckBoxOpenHtmlReport;
+    private JCheckBox jCheckBoxUseBundledJaCoCoJar;
     private JComboBox<Object> jComboBoxColorTheme;
     private JComboBox<String> jComboBoxWorkfiles;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
     private JLabel jLabelColorTheme;
+    private JLabel jLabelUseBundledJaCoCoJar;
     private JLabel jLabelWorkfiles;
     private JLabel jLabelWorkfilesTips;
+    private JTextField jTextFieldUseCustomJaCoCoJar;
     // End of variables declaration//GEN-END:variables
 }
