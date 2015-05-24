@@ -216,7 +216,6 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         });
 
         jTextFieldUseCustomJaCoCoJar.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldUseCustomJaCoCoJar.text")); // NOI18N
-        jTextFieldUseCustomJaCoCoJar.setEnabled(false);
 
         Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
 
@@ -229,6 +228,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
         jLabel2.setForeground(new Color(0, 102, 255));
         Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
+        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -343,6 +343,11 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
         jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
         jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
+		jTextFieldUseCustomJaCoCoJar.setText("/foo/bar/jacocoagent.jar");
+		jTextFieldUseCustomJaCoCoJar.setEditable(false);
+		jTextFieldUseCustomJaCoCoJar.setEnabled(false);
+		jButtonSelectCustomJaCoCoJar.setEnabled(false);
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jButtonSocialTwitterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialTwitterActionPerformed
@@ -380,9 +385,10 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAboutActionPerformed
 
     private void jCheckBoxUseBundledJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
-        // TODO hide/unhide custom jacoco jar path
-		
-		
+        boolean selected = jCheckBoxUseBundledJaCoCoJar.isSelected();
+		jTextFieldUseCustomJaCoCoJar.setEnabled(!selected);
+		jTextFieldUseCustomJaCoCoJar.setEditable(!selected);
+		jButtonSelectCustomJaCoCoJar.setEnabled(!selected);
     }//GEN-LAST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
 
     private void jButtonSelectCustomJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectCustomJaCoCoJarActionPerformed
@@ -408,6 +414,10 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
         jCheckBoxEnableHighlightingExtended.setSelected(Config.isEnblHighlightingExtended());
         jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
+		jTextFieldUseCustomJaCoCoJar.setEnabled(false);
+		jTextFieldUseCustomJaCoCoJar.setEditable(false);
+		jButtonSelectCustomJaCoCoJar.setEnabled(false);
     }
 
     /** Store configuration to user preferences. */
