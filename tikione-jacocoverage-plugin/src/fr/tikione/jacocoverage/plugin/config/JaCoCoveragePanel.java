@@ -10,16 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileFilter;
 import org.openide.awt.Mnemonics;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
@@ -31,44 +34,44 @@ import org.openide.util.NbBundle;
  */
 class JaCoCoveragePanel extends javax.swing.JPanel {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
-        initComponents();
-        try {
-            // Add "NetBeans (default)" and "Norway Today (dark)" themes with colors preview.
-            jComboBoxColorTheme.setRenderer(new IcoTxtComboBoxRenderer());
-            ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_REGULAR));
-            ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_NORWAYTODAY));
-            thNetBeansImg.setDescription("NetBeans (default)");
-            thNorwaytoday.setDescription("Norway Today");
-            jComboBoxColorTheme.addItem(thNetBeansImg);
-            jComboBoxColorTheme.addItem(thNorwaytoday);
-            jComboBoxWorkfiles.setModel(new javax.swing.DefaultComboBoxModel<>(
-                    new String[]{"keep original workfiles", "keep zipped workfiles", "delete workfiles"}));
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        // <editor-fold defaultstate="collapsed" desc="Tooltips">
-        // Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
-        jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
-                + "https://twitter.com/JLermitage</body></html>");
-        jButtonSocialFacebook.setToolTipText("<html><body>Jonathan Lermitage on <b>Facebook</b> (author of JaCoCoverage)<br>"
-                + "https://www.facebook.com/jonathan.lermitage</body></html>");
-        jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
-                + "https://github.com/jonathanlermitage</body></html>");
-        jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
-                + "http://lermitage.biz</body></html>");
-        jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
-                + "https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md</body></html>");
-        jButtonAbout.setToolTipText("<html><body>About JaCoCoverage</body></html>");
-        // </editor-fold>
-    }
+	JaCoCoveragePanel(JaCoCoverageOptionsPanelController controller) {
+		initComponents();
+		try {
+			// Add "NetBeans (default)" and "Norway Today (dark)" themes with colors preview.
+			jComboBoxColorTheme.setRenderer(new IcoTxtComboBoxRenderer());
+			ImageIcon thNetBeansImg = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_REGULAR));
+			ImageIcon thNorwaytoday = new ImageIcon(Utils.toBytes(Globals.THEME_ICO_NORWAYTODAY));
+			thNetBeansImg.setDescription("NetBeans (default)");
+			thNorwaytoday.setDescription("Norway Today");
+			jComboBoxColorTheme.addItem(thNetBeansImg);
+			jComboBoxColorTheme.addItem(thNorwaytoday);
+			jComboBoxWorkfiles.setModel(new javax.swing.DefaultComboBoxModel<>(
+					new String[]{"keep original workfiles", "keep zipped workfiles", "delete workfiles"}));
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		}
+		// <editor-fold defaultstate="collapsed" desc="Tooltips">
+		// Warning: background of tooltips is black on Ubuntu. Avoid coloring links with blue.
+		jButtonSocialTwitter.setToolTipText("<html><body>Jonathan Lermitage on <b>Twitter</b> (author of JaCoCoverage)<br>"
+				+ "https://twitter.com/JLermitage</body></html>");
+		jButtonSocialFacebook.setToolTipText("<html><body>Jonathan Lermitage on <b>Facebook</b> (author of JaCoCoverage)<br>"
+				+ "https://www.facebook.com/jonathan.lermitage</body></html>");
+		jButtonSocialGithub.setToolTipText("<html><body>Jonathan Lermitage  on <b>GitHub</b> (author of JaCoCoverage)<br>"
+				+ "https://github.com/jonathanlermitage</body></html>");
+		jButtonSocialJojohome.setToolTipText("<html><body>Jonathan Lermitage devblog (author of JaCoCoverage)<br>"
+				+ "http://lermitage.biz</body></html>");
+		jButtonOnlineHelp.setToolTipText("<html><body>Online help page of JaCoCoverage<br>"
+				+ "https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md</body></html>");
+		jButtonAbout.setToolTipText("<html><body>About JaCoCoverage</body></html>");
+		// </editor-fold>
+	}
 
-    /** 
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
-     */
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+	 */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -333,16 +336,16 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonResoreDefaultsActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonResoreDefaultsActionPerformed
-        jCheckBoxEnableHighlighting.setSelected(Globals.DEF_ENABLE_HIGHLIGHT);
-        jCheckBoxEnableConsoleReport.setSelected(Globals.DEF_ENABLE_CONSOLE_REPORT);
-        jCheckBoxEnableHtmlReport.setSelected(Globals.DEF_ENABLE_HTML_REPORT);
-        jCheckBoxOpenHtmlReport.setSelected(Globals.DEF_AUTOOPEN_HTML_REPORT);
-        jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
-        jComboBoxColorTheme.setSelectedIndex(Globals.DEF_THEME);
-        jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
-        jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
-        jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
-        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jCheckBoxEnableHighlighting.setSelected(Globals.DEF_ENABLE_HIGHLIGHT);
+		jCheckBoxEnableConsoleReport.setSelected(Globals.DEF_ENABLE_CONSOLE_REPORT);
+		jCheckBoxEnableHtmlReport.setSelected(Globals.DEF_ENABLE_HTML_REPORT);
+		jCheckBoxOpenHtmlReport.setSelected(Globals.DEF_AUTOOPEN_HTML_REPORT);
+		jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
+		jComboBoxColorTheme.setSelectedIndex(Globals.DEF_THEME);
+		jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
+		jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
+		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
 		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
 		jTextFieldUseCustomJaCoCoJar.setText("/foo/bar/jacocoagent.jar");
 		jTextFieldUseCustomJaCoCoJar.setEditable(false);
@@ -351,90 +354,109 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jButtonSocialTwitterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialTwitterActionPerformed
-        NBUtils.extBrowser("https://twitter.com/JLermitage");
+		NBUtils.extBrowser("https://twitter.com/JLermitage");
     }//GEN-LAST:event_jButtonSocialTwitterActionPerformed
 
     private void jButtonSocialFacebookActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialFacebookActionPerformed
-        NBUtils.extBrowser("https://www.facebook.com/jonathan.lermitage");
+		NBUtils.extBrowser("https://www.facebook.com/jonathan.lermitage");
     }//GEN-LAST:event_jButtonSocialFacebookActionPerformed
 
     private void jButtonSocialGithubActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialGithubActionPerformed
-        NBUtils.extBrowser("https://github.com/jonathanlermitage");
+		NBUtils.extBrowser("https://github.com/jonathanlermitage");
     }//GEN-LAST:event_jButtonSocialGithubActionPerformed
 
     private void jButtonOnlineHelpActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonOnlineHelpActionPerformed
-        NBUtils.extBrowser("https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md");
+		NBUtils.extBrowser("https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/README.md");
     }//GEN-LAST:event_jButtonOnlineHelpActionPerformed
 
     private void jButtonSocialJojohomeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialJojohomeActionPerformed
-        NBUtils.extBrowser("http://lermitage.biz");
+		NBUtils.extBrowser("http://lermitage.biz");
     }//GEN-LAST:event_jButtonSocialJojohomeActionPerformed
 
     private void jCheckBoxEnableHtmlReportActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEnableHtmlReportActionPerformed
-        jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
+		jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
     }//GEN-LAST:event_jCheckBoxEnableHtmlReportActionPerformed
 
     private void jCheckBoxEnableHighlightingActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEnableHighlightingActionPerformed
-        jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
-        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
     }//GEN-LAST:event_jCheckBoxEnableHighlightingActionPerformed
 
     private void jButtonAboutActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonAboutActionPerformed
-        AboutDialog about = new AboutDialog(null, true);
-        about.setVisible(true);
+		AboutDialog about = new AboutDialog(null, true);
+		about.setVisible(true);
     }//GEN-LAST:event_jButtonAboutActionPerformed
 
     private void jCheckBoxUseBundledJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
-        boolean selected = jCheckBoxUseBundledJaCoCoJar.isSelected();
+		boolean selected = jCheckBoxUseBundledJaCoCoJar.isSelected();
 		jTextFieldUseCustomJaCoCoJar.setEnabled(!selected);
 		jTextFieldUseCustomJaCoCoJar.setEditable(!selected);
 		jButtonSelectCustomJaCoCoJar.setEnabled(!selected);
     }//GEN-LAST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
 
     private void jButtonSelectCustomJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectCustomJaCoCoJarActionPerformed
-        // TODO select custom jacoco path
-		
-		
+		JFileChooser dialogue = new JFileChooser();
+		dialogue.setMultiSelectionEnabled(false);
+		dialogue.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		dialogue.setAcceptAllFileFilterUsed(false);
+		dialogue.setFileFilter(new FileFilter() {
+
+			@Override
+			public boolean accept(File f) {
+				return f.getName().toUpperCase().endsWith(".JAR") || f.isDirectory();
+			}
+
+			@Override
+			public String getDescription() {
+				return "JaCoCo jacocoagent jar file (.jar)";
+			}
+		});
+		if (dialogue.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			File javaagentFile = dialogue.getSelectedFile();
+			if (javaagentFile != null && javaagentFile.isFile()) {
+				jTextFieldUseCustomJaCoCoJar.setText(javaagentFile.getAbsolutePath());
+			}
+		}
     }//GEN-LAST:event_jButtonSelectCustomJaCoCoJarActionPerformed
 
     private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        NBUtils.extBrowser("http://www.eclemma.org/jacoco/");
+		NBUtils.extBrowser("http://www.eclemma.org/jacoco/");
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    /** Load user preferences and configure UI. */
-    void load() {
-        Config.sync();
-        jCheckBoxEnableHighlighting.setSelected(Config.isEnblHighlighting());
-        jCheckBoxEnableConsoleReport.setSelected(Config.isEnblConsoleReport());
-        jCheckBoxEnableHtmlReport.setSelected(Config.isEnblHtmlReport());
-        jCheckBoxOpenHtmlReport.setSelected(Config.isOpenHtmlReport());
-        jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
-        jComboBoxColorTheme.setSelectedIndex(Config.getTheme());
-        jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
-        jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
-        jCheckBoxEnableHighlightingExtended.setSelected(Config.isEnblHighlightingExtended());
-        jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+	/** Load user preferences and configure UI. */
+	void load() {
+		Config.sync();
+		jCheckBoxEnableHighlighting.setSelected(Config.isEnblHighlighting());
+		jCheckBoxEnableConsoleReport.setSelected(Config.isEnblConsoleReport());
+		jCheckBoxEnableHtmlReport.setSelected(Config.isEnblHtmlReport());
+		jCheckBoxOpenHtmlReport.setSelected(Config.isOpenHtmlReport());
+		jCheckBoxOpenHtmlReport.setEnabled(jCheckBoxEnableHtmlReport.isSelected());
+		jComboBoxColorTheme.setSelectedIndex(Config.getTheme());
+		jComboBoxColorTheme.setEnabled(jCheckBoxEnableHighlighting.isSelected());
+		jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
+		jCheckBoxEnableHighlightingExtended.setSelected(Config.isEnblHighlightingExtended());
+		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
 		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
 		jTextFieldUseCustomJaCoCoJar.setEnabled(false);
 		jTextFieldUseCustomJaCoCoJar.setEditable(false);
 		jButtonSelectCustomJaCoCoJar.setEnabled(false);
-    }
+	}
 
-    /** Store configuration to user preferences. */
-    void store() {
-        Config.setEnblConsoleReport(jCheckBoxEnableConsoleReport.isSelected());
-        Config.setEnblHighlighting(jCheckBoxEnableHighlighting.isSelected());
-        Config.setEnblHtmlReport(jCheckBoxEnableHtmlReport.isSelected());
-        Config.setOpenHtmlReport(jCheckBoxOpenHtmlReport.isSelected());
-        Config.setTheme(jComboBoxColorTheme.getSelectedIndex());
-        Config.setJaCoCoWorkfilesRule(jComboBoxWorkfiles.getSelectedIndex());
-        Config.setEnblHighlightingExtended(jCheckBoxEnableHighlightingExtended.isSelected());
-        Config.flush();
-    }
+	/** Store configuration to user preferences. */
+	void store() {
+		Config.setEnblConsoleReport(jCheckBoxEnableConsoleReport.isSelected());
+		Config.setEnblHighlighting(jCheckBoxEnableHighlighting.isSelected());
+		Config.setEnblHtmlReport(jCheckBoxEnableHtmlReport.isSelected());
+		Config.setOpenHtmlReport(jCheckBoxOpenHtmlReport.isSelected());
+		Config.setTheme(jComboBoxColorTheme.getSelectedIndex());
+		Config.setJaCoCoWorkfilesRule(jComboBoxWorkfiles.getSelectedIndex());
+		Config.setEnblHighlightingExtended(jCheckBoxEnableHighlightingExtended.isSelected());
+		Config.flush();
+	}
 
-    boolean valid() {
-        return true;
-    }
+	boolean valid() {
+		return true;
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton jButtonAbout;
     private JButton jButtonOnlineHelp;
