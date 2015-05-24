@@ -392,9 +392,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonSelectCustomJaCoCoJarActionPerformed
 
     private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO redirect to jacoco website for download
-		
-		
+        NBUtils.extBrowser("http://www.eclemma.org/jacoco/");
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /** Load user preferences and configure UI. */
