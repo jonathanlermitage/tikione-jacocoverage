@@ -3,6 +3,7 @@
 ### Version 1.5.2.20150xxx.xxxx (2015-0x-xx)
 * allow custom JaCoCo agent path to fix GitHub #28 (JaCoCo agent fails with non-ASCII path)
 * updated JaCoCo library to 0.7.5 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
+* minor code cleanup
 
 ### Version 1.5.1.20150301.1800 (2015-03-01)
 * partial fix for GitHub #26 (large project support)
