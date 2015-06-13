@@ -192,6 +192,12 @@ public class NBUtils {
      * @return the JaCoCo-Agent JAR.
      */
     public static File getJacocoAgentJar() {
+		if (Config.isUseCustomJacocoJar()) {
+			File jacocoagent = new File(Config.getCustomJacocoJarPath());
+			if (jacocoagent.exists()) {
+				return jacocoagent;
+			}
+		}
         return InstalledFileLocator.getDefault().locate("modules/ext/jacocoagent.jar", "fr.tikione.jacoco.lib", false);
     }
 
