@@ -39,7 +39,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCheckBoxUseBundledJaCoCoJar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelEclemmaWebsite" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jCheckBoxEnableConsoleReport" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxEnableHtmlReport" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -67,7 +67,7 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelUseCustomJaCoCoJar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextFieldUseCustomJaCoCoJar" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -100,12 +100,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelUseBundledJaCoCoJar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxUseBundledJaCoCoJar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEclemmaWebsite" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldUseCustomJaCoCoJar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelUseCustomJaCoCoJar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSelectCustomJaCoCoJar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -389,10 +389,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelUseCustomJaCoCoJar">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelUseCustomJaCoCoJar.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
@@ -406,20 +406,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectCustomJaCoCoJarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="jLabelEclemmaWebsite">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabel2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="fr/tikione/jacocoverage/plugin/config/Bundle.properties" key="JaCoCoveragePanel.jLabelEclemmaWebsite.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEclemmaWebsiteMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

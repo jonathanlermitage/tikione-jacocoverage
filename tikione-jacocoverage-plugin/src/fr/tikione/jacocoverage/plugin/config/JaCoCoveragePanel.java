@@ -95,9 +95,9 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
         jLabelUseBundledJaCoCoJar = new JLabel();
         jCheckBoxUseBundledJaCoCoJar = new JCheckBox();
         jTextFieldUseCustomJaCoCoJar = new JTextField();
-        jLabel1 = new JLabel();
+        jLabelUseCustomJaCoCoJar = new JLabel();
         jButtonSelectCustomJaCoCoJar = new JButton();
-        jLabel2 = new JLabel();
+        jLabelEclemmaWebsite = new JLabel();
 
         jButtonResoreDefaults.setIcon(new ImageIcon(getClass().getResource("/fr/tikione/jacocoverage/plugin/resources/icon/famfamfam_defaults.png"))); // NOI18N
         Mnemonics.setLocalizedText(jButtonResoreDefaults, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonResoreDefaults.text")); // NOI18N
@@ -220,7 +220,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 
         jTextFieldUseCustomJaCoCoJar.setText(NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jTextFieldUseCustomJaCoCoJar.text")); // NOI18N
 
-        Mnemonics.setLocalizedText(jLabel1, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel1.text")); // NOI18N
+        Mnemonics.setLocalizedText(jLabelUseCustomJaCoCoJar, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelUseCustomJaCoCoJar.text")); // NOI18N
 
         Mnemonics.setLocalizedText(jButtonSelectCustomJaCoCoJar, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jButtonSelectCustomJaCoCoJar.text")); // NOI18N
         jButtonSelectCustomJaCoCoJar.addActionListener(new ActionListener() {
@@ -229,12 +229,12 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setForeground(new Color(0, 102, 255));
-        Mnemonics.setLocalizedText(jLabel2, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabel2.text")); // NOI18N
-        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new MouseAdapter() {
+        jLabelEclemmaWebsite.setForeground(new Color(0, 102, 255));
+        Mnemonics.setLocalizedText(jLabelEclemmaWebsite, NbBundle.getMessage(JaCoCoveragePanel.class, "JaCoCoveragePanel.jLabelEclemmaWebsite.text")); // NOI18N
+        jLabelEclemmaWebsite.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabelEclemmaWebsite.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelEclemmaWebsiteMouseClicked(evt);
             }
         });
 
@@ -263,7 +263,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxUseBundledJaCoCoJar)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabelEclemmaWebsite))
                     .addComponent(jCheckBoxEnableConsoleReport)
                     .addComponent(jCheckBoxEnableHtmlReport)
                     .addGroup(layout.createSequentialGroup()
@@ -284,7 +284,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addComponent(jLabelUseCustomJaCoCoJar)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldUseCustomJaCoCoJar)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -312,11 +312,11 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUseBundledJaCoCoJar)
                     .addComponent(jCheckBoxUseBundledJaCoCoJar)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelEclemmaWebsite))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldUseCustomJaCoCoJar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelUseCustomJaCoCoJar)
                     .addComponent(jButtonSelectCustomJaCoCoJar))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
@@ -346,11 +346,11 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		jComboBoxWorkfiles.setSelectedIndex(Globals.DEF_JACOCOWORKFILES_RULE);
 		jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
 		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
-		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
-		jTextFieldUseCustomJaCoCoJar.setText("/foo/bar/jacocoagent.jar");
-		jTextFieldUseCustomJaCoCoJar.setEditable(false);
-		jTextFieldUseCustomJaCoCoJar.setEnabled(false);
-		jButtonSelectCustomJaCoCoJar.setEnabled(false);
+		jCheckBoxUseBundledJaCoCoJar.setSelected(!Globals.DEF_USE_CUSTOM_JACOCO_JAR);
+		jTextFieldUseCustomJaCoCoJar.setText(Globals.DEF_CUSTOM_JACOCO_JAR_PATH);;
+		jTextFieldUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jButtonSelectCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jLabelUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
     }//GEN-LAST:event_jButtonResoreDefaultsActionPerformed
 
     private void jButtonSocialTwitterActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSocialTwitterActionPerformed
@@ -392,6 +392,10 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		jTextFieldUseCustomJaCoCoJar.setEnabled(!selected);
 		jTextFieldUseCustomJaCoCoJar.setEditable(!selected);
 		jButtonSelectCustomJaCoCoJar.setEnabled(!selected);
+		jTextFieldUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jButtonSelectCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jLabelUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		
     }//GEN-LAST:event_jCheckBoxUseBundledJaCoCoJarActionPerformed
 
     private void jButtonSelectCustomJaCoCoJarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonSelectCustomJaCoCoJarActionPerformed
@@ -419,9 +423,9 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		}
     }//GEN-LAST:event_jButtonSelectCustomJaCoCoJarActionPerformed
 
-    private void jLabel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabelEclemmaWebsiteMouseClicked(MouseEvent evt) {//GEN-FIRST:event_jLabelEclemmaWebsiteMouseClicked
 		NBUtils.extBrowser("http://www.eclemma.org/jacoco/");
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabelEclemmaWebsiteMouseClicked
 
 	/** Load user preferences and configure UI. */
 	void load() {
@@ -436,10 +440,11 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		jComboBoxWorkfiles.setSelectedIndex(Config.getJaCoCoWorkfilesRule());
 		jCheckBoxEnableHighlightingExtended.setSelected(Config.isEnblHighlightingExtended());
 		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
-		jCheckBoxUseBundledJaCoCoJar.setSelected(true);
-		jTextFieldUseCustomJaCoCoJar.setEnabled(false);
-		jTextFieldUseCustomJaCoCoJar.setEditable(false);
-		jButtonSelectCustomJaCoCoJar.setEnabled(false);
+		jCheckBoxUseBundledJaCoCoJar.setSelected(!Config.isUseCustomJacocoJar());
+		jTextFieldUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jTextFieldUseCustomJaCoCoJar.setText(Config.getCustomJacocoJarPath());
+		jButtonSelectCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		jLabelUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
 	}
 
 	/** Store configuration to user preferences. */
@@ -451,6 +456,8 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		Config.setTheme(jComboBoxColorTheme.getSelectedIndex());
 		Config.setJaCoCoWorkfilesRule(jComboBoxWorkfiles.getSelectedIndex());
 		Config.setEnblHighlightingExtended(jCheckBoxEnableHighlightingExtended.isSelected());
+		Config.setUseCustomJacocoJar(!jCheckBoxUseBundledJaCoCoJar.isSelected());
+		Config.setCustomJacocoJarPath(jTextFieldUseCustomJaCoCoJar.getText());
 		Config.flush();
 	}
 
@@ -474,10 +481,10 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
     private JCheckBox jCheckBoxUseBundledJaCoCoJar;
     private JComboBox<Object> jComboBoxColorTheme;
     private JComboBox<String> jComboBoxWorkfiles;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
     private JLabel jLabelColorTheme;
+    private JLabel jLabelEclemmaWebsite;
     private JLabel jLabelUseBundledJaCoCoJar;
+    private JLabel jLabelUseCustomJaCoCoJar;
     private JLabel jLabelWorkfiles;
     private JLabel jLabelWorkfilesTips;
     private JTextField jTextFieldUseCustomJaCoCoJar;
