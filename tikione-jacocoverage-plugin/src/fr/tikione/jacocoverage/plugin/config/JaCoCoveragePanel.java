@@ -319,7 +319,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
                     .addComponent(jLabelUseCustomJaCoCoJar)
                     .addComponent(jButtonSelectCustomJaCoCoJar))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelWorkfilesTips, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -347,7 +347,7 @@ class JaCoCoveragePanel extends javax.swing.JPanel {
 		jCheckBoxEnableHighlightingExtended.setSelected(Globals.DEF_ENABLE_HIGHLIGHTEXTENDED);
 		jCheckBoxEnableHighlightingExtended.setEnabled(jCheckBoxEnableHighlighting.isSelected());
 		jCheckBoxUseBundledJaCoCoJar.setSelected(!Globals.DEF_USE_CUSTOM_JACOCO_JAR);
-		jTextFieldUseCustomJaCoCoJar.setText(Globals.DEF_CUSTOM_JACOCO_JAR_PATH);;
+		jTextFieldUseCustomJaCoCoJar.setText(Globals.DEF_CUSTOM_JACOCO_JAR_PATH);
 		jTextFieldUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
 		jButtonSelectCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());
 		jLabelUseCustomJaCoCoJar.setVisible(!jCheckBoxUseBundledJaCoCoJar.isSelected());

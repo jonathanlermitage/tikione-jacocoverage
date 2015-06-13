@@ -1,6 +1,6 @@
 ## JaCoCoverage Change Log
 
-### Version 1.5.2.20150xxx.xxxx (2015-0x-xx)
+### Version 1.5.2.20150613.1640 (2015-06-13)
 * GitHub #28 allow custom JaCoCo agent path (JaCoCo agent failed with non-ASCII path)
 * updated JaCoCo library to 0.7.5 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
 * minor code cleanup
