@@ -87,6 +87,24 @@ public class Config {
     }
 
     /**
+     * Get configuration value: use a custom JaCoCo jar instead of the bundled version.
+     *
+     * @return configuration value.
+     */
+    public static boolean isUseCustomJacocoJar() {
+        return pref.getBoolean(Globals.PROP_USE_CUSTOM_JACOCO_JAR, Globals.DEF_USE_CUSTOM_JACOCO_JAR);
+    }
+
+    /**
+     * Get configuration value: path of custom JaCoCo jar to use instead of the bundled version.
+     *
+     * @return configuration value.
+     */
+    public static String getCustomJacocoJarPath() {
+        return pref.get(Globals.PROP_CUSTOM_JACOCO_JAR_PATH, Globals.DEF_CUSTOM_JACOCO_JAR_PATH);
+    }
+
+    /**
      * Get configuration value: JaCoCoverage themePrefix.
      *
      * @return configuration value.
