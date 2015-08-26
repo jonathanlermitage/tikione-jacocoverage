@@ -1,7 +1,7 @@
 ## JaCoCoverage Change Log
 
 ### Version 1.5.2.20150826.2100 (2015-08-26)
-* changed WTFPL licence to LGPL.
+* changed WTFPL license to LGPL (because some people are not funny...).
 
 ### Version 1.5.2.20150613.1640 (2015-06-13)
 * GitHub #28 allow custom JaCoCo agent path (JaCoCo agent failed with non-ASCII path)
