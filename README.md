@@ -34,4 +34,4 @@ For details on previous and current versions, please check the [Changelog](https
 * Graeme Ingleby - provided NetBeans Module support ([website](http://gingleby.com/2015/01/netbeans-multi-module-code-coverage-antjacoco/))
 
 ### License
-[WTFPL](http://www.wtfpl.net) License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
+LGPL License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
