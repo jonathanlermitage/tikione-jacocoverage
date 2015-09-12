@@ -1,4 +1,4 @@
-**FYI, development is currently paused due to a lack of free-time.**
+**:zzz: FYI, development is currently paused due to a lack of free-time :zzz:**
 
 ## Java Code Coverage for NetBeans
 
