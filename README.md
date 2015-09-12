@@ -1,3 +1,4 @@
+**FYI, development is currently paused due to a lack of free-time.**
 
 ## Java Code Coverage for NetBeans
 
