@@ -11,6 +11,3 @@ JaCoCo and JaCoCoverage support Java 7 and 8 and are also tested with Java 6. It
 
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
-
-### License
-[WTFPL](http://www.wtfpl.net) License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
