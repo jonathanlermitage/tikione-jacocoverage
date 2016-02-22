@@ -1,5 +1,3 @@
-**:zzz: FYI, development is currently paused due to a lack of free-time. Feel free to submit pull-requests or fork the project.  :zzz:**
-
 ## Java Code Coverage for NetBeans
 
 * The JaCoCoverage Plugin is a NetBeans plugin that enhances the existing NetBeans functionality with new code coverage features.<br>
