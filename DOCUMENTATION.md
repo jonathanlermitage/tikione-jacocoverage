@@ -9,29 +9,5 @@ More precsisely, JaCoCoverage uses the JaCoCo Java Agent to enable coverage coll
 When your program terminates, JaCoCo generates coverage data and JaCoCoverage assures the coverage information integration in your NetBeans IDE.
 JaCoCo and JaCoCoverage support Java 7 and 8 and are also tested with Java 6. It may work with Java 5 too.
 
-### Media
-NetBeans Java editor showing highlighted code. You can see covered, partially covered and not covered code, and annotations in the left margin:
-
-![Screenshot](http://lermitage.biz/files/jacococoverage_editor.png)
-
-A context menu is enabled for supported projects. It allows you to run and test your programs with JaCoCoverage:
-
-![Screenshot](http://lermitage.biz/files/jacococoverage_menu.png)
-
-JaCoCoverage is configurable:
-
-![Screenshot](http://lermitage.biz/files/jacococoverage_options.png)
-
-A short textual coverage report:
-
-![Screenshot](http://lermitage.biz/files/jacococoverage_consolereport.png)
-
-A complete HTML coverage report:
-
-![Screenshot](http://lermitage.biz/files/jacococoverage_htmlreport.png)
-
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
-
-### License
-[WTFPL](http://www.wtfpl.net) License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.

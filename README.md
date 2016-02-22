@@ -1,4 +1,4 @@
-**:zzz: FYI, development is currently paused due to a lack of free-time :zzz:**
+**:zzz: FYI, development is currently paused due to a lack of free-time. Feel free to submit pull-requests or fork the project.  :zzz:**
 
 ## Java Code Coverage for NetBeans
 
@@ -25,7 +25,7 @@ You can also check the GitHub [releases page](https://github.com/jonathanlermita
 Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
 For details on previous and current versions, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
-### Documentation and Media
+### Documentation
 [Click Here!](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/DOCUMENTATION.md)
 
 ### Author
