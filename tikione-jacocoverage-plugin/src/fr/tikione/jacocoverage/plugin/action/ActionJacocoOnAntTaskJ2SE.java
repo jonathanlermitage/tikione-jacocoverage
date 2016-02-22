@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -252,11 +251,7 @@ public abstract class ActionJacocoOnAntTaskJ2SE
 									}
 
 									if (openHtmlReport) {
-										try {
-											HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
-										} catch (MalformedURLException ex) {
-											Exceptions.printStackTrace(ex);
-										}
+										HtmlBrowser.URLDisplayer.getDefault().showURL(Utilities.toURI(new File(report)).toURL());
 									}
 								}
 								if (enblHighlight) {
