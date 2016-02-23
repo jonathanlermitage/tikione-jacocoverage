@@ -2,6 +2,7 @@
 
 ### Latest Snapshot Version (2016-02-22)
 * updated JaCoCo library to 0.7.6 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
+* *built with NetBeans 8.1FCS and Oracle JDK8.*
 
 ### Version 1.5.2.20150826.2100 (2015-08-26)
 * changed WTFPL license to LGPL (because some people are not funny...).
