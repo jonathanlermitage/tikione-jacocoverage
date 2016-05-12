@@ -25,14 +25,11 @@ You can also check the GitHub [releases page](https://github.com/jonathanlermita
 Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
 For details on previous and current versions, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
 
-### Documentation
-[Click Here!](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/DOCUMENTATION.md)
-
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
 ### Contributor
-* Graeme Ingleby - provided NetBeans Module support ([website](http://gingleby.com/2015/01/netbeans-multi-module-code-coverage-antjacoco/))
+* Graeme Ingleby - provided NetBeans Module support
 
 ### License
 LGPL License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
