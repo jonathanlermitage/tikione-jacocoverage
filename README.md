@@ -1,4 +1,4 @@
-Thursday, May 12, 2016: due to a lack of free time, this project if over. Feel free to start a fork.
+Thursday, May 12, 2016: due to a lack of free time, this project is over. Feel free to start a fork.
 
 ## Java Code Coverage for NetBeans
 
