@@ -21,10 +21,6 @@ validated by the NetBeans Plugin Review staff (I am also a member of this team) 
 
 You can also check the GitHub [releases page](https://github.com/jonathanlermitage/tikione-jacocoverage/releases) for manual installation of NBM files.
 
-### Development progression
-Please see [issues attached to a **milestone**](https://github.com/jonathanlermitage/tikione-jacocoverage/issues/milestones).
-For details on previous and current versions, please check the [Changelog](https://github.com/jonathanlermitage/tikione-jacocoverage/blob/master/CHANGELOG.md) file.
-
 ### Author
 * Jonathan Lermitage (<jonathan.lermitage@gmail.com>)
 
