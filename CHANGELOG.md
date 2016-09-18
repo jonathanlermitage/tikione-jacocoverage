@@ -1,5 +1,8 @@
 ## JaCoCoverage Change Log
 
+### 2016-09-18  
+* changed LGPL license to MIT
+
 ### Latest Snapshot Version (2016-02-22)
 * updated JaCoCo library to 0.7.6 (see its [changelog](http://www.eclemma.org/jacoco/trunk/doc/changes.html)).
 * *built with NetBeans 8.1FCS and Oracle JDK8.*
