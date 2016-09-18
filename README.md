@@ -28,4 +28,4 @@ You can also check the GitHub [releases page](https://github.com/jonathanlermita
 * Graeme Ingleby - provided NetBeans Module support
 
 ### License
-LGPL License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
+MIT License. In other words, you can do what you want: this project is entirely OpenSource, Free and Gratis.
